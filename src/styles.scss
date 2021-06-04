@@ -5,7 +5,7 @@
 @include mat-core();
 
 $custom-typography: mat-typography-config(
-  $font-family: "Gothic A1, sans-serif",
+  $font-family: "Gotham,Gothic A1, sans-serif",
   $title: mat-typography-level(24px, 32px, 600),
   $headline: mat-typography-level(32px, 48px, 700),
   $body-1: mat-typography-level(16px, 24px, 500),

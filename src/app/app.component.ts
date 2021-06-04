@@ -17,9 +17,7 @@ export class AppComponent {
     this.renderer.setAttribute(this.document.body, 'class', hostClass);
     this.toggle()
   }
-
-
-  toggle() {
+  private toggle() {
     const active = this.themeService.getActiveTheme() ;
     if (active.name === 'light') {
       this.themeService.setTheme('dark');

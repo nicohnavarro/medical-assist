@@ -1,0 +1,14 @@
+{
+  "welcome":"Welcome",
+  "home": "Home",
+  "chat":"Chat",
+  "settings": "Settings",
+  "login": "Login",
+  "guest": "As Guest",
+  "username": "Username",
+  "password":"Password",
+  "logout": "Logout",
+  "error":"Ups!",
+  "errorLogin":"You can't login :(, Sorry.",
+  "me":"me"
+}

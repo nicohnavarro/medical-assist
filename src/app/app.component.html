@@ -1,6 +1,6 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="dark">
   <button mat-icon-button matTooltip="Menu de usuario">
-    <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
+    <mat-icon aria-hidden="false" aria-label="menu" style="margin-top:0;">menu</mat-icon>
   </button>
   <span>Medical Assist</span>
   <span class="spaced"></span>
@@ -17,30 +17,14 @@
   <mat-icon>brightness_5</mat-icon>
   <mat-slide-toggle (change)="onDarkModeSwitched($event)"></mat-slide-toggle>
   <mat-icon>bedtime</mat-icon>
+  <app-language-selector></app-language-selector>
 </mat-toolbar>
 <div app-theme class="container">
   <div class="neumoDiv">
+    <h1>{{ 'welcome' | translate }}</h1>
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi provident animi
     voluptatibus, saepe suscipit nostrum doloremque sed ipsum rem quisquam illo id
     accusamus veniam maxime labore, sequi odio minima pariatur.
-  </div>
-</div>
-
-<div app-theme>
-	<h1>Dark Mode With Angular and CSS</h1>
-	<div class="main container">
-    This text color should change when you clcik on toggle button. The background-color and text-color of the body will change.
-		<div class="innerdiv">
-			<p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-      <span>Light</span>
-      <label class="switch">
-        <input type="checkbox" (click)="toggle()" >
-        <span class="slider round"></span>
-      </label>
-      <span>Dark</span>
-    </div>
   </div>
 </div>
 <router-outlet></router-outlet>

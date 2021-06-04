@@ -1,0 +1,15 @@
+{
+  "welcome":"Bienvenido",
+  "home": "Inicio",
+  "chat":"Charlas",
+  "games": "Juegos",
+  "settings": "Configuracion",
+  "login": "Ingresar",
+  "guest": "Como Invitado",
+  "username": "Nombre de Usuario",
+  "password":"Clave",
+  "logout": "Salir",
+  "error":"Opa!",
+  "errorLogin":"No pudimos iniciar tu sesion :(, intenta nuevamente.",
+  "me":"yo"
+}
