@@ -1,1 +1,119 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/theming";
+@import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@200;400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@200;400;600&family=Grenze+Gotisch:wght@100&display=swap");
+
+@include mat-core();
+
+$custom-typography: mat-typography-config(
+  $font-family: "Gothic A1, sans-serif",
+  $title: mat-typography-level(24px, 32px, 600),
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500),
+);
+
+// GAMA COLORES
+$my-primary-color: (
+  200: #84bdf1,
+  300: #53a3eb,
+  400: #2e8fe7,
+  500: #097be3,
+  600: #0873e0,
+  700: #0668dc,
+  contrast: (
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+  ),
+);
+
+$my-accent-color: (
+  200: #abcbe9,
+  300: #89b6e0,
+  400: #6fa6d9,
+  500: #5696d2,
+  600: #4f8ecd,
+  700: #4583c7,
+  contrast: (
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #ffffff,
+  ),
+);
+
+$my-warn-color: (
+  200: #e68080,
+  300: #db4d4d,
+  400: #d42626,
+  500: #cc0000,
+  600: #c70000,
+  700: #c00000,
+  contrast: (
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+  ),
+);
+
+// PALETA DE COLORES
+$my-palette-primary: mat-palette($my-primary-color);
+$my-palette-accent: mat-palette($my-accent-color);
+$my-palette-warn: mat-palette($my-warn-color);
+
+// TEMA PROPIO
+$my-theme-light: mat-light-theme(
+  (
+    color: (
+      primary: $my-palette-primary,
+      accent: $my-palette-accent,
+      warn: $my-palette-warn,
+    ),
+    typography: $custom-typography,
+  )
+);
+
+$my-theme-dark: mat-dark-theme(
+  (
+    color: (
+      primary: $my-palette-primary,
+      accent: $my-palette-accent,
+      warn: $my-palette-warn,
+    ),
+    typography: $custom-typography,
+  )
+);
+
+.darkMode {
+  @include angular-material-theme($my-theme-dark);
+}
+
+.lightMode {
+  @include angular-material-theme($my-theme-light);
+}
+
+// APLICAR NUESTRO TEMA A ANGULAR
+@include angular-material-theme($my-theme-light);
+@include mat-core($custom-typography);
+
+// REEMPLAZA EN ANGULAR.JSON -> STYLES
+// "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+// POR LA RUTA DEL CUSTOM THEME
+// "src/assets/styles/my-theme.scss",
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  // font-family: Gotham, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+  //   Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Gothic A1", sans-serif;
+}
