@@ -1,0 +1,22 @@
+<mat-toolbar color="dark">
+  <button mat-icon-button matTooltip="Menu de usuario">
+    <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
+  </button>
+  <span>{{ 'title' | translate}}</span>
+  <span class="spaced"></span>
+  <!-- <div *ngIf="usuario" >
+      <img  *ngIf="usuario != null" [src]="profileImg" alt="">
+  </div> -->
+  <!-- {{usuario | async | json}} -->
+
+  <!-- <button *ngIf="usuario" mat-button (click)="logOut()">Salir</button> -->
+  <button mat-button (click)="prueba()">{{ 'login' | translate}}</button>
+  <mat-icon>brightness_5</mat-icon>
+  <mat-slide-toggle (change)="onDarkModeSwitched($event)"></mat-slide-toggle>
+  <mat-icon>bedtime</mat-icon>
+  <app-language-selector></app-language-selector>
+  <button mat-button></button>
+  <button mat-icon-button matTooltip="Cerrar sesion">
+    <mat-icon aria-hidden="false" aria-label="logout">logout</mat-icon>
+  </button>
+</mat-toolbar>

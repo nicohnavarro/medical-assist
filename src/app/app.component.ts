@@ -12,7 +12,7 @@ export class AppComponent {
   constructor(@Inject(DOCUMENT) private document: Document, private renderer: Renderer2 ,private themeService:ThemeService) {
   }
 
-  onDarkModeSwitched({ checked }: MatSlideToggleChange) {
+  onSelectedTheme(checked) {
     const hostClass = checked ? 'mat-app-background darkMode' : 'mat-app-background lightMode';
     this.renderer.setAttribute(this.document.body, 'class', hostClass);
     this.toggle()

@@ -1,24 +1,4 @@
-<mat-toolbar color="dark">
-  <button mat-icon-button matTooltip="Menu de usuario">
-    <mat-icon aria-hidden="false" aria-label="menu" style="margin-top:0;">menu</mat-icon>
-  </button>
-  <span>Medical Assist</span>
-  <span class="spaced"></span>
-  <!-- <div *ngIf="usuario" >
-      <img  *ngIf="usuario != null" [src]="profileImg" alt="">
-  </div> -->
-  <!-- {{usuario | async | json}} -->
-  <button mat-button></button>
-  <button mat-icon-button matTooltip="Cerrar sesion">
-    <mat-icon aria-hidden="false" aria-label="logout">logout</mat-icon>
-  </button>
-  <!-- <button *ngIf="usuario" mat-button (click)="logOut()">Salir</button> -->
-  <button mat-button>Ingresar</button>
-  <mat-icon>brightness_5</mat-icon>
-  <mat-slide-toggle (change)="onDarkModeSwitched($event)"></mat-slide-toggle>
-  <mat-icon>bedtime</mat-icon>
-  <app-language-selector></app-language-selector>
-</mat-toolbar>
+<app-navbar (selectedTheme)="onSelectedTheme($event)"></app-navbar>
 <div app-theme class="container">
   <div class="neumoDiv">
     <h1>{{ 'welcome' | translate }}</h1>

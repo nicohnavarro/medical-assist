@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 import { AngularMaterialModule } from './modules/angular-material.module';
 import { ToastrModule } from 'ngx-toastr';
 import { LanguageSelectorComponent } from './components/shared/language-selector/language-selector.component';
+import { NavbarComponent } from './components/layout/navbar/navbar.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -24,7 +25,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    LanguageSelectorComponent
+    LanguageSelectorComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
