@@ -17,6 +17,10 @@ import { AngularMaterialModule } from './modules/angular-material.module';
 import { ToastrModule } from 'ngx-toastr';
 import { LanguageSelectorComponent } from './components/shared/language-selector/language-selector.component';
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
+import { HomeComponent } from './pages/home/home.component';
+import { ErrorComponent } from './pages/error/error.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -26,7 +30,11 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     LanguageSelectorComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent,
+    ErrorComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

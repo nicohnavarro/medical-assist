@@ -1,5 +1,5 @@
 <mat-toolbar color="dark">
-  <button mat-icon-button matTooltip="Menu de usuario">
+  <button mat-icon-button matTooltip="Menu de usuario" (click)="activateSidebar()">
     <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
   </button>
   <span>{{ 'title' | translate}}</span>
@@ -10,7 +10,7 @@
   <!-- {{usuario | async | json}} -->
 
   <!-- <button *ngIf="usuario" mat-button (click)="logOut()">Salir</button> -->
-  <button mat-button (click)="prueba()">{{ 'login' | translate}}</button>
+  <button mat-button (click)="goLogin()">{{ 'login' | translate}}</button>
   <mat-icon>brightness_5</mat-icon>
   <mat-slide-toggle (change)="onDarkModeSwitched($event)"></mat-slide-toggle>
   <mat-icon>bedtime</mat-icon>

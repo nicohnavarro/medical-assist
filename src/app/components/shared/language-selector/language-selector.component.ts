@@ -13,9 +13,9 @@ export class LanguageSelectorComponent implements OnInit {
   options: any;
   
   constructor(private translateService: TranslateService) {
-    this.lang = localStorage.getItem("lang") || "en"
+    this.lang = localStorage.getItem("lang") || "es"
     this.translateService.setDefaultLang('es');
-    const lang = localStorage.getItem("lang") || "es"
+    const lang = localStorage.getItem("lang") || "en"
     this.translateService.use(lang)
     this.lang= lang;
     document.documentElement.lang = lang

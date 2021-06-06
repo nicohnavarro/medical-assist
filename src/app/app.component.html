@@ -1,10 +1,3 @@
-<app-navbar (selectedTheme)="onSelectedTheme($event)"></app-navbar>
-<div app-theme class="container">
-  <div class="neumoDiv">
-    <h1>{{ 'welcome' | translate }}</h1>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi provident animi
-    voluptatibus, saepe suscipit nostrum doloremque sed ipsum rem quisquam illo id
-    accusamus veniam maxime labore, sequi odio minima pariatur.
-  </div>
+<div [@routeAnimations]="prepareRoute(outlet)" class="appContainer" >
+  <router-outlet #outlet="outlet"></router-outlet>
 </div>
-<router-outlet></router-outlet>

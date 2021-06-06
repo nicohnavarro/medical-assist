@@ -1,0 +1,74 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background);
+  height: 90vh;
+  padding:100px;
+}
+
+.neumoDiv {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  padding: 100px;
+  border-radius: 20px;
+  background: var(--background);
+  color: var(--on-background);
+  box-shadow: var(--border-shadow);
+}
+
+mat-drawer-container{
+  mat-drawer{
+    .sidebar{
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+    }
+    overflow-y: hidden;
+  }
+  overflow-y: hidden;
+
+}
+
+.active{
+  background-color: var(--background);
+ }
+
+.example-container {
+  background-color: var(--background);
+    .example-sidenav {
+      button{
+        margin: 1rem;
+      }
+      padding: 0px;
+      width: 15vw;
+      min-width: 200px;
+      background-color: var(--background);
+    }
+  }
+  .mat-drawer-container{
+
+    background-color: var(--background);
+  }
+  
+  .example-sidenav-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: var(--background);
+  }
+  
+ mat-list{
+  mat-list-item:hover{
+    cursor: pointer;
+    background-color: grey;
+  }
+  mat-list-item{
+    transition: background-color 0.2s linear 0.2s;
+  }
+ }
+
+ 
