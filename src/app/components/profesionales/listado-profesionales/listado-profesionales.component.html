@@ -1,0 +1,48 @@
+<mat-spinner *ngIf="cargando" [diameter]=150 style="margin: 10% auto;"></mat-spinner>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!cargando">  
+    <!-- Nombre Column -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <!-- Apellido Column -->
+    <ng-container matColumnDef="apellido">
+      <th mat-header-cell *matHeaderCellDef> Apellido </th>
+      <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
+    </ng-container>
+  
+    <!-- Dni Column -->
+    <ng-container matColumnDef="domicilio">
+      <th mat-header-cell *matHeaderCellDef> Domicilio </th>
+      <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+    </ng-container>
+  
+    <!-- Correo Column -->
+    <ng-container matColumnDef="correo">
+      <th mat-header-cell *matHeaderCellDef> Correo </th>
+      <td mat-cell *matCellDef="let element"> {{element.mail}} </td>
+    </ng-container>
+    
+      <!-- Edad Column -->
+      <ng-container matColumnDef="edad">
+        <th mat-header-cell *matHeaderCellDef> Edad </th>
+        <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="editar">
+        <th mat-header-cell *matHeaderCellDef> Editar </th>
+        <td mat-cell *matCellDef="let element"><mat-icon aria-hidden="false" aria-label="Example home icon" (click)="editarMedico(element)">edit</mat-icon></td>
+      </ng-container>
+
+      <ng-container matColumnDef="borrar">
+        <th mat-header-cell *matHeaderCellDef> Borrar </th>
+        <td mat-cell *matCellDef="let element"><mat-icon aria-hidden="false" aria-label="Example home icon" (click)="eliminarMedico(element)">delete</mat-icon></td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

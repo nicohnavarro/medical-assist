@@ -1,0 +1,149 @@
+mat-vertical-stepper {
+  background-color: #dbdbdb;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+mat-step {
+  color: black;
+}
+.form_datos {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  text-align: center;
+  align-items: center;
+
+  mat-form-field {
+    border-radius: 25px;
+    background: #dbdbdb;
+    box-shadow: 20px 20px 60px #bababa, -20px -20px 60px #fcfcfc;
+    padding: 0.3rem;
+    width: 30%;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+    mat-label {
+      color: black;
+    }
+    input {
+      color: black;
+    }
+  }
+}
+.captcha {
+  margin: 1% auto;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-right: 10%;
+}
+
+.btn-form {
+  text-align: center;
+  margin-top: 3rem;
+  button {
+    margin-left: 1rem;
+  }
+}
+.datos_impor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  mat-form-field {
+    width: 80%;
+    margin-top: 1rem;
+  }
+}
+.imagenes {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  app-upload-image {
+    margin-right: 2rem;
+  }
+}
+
+.datos_tipo {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  width: 100%;
+  padding: 2rem;
+  .tipo {
+    min-width: 200px;
+    height: 50px;
+    label {
+      font-weight: 400;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+    mat-radio-button {
+      margin-right: 1rem;
+      margin-top: 0.4rem;
+    }
+    width: 25%;
+    background-color: #c2185b;
+    border-radius: 15px;
+  }
+  mat-form-field {
+    width: 50%;
+    margin-top: 0;
+    color: black;
+  }
+}
+::ng-deep .mat-select-value{    
+  color: black!important;  }
+
+
+@media only screen and (max-width: 950px) {
+  mat-horizontal-stepper {
+    background-color: #dbdbdb;
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+  }
+  .form_datos {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+    mat-form-field {
+      width: 80%;
+      margin: 1rem 1rem;
+    }
+  }
+
+  .btn-form {
+    text-align: center;
+    margin: auto;
+    margin-top: 3rem;
+    button {
+      margin-left: 1rem;
+    }
+  }
+  .datos_impor {
+    width: 100%;
+    mat-form-field {
+      width: 80%;
+      margin-top: 1rem;
+    }
+  }
+
+  .datos_tipo{
+    flex-direction: column;
+    mat-form-field{
+      margin-right: 1rem;
+      margin-left: 0;
+    }
+
+  }
+
+  .captcha {
+    margin-top: 3rem;
+  }
+}

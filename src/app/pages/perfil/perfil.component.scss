@@ -1,0 +1,11 @@
+.aviso {
+    margin: 2rem auto;
+    height: auto;
+    display: flex;
+    width: 20%;
+    flex-direction: column;
+    mat-card {
+      display: flex;
+      flex-direction: column;
+    }
+  }

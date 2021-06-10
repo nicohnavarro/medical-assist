@@ -25,6 +25,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "firebase": "^7.0 || ^8.0",
+    "ng-recaptcha": "^8.0.0",
     "ngx-toastr": "^14.0.0",
     "notyf": "^3.9.0",
     "rxjs": "~6.6.0",

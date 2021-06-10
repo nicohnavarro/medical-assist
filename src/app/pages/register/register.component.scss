@@ -1,0 +1,52 @@
+mat-drawer-container {
+  width: 100%;
+  mat-drawer {
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+    }
+  }
+}
+
+.example-container {
+  width: 100vw;
+  height: 92vh;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  .example-sidenav {
+    button {
+      margin: 1rem;
+    }
+    padding: 0px;
+    width: 15vw;
+    min-width: 200px;
+  }
+}
+
+.example-sidenav-content {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #dbdbdb;
+
+  mat-card {
+    margin:0;
+    margin-top: 2rem;
+    height: auto;
+    width: auto;
+    border-radius: 20px;
+    background-color: transparent;
+    padding:0.2rem;
+  }
+}
+
+mat-list {
+  mat-list-item:hover {
+    cursor: pointer;
+    background-color: #c2185b;
+  }
+  mat-list-item {
+    transition: background-color 0.2s linear 0.2s;
+  }
+}

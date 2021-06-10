@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  @Output() selectedTheme: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() openSidebar:EventEmitter<any> = new EventEmitter();
   @Input() usuario;
   ingreso_usuario:boolean;
@@ -17,11 +16,6 @@ export class NavbarComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.checked = localStorage.getItem('lang') == 'en' ? true: false;
-  }
-
-  onDarkModeSwitched({ checked }: MatSlideToggleChange) {
-    this.selectedTheme.emit(checked);
   }
 
   async logOut(){

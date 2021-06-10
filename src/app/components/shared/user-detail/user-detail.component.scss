@@ -1,0 +1,36 @@
+.mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+  mat-expansion-panel{
+      margin-top: 1rem;
+  }
+mat-panel-description {
+    span{
+        color: blueviolet;
+    }
+}
+
+.images{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    img{
+        width: 130px;
+        height: 110px;
+        border-radius: 14px;
+        margin: 10px 20px;
+    }
+}
+
+.profesional {
+    span{
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+}
+
+.especialidades{
+    p{
+        margin-left: 5px;
+    }
+}

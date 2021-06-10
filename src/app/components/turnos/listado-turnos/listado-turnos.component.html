@@ -1,0 +1,61 @@
+<mat-spinner *ngIf="cargando" [diameter]=150 style="margin: 10% auto;"></mat-spinner>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!cargando" class="table-responsive">  
+    <!-- Nombre Column -->
+    <ng-container matColumnDef="especialidad">
+      <th mat-header-cell *matHeaderCellDef> Especialidad </th>
+      <td mat-cell *matCellDef="let element"> {{element.especialidad}} </td>
+    </ng-container>
+  
+    <!-- Apellido Column -->
+    <ng-container matColumnDef="medico">
+      <th mat-header-cell *matHeaderCellDef> Medico </th>
+      <td mat-cell *matCellDef="let element"> {{element.medico.name}} </td>
+    </ng-container>
+  
+    <!-- Dni Column -->
+    <ng-container matColumnDef="paciente">
+      <th mat-header-cell *matHeaderCellDef> Paciente </th>
+      <td mat-cell *matCellDef="let element"> {{element.paciente.name}} </td>
+    </ng-container>
+  
+    <!-- Correo Column -->
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef> Fecha </th>
+      <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+    </ng-container>
+    
+      <!-- Edad Column -->
+      <ng-container matColumnDef="hora">
+        <th mat-header-cell *matHeaderCellDef> Hora </th>
+        <td mat-cell *matCellDef="let element"> {{element.hora}} </td>
+      </ng-container>
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        <td mat-cell *matCellDef="let element"> {{element.estado | enumAsString:Estados }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="atender">
+        <th mat-header-cell *matHeaderCellDef> Aceptar </th>
+        <td mat-cell disabled="true" *matCellDef="let element"><mat-icon aria-hidden="false" aria-label="Example home icon" (click)="aceptarTurno(element)">done</mat-icon></td>
+      </ng-container>
+
+      <ng-container matColumnDef="cancelar">
+        <th mat-header-cell *matHeaderCellDef> Cancelar </th>
+        <td mat-cell *matCellDef="let element"><mat-icon aria-hidden="false" aria-label="Example home icon" (click)="cancelarTurno(element)">report_problem</mat-icon></td>
+      </ng-container>
+      <ng-container matColumnDef="encuesta">
+        <th mat-header-cell *matHeaderCellDef> Encuesta </th>
+        <td mat-cell *matCellDef="let element"><mat-icon aria-hidden="false" aria-label="Example home icon" (click)="agregarEncuesta(element)">grade</mat-icon></td>
+      </ng-container>
+      <ng-container matColumnDef="resena">
+        <th mat-header-cell *matHeaderCellDef> Resena </th>
+        <td mat-cell *matCellDef="let element"><mat-icon aria-hidden="false" aria-label="Example home icon" (click)="agregarResena(element)">assignment</mat-icon></td>
+      </ng-container>
+      
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

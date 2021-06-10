@@ -1,1 +1,75 @@
-<p>login works!</p>
+<div class="row">
+  <div class="column-imagen">
+      <img src="../../../assets/img/6301-min.jpg" alt="">
+      <span>Ingresa con tu usuario y contraseña</span>
+      <span>para acceder a la mejor atencion personalizada</span>
+  </div>
+  <div class="column-login">
+
+      <mat-toolbar color="primary">
+          <span>Mi clinica app</span>
+      </mat-toolbar>
+
+      <div class="campos">
+          <form class="example-form">
+              <mat-form-field appearance="fill">
+                  <mat-label>Correo electronico</mat-label>
+                  <input matInput [formControl]="emailFormControl" placeholder="Ej. admin@gmail.com">
+                  <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                      Por favor ingrese un correo valido.
+                  </mat-error>
+                  <mat-error *ngIf="emailFormControl.hasError('required')">
+                      El correo es <strong>obligatorio</strong>
+                  </mat-error> -->
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                  <mat-label>Ingrese su contraseña </mat-label>
+                  <input matInput [formControl]="passwordFormControl" minlength="6" [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                  <!-- <mat-error *ngIf="passwordFormControl.hasError('required')">
+                      La contraseña es <strong>obligatoria</strong>
+                  </mat-error>
+                  <mat-error *ngIf="passwordFormControl.value.length < 6">
+                      La contraseña debe contener al menos <strong>6 caracteres</strong>
+                  </mat-error> -->
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                  <mat-label>Ingresar como: </mat-label>
+                  <mat-select [(value)]="selected" [formControl]="tipoUsuarioFormCtrl" (selectionChange)="onOptionsSelected(selected)">
+                      <mat-option value="admin">
+                          Admin
+                      </mat-option>
+                      <mat-option value="paciente">
+                          Paciente
+                      </mat-option>
+                      <mat-option value="medico">
+                          Medico
+                      </mat-option>
+                  </mat-select>
+              </mat-form-field>
+          </form>
+      </div>
+      <div class="btn-ingreso">
+          <!-- <button class="mediano google" mat-raised-button>
+              <img src="../../../assets/icon/gmail.jpg" alt="">
+              <span>  Google</span>
+              </button>
+          <button class="mediano facebook" mat-raised-button>
+              <img src="../../../assets/icon/facebook.png" alt="">
+              <span>  Facebook</span></button>
+          <button class="mediano twitter" mat-raised-button disabled>
+              <img src="../../../assets/icon/twitter.png" alt="">
+              <span>  Twitter</span></button> -->
+
+      </div>
+      <mat-spinner *ngIf="(cargando)"></mat-spinner>
+      <div class="btn-login" >
+          <button class="grande" *ngIf="(!cargando)" mat-raised-button color="primary" (click)="logIn()">Ingresar</button>
+          <!-- <button class="grande" *ngIf="(cargando)" mat-raised-button color="primary">Cargando ...</button> -->
+          <button class="grande" mat-raised-button *ngIf="(!cargando)" color="accent" routerLink="/register">Registrarse</button>
+      </div>
+  </div>
+</div>

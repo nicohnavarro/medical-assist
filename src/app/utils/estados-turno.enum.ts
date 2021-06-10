@@ -1,0 +1,7 @@
+export enum EstadosTurno {
+    PENDIENTE,
+    ACEPTADO,
+    CANCELADO_MEDICO,
+    CANCELADO_PACIENTE,
+    CONCLUIDO
+}

@@ -1,0 +1,27 @@
+<div class="" *ngIf="cargando">
+    <h2 mat-dialog-title>Agregando turno ...</h2>
+    <mat-spinner></mat-spinner>
+</div>
+
+<div class="" *ngIf="!cargando && !turno_cargado">
+    <h2 mat-dialog-title>Detalles del turno para {{turno.especialidad}}</h2>
+    <mat-dialog-content>
+        <span>Medico: {{turno.medico.name}}</span>
+        <span>Paciente: {{turno.paciente.name}}</span>
+        <span>Fecha: {{turno.fecha}} {{turno.hora}}</span>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-raised-button color="primary" (click)="confirmarTurno()">Confirmar Turno</button>
+        <button mat-button mat-dialog-close>Cancelar</button>
+    </mat-dialog-actions>
+</div>
+
+<div class="" *ngIf="!cargando && turno_cargado">
+    <h2 mat-dialog-title>Muchas gracias {{turno.paciente.name}}</h2>
+    <mat-dialog-content>
+        <span>No te olvides de cargar una reseña mas adelante!</span>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-raised-button color="primary" mat-dialog-close>Cerrar</button>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,12 @@
+<div class="sacar_turnos" *ngIf="loggeado">
+    
+</div>
+
+<div *ngIf="!loggeado">
+    <div class="aviso">
+        <mat-card>
+            Ingresa para poder editar tu perfil!
+            <button mat-raised-button color="primary"  (click)="irIngreso()">Ingresar</button>
+        </mat-card>
+    </div>
+</div>

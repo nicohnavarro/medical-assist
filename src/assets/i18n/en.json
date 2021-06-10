@@ -2,6 +2,11 @@
   "title": "Medical Assist",
   "welcome":"Welcome",
   "home": "Home",
+  "profile":"Profile",
+  "schedule":"Schedule",
+  "patients":"Patients",
+  "shifts":"Shifts",
+  "review":"Review",
   "chat":"Chat",
   "settings": "Settings",
   "login": "Login",
@@ -11,5 +16,7 @@
   "logout": "Logout",
   "error":"Ups!",
   "errorLogin":"You can't login :(, Sorry.",
-  "me":"me"
+  "me":"me",
+  "mainText":"We are doctors of different specialties who use technology as a communication tool so that you can access a quality consultation with experts without the need to leave your home.",
+  "secondText":"Our goal, in addition to making the diagnosis and treatment of your condition, is that you feel content and satisfied with the professional you choose and that they become your new family doctor. We provide a quick and personalized response throughout the year."
 }
