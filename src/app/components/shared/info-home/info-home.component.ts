@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./info-home.component.scss']
 })
 export class InfoHomeComponent implements OnInit {
-verificado:boolean=false;
+
   constructor() { }
 
   ngOnInit(): void {

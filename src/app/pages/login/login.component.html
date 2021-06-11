@@ -1,58 +1,62 @@
 <div class="row">
   <div class="column-imagen">
-      <img src="../../../assets/img/6301-min.jpg" alt="">
-      <span>Ingresa con tu usuario y contraseña</span>
-      <span>para acceder a la mejor atencion personalizada</span>
+      <img src="../../../assets/images/loginimage.svg" alt="">
+      <span>{{'loginmessage1' | translate}}</span>
+      <span>{{'loginmessage2' | translate}}</span>
+<div class="features">
+    <app-language-selector></app-language-selector>
+    <app-theme-toogle></app-theme-toogle>
+</div>
   </div>
   <div class="column-login">
 
-      <mat-toolbar color="primary">
-          <span>Mi clinica app</span>
+      <mat-toolbar>
+          <span>{{'title' | translate}}</span>
       </mat-toolbar>
 
       <div class="campos">
           <form class="example-form">
-              <mat-form-field appearance="fill">
-                  <mat-label>Correo electronico</mat-label>
+              <mat-form-field>
+                  <mat-label>{{'email' | translate}}</mat-label>
                   <input matInput [formControl]="emailFormControl" placeholder="Ej. admin@gmail.com">
-                  <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                      Por favor ingrese un correo valido.
+                  <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                     {{'validateEmail1' | translate}}
                   </mat-error>
                   <mat-error *ngIf="emailFormControl.hasError('required')">
-                      El correo es <strong>obligatorio</strong>
-                  </mat-error> -->
+                      {{'validateEmail2' | translate}}
+                  </mat-error>
               </mat-form-field>
 
-              <mat-form-field appearance="fill">
-                  <mat-label>Ingrese su contraseña </mat-label>
+              <mat-form-field>
+                  <mat-label>{{ 'password' | translate}}</mat-label>
                   <input matInput [formControl]="passwordFormControl" minlength="6" [type]="hide ? 'password' : 'text'">
                   <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                   </button>
-                  <!-- <mat-error *ngIf="passwordFormControl.hasError('required')">
-                      La contraseña es <strong>obligatoria</strong>
+                  <mat-error *ngIf="passwordFormControl.hasError('required')">
+                    {{'validatePassword2' | translate}}
                   </mat-error>
                   <mat-error *ngIf="passwordFormControl.value.length < 6">
-                      La contraseña debe contener al menos <strong>6 caracteres</strong>
-                  </mat-error> -->
+                    {{'validatePassword1' | translate}}
+                  </mat-error>
               </mat-form-field>
-              <mat-form-field appearance="fill">
-                  <mat-label>Ingresar como: </mat-label>
+              <mat-form-field *ngIf="(!cargando)">
+                  <mat-label>{{ 'guest' | translate}}</mat-label>
                   <mat-select [(value)]="selected" [formControl]="tipoUsuarioFormCtrl" (selectionChange)="onOptionsSelected(selected)">
                       <mat-option value="admin">
-                          Admin
+                          {{ 'admin' | translate}}
                       </mat-option>
                       <mat-option value="paciente">
-                          Paciente
+                          {{ 'patient' | translate}}
                       </mat-option>
                       <mat-option value="medico">
-                          Medico
+                          {{ 'doctor' | translate}}
                       </mat-option>
                   </mat-select>
               </mat-form-field>
           </form>
       </div>
-      <div class="btn-ingreso">
+      <div class="btn-ingreso"*ngIf="(cargando)">
           <!-- <button class="mediano google" mat-raised-button>
               <img src="../../../assets/icon/gmail.jpg" alt="">
               <span>  Google</span>
@@ -67,9 +71,9 @@
       </div>
       <mat-spinner *ngIf="(cargando)"></mat-spinner>
       <div class="btn-login" >
-          <button class="grande" *ngIf="(!cargando)" mat-raised-button color="primary" (click)="logIn()">Ingresar</button>
+          <button class="grande" *ngIf="(!cargando)" mat-raised-button color="primary" (click)="logIn()">{{'login' | translate}}</button>
           <!-- <button class="grande" *ngIf="(cargando)" mat-raised-button color="primary">Cargando ...</button> -->
-          <button class="grande" mat-raised-button *ngIf="(!cargando)" color="accent" routerLink="/register">Registrarse</button>
+          <button class="grande" mat-raised-button *ngIf="(!cargando)" color="warn" routerLink="/register">{{'register'| translate}}</button>
       </div>
   </div>
 </div>

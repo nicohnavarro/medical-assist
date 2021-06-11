@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   cargando = false;
 
-  constructor(private authSvc: AuthService,private userSvc:UserService, private router: Router, private _snackBar: MatSnackBar) { }
+  constructor(private authSvc: AuthService, private userSvc: UserService, private router: Router, private _snackBar: MatSnackBar) { }
   selected
   ngOnInit(): void {
   }
@@ -55,21 +55,17 @@ export class LoginComponent implements OnInit {
   async logIn() {
     try {
       this.activarSpinner();
-      await this.authSvc.login(this.emailFormControl.value, this.passwordFormControl.value).then((auth)=>{
-        if (auth) {
-          this.userSvc.setUser(auth.uid).subscribe((data)=>{
-            this.authSvc.user = data;
-            console.log(auth);
-            this.router.navigate(['admin/home']);
-          });
-        }
-        else {
-          this.openSnackBar('No ingresaste una cuenta valida.', 'Registrarse');
-        }
-      });
+      const user = await this.authSvc.login(this.emailFormControl.value, this.passwordFormControl.value);
+      if (!user) {
+        this.openSnackBar('No ingresaste una cuenta valida.', 'Registrarse');
+      }
+      else{
+        localStorage.setItem("uid",user.uid);
+        this.router.navigate(["main"]);
+      }
     }
     catch (err) {
-      this.openSnackBar(err, 'Error');
+      this.openSnackBar("Tuvimos un problema", 'Error');
     }
 
   }

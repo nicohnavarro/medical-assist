@@ -8,39 +8,40 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./language-selector.component.scss']
 })
 export class LanguageSelectorComponent implements OnInit {
-
+  checked: boolean;
   lang: string;
   options: any;
-  
+
   constructor(private translateService: TranslateService) {
-    localStorage.setItem("lang",'es');
-    this.translateService.setDefaultLang('es');
-    const lang = localStorage.getItem("lang") || "en"
-    this.translateService.use(lang)
-    this.lang= lang;
-    document.documentElement.lang = lang
+    if (localStorage.getItem("lang") === 'en') {
+      this.translateService.use('en');
+      document.documentElement.lang = 'en'
+      this.checked = true;
+    }
+    else if (localStorage.getItem("lang") === 'es') {
+      this.translateService.use('es');
+      document.documentElement.lang = 'es'
+      this.checked = false;
+    }
+    else {
+      localStorage.setItem("lang", "es")
+      this.translateService.use('es');
+      document.documentElement.lang = 'es'
+    }
   }
 
   ngOnInit(): void {
     this.options = [
-      { Value: 'es', Text: '🇦🇷 Español',},
-      { Value: 'en', Text: '🇬🇧 English',},
+      { Value: 'es', Text: '🇦🇷 Español', },
+      { Value: 'en', Text: '🇬🇧 English', },
     ];
   }
 
-  changeLang(lang: any) {
-    this.lang= lang
-    localStorage.setItem("lang", lang);
-    // window.location.reload()
-    this.translateService.use(lang)
-  }
-
-  onEnglishSwitched({checked}: MatSlideToggleChange){
-    let lang = checked ?  'en' : 'es';
-    this.lang = lang;
-    localStorage.setItem("lang", lang);
-    // window.location.reload()
-    this.translateService.use(lang)
+  onEnglishSwitched({ checked }: MatSlideToggleChange) {
+    this.lang = checked ? 'en' : 'es';
+    localStorage.setItem("lang", this.lang);
+    this.translateService.use(this.lang);
+    document.documentElement.lang = this.lang;
   }
 
 }

@@ -4,7 +4,7 @@ import { ListadosComponent } from './pages/listados/listados.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ErrorComponent } from './pages/error/error.component';
-import { HomeComponent } from './pages/home/home.component';
+import { MainComponent } from './pages/main/main.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EncuestaComponent } from './components/encuesta/encuesta.component';
@@ -13,8 +13,8 @@ import { SacarTurnoComponent } from './pages/sacar-turno/sacar-turno.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'admin', component: HomeComponent, data: {animation: 'home'},children:[
-    {path: 'home',component:InfoHomeComponent,data: {animation: 'home'}},
+  { path: 'main', component: MainComponent, data: {animation: 'home'},children:[
+    {path: '',component:InfoHomeComponent},
     {path: 'perfil',component:PerfilComponent,data: {animation: 'home'}},
     {path: 'listados', component:ListadosComponent},
     {path: 'sacar-turno', component:SacarTurnoComponent},
@@ -23,7 +23,7 @@ const routes: Routes = [
   ]},
   { path: 'login', component: LoginComponent, data: {animation: 'login'} },
   { path: 'register', component: RegisterComponent, data: {animation: 'registro'} },
-  { path: '**', component: HomeComponent, data: {animation: 'home'} }
+  { path: '**', component: ErrorComponent, data: {animation: 'home'} }
   
 ];
 

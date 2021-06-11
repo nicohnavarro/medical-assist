@@ -21,6 +21,7 @@ export class UserService {
   agregarUser(user:IUser,id:string){
     return this.db.collection('usuarios').doc(id).set(user);
   }
+
   getUserById(id:string):Observable<IUser>{
     const usersDocuments = this.db.doc<IUser>('usuarios/' + id);
     return usersDocuments.snapshotChanges()
@@ -33,7 +34,9 @@ export class UserService {
   }
 
   setUser(id:string){
-    return this.getUserById(id);
+    this.getUserById(id).subscribe((data)=>{
+      return data;
+    });
   }
 
   getAdmins(): Observable<IAdmin[]> {

@@ -15,7 +15,6 @@ public user;
 
   async login(email:string, password:string){
     try{
-      debugger;
       const result = await this.afAuth.signInWithEmailAndPassword(email,password);
       return result.user;
     }

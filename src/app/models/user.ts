@@ -11,3 +11,9 @@ export interface IUser {
     type:string,
     especializaciones?:string[],
 }
+
+export interface UserNav {
+    uid:number,
+    photoURL:string,
+    email:string
+}

@@ -13,36 +13,36 @@ $custom-typography: mat-typography-config(
 
 // GAMA COLORES
 $my-primary-color: (
-  200: #84bdf1,
-  300: #53a3eb,
-  400: #2e8fe7,
-  500: #097be3,
-  600: #0873e0,
-  700: #0668dc,
+  200 : #abcbe9,
+  300 : #89b6e0,
+  400 : #6fa6d9,
+  500 : #5696d2,
+  600 : #4f8ecd,
+  700 : #4583c7,
   contrast: (
-    200: #000000,
-    300: #000000,
-    400: #ffffff,
-    500: #ffffff,
-    600: #ffffff,
-    700: #ffffff,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #ffffff,
   ),
 );
 
 $my-accent-color: (
-  200: #abcbe9,
-  300: #89b6e0,
-  400: #6fa6d9,
-  500: #5696d2,
-  600: #4f8ecd,
-  700: #4583c7,
+  200 : #abcbe9,
+  300 : #89b6e0,
+  400 : #6fa6d9,
+  500 : #5696d2,
+  600 : #4f8ecd,
+  700 : #4583c7,
   contrast: (
-    200: #000000,
-    300: #000000,
-    400: #000000,
-    500: #000000,
-    600: #000000,
-    700: #ffffff,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #ffffff,
   ),
 );
 
@@ -107,9 +107,28 @@ $my-theme-dark: mat-dark-theme(
 // "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
 // POR LA RUTA DEL CUSTOM THEME
 // "src/assets/styles/my-theme.scss",
+html, body { height: 100%; }
 body {
   margin: 0;
   // font-family: Gotham, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
   //   Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-family: "Gothic A1", sans-serif;
+}
+
+*{
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(11, 2, 106);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: rgb(238 234 244) 0px 0px 5px inset;
+  border-radius: 10px;
 }

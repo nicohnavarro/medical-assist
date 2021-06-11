@@ -3,7 +3,7 @@ import { lightTheme } from './theme/light-theme';
 import { ThemeModule } from './theme/theme.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +17,7 @@ import { AngularMaterialModule } from './modules/angular-material.module';
 import { ToastrModule } from 'ngx-toastr';
 import { LanguageSelectorComponent } from './components/shared/language-selector/language-selector.component';
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
-import { HomeComponent } from './pages/home/home.component';
+import { MainComponent } from './pages/main/main.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -34,7 +34,6 @@ import { DetalleProfesionalComponent } from './components/profesionales/detalle-
 import { DetallePacienteComponent } from './components/pacientes/detalle-paciente/detalle-paciente.component';
 import { ListadosComponent } from './pages/listados/listados.component';
 import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
-import { InfoHomeComponent } from './components/shared/info-home/info-home.component';
 import { EncuestaComponent } from './components/encuesta/encuesta.component';
 import { ListadoTurnosComponent } from './components/turnos/listado-turnos/listado-turnos.component';
 import { SacarTurnoComponent } from './pages/sacar-turno/sacar-turno.component';
@@ -51,6 +50,7 @@ import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
 import { ReseniaModalComponent } from './components/shared/resenia-modal/resenia-modal.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { ThemeToogleComponent } from './components/shared/theme-toogle/theme-toogle.component';
+import { InfoHomeComponent } from './components/shared/info-home/info-home.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -61,7 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     LanguageSelectorComponent,
     NavbarComponent,
-    HomeComponent,
+    MainComponent,
     ErrorComponent,
     LoginComponent,
     RegisterComponent,
@@ -76,7 +76,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     DetallePacienteComponent,
     ListadosComponent,
     SidebarComponent,
-    InfoHomeComponent,
     EncuestaComponent,
     ListadoTurnosComponent,
     SacarTurnoComponent,
@@ -91,7 +90,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PerfilComponent,
     MisTurnosComponent,
     ReseniaModalComponent,
-    ThemeToogleComponent
+    ThemeToogleComponent,
+    InfoHomeComponent
   ],
   imports: [
     BrowserModule,

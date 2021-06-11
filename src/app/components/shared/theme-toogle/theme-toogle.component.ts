@@ -9,26 +9,26 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./theme-toogle.component.scss']
 })
 export class ThemeToogleComponent implements OnInit {
+  checked:boolean;
+  themeState:string;
 
-  constructor(@Inject(DOCUMENT) private document: Document, private renderer: Renderer2 ,private themeService:ThemeService) { }
+  constructor(@Inject(DOCUMENT) private document: Document, private renderer: Renderer2 ,private themeService:ThemeService) {
+    this.checked = this.themeService.getActiveTheme().name === 'light' ? false : true; 
+    this.validatetheme();
+    this.renderer.setAttribute(this.document.body, 'class',this.themeState);
+   }
 
   ngOnInit(): void {
+  }
 
-    
+  validatetheme(){
+    this.checked ? this.themeState='mat-app-background darkMode' : this.themeState='mat-app-background lightMode';
   }
 
   onDarkModeSwitched({ checked }: MatSlideToggleChange) {
     const hostClass = checked ? 'mat-app-background darkMode' : 'mat-app-background lightMode';
+    const theme = checked ? 'dark' : 'light';
     this.renderer.setAttribute(this.document.body, 'class', hostClass);
-    this.toggle()
-  }
-
-  private toggle() {
-    const active = this.themeService.getActiveTheme() ;
-    if (active.name === 'light') {
-      this.themeService.setTheme('dark');
-    } else {
-      this.themeService.setTheme('light');
-    }
+    this.themeService.setTheme(theme);
   }
 }
