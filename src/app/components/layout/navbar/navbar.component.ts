@@ -17,9 +17,9 @@ export class NavbarComponent implements OnInit {
   @Input() user: any;
   //#endregion
 
-  constructor(private router: Router, private userSvc: UserService, private authSvc:AuthService ) { 
-    if(localStorage.getItem('uid')){
-      this.userSvc.getUserById(localStorage.getItem('uid')).subscribe((data)=>{
+  constructor(private router: Router, private userSvc: UserService, private authSvc: AuthService) {
+    if (localStorage.getItem('uid')) {
+      this.userSvc.getUserById(localStorage.getItem('uid')).subscribe((data) => {
         this.user = data;
         console.log(data);
       })
@@ -36,6 +36,7 @@ export class NavbarComponent implements OnInit {
   async logout() {
     try {
       await this.authSvc.logout();
+      localStorage.removeItem('uid')
       this.router.navigate(['/login'])
     }
     catch (err) {

@@ -1,37 +1,22 @@
-<app-navbar (openSidebar)="drawer.toggle()"></app-navbar>
-<mat-drawer-container class="example-container">
-    <mat-drawer #drawer class="example-sidenav" mode="side">
-        <div class="sidebar">
-            <mat-list>
-                <div mat-subheader>Opciones</div>
-                <mat-list-item [routerLink]="['/admin/home']" routerLinkActive="active" >
-                    <mat-icon mat-list-icon>home</mat-icon>
-                    <div mat-line>Home</div>
-                </mat-list-item>
-                <mat-list-item>
-                    <mat-icon mat-list-icon>build</mat-icon>
-                    <div mat-line>Perfil</div>
-                </mat-list-item>
-                <mat-list-item [routerLink]="['/admin/listados']" routerLinkActive="active" >
-                    <mat-icon mat-list-icon>group</mat-icon>
-                    <div mat-line>Listados</div>
-                </mat-list-item>
-                <mat-list-item [routerLink]="['/admin/sacar-turno']" routerLinkActive="active" >
-                    <mat-icon mat-list-icon>date_range</mat-icon>
-                    <div mat-line>Sacar turno</div>
-                </mat-list-item>
-                <mat-list-item [routerLink]="['/admin/encuesta']" routerLinkActive="active" >
-                    <mat-icon mat-list-icon>assignment</mat-icon>
-                    <div mat-line>Encuesta</div>
-                </mat-list-item>
-            </mat-list>
-        </div>
-    </mat-drawer>
+<div class="row">
+  <div class="column-login">
+    <mat-toolbar>
+      <span>{{ "title" | translate }}</span>
+    </mat-toolbar>
 
-    <div class="example-sidenav-content">
-        <mat-card>
-            <app-stepper-form (usuario_registrado)="ObtenerUsuario($event)" (user_img_1)="GetImgUno($event)" (user_img_2)="GetImgDos($event)"></app-stepper-form>
-        </mat-card>
+    <app-stepper-form app-theme
+      (usuario_registrado)="ObtenerUsuario($event)"
+      (user_img_1)="GetImgUno($event)"
+      (user_img_2)="GetImgDos($event)"
+    ></app-stepper-form>
+  </div>
+  <div class="column-imagen">
+    <img src="../../../assets/images/loginimage.svg" alt="" />
+    <span>{{ "registermessage1" | translate }}</span>
+    <span>{{ "registermessage2" | translate }}</span>
+    <div class="features">
+      <app-language-selector></app-language-selector>
+      <app-theme-toogle></app-theme-toogle>
     </div>
-
-</mat-drawer-container>
+  </div>
+</div>

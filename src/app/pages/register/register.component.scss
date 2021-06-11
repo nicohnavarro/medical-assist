@@ -1,52 +1,120 @@
-mat-drawer-container {
-  width: 100%;
-  mat-drawer {
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      justify-content: start;
-    }
-  }
-}
-
-.example-container {
-  width: 100vw;
-  height: 92vh;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  .example-sidenav {
-    button {
-      margin: 1rem;
-    }
-    padding: 0px;
-    width: 15vw;
-    min-width: 200px;
-  }
-}
-
-.example-sidenav-content {
+.row {
   display: flex;
-  justify-content: center;
-  height: 100%;
   width: 100%;
-  background-color: #dbdbdb;
+  height: 100vh;
+  .column-imagen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 30vw;
+    background: var(--background);
+    color: var(--on-background);
+    overflow: hidden;
+    .features{
+      display: flex;
+      width: 100%;
+      align-items: flex-start;
+      justify-content: space-around;
+    }
+    img {
+      width: 70%;
+      height: 70%;
+      animation: fadeIn ease 5s;
+    }
+    span {
+      animation: fadeIn ease 4s;
+      font-size: large;
+      margin-bottom: 1rem;
+    }
+  }
+  .column-login {
+    background: var(--background);
+    color: var(--on-background);
+    width: 70vw;
+    height: 100%;
+    text-align: center;
+    animation: fadeIn ease 7s;
 
-  mat-card {
-    margin:0;
-    margin-top: 2rem;
-    height: auto;
-    width: auto;
-    border-radius: 20px;
-    background-color: transparent;
-    padding:0.2rem;
+    .example-form {
+      margin: auto;
+      mat-form-field {
+        border-radius: 14px;
+        background: var(--background);
+        color: var(--on-background);
+        box-shadow: var(--border-shadow);
+        padding: 20px;
+        width: 80%;
+        margin-top: 1.3rem;
+        margin-bottom: 1rem;
+        mat-label {
+          color: var(--on-background);
+        }
+      }
+    }
   }
 }
 
-mat-list {
-  mat-list-item:hover {
-    cursor: pointer;
-    background-color: #c2185b;
+::ng-deep .mat-select-value{    
+  color: var(--on-background); }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  mat-list-item {
-    transition: background-color 0.2s linear 0.2s;
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeBottom {
+  0% {
+    margin-top: 100%;
+  }
+  100% {
+    margin-top: 5%;
+  }
+}
+
+.btn-ingreso{
+  height: 50px;
+}
+
+mat-toolbar span {
+  flex: 1;
+  text-align: center;
+  align-items: center;
+}
+
+.btn-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10%;
+  text-align: center;
+  height: 20%;
+  button {
+    width: 80%;
+    height: 60%;
+    margin: 0.5rem 0.4rem;
+    font-size: large;
+    padding: 10px;
+
+  }
+}
+mat-spinner {
+  margin:auto;
+}
+
+@media only screen and (max-width: 700px) {
+  .row {
+    .column-imagen {
+      height: 0;
+      width: 0;
+    }
+    .column-login {
+      height: 100%;
+      width: 100%;
+    }
   }
 }

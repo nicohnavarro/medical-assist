@@ -3,8 +3,8 @@
         <img [src]="source" alt="">
     </div>
     <div class="form-group">
-        <label mat-button [for]="source" *ngIf="source === '../../../assets/img/user.png'">Carga tu imagen!</label>
-        <label mat-button [for]="source" *ngIf="source !== '../../../assets/img/user.png'">Queres cambiarla?</label>
+        <label mat-button [for]="source" *ngIf="source === '../../../../assets/images/userempty.svg'"> {{'loadImage' | translate}}</label>
+        <label mat-button [for]="source" *ngIf="source !== '../../../../assets/images/userempty.svg'"> {{'changeImage' | translate}}</label>
         <input type="file" [id]="source" (change)="onSelectFile($event,source)">
     </div>
 </div>

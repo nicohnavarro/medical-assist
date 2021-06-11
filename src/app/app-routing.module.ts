@@ -15,14 +15,14 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'main', component: MainComponent, data: {animation: 'home'},children:[
     {path: '',component:InfoHomeComponent},
-    {path: 'perfil',component:PerfilComponent,data: {animation: 'home'}},
+    {path: 'profile',component:PerfilComponent,data: {animation: 'home'}},
     {path: 'listados', component:ListadosComponent},
     {path: 'sacar-turno', component:SacarTurnoComponent},
     {path: 'mis-turnos', component:MisTurnosComponent},
     {path: 'encuesta', component:EncuestaComponent},
   ]},
   { path: 'login', component: LoginComponent, data: {animation: 'login'} },
-  { path: 'register', component: RegisterComponent, data: {animation: 'registro'} },
+  { path: 'register', component: RegisterComponent, data: {animation: 'register'} },
   { path: '**', component: ErrorComponent, data: {animation: 'home'} }
   
 ];

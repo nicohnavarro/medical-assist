@@ -1,134 +1,217 @@
-<mat-vertical-stepper linear="false" #stepper color='basic'>
+<mat-horizontal-stepper linear="false" #stepper>
   <mat-step [stepControl]="datosPersonalesFormGroup">
     <form [formGroup]="datosPersonalesFormGroup">
       <div class="form_datos">
-        <ng-template matStepLabel>Datos personales</ng-template>
-       <mat-form-field appearance="standard">
-          <mat-label>Nombre</mat-label>
-          <input matInput [formControl]="nombreFormCtrl" placeholder="Nombre">
-          <mat-error *ngIf="nombreFormCtrl.hasError('required')">
-            El nombre es <strong>obligatorio</strong>
+        <ng-template matStepLabel>{{'personalInfo' | translate}}</ng-template>
+
+        <div class="datos-prin">
+          <mat-form-field appearance="standard">
+            <mat-label>{{'name' | translate}}</mat-label>
+            <input
+              matInput
+              [formControl]="nombreFormCtrl"
+              placeholder="Nombre"
+            />
+            <mat-error *ngIf="nombreFormCtrl.hasError('required')">
+              {{'fieldRequired' | translate}}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="standard">
+            <mat-label>{{'surname' | translate}}</mat-label>
+            <input
+              matInput
+              [formControl]="apellidoFormCtrl"
+              placeholder="Apellido"
+            />
+            <mat-error *ngIf="apellidoFormCtrl.hasError('required')">
+              {{'fieldRequired' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="datos-prin">
+          <mat-form-field appearance="standard">
+            <mat-label>{{'address' | translate}}</mat-label>
+            <input
+              matInput
+              [formControl]="domicilioFormCtrl"
+              placeholder="Domicilio"
+            />
+            <mat-error *ngIf="domicilioFormCtrl.hasError('required')">
+              {{'fieldRequired' | translate}}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="standard" class="edadFormCtrl">
+            <mat-label>{{'age' | translate}}</mat-label>
+            <input
+              matInput
+              type="number"
+              [formControl]="edadFormCtrl"
+              placeholder="Edad"
+            />
+            <mat-error *ngIf="edadFormCtrl.hasError('required')">
+              {{'fieldRequired' | translate}}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <div class="btn-form">
+      <button matStepperNext mat-raised-button color="primary">
+        {{'next' | translate}}
+      </button>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="datosCuentaFormGroup" >
+    <ng-template matStepLabel>{{'accountInfo' | translate}}</ng-template>
+    <form [formGroup]="datosCuentaFormGroup" class="form_datos">
+      <div class="datos_impor">
+        <mat-form-field appearance="standard">
+          <mat-label>{{'email' | translate}}</mat-label>
+          <input
+            matInput
+            [formControl]="emailFormCtrl"
+            placeholder="Ej. admin@gmail.com"
+          />
+          <mat-error
+            *ngIf="
+              emailFormCtrl.hasError('email') &&
+              !emailFormCtrl.hasError('required')
+            "
+          >
+          {{'validateEmail1' | translate}}
+          </mat-error>
+          <mat-error *ngIf="emailFormCtrl.hasError('required')">
+            {{'validateEmail2' | translate}}
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
-          <mat-label>Apellido</mat-label>
-          <input matInput [formControl]="apellidoFormCtrl" placeholder="Apellido">
-          <mat-error *ngIf="apellidoFormCtrl.hasError('required')">
-            El apellido es <strong>obligatorio</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="standard">
-          <mat-label>Domicilio</mat-label>
-          <input matInput [formControl]="domicilioFormCtrl" placeholder="Domicilio">
-          <mat-error *ngIf="domicilioFormCtrl.hasError('required')">
-            El domicilio es <strong>obligatorio</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="standard" class="edadFormCtrl">
-          <mat-label>Edad</mat-label>
-          <input matInput type="number" [formControl]="edadFormCtrl" placeholder="Edad">
-          <mat-error *ngIf="edadFormCtrl.hasError('required')">
-            La edad es <strong>obligatoria</strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
-    </form>
-    <div class="btn-form">
-      <button matStepperNext mat-raised-button color="primary">Siguiente</button>
-    </div>
-  </mat-step>
-  <mat-step [stepControl]="datosCuentaFormGroup" label="Datos de cuenta">
-    <form [formGroup]="datosCuentaFormGroup" class="form_datos">
-      <div class="datos_impor">
-        <mat-form-field appearance="standard">
-          <mat-label>Correo electronico</mat-label>
-          <input matInput [formControl]="emailFormCtrl" placeholder="Ej. admin@gmail.com">
-          <mat-error *ngIf="emailFormCtrl.hasError('email') && !emailFormCtrl.hasError('required')">
-            Por favor ingrese un correo valido.
-          </mat-error>
-          <mat-error *ngIf="emailFormCtrl.hasError('required')">
-            El correo es <strong>obligatorio</strong>
-          </mat-error>
-        </mat-form-field>
-  
-        <mat-form-field appearance="standard">
-          <mat-label>Ingrese su contraseña </mat-label>
-          <input matInput [formControl]="claveFormCtrl" minlength="6" [type]="hide ? 'password' : 'text'">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-label>{{'password' | translate}} </mat-label>
+          <input
+            matInput
+            [formControl]="claveFormCtrl"
+            minlength="6"
+            [type]="hide ? 'password' : 'text'"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
           <mat-error *ngIf="claveFormCtrl.hasError('required')">
-            La contraseña es <strong>obligatoria</strong>
+            {{'validatePassword2' | translate}}
           </mat-error>
           <mat-error *ngIf="claveFormCtrl.value.length < 6">
-            La contraseña debe contener al menos <strong>6 caracteres</strong>
+            {{'validatePassword1' | translate}}
           </mat-error>
         </mat-form-field>
       </div>
       <div class="imagenes">
-        <app-upload-image source={{imagen_uno}} (fotoSeleccionada)="obtieneImagen_uno($event)" (fotoSubir)="archivoSubir_uno($event)"></app-upload-image>
-        <app-upload-image source={{imagen_dos}} (fotoSeleccionada)="obtieneImagen_dos($event)" (fotoSubir)="archivoSubir_dos($event)"></app-upload-image>
+        <app-upload-image
+          source="{{ imagen_uno }}"
+          (fotoSeleccionada)="obtieneImagen_uno($event)"
+          (fotoSubir)="archivoSubir_uno($event)"
+        ></app-upload-image>
+        <app-upload-image
+          source="{{ imagen_dos }}"
+          (fotoSeleccionada)="obtieneImagen_dos($event)"
+          (fotoSubir)="archivoSubir_dos($event)"
+        ></app-upload-image>
       </div>
     </form>
     <div class="captcha">
-      <re-captcha (resolved)="resolved($event)" siteKey="6Lcv5fgUAAAAALZuvhQHpOBljPWXfGeD165TICyR"></re-captcha>
+      <re-captcha
+        (resolved)="resolved($event)"
+        siteKey="6Lcv5fgUAAAAALZuvhQHpOBljPWXfGeD165TICyR"
+      ></re-captcha>
     </div>
     <div class="btn-form">
-      <button mat-raised-button color="accent" matStepperPrevious>Atras</button>
-      <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+      <button mat-raised-button color="accent" matStepperPrevious>{{'back' | translate}}</button>
+      <button mat-raised-button color="primary" matStepperNext>
+        {{'next' | translate}}
+      </button>
     </div>
   </mat-step>
   <mat-step>
     <div class="form_datos">
-        <ng-template matStepLabel>Tipo de usuario</ng-template>
-        <div class="datos_tipo">
-          <div class="tipo">
-              <label id="example-radio-group-label">Elige una opcion</label><br>
-              <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="tipoUsuario" name="tipoUsuario">
-                  <mat-radio-button class="example-radio-button" *ngFor="let tipo of tiposUsuarios" [value]="tipo">
-                      {{tipo}}
-                  </mat-radio-button>
-              </mat-radio-group>
-          </div>
-          <mat-form-field *ngIf="tipoUsuario == 'Medico'"appearance="fill" color="accent">
-              <mat-label>Especialidad</mat-label>
-              <mat-select class="select_color" [formControl]="especialidadFormCtrl" multiple required>
-                  <mat-option class="select_color" *ngFor="let especialidad of especialidades | enumToArray" [value]="especialidad.name">
-                      {{especialidad.name}}
-                  </mat-option>
-              </mat-select>
-          </mat-form-field>
+      <ng-template matStepLabel>{{'typeOfUser' | translate}}</ng-template>
+      <div class="datos_tipo">
+        <div class="tipo">
+          <label id="example-radio-group-label">{{'chooseOption' | translate}}</label><br />
+          <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            [(ngModel)]="tipoUsuario"
+            name="tipoUsuario"
+          >
+            <mat-radio-button
+              class="example-radio-button"
+              *ngFor="let tipo of tiposUsuarios"
+              [value]="tipo"
+            >
+              {{ tipo }}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <mat-form-field
+          *ngIf="tipoUsuario == 'Medico'"
+          appearance="fill"
+          color="accent"
+        >
+          <mat-label>Especialidad</mat-label>
+          <mat-select
+            class="select_color"
+            [formControl]="especialidadFormCtrl"
+            multiple
+            required
+          >
+            <mat-option
+              class="select_color"
+              *ngFor="let especialidad of especialidades | enumToArray"
+              [value]="especialidad.name"
+            >
+              {{ especialidad.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-  </div>
+    </div>
     <div class="btn-form">
-      <button mat-raised-button color="accent" matStepperPrevious>Atras</button>
-      <button matStepperNext mat-raised-button color="primary">Siguiente</button>
+      <button mat-raised-button color="accent" matStepperPrevious>{{'back' | translate}}</button>
+      <button matStepperNext mat-raised-button color="primary">
+        {{'next' | translate}}
+      </button>
     </div>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Control de datos</ng-template>
-    <p>Verifica que todos tus datos esten bien! No hay vuelta atras!</p>
-    <p>Mentira, podes modificarlo cuando vos quieras!</p>
-    <app-user-detail 
-    [nombre]=nombreFormCtrl.value
-    [apellido]=apellidoFormCtrl.value
-    [domicilio]=domicilioFormCtrl.value
-    [edad]=edadFormCtrl.value
-    [correo]=emailFormCtrl.value
-    [imagen_uno]=imagen_uno
-    [imagen_dos]=imagen_dos
-    [tipo]=tipoUsuario
-    [especialidades]=especialidadFormCtrl.value
-
-    
+    <ng-template matStepLabel>{{'controlInfo' | translate}}</ng-template>
+    <p>{{'verifyInfo' | translate}}</p>
+    <app-user-detail
+      [nombre]="nombreFormCtrl.value"
+      [apellido]="apellidoFormCtrl.value"
+      [domicilio]="domicilioFormCtrl.value"
+      [edad]="edadFormCtrl.value"
+      [correo]="emailFormCtrl.value"
+      [imagen_uno]="imagen_uno"
+      [imagen_dos]="imagen_dos"
+      [tipo]="tipoUsuario"
+      [especialidades]="especialidadFormCtrl.value"
     >
     </app-user-detail>
     <div class="btn-form">
-      <button mat-raised-button color="accent" matStepperPrevious>Atras</button>
-      <button mat-raised-button color="warn" (click)="LimpiarCampos()">Limpiar todo</button>
-      <button mat-raised-button color="primary" (click)="EnviarRegistro()">Registrar</button>
+      <button mat-raised-button color="accent" matStepperPrevious>{{'back' | translate}}</button>
+      <button mat-raised-button color="warn" (click)="LimpiarCampos()">
+        {{'cleanAll' | translate}}
+      </button>
+      <button mat-raised-button color="primary" (click)="EnviarRegistro()">
+        {{'register' | translate}}
+      </button>
     </div>
   </mat-step>
-</mat-vertical-stepper>
+</mat-horizontal-stepper>

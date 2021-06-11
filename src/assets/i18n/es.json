@@ -33,5 +33,24 @@
   "validatePasswrod2":"La clave es obligatorio",
   "register":"Registrate",
   "loginmessage1":"Ingresa con tu usuario y contraseña",
-  "loginmessage2":"para acceder a la mejor atencion personalizada"
+  "loginmessage2":"para acceder a la mejor atencion personalizada",
+  "registermessage1":"Completa todos los campos con tus datos",
+  "registermessage2":"despues te llegara un correo para confirmar tu registro",
+  "personalInfo":"Datos personales",
+  "accountInfo":"Datos de cuenta",
+  "typeOfUser":"Tipo de usuario",
+  "controlInfo":"Control de datos",
+  "name":"Nombre",
+  "surname":"Apellido",
+  "age":"Edad",
+  "address":"Direccion",
+  "next":"Siguiente",
+  "back":"Atras",
+  "loadImage":"Carga tu imagen",
+  "changeImage":"Quieres cambiarla?",
+  "chooseOption":"Elige una opcion",
+  "verifyInfo":"Verifica que todos tus datos esten bien",
+  "cleanAll":"Limpiar datos",
+  "fieldRequired":"Este campo es obligatorio"
+
 }

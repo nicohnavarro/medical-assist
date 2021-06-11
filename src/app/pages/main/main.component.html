@@ -1,30 +1,3 @@
-<!-- <app-theme app-theme>
-<app-navbar [user]="user" (openSidebar)="drawer.toggle()"></app-navbar>
-
-<mat-drawer-container  app-theme class="example-container" autosize hasBackdrop="false">
-  <mat-drawer #drawer app-theme class="example-sidenav" mode="side">
-    <div class="sidebar">
-      <mat-list>
-        <div mat-subheader>Menu</div>
-
-        <mat-list-item
-          *ngFor="let menuopt of menuOptions"
-          [routerLink]="[menuopt.router]"
-          routerLinkActive="active"
-        >
-          <mat-icon mat-list-icon>{{ menuopt.icon }}</mat-icon>
-          <div mat-line>{{ menuopt.title | translate }}</div>
-        </mat-list-item>
-      </mat-list>
-    </div>
-  </mat-drawer>
-
-  <mat-drawer-content>
-    <router-outlet></router-outlet>
-  </mat-drawer-content>
-</mat-drawer-container>
-</app-theme> -->
-
 <div class="example-container">
   <app-navbar [user]="user" (openSidebar)="snav.toggle()"></app-navbar>
   <mat-sidenav-container class="example-sidenav-container" hasBackdrop="false">

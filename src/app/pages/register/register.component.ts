@@ -17,7 +17,8 @@ import { UserService } from 'src/app/services/user.service';
 export class RegisterComponent implements OnInit {
   file_uno: File;
   file_dos: File;
-  constructor(private authSvc: AuthService, private fileSvc: FileService, private userSvc: UserService, private _snackBar: MatSnackBar, private router: Router, public dialog: MatDialog) { }
+  constructor(private authSvc: AuthService, private fileSvc: FileService, private userSvc: UserService, private _snackBar: MatSnackBar, private router: Router, public dialog: MatDialog) {
+   }
 
   ngOnInit() { }
 
@@ -74,6 +75,10 @@ export class RegisterComponent implements OnInit {
     this.file_dos = img
   }
 
+  gotoLogin(){
+    this.router.navigate(['login']);
+  }
+
   async openDialog() {
     const dialogRef = this.dialog.open(SpinnerModalComponent);
     dialogRef.afterClosed().subscribe(result => {
@@ -95,5 +100,4 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/home']);
     });
   }
-
 }
