@@ -2,16 +2,26 @@ table {
     width: 90%;
     padding: 1rem;
     margin: 2rem auto;
+    background: var(--background)!important;
+    color: var(--on-background)!important;
+    box-shadow: var(--border-shadow)!important;
+    border-radius: 15px;
   }
 
 tbody tr:hover{
-    background-color: #C2185B;
+    background-color: #4583c7;
   }
 
 .mat-row:hover{
-    background-color: #C2185B;
+    background-color: #4583c7;
 }
 
 .mat-icon:hover{
   cursor: pointer;
+}
+
+mat-paginator{
+  background: var(--background)!important;
+  color: var(--on-background)!important;
+  box-shadow: var(--border-shadow)!important;
 }

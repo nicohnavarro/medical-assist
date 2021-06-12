@@ -27,3 +27,7 @@
     font-size: medium;
   }
 }
+mat-toolbar{
+  background: var(--background)!important;
+  color: var(--on-background)!important;
+}

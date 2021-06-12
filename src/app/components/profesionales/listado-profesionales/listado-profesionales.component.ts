@@ -37,8 +37,8 @@ export class ListadoProfesionalesComponent implements OnInit {
   }
 
   getMedicos(){
-    this.userSvc.getMedicos().subscribe(data => {
-      this.medicos = data;
+    this.userSvc.getByType('Medico').subscribe(data => {
+      this.medicos = data as IMedico[];
       this.dataSource.data = this.medicos;
       setTimeout(() => {
         

@@ -1,6 +1,23 @@
-
 <mat-tab-group>
-    <mat-tab label="Pacientes"> <app-listado-pacientes></app-listado-pacientes></mat-tab>
-    <mat-tab label="Profesionales"> <app-listado-profesionales></app-listado-profesionales></mat-tab>
-    <mat-tab label="Admins"> 404  </mat-tab>
-  </mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">supervised_user_circle</mat-icon>
+      {{ "patients" | translate }}
+    </ng-template>
+    <app-listado-pacientes></app-listado-pacientes
+  ></mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">local_hospital</mat-icon>
+      {{ "doctors" | translate }}
+    </ng-template>
+    <app-listado-profesionales></app-listado-profesionales
+  ></mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">security</mat-icon>
+      {{ "admins" | translate }}
+    </ng-template>
+    404
+  </mat-tab>
+</mat-tab-group>

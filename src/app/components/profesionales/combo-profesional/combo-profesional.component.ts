@@ -20,8 +20,8 @@ export class ComboProfesionalComponent implements OnInit {
   }
 
   onOptionsSelected(id:string){
-    this.userSvc.getMedicoById(id).subscribe(medico=>{
-      this.seleccionaMedico.emit(medico);
+    this.userSvc.getById(id).subscribe(medico=>{
+      this.seleccionaMedico.emit(medico as IMedico);
     })
 
     

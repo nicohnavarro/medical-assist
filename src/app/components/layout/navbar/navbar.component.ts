@@ -19,7 +19,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router, private userSvc: UserService, private authSvc: AuthService) {
     if (localStorage.getItem('uid')) {
-      this.userSvc.getUserById(localStorage.getItem('uid')).subscribe((data) => {
+      this.userSvc.getById(localStorage.getItem('uid')).subscribe((data) => {
+        this.authSvc.user = data;
         this.user = data;
         console.log(data);
       })

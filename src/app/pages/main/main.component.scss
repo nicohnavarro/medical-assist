@@ -2,15 +2,17 @@
 // }
 
 mat-list {
+  background: var(--background)!important;
+  color: var(--on-background)!important;
   mat-list-item:hover {
     cursor: pointer;
-    background-color: grey;
+    background-color: #4583c7;
   }
   mat-list-item {
-    transition: background-color 0.2s linear 0.2s;
+    transition: background-color 0.1s linear 0.1s;
   }
   .active {
-    background-color: var(--background);
+    box-shadow: var(--inset-shadow)!important;
   }
 }
 .example-container {

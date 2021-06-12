@@ -5,6 +5,8 @@
   "profile":"Profile",
   "schedules":"Schedules",
   "patients":"Patients",
+  "doctors":"Doctors",
+  "admins":"Admins",
   "shifts":"Shifts",
   "reviews":"Reviews",
   "surveys":"Surveys",
@@ -52,5 +54,7 @@
   "verifyInfo":"Verify that all your data is correct",
   "cleanAll":"Clear all",
   "fieldRequired":"This field is required",
-  "loading":"Loading ..."
+  "loading":"Loading ...",
+  "edit":"Editar",
+  "delete":"Borrar"
 }

@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
         let task_2 = await this.fileSvc.UploadFile(this.file_dos, user.mail);
         user.first_image = await task_1.ref.getDownloadURL();
         user.second_image = await task_2.ref.getDownloadURL();
-        this.userSvc.agregarUser(user,cred.user.uid).then((algo)=>{
+        this.userSvc.add(user,cred.user.uid).then((algo)=>{
           localStorage.setItem('uid',cred.user.uid);
           this.dialog.closeAll();
           this.router.navigate(['main']);

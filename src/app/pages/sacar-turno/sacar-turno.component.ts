@@ -40,10 +40,10 @@ export class SacarTurnoComponent implements OnInit {
       this.lista_filtrada_medicos = [];
       this.lista_filtrada_dias = [];
       this.lista_filtrada_horarios = [];
-      this.userSvc.getMedicos().subscribe(data => {
-        this.lista_medicos = data;
+      this.userSvc.getByType('Medico').subscribe(data => {
+        this.lista_medicos = data as IMedico[];
       });
-      this.userSvc.getPacienteById(this.authSvc.user.uid).subscribe(paciente=>{
+      this.userSvc.getById(this.authSvc.user.uid).subscribe(paciente=>{
         this.turno_paciente = paciente;
       })
     }
