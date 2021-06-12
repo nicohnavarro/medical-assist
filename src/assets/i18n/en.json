@@ -51,5 +51,6 @@
   "chooseOption":"Choose an option",
   "verifyInfo":"Verify that all your data is correct",
   "cleanAll":"Clear all",
-  "fieldRequired":"This field is required"
+  "fieldRequired":"This field is required",
+  "loading":"Loading ..."
 }

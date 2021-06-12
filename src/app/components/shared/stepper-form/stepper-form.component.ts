@@ -13,7 +13,7 @@ export class StepperFormComponent implements OnInit {
   @Output() usuario_registrado: EventEmitter<IUser> = new EventEmitter<IUser>();
   @Output() user_img_1: EventEmitter<File> = new EventEmitter<File>();
   @Output() user_img_2: EventEmitter<File> = new EventEmitter<File>();
-  imagen_uno: string = '../../../assets/img/user.png';
+  imagen_uno: string = '../../../assets/images/user.png';
   subirImagen_uno;
 
   obtieneImagen_uno(e) {
@@ -22,7 +22,7 @@ export class StepperFormComponent implements OnInit {
   archivoSubir_uno(e) {
     this.subirImagen_uno = e;
   }
-  imagen_dos: string = '../../../assets/img/user.png';
+  imagen_dos: string = '../../../assets/images/user.png';
   subirImagen_dos;
 
   obtieneImagen_dos(e) {

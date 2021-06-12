@@ -51,6 +51,7 @@
   "chooseOption":"Elige una opcion",
   "verifyInfo":"Verifica que todos tus datos esten bien",
   "cleanAll":"Limpiar datos",
-  "fieldRequired":"Este campo es obligatorio"
+  "fieldRequired":"Este campo es obligatorio",
+  "loading":"Cargando ..."
 
 }
