@@ -1,3 +1,4 @@
+import { WorkDaysService } from './../../services/work-days.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -33,7 +34,7 @@ export class SacarTurnoComponent implements OnInit {
   turno_paciente:IPaciente;
   loggeado:boolean = false;
 
-  constructor(private userSvc: UserService, public dialog: MatDialog,private authSvc:AuthService,private router:Router) {
+  constructor(private userSvc: UserService, public dialog: MatDialog,private authSvc:AuthService,private router:Router,private workDaysSvc:WorkDaysService) {
     if(this.authSvc.user){
       this.loggeado=true;
       this.lista_medicos = [];
@@ -44,7 +45,7 @@ export class SacarTurnoComponent implements OnInit {
         this.lista_medicos = data as IMedico[];
       });
       this.userSvc.getById(this.authSvc.user.uid).subscribe(paciente=>{
-        this.turno_paciente = paciente;
+        this.turno_paciente = paciente as IPaciente;
       })
     }
   }
@@ -60,6 +61,7 @@ export class SacarTurnoComponent implements OnInit {
   }
 
   mandamosMedico(medico: IMedico) {
+    console.log(medico);
     this.turno_dia = null;
     this.turno_hora = null;
     this.turno_medico = medico;
@@ -82,24 +84,37 @@ export class SacarTurnoComponent implements OnInit {
 
   filtrarMedicosByEspecialidad(especialidad: Especialidades) {
     let filtrada = this.lista_medicos.filter(medico => {
-      if (medico.especialidades.includes(especialidad.toString()))
+      if (medico.especializaciones.includes(especialidad.toString()))
         return medico;
     });
     this.lista_filtrada_medicos = filtrada;
   }
 
   filtrarDiasByMedico(medico: IMedico) {
-    let dias = medico.dias_laborables.map(dia => {
-      return dia.split('=')[0];
-    }).map(dia => {
-      return Dias[+dia[0]];
-    });
+    // let dias = medico.dias_laborables.map(dia => {
+    //   return dia.split('=')[0];
+    // }).map(dia => {
+    //   return Dias[+dia[0]];
+    // });
 
-    let quincenaFiltrada = getQuincena().filter((dia) => {
-      let diaNombre = dia.split("-")[0];
-      if (dias.includes(diaNombre)) { return dia };
+    // let quincenaFiltrada = getQuincena().filter((dia) => {
+    //   let diaNombre = dia.split("-")[0];
+    //   if (dias.includes(diaNombre)) { return dia };
+    // });
+    // this.lista_filtrada_dias = quincenaFiltrada;
+    this.workDaysSvc.getWorkDays(medico.id).subscribe(data=>{
+      console.log(data);
     });
-    this.lista_filtrada_dias = quincenaFiltrada;
+      
+    //   const filtrado = data.filter(({medicoKey})=>{
+    //   console.log(medicoKey);
+    //   console.log(medico)
+    //     return medicoKey === medico.uid
+    //   })
+    //   console.log("no filtrada",data)
+    //   console.log("filtrado",filtrado)
+    // })
+    
   }
 
   filtrarHoraByDia(dia: string) {

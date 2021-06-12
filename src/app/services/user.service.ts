@@ -41,7 +41,7 @@ export class UserService {
   }
 
   getByType(type:string) {
-    return this.db.collection('usuarios', ref => ref.where('type', '==', type)).valueChanges()
+    return this.db.collection('usuarios', ref => ref.where('type', '==', type)).valueChanges({idField: 'uid'});
   }
 
 }

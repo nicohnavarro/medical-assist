@@ -17,6 +17,7 @@ export class ComboEspecialidadComponent implements OnInit {
   }
 
   onOptionsSelected(especialidad:Especialidades){
+    console.log(especialidad);
     this.seleccionaEspecialidad.emit(especialidad);
   }
 }
