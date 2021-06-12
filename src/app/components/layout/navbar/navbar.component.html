@@ -3,14 +3,15 @@
     <mat-icon aria-hidden="false" aria-label="menu">menu</mat-icon>
   </button>
   <span>{{ "title" | translate }}</span>
-  <div *ngIf="user">
-    <img *ngIf="user != null" [src]="user.photoURL" alt="" />
-  </div>
   <div class="controls">
     <app-theme-toogle></app-theme-toogle>
     <app-language-selector></app-language-selector>
   </div>
   <div class="spaced"></div>
+  <div *ngIf="user" class="userInfo">
+    <img *ngIf="user != null" [src]="user.first_image" alt="" />
+    <p>{{ user.mail}}</p>
+  </div>
   <button mat-button *ngIf="!user" (click)="login()">
     {{ "login" | translate }}
   </button>
