@@ -35,7 +35,9 @@ export class SacarTurnoComponent implements OnInit {
   loggeado:boolean = false;
 
   constructor(private userSvc: UserService, public dialog: MatDialog,private authSvc:AuthService,private router:Router,private workDaysSvc:WorkDaysService) {
-    if(this.authSvc.user){
+
+  
+    if(localStorage.getItem('uid')){
       this.loggeado=true;
       this.lista_medicos = [];
       this.lista_filtrada_medicos = [];
@@ -44,7 +46,7 @@ export class SacarTurnoComponent implements OnInit {
       this.userSvc.getByType('Medico').subscribe(data => {
         this.lista_medicos = data as IMedico[];
       });
-      this.userSvc.getById(this.authSvc.user.uid).subscribe(paciente=>{
+      this.userSvc.getById(localStorage.getItem('uid')).subscribe(paciente=>{
         this.turno_paciente = paciente as IPaciente;
       })
     }
@@ -60,13 +62,14 @@ export class SacarTurnoComponent implements OnInit {
     this.tiene_especialidad = true;
   }
 
-  mandamosMedico(medico: IMedico) {
-    console.log(medico);
-    this.turno_dia = null;
-    this.turno_hora = null;
-    this.turno_medico = medico;
-    this.filtrarDiasByMedico(medico);
-    this.tiene_medico = true;
+  mandamosMedico(id: string) {
+    this.userSvc.getById(id).subscribe(medico=>{      
+      this.turno_dia = null;
+      this.turno_hora = null;
+      this.turno_medico = medico as IMedico;
+      this.filtrarDiasByMedico(medico as IMedico);
+      this.tiene_medico = true;
+    })   
   }
 
   mandamosDia(dia: string) {
@@ -88,6 +91,7 @@ export class SacarTurnoComponent implements OnInit {
         return medico;
     });
     this.lista_filtrada_medicos = filtrada;
+    console.log(filtrada);
   }
 
   filtrarDiasByMedico(medico: IMedico) {

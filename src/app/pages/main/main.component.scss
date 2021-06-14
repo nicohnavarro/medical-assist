@@ -1,5 +1,9 @@
 // @media (max-width: 600px) {
 // }
+mat-sidenav{
+  background: var(--background)!important;
+  color: var(--on-background)!important;
+}
 
 mat-list {
   background: var(--background)!important;

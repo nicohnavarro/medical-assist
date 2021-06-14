@@ -51,6 +51,7 @@ import { ReseniaModalComponent } from './components/shared/resenia-modal/resenia
 import { RecaptchaModule } from 'ng-recaptcha';
 import { ThemeToogleComponent } from './components/shared/theme-toogle/theme-toogle.component';
 import { InfoHomeComponent } from './components/shared/info-home/info-home.component';
+import { ComboListComponent } from './components/shared/combo-list/combo-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -91,7 +92,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MisTurnosComponent,
     ReseniaModalComponent,
     ThemeToogleComponent,
-    InfoHomeComponent
+    InfoHomeComponent,
+    ComboListComponent
   ],
   imports: [
     BrowserModule,

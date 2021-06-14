@@ -1,33 +1,46 @@
 <div class="sacar_turnos" *ngIf="loggeado">
-    <div class="especialidad">
-        <app-combo-especialidad (seleccionaEspecialidad)="mandamosEspecialidad($event)"></app-combo-especialidad>
-    </div>
-    <div class="medico">
+  <div class="especialidad">
+    <app-combo-especialidad
+      (seleccionaEspecialidad)="mandamosEspecialidad($event)"
+    ></app-combo-especialidad>
+  </div>
+  <!-- <div class="medico">
         <app-combo-profesional [eligio_especialidad]=tiene_especialidad [medico_mostrar]="turno_medico" [medicos]=lista_filtrada_medicos (seleccionaMedico)="mandamosMedico($event)"></app-combo-profesional>
-    </div>
-    <div class="medico">
-        <app-combo-dia 
-         [eligio_medico]=tiene_medico
-         [dias]=lista_filtrada_dias 
-         [dia_mostrar]="turno_dia" 
-         (seleccionaDia)="mandamosDia($event)"
-         ></app-combo-dia>
-    </div>
-    <div class="medico">
-        <app-combo-hora 
-         [eligio_dia]=tiene_dia
-         (seleccionaHora)="mandamosHora($event)"
-         [horarios]=lista_filtrada_horarios
-         [horario_mostrar]="turno_hora" 
-         ></app-combo-hora>
-    </div>
+    </div> -->
+  <div class="medico">
+    <app-combo-list
+      [lastSelection]="tiene_especialidad"
+      fieldName="Medico seleccionado:"
+      [elementToShow]="turno_medico"
+      [myList]="lista_filtrada_medicos"
+      (selectedItem)="mandamosMedico($event)"
+    ></app-combo-list>
+  </div>
+  <div class="medico">
+    <app-combo-dia
+      [eligio_medico]="tiene_medico"
+      [dias]="lista_filtrada_dias"
+      [dia_mostrar]="turno_dia"
+      (seleccionaDia)="mandamosDia($event)"
+    ></app-combo-dia>
+  </div>
+  <div class="medico">
+    <app-combo-hora
+      [eligio_dia]="tiene_dia"
+      (seleccionaHora)="mandamosHora($event)"
+      [horarios]="lista_filtrada_horarios"
+      [horario_mostrar]="turno_hora"
+    ></app-combo-hora>
+  </div>
 </div>
 
 <div *ngIf="!loggeado">
-    <div class="aviso">
-        <mat-card>
-            Ingresa para poder pedir un turno!
-            <button mat-raised-button color="primary"  (click)="irIngreso()">Ingresar</button>
-        </mat-card>
-    </div>
+  <div class="aviso">
+    <mat-card>
+      Ingresa para poder pedir un turno!
+      <button mat-raised-button color="primary" (click)="irIngreso()">
+        Ingresar
+      </button>
+    </mat-card>
+  </div>
 </div>

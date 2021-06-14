@@ -1,0 +1,23 @@
+<div class="" *ngIf="lastSelection">
+  <div *ngIf="myList && myList.length > 0">
+    <h3>
+      {{ fieldName }}
+      <span *ngIf="elementToShow">{{ elementToShow.name }}</span>
+    </h3>
+
+    <mat-selection-list
+      #item
+      [multiple]="false"
+      (selectionChange)="
+        onOptionsSelected(item.selectedOptions.selected[0]?.value)
+      "
+    >
+      <mat-list-option *ngFor="let element of myList" value="{{ element.uid }}">
+        {{ element.name }}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+  <div *ngIf="myList && myList.length === 0">
+    <h3>{{sorry}}</h3>
+  </div>
+</div>
