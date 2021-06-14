@@ -1,3 +1,4 @@
+import { MedicalSpecialty } from './medical_specialty';
 import { Especialidades } from '../utils/especialidades.enum';
 import { EstadosTurno } from '../utils/estados-turno.enum';
 import { IMedico } from './medico';
@@ -12,7 +13,7 @@ export interface ITurno {
     resena?:string,
     encuesta?:string,
     estado:EstadosTurno,
-    especialidad:Especialidades
+    especialidad:MedicalSpecialty
 
     
 }

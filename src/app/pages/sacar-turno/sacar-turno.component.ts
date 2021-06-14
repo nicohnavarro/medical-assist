@@ -1,3 +1,4 @@
+import { MedicalSpecialtiesService } from './../../services/medical-specialties.service';
 import { WorkDaysService } from './../../services/work-days.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -12,6 +13,7 @@ import { Dias } from 'src/app/utils/dias.enum';
 import { Especialidades } from 'src/app/utils/especialidades.enum';
 import { EstadosTurno } from 'src/app/utils/estados-turno.enum';
 import { getHorarios, getQuincena } from 'src/app/utils/helpers';
+import { MedicalSpecialty } from 'src/app/models/medical_specialty';
 
 @Component({
   selector: 'app-sacar-turno',
@@ -20,25 +22,26 @@ import { getHorarios, getQuincena } from 'src/app/utils/helpers';
 })
 export class SacarTurnoComponent implements OnInit {
 
-  turno_especialidad: Especialidades;
+  turno_especialidad:  MedicalSpecialty;
   turno_medico: IMedico;
   turno_dia: string;
   turno_hora: string;
   lista_medicos: IMedico[];
+  lista_especialidad: any[];
   lista_filtrada_medicos: IMedico[];
   lista_filtrada_dias: string[];
   lista_filtrada_horarios: string[];
   tiene_especialidad: boolean = false;
   tiene_medico: boolean = false;
   tiene_dia: boolean = false;
-  turno_paciente:IPaciente;
-  loggeado:boolean = false;
+  turno_paciente: IPaciente;
+  loggeado: boolean = false;
 
-  constructor(private userSvc: UserService, public dialog: MatDialog,private authSvc:AuthService,private router:Router,private workDaysSvc:WorkDaysService) {
+  constructor(private userSvc: UserService, private specialtiesSvc: MedicalSpecialtiesService, public dialog: MatDialog, private authSvc: AuthService, private router: Router, private workDaysSvc: WorkDaysService) {
 
-  
-    if(localStorage.getItem('uid')){
-      this.loggeado=true;
+
+    if (localStorage.getItem('uid')) {
+      this.loggeado = true;
       this.lista_medicos = [];
       this.lista_filtrada_medicos = [];
       this.lista_filtrada_dias = [];
@@ -46,8 +49,11 @@ export class SacarTurnoComponent implements OnInit {
       this.userSvc.getByType('Medico').subscribe(data => {
         this.lista_medicos = data as IMedico[];
       });
-      this.userSvc.getById(localStorage.getItem('uid')).subscribe(paciente=>{
+      this.userSvc.getById(localStorage.getItem('uid')).subscribe(paciente => {
         this.turno_paciente = paciente as IPaciente;
+      })
+      this.specialtiesSvc.getSpecialties().subscribe(data=>{
+        this.lista_especialidad = data;
       })
     }
   }
@@ -55,21 +61,23 @@ export class SacarTurnoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  mandamosEspecialidad(especialidad: Especialidades) {
-    this.cleanFilter();
-    this.turno_especialidad = especialidad;
-    this.filtrarMedicosByEspecialidad(especialidad);
-    this.tiene_especialidad = true;
+  mandamosEspecialidad(id:string) {
+    this.specialtiesSvc.getSpecialtyById(id).subscribe(data=>{
+      this.turno_especialidad = data as MedicalSpecialty;
+      this.filtrarMedicosByEspecialidad(data.name);
+      this.tiene_especialidad = true;
+
+    })
   }
 
   mandamosMedico(id: string) {
-    this.userSvc.getById(id).subscribe(medico=>{      
+    this.userSvc.getById(id).subscribe(medico => {
       this.turno_dia = null;
       this.turno_hora = null;
       this.turno_medico = medico as IMedico;
       this.filtrarDiasByMedico(medico as IMedico);
       this.tiene_medico = true;
-    })   
+    })
   }
 
   mandamosDia(dia: string) {
@@ -85,13 +93,12 @@ export class SacarTurnoComponent implements OnInit {
     console.log(hora);
   }
 
-  filtrarMedicosByEspecialidad(especialidad: Especialidades) {
+  filtrarMedicosByEspecialidad(especialidad) {
     let filtrada = this.lista_medicos.filter(medico => {
       if (medico.especializaciones.includes(especialidad.toString()))
         return medico;
     });
     this.lista_filtrada_medicos = filtrada;
-    console.log(filtrada);
   }
 
   filtrarDiasByMedico(medico: IMedico) {
@@ -106,10 +113,10 @@ export class SacarTurnoComponent implements OnInit {
     //   if (dias.includes(diaNombre)) { return dia };
     // });
     // this.lista_filtrada_dias = quincenaFiltrada;
-    this.workDaysSvc.getWorkDays(medico.id).subscribe(data=>{
+    this.workDaysSvc.getWorkDays(medico.id).subscribe(data => {
       console.log(data);
     });
-      
+
     //   const filtrado = data.filter(({medicoKey})=>{
     //   console.log(medicoKey);
     //   console.log(medico)
@@ -118,7 +125,7 @@ export class SacarTurnoComponent implements OnInit {
     //   console.log("no filtrada",data)
     //   console.log("filtrado",filtrado)
     // })
-    
+
   }
 
   filtrarHoraByDia(dia: string) {
@@ -138,15 +145,15 @@ export class SacarTurnoComponent implements OnInit {
   }
 
   async openDialog() {
-    let turno:ITurno ={
-      especialidad : this.turno_especialidad,
-      medico : this.turno_medico,
-      fecha : this.turno_dia,
-      hora : this.turno_hora,
+    let turno: ITurno = {
+      especialidad: this.turno_especialidad,
+      medico: this.turno_medico,
+      fecha: this.turno_dia,
+      hora: this.turno_hora,
       paciente: this.turno_paciente,
-      estado:0,
+      estado: 0,
     };
-    
+
 
     const dialogConfig = new MatDialogConfig();
 
@@ -154,17 +161,17 @@ export class SacarTurnoComponent implements OnInit {
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
-        turno
+      turno
     };
 
-    const dialogRef = this.dialog.open(ConfirmModalComponent,dialogConfig);
+    const dialogRef = this.dialog.open(ConfirmModalComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
 
-  irIngreso(){
-this.router.navigate(['login']);
+  irIngreso() {
+    this.router.navigate(['login']);
   }
 
 }

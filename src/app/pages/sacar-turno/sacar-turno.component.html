@@ -1,12 +1,22 @@
 <div class="sacar_turnos" *ngIf="loggeado">
-  <div class="especialidad">
+  <!-- <div class="especialidad">
     <app-combo-especialidad
       (seleccionaEspecialidad)="mandamosEspecialidad($event)"
     ></app-combo-especialidad>
-  </div>
+  </div> -->
   <!-- <div class="medico">
         <app-combo-profesional [eligio_especialidad]=tiene_especialidad [medico_mostrar]="turno_medico" [medicos]=lista_filtrada_medicos (seleccionaMedico)="mandamosMedico($event)"></app-combo-profesional>
     </div> -->
+    <div class="especialidad">
+        <app-combo-list
+        lastSelection="true"
+          fieldName="Especialidad seleccionada:"
+          [elementToShow]="turno_especialidad"
+          [myList]="lista_especialidad"
+          (selectedItem)="mandamosEspecialidad($event)"
+        ></app-combo-list>
+      </div>
+
   <div class="medico">
     <app-combo-list
       [lastSelection]="tiene_especialidad"

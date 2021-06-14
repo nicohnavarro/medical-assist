@@ -21,7 +21,7 @@ export class ComboListComponent implements OnInit {
 
 
   onOptionsSelected(id:string){
-      this.selectedItem.emit(id);
+    this.selectedItem.emit(id);
   }
 
 }
