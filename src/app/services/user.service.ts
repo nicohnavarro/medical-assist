@@ -16,7 +16,7 @@ export class UserService {
   constructor(private db:AngularFirestore) { }
 
   getAll():Observable<any[]> {
-    return this.db.collection<IAdmin>('usuarios').valueChanges({idField: 'docId'});
+    return this.db.collection<any>('usuarios').valueChanges({idField: 'id'});
   }
 
   add(user:IUser,id:string){
@@ -41,7 +41,7 @@ export class UserService {
   }
 
   getByType(type:string) {
-    return this.db.collection('usuarios', ref => ref.where('type', '==', type)).valueChanges({idField: 'uid'});
+    return this.db.collection('usuarios', ref => ref.where('type', '==', type)).valueChanges({idField: 'id'});
   }
 
 }

@@ -6,5 +6,5 @@ export interface IMedico extends IUser{
     especialidades:string[],
     dias_laborables:string[],
     validado:boolean,
-    uid:string
+    id:string
 }

@@ -24,3 +24,16 @@ export function getQuincena(){
     }
     return quincena;
 }
+
+export function getDateWork(work_days:string[]){
+    let date = new Date();
+    let today = new Date();
+    let quincena:string[] = [];
+    for(let i=1 ; i<=15 ; i++){
+        date.setDate(today.getDate() + i);
+        if(work_days.includes(Dias[date.getDay()])){
+            quincena.push(Dias[date.getDay()] + '-' + getDiaFormat(date));
+        }
+    }
+    return quincena;
+}   

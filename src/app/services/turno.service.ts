@@ -11,14 +11,14 @@ export class TurnoService {
   constructor(private db:AngularFirestore) { }
 
   getTurnos(): Observable<ITurno[]> {
-    return this.db.collection<ITurno>('turnos').valueChanges({idField: 'id'});
+    return this.db.collection<ITurno>('shifts').valueChanges({idField: 'id'});
   }
 
   agregarTurno(turno: ITurno): void {
-    this.db.collection<ITurno>('turnos').add(turno);
+    this.db.collection<ITurno>('shifts').add(turno);
   }
 
   modificarTurno(turno:ITurno,id:string): Promise<void>{
-    return this.db.collection<ITurno>('turnos').doc(id).set(turno);
+    return this.db.collection<ITurno>('shifts').doc(id).set(turno);
   }
 }

@@ -1,10 +1,13 @@
-  
-mat-spinner{
-    margin: auto;
+mat-spinner {
+  margin: auto;
 }
 
-mat-dialog-content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--background)!important;
+  color: var(--on-background)!important;
+  box-shadow: var(--border-shadow)!important;
+  border-radius: 40px!important;
 }
