@@ -114,7 +114,7 @@ export class ListadoTurnosComponent implements OnInit {
   agregarResena(turno: ITurno) {
     console.log(turno);
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.panelClass='add-comment-modal';
+    dialogConfig.panelClass='custom-modalbox';
     const dialogRef = this.dialog.open(ReseniaModalComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

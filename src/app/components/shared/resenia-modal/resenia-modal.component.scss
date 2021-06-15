@@ -1,7 +1,7 @@
-.add-comment-modal{
-  mat-dialog-container {
+.myModal{
     background: var(--background)!important;
     color: var(--on-background)!important;
     box-shadow: var(--border-shadow)!important;
+    padding: 2rem;
+    border-radius: 17px!important;
   }
-}

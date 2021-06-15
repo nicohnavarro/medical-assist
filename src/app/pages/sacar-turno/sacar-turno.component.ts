@@ -1,3 +1,5 @@
+import { ITurno } from './../../models/turno';
+import { TurnoService } from './../../services/turno.service';
 import { MedicalSpecialtiesService } from './../../services/medical-specialties.service';
 import { WorkDaysService } from './../../services/work-days.service';
 import { Component, OnInit } from '@angular/core';
@@ -6,7 +8,6 @@ import { Router } from '@angular/router';
 import { ConfirmModalComponent } from 'src/app/components/shared/confirm-modal/confirm-modal.component';
 import { IMedico } from 'src/app/models/medico';
 import { IPaciente } from 'src/app/models/paciente';
-import { ITurno } from 'src/app/models/turno';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Dias } from 'src/app/utils/dias.enum';
@@ -22,7 +23,7 @@ import { MedicalSpecialty } from 'src/app/models/medical_specialty';
 })
 export class SacarTurnoComponent implements OnInit {
 
-  turno_especialidad:  MedicalSpecialty;
+  turno_especialidad: MedicalSpecialty;
   turno_medico: IMedico;
   turno_dia: string;
   turno_hora: string;
@@ -36,9 +37,9 @@ export class SacarTurnoComponent implements OnInit {
   tiene_dia: boolean = false;
   turno_paciente: IPaciente;
   loggeado: boolean = false;
-  doctorInfo:any[];
+  doctorInfo: any[];
 
-  constructor(private userSvc: UserService, private specialtiesSvc: MedicalSpecialtiesService, public dialog: MatDialog, private authSvc: AuthService, private router: Router, private workDaysSvc: WorkDaysService) {
+  constructor(private userSvc: UserService, private shiftSvc: TurnoService, private specialtiesSvc: MedicalSpecialtiesService, public dialog: MatDialog, private authSvc: AuthService, private router: Router, private workDaysSvc: WorkDaysService) {
 
 
     if (localStorage.getItem('uid')) {
@@ -53,7 +54,7 @@ export class SacarTurnoComponent implements OnInit {
       this.userSvc.getById(localStorage.getItem('uid')).subscribe(paciente => {
         this.turno_paciente = paciente as IPaciente;
       })
-      this.specialtiesSvc.getSpecialties().subscribe(data=>{
+      this.specialtiesSvc.getSpecialties().subscribe(data => {
         this.lista_especialidad = data;
       })
     }
@@ -62,9 +63,9 @@ export class SacarTurnoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  mandamosEspecialidad(id:string) {
+  mandamosEspecialidad(id: string) {
     this.cleanFilter();
-    this.specialtiesSvc.getSpecialtyById(id).subscribe(data=>{
+    this.specialtiesSvc.getSpecialtyById(id).subscribe(data => {
       this.turno_especialidad = data as MedicalSpecialty;
       this.filtrarMedicosByEspecialidad(data.name);
       this.tiene_especialidad = true;
@@ -106,7 +107,7 @@ export class SacarTurnoComponent implements OnInit {
   filtrarDiasByMedico(medico: IMedico) {
     this.workDaysSvc.getWorkDays(medico.id).subscribe(data => {
       this.doctorInfo = data;
-      let work_days = data.map(doctor=>{
+      let work_days = data.map(doctor => {
         return doctor.day;
       });
       this.lista_filtrada_dias = getDateWork(work_days);
@@ -115,8 +116,17 @@ export class SacarTurnoComponent implements OnInit {
 
   filtrarHoraByDia(selectedDay: string) {
     let day = selectedDay.split('-')[0];
-    let schedule = this.doctorInfo.filter(info => info.day === day).map(info => info.schedule);
-    this.lista_filtrada_horarios = schedule[0];
+    let shiftsTaken = [];
+    let schedule: string[] = this.doctorInfo.filter(info => info.day === day).map(info => info.schedule)[0];
+    this.shiftSvc.getTurnos().subscribe((data) => {
+      shiftsTaken = data.filter(shift => shift.fecha === selectedDay && shift.estado <= 1).map(item => item.hora)
+      if (shiftsTaken.length > 0) {
+        this.lista_filtrada_horarios = schedule.filter(hour => !shiftsTaken.includes(hour));
+      }
+      else {
+        this.lista_filtrada_horarios = schedule
+      }
+    });
   }
 
   cleanFilter() {
@@ -146,7 +156,7 @@ export class SacarTurnoComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.panelClass= 'custom-modalbox';
+    dialogConfig.panelClass = 'custom-modalbox';
     dialogConfig.data = {
       turno
     };

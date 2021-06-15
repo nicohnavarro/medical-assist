@@ -1,3 +1,4 @@
+import { UserGuard } from './guards/user.guard';
 import { InfoHomeComponent } from './components/shared/info-home/info-home.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
 import { ListadosComponent } from './pages/listados/listados.component';
@@ -20,7 +21,7 @@ const routes: Routes = [
     {path: 'lists', component:ListadosComponent},
     {path: 'addShift', component:SacarTurnoComponent},
     {path: 'shiftsList', component:MisTurnosComponent},
-    {path: 'surveys', component:EncuestaComponent},
+    {path: 'surveys', component:EncuestaComponent, canActivate:[UserGuard]},
   ]},
   { path: 'login', component: LoginComponent, data: {animation: 'login'} },
   { path: 'register', component: RegisterComponent, data: {animation: 'register'} },

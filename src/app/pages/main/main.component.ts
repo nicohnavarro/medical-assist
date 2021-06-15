@@ -58,7 +58,7 @@ export class MainComponent implements OnInit {
     let surveys:menuOption = {
       icon:"assignment_late",
       title:"surveys",
-      router:"survey"
+      router:"surveys"
     }
 
     let schedules:menuOption = {

@@ -2,12 +2,17 @@ mat-spinner {
   margin: auto;
 }
 
+.myModal{
+  background: var(--background)!important;
+  color: var(--on-background)!important;
+  box-shadow: var(--border-shadow)!important;
+  padding: 2rem;
+  border-radius: 17px!important;
+}
+
 .mat-dialog-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: var(--background)!important;
-  color: var(--on-background)!important;
-  box-shadow: var(--border-shadow)!important;
-  border-radius: 40px!important;
+  margin: 1rem 1rem;
 }

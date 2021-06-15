@@ -76,6 +76,7 @@ $my-theme-light: mat-light-theme(
       accent: $my-palette-accent,
       warn: $my-palette-warn,
     ),
+
     typography: $custom-typography,
   )
 );
@@ -134,16 +135,13 @@ body {
   background: transparent;
 }
 
+.custom-modalbox{
+    mat-dialog-container{
+      background: transparent!important;
+      padding: 0!important;
+      margin: 0!important;
+      border-radius: 20px!important;
+    }
+    border-radius: 20px!important;
 
-.custom-modalbox {
-  mat-dialog-container {
-    border-radius: 18px!important;
-  }
-}
-
-.add-comment-modal{
-  mat-dialog-container {
-    border-radius: 18px!important;
-    // background-color: transparent!important;
-  }
 }
