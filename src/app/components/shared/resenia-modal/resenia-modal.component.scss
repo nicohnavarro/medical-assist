@@ -1,0 +1,7 @@
+.add-comment-modal{
+  mat-dialog-container {
+    background: var(--background)!important;
+    color: var(--on-background)!important;
+    box-shadow: var(--border-shadow)!important;
+  }
+}

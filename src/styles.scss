@@ -140,3 +140,10 @@ body {
     border-radius: 18px!important;
   }
 }
+
+.add-comment-modal{
+  mat-dialog-container {
+    border-radius: 18px!important;
+    // background-color: transparent!important;
+  }
+}

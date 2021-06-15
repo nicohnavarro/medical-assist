@@ -114,6 +114,7 @@ export class ListadoTurnosComponent implements OnInit {
   agregarResena(turno: ITurno) {
     console.log(turno);
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.panelClass='add-comment-modal';
     const dialogRef = this.dialog.open(ReseniaModalComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -121,7 +122,8 @@ export class ListadoTurnosComponent implements OnInit {
   }
   
   getFilterSpecialties(filter:any[]){
-    let newList = this.mostrar_turnos.filter(t => filter.includes(t.especialidad.name));
+    let onlyName = filter.map(t=>t.name);
+    let newList = this.mostrar_turnos.filter(t => onlyName.includes(t.especialidad.name));
     this.dataSource.data = newList;
   }
 
