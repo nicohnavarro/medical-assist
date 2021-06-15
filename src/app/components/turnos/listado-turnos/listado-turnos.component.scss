@@ -1,20 +1,50 @@
 table {
-    width: 90%;
-    padding: 1rem;
-    margin: 2rem auto;
-    overflow-x: scroll;
-  }
+  width: 90%;
+  padding: 1rem;
+  margin: 2rem auto;
+  background: var(--background)!important;
+  color: var(--on-background)!important;
+  box-shadow: var(--border-shadow)!important;
+  border-radius: 15px;
+}
 
 tbody tr:hover{
-    background-color: #C2185B;
-  }
+  background-color: #4583c7;
+}
 
 .mat-row:hover{
-    background-color: #C2185B;
+  background-color: #4583c7;
 }
 
 .mat-icon:hover{
-  cursor: pointer;
+cursor: pointer;
+color:white;
+}
+
+mat-paginator{
+background: var(--background)!important;
+color: var(--on-background)!important;
+box-shadow: var(--border-shadow)!important;
+}
+
+.example-section {
+  margin: 12px 0;
+}
+
+.example-margin {
+  margin: 0 12px;
+}
+
+ul {
+  li{
+    margin-right: 1.3rem;
+  }
+  list-style-type: none;
+  margin-top: 4px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 1rem;
+  flex-wrap: wrap;
 }
 
 

@@ -1,3 +1,5 @@
+import { element } from 'protractor';
+import { MedicalSpecialtiesService } from './../../../services/medical-specialties.service';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -16,6 +18,7 @@ import { ReseniaModalComponent } from '../../shared/resenia-modal/resenia-modal.
 export class ListadoTurnosComponent implements OnInit {
 
   Estados= EstadosTurno;
+  Specialties=[];
   @Input()mostrar_turnos:Array<ITurno>=[];
   @Input()turno_pasado:boolean=false;
   @Output() confirmo_turno:EventEmitter<ITurno> = new EventEmitter<ITurno>();
@@ -36,7 +39,10 @@ export class ListadoTurnosComponent implements OnInit {
   dataSource = new MatTableDataSource<ITurno>(this.mostrar_turnos);
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   
-  constructor(private userSvc:UserService,private turnoSvc:TurnoService,public dialog: MatDialog) {
+  constructor(private userSvc:UserService,private turnoSvc:TurnoService,public dialog: MatDialog,private specialtiesSvc:MedicalSpecialtiesService) {
+    specialtiesSvc.getSpecialties().subscribe(data =>{
+      this.Specialties = data.map(item => {return {...item,completed:true}});
+    })
   }
   
   ngOnInit(): void {
@@ -83,4 +89,30 @@ export class ListadoTurnosComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+  allComplete: boolean = true;
+
+  updateAllComplete() {
+    this.allComplete = this.Specialties != null && this.Specialties.every(t => t.completed);
+    let specialtiesSelected = this.Specialties.filter(t=> t.completed).map(t =>  t.name);
+    console.log(specialtiesSelected)
+    // this.mostrar_turnos = this.mostrar_turnos.filter(t => specialtiesSelected.includes(t.especialidad.name));
+    console.log(this.mostrar_turnos);
+  }
+
+  someComplete(): boolean {
+    if (this.Specialties == null) {
+      return false;
+    }
+    return this.Specialties.filter(t => t.completed).length > 0 && !this.allComplete;
+  }
+
+  setAll(completed: boolean) {
+    this.allComplete = completed;
+    if (this.Specialties == null) {
+      return;
+    }
+    this.Specialties.forEach(t => t.completed = completed);
+  }
+
+
 }

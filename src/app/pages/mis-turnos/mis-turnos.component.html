@@ -1,6 +1,33 @@
-<h2>Turnos de hoy: </h2>
-<app-listado-turnos [mostrar_turnos]=turnos_hoy (confirmo_turno)="actualizar_turnos($event)"></app-listado-turnos>
-<h2>Turnos siguientes:</h2>
-<app-listado-turnos [mostrar_turnos]=turnos_proximos (confirmo_turno)="actualizar_turnos($event)"></app-listado-turnos>
-<h2>Turnos pasados:</h2>
-<app-listado-turnos [mostrar_turnos]=turnos_pasados [turno_pasado]=pasados (confirmo_turno)="actualizar_turnos($event)"></app-listado-turnos>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">supervised_user_circle</mat-icon>
+      {{ "shiftsToday" | translate }}
+    </ng-template>
+    <app-listado-turnos
+      [mostrar_turnos]="turnos_hoy"
+      (confirmo_turno)="actualizar_turnos($event)"
+    ></app-listado-turnos>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">local_hospital</mat-icon>
+      {{ "shiftsNext" | translate }}
+    </ng-template>
+    <app-listado-turnos
+      [mostrar_turnos]="turnos_proximos"
+      (confirmo_turno)="actualizar_turnos($event)"
+    ></app-listado-turnos>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">local_hospital</mat-icon>
+      {{ "shiftsPrevious" | translate }}
+    </ng-template>
+    <app-listado-turnos
+      [mostrar_turnos]="turnos_pasados"
+      [turno_pasado]="pasados"
+      (confirmo_turno)="actualizar_turnos($event)"
+    ></app-listado-turnos>
+  </mat-tab>
+</mat-tab-group>

@@ -56,5 +56,9 @@
   "fieldRequired":"This field is required",
   "loading":"Loading ...",
   "edit":"Editar",
-  "delete":"Borrar"
+  "delete":"Borrar",
+  "shiftsToday":"Shifts today",
+  "shiftsNext":"Next Shifts",
+  "shiftsPrevious":"Previous Shifts",
+  "all":"All"
 }

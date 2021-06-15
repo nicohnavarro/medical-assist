@@ -56,6 +56,9 @@
   "fieldRequired":"Este campo es obligatorio",
   "loading":"Cargando ...",
   "edit":"Editar",
-  "delete":"Borrar"
-
+  "delete":"Borrar",
+  "shiftsToday":"Turnos de hoy",
+  "shiftsNext":"Proximos turnos",
+  "shiftsPrevious":"Turnos Anteriores",
+  "all":"Todas"
 }
