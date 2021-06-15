@@ -1,0 +1,36 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h3>{{ filterName | translate}}</h3>
+    </mat-panel-title>
+    <!-- <mat-panel-description>
+      Type your name and age
+      <mat-icon>account_circle</mat-icon>
+    </mat-panel-description> -->
+  </mat-expansion-panel-header>
+
+  <span class="filter_list">
+    <mat-checkbox
+      class="filter-margin"
+      [checked]="allComplete"
+      color="accent"
+      [indeterminate]="someComplete()"
+      (change)="setAll($event.checked)"
+    >
+      {{ "all" | translate }}
+    </mat-checkbox>
+  </span>
+  <span class="filter_list">
+    <ul>
+      <li *ngFor="let item of items">
+        <mat-checkbox
+          [(ngModel)]="item.completed"
+          color="primary"
+          (ngModelChange)="updateAllComplete()"
+        >
+          {{ item.name }}
+        </mat-checkbox>
+      </li>
+    </ul>
+  </span>
+</mat-expansion-panel>

@@ -17,16 +17,18 @@ import { ReseniaModalComponent } from '../../shared/resenia-modal/resenia-modal.
 })
 export class ListadoTurnosComponent implements OnInit {
 
-  Estados= EstadosTurno;
-  Specialties=[];
-  @Input()mostrar_turnos:Array<ITurno>=[];
-  @Input()turno_pasado:boolean=false;
-  @Output() confirmo_turno:EventEmitter<ITurno> = new EventEmitter<ITurno>();
-  cargando:boolean=true;
+  Estados = EstadosTurno;
+  Specialties = [];
+  Doctors = [];
+  Patients = [];
+  @Input() mostrar_turnos: Array<ITurno> = [];
+  @Input() turno_pasado: boolean = false;
+  @Output() confirmo_turno: EventEmitter<ITurno> = new EventEmitter<ITurno>();
+  cargando: boolean = true;
   displayedColumns: string[] = [
     'especialidad',
     'medico',
-    'paciente',   
+    'paciente',
     'fecha',
     'hora',
     'estado',
@@ -37,27 +39,34 @@ export class ListadoTurnosComponent implements OnInit {
   ];
 
   dataSource = new MatTableDataSource<ITurno>(this.mostrar_turnos);
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  
-  constructor(private userSvc:UserService,private turnoSvc:TurnoService,public dialog: MatDialog,private specialtiesSvc:MedicalSpecialtiesService) {
-    specialtiesSvc.getSpecialties().subscribe(data =>{
-      this.Specialties = data.map(item => {return {...item,completed:true}});
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  constructor(private userSvc: UserService, private turnoSvc: TurnoService, public dialog: MatDialog, private specialtiesSvc: MedicalSpecialtiesService) {
+    specialtiesSvc.getSpecialties().subscribe(data => {
+      this.Specialties = data.map(item => { return { ...item, completed: true } });
     })
+    userSvc.getByType('Medico').subscribe(data=>{
+      this.Doctors = data.map(item => { return { ...item, completed: true } });
+    })
+    userSvc.getByType('Paciente').subscribe(data=>{
+      this.Patients = data.map(item => { return { ...item, completed: true } });
+    })
+
   }
-  
+
   ngOnInit(): void {
     setTimeout(() => {
-      this.cargando=false;
+      this.cargando = false;
       this.dataSource.data = this.mostrar_turnos;
       this.dataSource.paginator = this.paginator;
     }, 5000);
   }
 
-  getTurnos(){
+  getTurnos() {
     this.dataSource.data = this.mostrar_turnos;
   }
 
-  openDialog(component,options?): void {
+  openDialog(component, options?): void {
     const dialogRef = this.dialog.open(component, options);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -65,54 +74,67 @@ export class ListadoTurnosComponent implements OnInit {
     });
   }
 
-  aceptarTurno(turno:ITurno){
+  aceptarTurno(turno: ITurno) {
     turno.estado = EstadosTurno.ACEPTADO;
-    this.turnoSvc.modificarTurno(turno,turno.id).then(()=>{
+    this.turnoSvc.modificarTurno(turno, turno.id).then(() => {
       this.confirmo_turno.emit(turno);
     });
-  
+
   }
-  cancelarTurno(turno:ITurno){
+  cancelarTurno(turno: ITurno) {
     turno.estado = EstadosTurno.CANCELADO_MEDICO;
-    this.turnoSvc.modificarTurno(turno,turno.id).then(()=>{
+    this.turnoSvc.modificarTurno(turno, turno.id).then(() => {
       this.getTurnos();
     });
   }
-  agregarEncuesta(turno:ITurno){
+
+  changeStateShift(action:string,shift:ITurno){
+    switch (action) {
+      case 'ACEPTAR':
+        shift.estado = EstadosTurno.ACEPTADO;
+        this.turnoSvc.modificarTurno(shift, shift.id).then(() => {
+          this.confirmo_turno.emit(shift);
+        });
+        break;
+        case 'CANCELAR':
+          shift.estado = EstadosTurno.CANCELADO_MEDICO;
+          this.turnoSvc.modificarTurno(shift, shift.id).then(() => {
+            this.getTurnos();
+          });
+          break;
+      default:
+        break;
+    }
+  }
+
+
+  agregarEncuesta(turno: ITurno) {
 
   }
-  agregarResena(turno:ITurno){
+  agregarResena(turno: ITurno) {
     console.log(turno);
     const dialogConfig = new MatDialogConfig();
-    const dialogRef = this.dialog.open(ReseniaModalComponent,dialogConfig);
+    const dialogRef = this.dialog.open(ReseniaModalComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
-  allComplete: boolean = true;
-
-  updateAllComplete() {
-    this.allComplete = this.Specialties != null && this.Specialties.every(t => t.completed);
-    let specialtiesSelected = this.Specialties.filter(t=> t.completed).map(t =>  t.name);
-    console.log(specialtiesSelected)
-    // this.mostrar_turnos = this.mostrar_turnos.filter(t => specialtiesSelected.includes(t.especialidad.name));
-    console.log(this.mostrar_turnos);
+  
+  getFilterSpecialties(filter:any[]){
+    let newList = this.mostrar_turnos.filter(t => filter.includes(t.especialidad.name));
+    this.dataSource.data = newList;
   }
 
-  someComplete(): boolean {
-    if (this.Specialties == null) {
-      return false;
-    }
-    return this.Specialties.filter(t => t.completed).length > 0 && !this.allComplete;
+  getFilterDoctors(filter:any[]){
+    let doctorIds = filter.map(doctor=> doctor.id)
+    let newList = this.mostrar_turnos.filter(t => doctorIds.includes(t.medico.id));
+    this.dataSource.data = newList;
   }
 
-  setAll(completed: boolean) {
-    this.allComplete = completed;
-    if (this.Specialties == null) {
-      return;
-    }
-    this.Specialties.forEach(t => t.completed = completed);
+  getFilterPatients(filter:any[]){
+    let patientIds = filter.map(patient=> patient.id)
+    let newList = this.mostrar_turnos.filter(t => patientIds.includes(t.paciente.id));
+    this.dataSource.data = newList;
   }
-
 
 }

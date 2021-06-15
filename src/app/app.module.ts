@@ -52,6 +52,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { ThemeToogleComponent } from './components/shared/theme-toogle/theme-toogle.component';
 import { InfoHomeComponent } from './components/shared/info-home/info-home.component';
 import { ComboListComponent } from './components/shared/combo-list/combo-list.component';
+import { CustomFilterComponent } from './components/shared/custom-filter/custom-filter.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -93,7 +94,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReseniaModalComponent,
     ThemeToogleComponent,
     InfoHomeComponent,
-    ComboListComponent
+    ComboListComponent,
+    CustomFilterComponent
   ],
   imports: [
     BrowserModule,
