@@ -76,6 +76,22 @@
   "reminderShift": "No te olvides de cargar una resena",
   "thankyou": "Muchas gracias! ",
   "survey": "Encuesta",
-  "review": "Reseña"
+  "review": "Reseña",
+  "insurance": "Obra Social",
+  "document": "Documento",
+  "validateDocument": "Documento Invalido",
+  "historyData":"Historial Medico",
+  "height":"Altura",
+  "weight":"Peso",
+  "temperature":"Temp",
+  "pressure":"Presion",
+  "key1":"Campo Opcional",
+  "value1":"Valor",
+  "addHistory":"Agregar",
+  "finish":"Finalizar",
+  "finishMsg":"Complete el historial medico",
+  "reviewMsg":"Agregue una resena al turno",
+  "required":"Requerido",
+  "shift":"Turno"
 }
 

@@ -1,0 +1,138 @@
+<form [formGroup]="datosHistorialFormGroup">
+  <div class="form_datos">
+    <ng-template matStepLabel>{{ "historyData" | translate }}</ng-template>
+
+    <div class="datos-prin">
+      <mat-form-field appearance="standard">
+        <mat-label>{{ "height" | translate }}</mat-label>
+        <input
+          matInput
+          type="number"
+          [formControl]="heightFormCtrl"
+          placeholder="X.xx"
+          pattern="[0-9]{1}\.[0-9]{1,2}"
+        />
+        <span matSuffix>Mts</span>
+        <mat-error *ngIf="heightFormCtrl.hasError('required')">
+          {{ "required" | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>{{ "weight" | translate }}</mat-label>
+        <input
+          type="number"
+          matInput
+          [formControl]="weightFormCtrl"
+          placeholder="XX.x"
+          pattern="[0-9]{1,2}\.[0-9]{1}"
+        />
+        <span matSuffix>Kg</span>
+
+        <mat-error *ngIf="weightFormCtrl.hasError('required')">
+          {{ "required" | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>{{ "temperature" | translate }}</mat-label>
+        <input
+          matInput
+          type="number"
+          [formControl]="temperatureFormCtrl"
+          placeholder="XX.x"
+          pattern="[0-9]{1,2}\.[0-9]{1}"
+        />
+        <span matSuffix>C</span>
+
+        <mat-error *ngIf="temperatureFormCtrl.hasError('required')">
+          {{ "required" | translate }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="standard" class="pressureFormCtrl">
+        <mat-label>{{ "pressure" | translate }}</mat-label>
+        <input
+          matInput
+          [formControl]="pressureFormCtrl"
+          placeholder="xxx/xxx"
+          pattern="[0-9]{1,3}\/[0-9]{1,3}"
+        />
+        <span matSuffix>mmHg</span>
+
+        <mat-error *ngIf="pressureFormCtrl.hasError('required')">
+          {{ "required" | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+<div class="datos-secon">
+  <div class="optionals">
+    <mat-form-field appearance="standard">
+      <mat-label>{{ "key1" | translate }}</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Campo"
+        [formControl]="option1FormCtrl"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>{{ "value1" | translate }}</mat-label>
+      <input
+        matInput
+        type="text"
+        [formControl]="value1FormCtrl"
+        placeholder="..."
+      />
+    </mat-form-field>
+  </div>
+  <div class="optionals">
+    <mat-form-field appearance="standard">
+      <mat-label>{{ "key1" | translate }}</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Campo"
+        [formControl]="option2FormCtrl"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>{{ "value1" | translate }}</mat-label>
+      <input
+        matInput
+        type="text"
+        [formControl]="value2FormCtrl"
+        placeholder="..."
+      />
+    </mat-form-field>
+  </div>
+  <div class="optionals">
+    <mat-form-field appearance="standard">
+      <mat-label>{{ "key1" | translate }}</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Campo"
+        [formControl]="option3FormCtrl"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>{{ "value1" | translate }}</mat-label>
+      <input
+        matInput
+        type="text"
+        [formControl]="value3FormCtrl"
+        placeholder="..."
+      />
+    </mat-form-field>
+  </div>
+</div>
+<div class="btn-form">
+  <button mat-raised-button color="accent" (click)="addHistory()">
+    {{ "addHistory" | translate }}
+  </button>
+  <button mat-raised-button (click)="cleanAll()" color="warn">
+    {{ "cleanAll" | translate }}
+  </button>
+</div>

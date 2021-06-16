@@ -76,6 +76,22 @@
   "reminderShift": "Dont forget to review your shift",
   "thankyou": "Thank you! ",
   "survey": "Survey",
-  "review": "Review"
+  "review": "Review",
+  "insurance": "Insurance",
+  "document": "Document",
+  "validateDocument": "Invalid Field",
+  "historyData":"Medical Record",
+  "height":"Height",
+  "weight":"Weight",
+  "temperature":"Temp",
+  "pressure":"Pressure",
+  "key1":"Optional Field",
+  "value1":"Value",
+  "addHistory":"Add",
+  "finish":"Finish",
+  "finishMsg":"Complete the medical history",
+  "reviewMsg":"Add review to patient",
+  "required":"Required",
+  "shift":"Shift"
 }
 

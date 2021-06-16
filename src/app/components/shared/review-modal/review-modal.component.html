@@ -1,0 +1,29 @@
+<div app-theme class="myModal">
+  <h2 mat-dialog-title>
+    {{ "finishMsg" | translate }}
+  </h2>
+  <mat-dialog-content>
+    <app-historial-form></app-historial-form>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "reviewMsg" | translate }}:</mat-label>
+      <textarea
+        matInput
+        (ngModelChange)="validMotivo($event)"
+        [ngModel]="motivo"
+      ></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="!btnEnable"
+      (click)="cancelShift()"
+    >
+      {{ "finish" | translate }} {{ "shift" | translate }}
+    </button>
+    <button mat-raised-button mat-dialog-close color="warn">
+      {{ "close" | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>

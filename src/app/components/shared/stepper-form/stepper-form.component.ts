@@ -1,15 +1,19 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { IUser } from 'src/app/models/user';
 import { Especialidades } from 'src/app/utils/especialidades.enum';
 
 @Component({
   selector: 'app-stepper-form',
   templateUrl: './stepper-form.component.html',
-  styleUrls: ['./stepper-form.component.scss']
+  styleUrls: ['./stepper-form.component.scss'],
 })
 export class StepperFormComponent implements OnInit {
-
   @Output() usuario_registrado: EventEmitter<IUser> = new EventEmitter<IUser>();
   @Output() user_img_1: EventEmitter<File> = new EventEmitter<File>();
   @Output() user_img_2: EventEmitter<File> = new EventEmitter<File>();
@@ -36,10 +40,10 @@ export class StepperFormComponent implements OnInit {
   apellidoFormCtrl: FormControl;
   edadFormCtrl: FormControl;
   domicilioFormCtrl: FormControl;
-
+  documentFormCtrl: FormControl;
   emailFormCtrl: FormControl;
   claveFormCtrl: FormControl;
-
+  obraSocial: FormControl;
   especialidadFormCtrl: FormControl;
   //#endregion
 
@@ -64,19 +68,34 @@ export class StepperFormComponent implements OnInit {
     this.datosPersonalesFormGroup.addControl('nombre', this.nombreFormCtrl);
     this.datosPersonalesFormGroup.addControl('apellido', this.apellidoFormCtrl);
     this.datosPersonalesFormGroup.addControl('edad', this.edadFormCtrl);
-    this.datosPersonalesFormGroup.addControl('domicilio', this.domicilioFormCtrl);
-
-    this.emailFormCtrl = new FormControl('', [Validators.required, Validators.email]);
-    this.claveFormCtrl = new FormControl('', [Validators.required, Validators.minLength(6)]);
+    this.datosPersonalesFormGroup.addControl(
+      'domicilio',
+      this.domicilioFormCtrl
+    );
+    this.documentFormCtrl = new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(8),
+    ]);
+    this.obraSocial = new FormControl('');
+    this.emailFormCtrl = new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]);
+    this.claveFormCtrl = new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]);
     this.datosCuentaFormGroup.addControl('email', this.emailFormCtrl);
     this.datosCuentaFormGroup.addControl('clave', this.claveFormCtrl);
     this.especialidadFormCtrl = new FormControl('');
-    this.datosTipoFormGroup.addControl('especialidad', this.especialidadFormCtrl);
+    this.datosTipoFormGroup.addControl(
+      'especialidad',
+      this.especialidadFormCtrl
+    );
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   EnviarRegistro() {
     this.CrearUsuario();
@@ -85,7 +104,6 @@ export class StepperFormComponent implements OnInit {
     setTimeout(() => {
       this.usuario_registrado.emit(this.usuario);
     }, 1000);
-
   }
 
   LimpiarCampos() {
@@ -94,6 +112,8 @@ export class StepperFormComponent implements OnInit {
     this.claveFormCtrl.setValue('');
     this.emailFormCtrl.setValue('');
     this.datosTipoFormGroup.reset();
+    this.obraSocial.setValue('');
+    this.documentFormCtrl.setValue('');
     this.imagen_uno = '../../../assets/img/user.png';
     this.imagen_dos = '../../../assets/img/user.png';
     this.tipoUsuario = '';
@@ -112,10 +132,13 @@ export class StepperFormComponent implements OnInit {
       password: this.claveFormCtrl.value,
       address: this.domicilioFormCtrl.value,
       type: this.tipoUsuario,
+      doc: this.documentFormCtrl.value,
       first_image: this.imagen_uno,
       second_image: this.imagen_dos,
-    }
+    };
     if (this.tipoUsuario === 'Medico')
       this.usuario.especializaciones = this.especialidadFormCtrl.value;
+    if (this.tipoUsuario === 'Paciente')
+      this.usuario.obraSocial = this.obraSocial.value;
   }
 }

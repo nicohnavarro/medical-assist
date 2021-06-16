@@ -18,7 +18,8 @@ import { TurnoService } from 'src/app/services/turno.service';
 import { UserService } from 'src/app/services/user.service';
 import { EstadosTurno } from 'src/app/utils/estados-turno.enum';
 import { ReseniaModalComponent } from '../../shared/resenia-modal/resenia-modal.component';
-
+import { ReviewModalComponent } from '../../shared/review-modal/review-modal.component';
+import { Notyf } from 'notyf';
 @Component({
   selector: 'app-listado-turnos',
   templateUrl: './listado-turnos.component.html',
@@ -43,6 +44,7 @@ export class ListadoTurnosComponent implements OnInit {
     'estado',
     'atender',
     'cancelar',
+    'finalizar',
     'encuesta',
     'resena',
   ];
@@ -60,7 +62,9 @@ export class ListadoTurnosComponent implements OnInit {
     this.typeUser = authSvc.user.type;
     if (this.typeUser === 'Paciente') {
       let removeId = this.displayedColumns.indexOf('atender');
+      let finishId = this.displayedColumns.indexOf('finalizar');
       this.displayedColumns.splice(removeId, 1);
+      this.displayedColumns.splice(finishId, 1);
     }
     specialtiesSvc.getSpecialties().subscribe((data) => {
       this.Specialties = data.map((item) => {
@@ -125,25 +129,35 @@ export class ListadoTurnosComponent implements OnInit {
   }
 
   changeStateShift(action: string, shift: ITurno, typeUser: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.panelClass = 'custom-modalbox';
+    dialogConfig.maxWidth= '60vw';
+    dialogConfig.data = {
+      shift,
+      typeUser,
+    };
+
     switch (action) {
       case 'ACEPTAR':
         shift.estado = EstadosTurno.ACEPTADO;
         this.turnoSvc.modificarTurno(shift, shift.id).then(() => {
           this.confirmo_turno.emit(shift);
+          let notyf = new Notyf();
+          notyf.success('El turno ha sido Aceptado.');
         });
         break;
       case 'CANCELAR':
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
-        dialogConfig.panelClass = 'custom-modalbox';
-        dialogConfig.data = {
-          shift,
-          typeUser,
-        };
-
-        const dialogRef = this.dialog.open(CancelModalComponent, dialogConfig);
+        let dialogRef = this.dialog.open(CancelModalComponent, dialogConfig);
         dialogRef.afterClosed().subscribe((result) => {
+          console.log(`Dialog result: ${result}`);
+          this.getTurnos();
+        });
+        break;
+      case 'FINALIZADO':
+        let reviewModal = this.dialog.open(ReviewModalComponent, dialogConfig);
+        reviewModal.afterClosed().subscribe((result) => {
           console.log(`Dialog result: ${result}`);
           this.getTurnos();
         });

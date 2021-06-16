@@ -2,47 +2,47 @@
   <mat-step [stepControl]="datosPersonalesFormGroup">
     <form [formGroup]="datosPersonalesFormGroup">
       <div class="form_datos">
-        <ng-template matStepLabel>{{'personalInfo' | translate}}</ng-template>
+        <ng-template matStepLabel>{{ "personalInfo" | translate }}</ng-template>
 
         <div class="datos-prin">
           <mat-form-field appearance="standard">
-            <mat-label>{{'name' | translate}}</mat-label>
+            <mat-label>{{ "name" | translate }}</mat-label>
             <input
               matInput
               [formControl]="nombreFormCtrl"
               placeholder="Nombre"
             />
             <mat-error *ngIf="nombreFormCtrl.hasError('required')">
-              {{'fieldRequired' | translate}}
+              {{ "fieldRequired" | translate }}
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="standard">
-            <mat-label>{{'surname' | translate}}</mat-label>
+            <mat-label>{{ "surname" | translate }}</mat-label>
             <input
               matInput
               [formControl]="apellidoFormCtrl"
               placeholder="Apellido"
             />
             <mat-error *ngIf="apellidoFormCtrl.hasError('required')">
-              {{'fieldRequired' | translate}}
+              {{ "fieldRequired" | translate }}
             </mat-error>
           </mat-form-field>
         </div>
         <div class="datos-prin">
           <mat-form-field appearance="standard">
-            <mat-label>{{'address' | translate}}</mat-label>
+            <mat-label>{{ "address" | translate }}</mat-label>
             <input
               matInput
               [formControl]="domicilioFormCtrl"
               placeholder="Domicilio"
             />
             <mat-error *ngIf="domicilioFormCtrl.hasError('required')">
-              {{'fieldRequired' | translate}}
+              {{ "fieldRequired" | translate }}
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="standard" class="edadFormCtrl">
-            <mat-label>{{'age' | translate}}</mat-label>
+            <mat-label>{{ "age" | translate }}</mat-label>
             <input
               matInput
               type="number"
@@ -50,7 +50,7 @@
               placeholder="Edad"
             />
             <mat-error *ngIf="edadFormCtrl.hasError('required')">
-              {{'fieldRequired' | translate}}
+              {{ "fieldRequired" | translate }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -58,17 +58,17 @@
     </form>
     <div class="btn-form">
       <button matStepperNext mat-raised-button color="primary">
-        {{'next' | translate}}
+        {{ "next" | translate }}
       </button>
     </div>
   </mat-step>
 
-  <mat-step [stepControl]="datosCuentaFormGroup" >
-    <ng-template matStepLabel>{{'accountInfo' | translate}}</ng-template>
+  <mat-step [stepControl]="datosCuentaFormGroup">
+    <ng-template matStepLabel>{{ "accountInfo" | translate }}</ng-template>
     <form [formGroup]="datosCuentaFormGroup" class="form_datos">
       <div class="datos_impor">
         <mat-form-field appearance="standard">
-          <mat-label>{{'email' | translate}}</mat-label>
+          <mat-label>{{ "email" | translate }}</mat-label>
           <input
             matInput
             [formControl]="emailFormCtrl"
@@ -80,15 +80,15 @@
               !emailFormCtrl.hasError('required')
             "
           >
-          {{'validateEmail1' | translate}}
+            {{ "validateEmail1" | translate }}
           </mat-error>
           <mat-error *ngIf="emailFormCtrl.hasError('required')">
-            {{'validateEmail2' | translate}}
+            {{ "validateEmail2" | translate }}
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
-          <mat-label>{{'password' | translate}} </mat-label>
+          <mat-label>{{ "password" | translate }} </mat-label>
           <input
             matInput
             [formControl]="claveFormCtrl"
@@ -105,10 +105,10 @@
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
           <mat-error *ngIf="claveFormCtrl.hasError('required')">
-            {{'validatePassword2' | translate}}
+            {{ "validatePassword2" | translate }}
           </mat-error>
           <mat-error *ngIf="claveFormCtrl.value.length < 6">
-            {{'validatePassword1' | translate}}
+            {{ "validatePassword1" | translate }}
           </mat-error>
         </mat-form-field>
       </div>
@@ -132,18 +132,23 @@
       ></re-captcha>
     </div>
     <div class="btn-form">
-      <button mat-raised-button color="accent" matStepperPrevious>{{'back' | translate}}</button>
+      <button mat-raised-button color="accent" matStepperPrevious>
+        {{ "back" | translate }}
+      </button>
       <button mat-raised-button color="primary" matStepperNext>
-        {{'next' | translate}}
+        {{ "next" | translate }}
       </button>
     </div>
   </mat-step>
   <mat-step>
     <div class="form_datos">
-      <ng-template matStepLabel>{{'typeOfUser' | translate}}</ng-template>
+      <ng-template matStepLabel>{{ "typeOfUser" | translate }}</ng-template>
       <div class="datos_tipo">
         <div class="tipo">
-          <label id="example-radio-group-label">{{'chooseOption' | translate}}</label><br />
+          <label id="example-radio-group-label">{{
+            "chooseOption" | translate
+          }}</label
+          ><br />
           <mat-radio-group
             aria-labelledby="example-radio-group-label"
             class="example-radio-group"
@@ -158,13 +163,29 @@
               {{ tipo }}
             </mat-radio-button>
           </mat-radio-group>
+
+          <mat-form-field appearance="standard">
+            <mat-label>{{ "document" | translate }}</mat-label>
+            <input
+              matInput
+              [formControl]="documentFormCtrl"
+              placeholder="DNI"
+            />
+            <mat-error *ngIf="documentFormCtrl.hasError('required')">
+              {{ "fieldRequired" | translate }}
+            </mat-error>
+
+            <mat-error *ngIf="documentFormCtrl.value.length < 8">
+              {{ "validateDocument" | translate }}
+            </mat-error>
+          </mat-form-field>
         </div>
         <mat-form-field
           *ngIf="tipoUsuario == 'Medico'"
           appearance="fill"
           color="accent"
         >
-          <mat-label>Especialidad</mat-label>
+          <mat-label>{{ "specialties" | translate }}</mat-label>
           <mat-select
             class="select_color"
             [formControl]="especialidadFormCtrl"
@@ -180,18 +201,36 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+
+        <mat-form-field
+          *ngIf="tipoUsuario == 'Paciente'"
+          appearance="fill"
+          color="accent"
+        >
+          <mat-label>{{ "insurance" | translate }}</mat-label>
+          <input
+            matInput
+            [formControl]="obraSocial"
+            placeholder="Obra Social"
+          />
+          <mat-error *ngIf="obraSocial.hasError('required')">
+            {{ "fieldRequired" | translate }}
+          </mat-error>
+        </mat-form-field>
       </div>
     </div>
     <div class="btn-form">
-      <button mat-raised-button color="accent" matStepperPrevious>{{'back' | translate}}</button>
+      <button mat-raised-button color="accent" matStepperPrevious>
+        {{ "back" | translate }}
+      </button>
       <button matStepperNext mat-raised-button color="primary">
-        {{'next' | translate}}
+        {{ "next" | translate }}
       </button>
     </div>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>{{'controlInfo' | translate}}</ng-template>
-    <p>{{'verifyInfo' | translate}}</p>
+    <ng-template matStepLabel>{{ "controlInfo" | translate }}</ng-template>
+    <p>{{ "verifyInfo" | translate }}</p>
     <app-user-detail
       [nombre]="nombreFormCtrl.value"
       [apellido]="apellidoFormCtrl.value"
@@ -201,16 +240,20 @@
       [imagen_uno]="imagen_uno"
       [imagen_dos]="imagen_dos"
       [tipo]="tipoUsuario"
+      [obraSocial]="obraSocial.value"
+      [doc]="documentFormCtrl.value"
       [especialidades]="especialidadFormCtrl.value"
     >
     </app-user-detail>
     <div class="btn-form">
-      <button mat-raised-button color="accent" matStepperPrevious>{{'back' | translate}}</button>
+      <button mat-raised-button color="accent" matStepperPrevious>
+        {{ "back" | translate }}
+      </button>
       <button mat-raised-button color="warn" (click)="LimpiarCampos()">
-        {{'cleanAll' | translate}}
+        {{ "cleanAll" | translate }}
       </button>
       <button mat-raised-button color="primary" (click)="EnviarRegistro()">
-        {{'register' | translate}}
+        {{ "register" | translate }}
       </button>
     </div>
   </mat-step>

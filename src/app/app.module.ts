@@ -54,6 +54,8 @@ import { InfoHomeComponent } from './components/shared/info-home/info-home.compo
 import { ComboListComponent } from './components/shared/combo-list/combo-list.component';
 import { CustomFilterComponent } from './components/shared/custom-filter/custom-filter.component';
 import { CancelModalComponent } from './components/shared/cancel-modal/cancel-modal.component';
+import { ReviewModalComponent } from './components/shared/review-modal/review-modal.component';
+import { HistorialFormComponent } from './components/shared/historial-form/historial-form.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -97,7 +99,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     InfoHomeComponent,
     ComboListComponent,
     CustomFilterComponent,
-    CancelModalComponent
+    CancelModalComponent,
+    ReviewModalComponent,
+    HistorialFormComponent
   ],
   imports: [
     BrowserModule,

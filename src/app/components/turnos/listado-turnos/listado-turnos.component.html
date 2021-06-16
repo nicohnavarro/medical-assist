@@ -93,13 +93,26 @@
       >
     </td>
   </ng-container>
+  <ng-container matColumnDef="finalizar">
+    <th mat-header-cell *matHeaderCellDef>{{ "finish" | translate }}</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon
+        *ngIf="!turno_pasado && element.estado === 1"
+        aria-hidden="false"
+        aria-label="Example home icon"
+        (click)="changeStateShift('FINALIZADO', element, typeUser)"
+        >offline_pin</mat-icon
+      >
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="encuesta">
     <th mat-header-cell *matHeaderCellDef>{{ "survey" | translate }}</th>
     <td mat-cell *matCellDef="let element">
       <mat-icon
+        *ngIf="element.encuesta && element.estado == 5"
         aria-hidden="false"
         aria-label="Example home icon"
-        *ngIf="element.estado"
         (click)="agregarEncuesta(element)"
         >grade</mat-icon
       >
