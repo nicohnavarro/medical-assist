@@ -9,39 +9,42 @@ import { Dias } from '../utils/dias.enum';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  constructor(private db: AngularFirestore) {}
 
-  constructor(private db:AngularFirestore) { }
-
-  getAll():Observable<any[]> {
-    return this.db.collection<any>('usuarios').valueChanges({idField: 'id'});
+  getAll(): Observable<any[]> {
+    return this.db.collection<any>('usuarios').valueChanges({ idField: 'id' });
   }
 
-  add(user:IUser,id:string){
+  add(user: IUser, id: string) {
     return this.db.collection('usuarios').doc(id).set(user);
   }
 
-  getById(id:string):Observable<IUser>{
+  getById(id: string): Observable<IUser> {
     const usersDocuments = this.db.doc<IUser>('usuarios/' + id);
-    return usersDocuments.snapshotChanges()
-      .pipe(
-        map(changes => {
-          const data = changes.payload.data();
-          const id = changes.payload.id;
-          return { id, ...data };
-        }))
+    return usersDocuments.snapshotChanges().pipe(
+      map((changes) => {
+        const data = changes.payload.data();
+        const id = changes.payload.id;
+        return { id, ...data };
+      })
+    );
   }
 
-  setUser(id:string){
-    this.getById(id).subscribe((data)=>{
+  setUser(id: string) {
+    this.getById(id).subscribe((data) => {
       return data;
     });
   }
 
-  getByType(type:string) {
-    return this.db.collection('usuarios', ref => ref.where('type', '==', type)).valueChanges({idField: 'id'});
+  modificarUser(user: IUser, id: string): Promise<void> {
+    return this.db.collection<IUser>('usuarios').doc(id).set(user);
   }
-
+  getByType(type: string) {
+    return this.db
+      .collection('usuarios', (ref) => ref.where('type', '==', type))
+      .valueChanges({ idField: 'id' });
+  }
 }

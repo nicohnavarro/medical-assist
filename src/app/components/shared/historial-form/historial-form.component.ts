@@ -12,7 +12,8 @@ import {
   styleUrls: ['./historial-form.component.scss'],
 })
 export class HistorialFormComponent implements OnInit {
-  @Output() datosFijos: EventEmitter<any> = new EventEmitter<any>();
+  @Output() medicalHistory: EventEmitter<any> = new EventEmitter<any>();
+  historyAdded: boolean = false;
   //#region  FormControls
   heightFormCtrl: FormControl;
   weightFormCtrl: FormControl;
@@ -50,11 +51,24 @@ export class HistorialFormComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
   cleanAll() {
     this.datosHistorialFormGroup.reset();
+    this.historyAdded = false;
   }
 
-  addHistory() {}
+  addHistory() {
+    this.buildHistory();
+    this.historyAdded = true;
+  }
 
-  private buildHistory() {}
+  private buildHistory() {
+    let history = {
+      altura: this.heightFormCtrl.value,
+      peso: this.weightFormCtrl.value,
+      temperature: this.temperatureFormCtrl.value,
+      pressure: this.pressureFormCtrl.value,
+    };
+    this.medicalHistory.emit(history);
+  }
 }

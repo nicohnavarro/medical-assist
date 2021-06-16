@@ -133,7 +133,7 @@ export class ListadoTurnosComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.panelClass = 'custom-modalbox';
-    dialogConfig.maxWidth= '60vw';
+    dialogConfig.maxWidth = '60vw';
     dialogConfig.data = {
       shift,
       typeUser,
@@ -166,10 +166,15 @@ export class ListadoTurnosComponent implements OnInit {
   }
 
   agregarEncuesta(turno: ITurno) {}
-  agregarResena(turno: ITurno) {
-    console.log(turno);
+  seeReview(shift: ITurno) {
     const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
     dialogConfig.panelClass = 'custom-modalbox';
+    dialogConfig.maxWidth = '30vw';
+    dialogConfig.data = {
+      shift,
+    };
     const dialogRef = this.dialog.open(ReseniaModalComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);

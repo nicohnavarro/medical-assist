@@ -92,6 +92,7 @@
   "finishMsg":"Complete the medical history",
   "reviewMsg":"Add review to patient",
   "required":"Required",
-  "shift":"Shift"
+  "shift":"Shift",
+  "historyAdded":"Medical History Added"
 }
 

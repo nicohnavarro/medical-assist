@@ -3,7 +3,9 @@
     {{ "finishMsg" | translate }}
   </h2>
   <mat-dialog-content>
-    <app-historial-form></app-historial-form>
+    <app-historial-form
+      (medicalHistory)="getMedicalHistory($event)"
+    ></app-historial-form>
     <mat-form-field appearance="outline">
       <mat-label>{{ "reviewMsg" | translate }}:</mat-label>
       <textarea
@@ -18,7 +20,7 @@
       mat-raised-button
       color="accent"
       [disabled]="!btnEnable"
-      (click)="cancelShift()"
+      (click)="finishShift()"
     >
       {{ "finish" | translate }} {{ "shift" | translate }}
     </button>

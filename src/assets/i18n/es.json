@@ -92,6 +92,7 @@
   "finishMsg":"Complete el historial medico",
   "reviewMsg":"Agregue una resena al turno",
   "required":"Requerido",
-  "shift":"Turno"
+  "shift":"Turno",
+  "historyAdded":"Historia Clinica Agregada"
 }
 
