@@ -1,0 +1,38 @@
+<div app-theme class="myModal">
+  <h2 mat-dialog-title>
+    {{ "details" | translate }}: {{ turno.especialidad.name }}
+  </h2>
+  <mat-dialog-content>
+    <span
+      ><b>{{ "doctor" | translate }}:</b> {{ turno.medico.name }}</span
+    ><br />
+    <span
+      ><b>{{ "patient" | translate }}:</b> {{ turno.paciente.name }}</span
+    ><br />
+    <span
+      ><b>{{ "date" | translate }}:</b> {{ turno.fecha }} {{ turno.hora }}</span
+    >
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "reasonCancel" | translate }}:</mat-label>
+      <textarea
+        matInput
+        (ngModelChange)="validMotivo($event)"
+        [ngModel]="motivo"
+      ></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="!btnEnable"
+      (click)="cancelShift()"
+    >
+      {{ "cancel" | translate }} {{ "shift" | translate }}
+    </button>
+    <button mat-raised-button mat-dialog-close color="warn">
+      {{ "close" | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>

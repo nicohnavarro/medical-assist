@@ -53,6 +53,7 @@ import { ThemeToogleComponent } from './components/shared/theme-toogle/theme-too
 import { InfoHomeComponent } from './components/shared/info-home/info-home.component';
 import { ComboListComponent } from './components/shared/combo-list/combo-list.component';
 import { CustomFilterComponent } from './components/shared/custom-filter/custom-filter.component';
+import { CancelModalComponent } from './components/shared/cancel-modal/cancel-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -95,7 +96,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ThemeToogleComponent,
     InfoHomeComponent,
     ComboListComponent,
-    CustomFilterComponent
+    CustomFilterComponent,
+    CancelModalComponent
   ],
   imports: [
     BrowserModule,

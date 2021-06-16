@@ -1,6 +1,15 @@
+import { CancelModalComponent } from './../../shared/cancel-modal/cancel-modal.component';
+import { AuthService } from './../../../services/auth.service';
 import { element } from 'protractor';
 import { MedicalSpecialtiesService } from './../../../services/medical-specialties.service';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,10 +22,9 @@ import { ReseniaModalComponent } from '../../shared/resenia-modal/resenia-modal.
 @Component({
   selector: 'app-listado-turnos',
   templateUrl: './listado-turnos.component.html',
-  styleUrls: ['./listado-turnos.component.scss']
+  styleUrls: ['./listado-turnos.component.scss'],
 })
 export class ListadoTurnosComponent implements OnInit {
-
   Estados = EstadosTurno;
   Specialties = [];
   Doctors = [];
@@ -25,6 +33,7 @@ export class ListadoTurnosComponent implements OnInit {
   @Input() turno_pasado: boolean = false;
   @Output() confirmo_turno: EventEmitter<ITurno> = new EventEmitter<ITurno>();
   cargando: boolean = true;
+  typeUser: string = '';
   displayedColumns: string[] = [
     'especialidad',
     'medico',
@@ -35,23 +44,39 @@ export class ListadoTurnosComponent implements OnInit {
     'atender',
     'cancelar',
     'encuesta',
-    'resena'
+    'resena',
   ];
 
   dataSource = new MatTableDataSource<ITurno>(this.mostrar_turnos);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private userSvc: UserService, private turnoSvc: TurnoService, public dialog: MatDialog, private specialtiesSvc: MedicalSpecialtiesService) {
-    specialtiesSvc.getSpecialties().subscribe(data => {
-      this.Specialties = data.map(item => { return { ...item, completed: true } });
-    })
-    userSvc.getByType('Medico').subscribe(data=>{
-      this.Doctors = data.map(item => { return { ...item, completed: true } });
-    })
-    userSvc.getByType('Paciente').subscribe(data=>{
-      this.Patients = data.map(item => { return { ...item, completed: true } });
-    })
-
+  constructor(
+    private userSvc: UserService,
+    private turnoSvc: TurnoService,
+    public dialog: MatDialog,
+    private specialtiesSvc: MedicalSpecialtiesService,
+    private authSvc: AuthService
+  ) {
+    this.typeUser = authSvc.user.type;
+    if (this.typeUser === 'Paciente') {
+      let removeId = this.displayedColumns.indexOf('atender');
+      this.displayedColumns.splice(removeId, 1);
+    }
+    specialtiesSvc.getSpecialties().subscribe((data) => {
+      this.Specialties = data.map((item) => {
+        return { ...item, completed: true };
+      });
+    });
+    userSvc.getByType('Medico').subscribe((data) => {
+      this.Doctors = data.map((item) => {
+        return { ...item, completed: true };
+      });
+    });
+    userSvc.getByType('Paciente').subscribe((data) => {
+      this.Patients = data.map((item) => {
+        return { ...item, completed: true };
+      });
+    });
   }
 
   ngOnInit(): void {
@@ -69,7 +94,7 @@ export class ListadoTurnosComponent implements OnInit {
   openDialog(component, options?): void {
     const dialogRef = this.dialog.open(component, options);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.getTurnos();
     });
   }
@@ -79,7 +104,6 @@ export class ListadoTurnosComponent implements OnInit {
     this.turnoSvc.modificarTurno(turno, turno.id).then(() => {
       this.confirmo_turno.emit(turno);
     });
-
   }
   cancelarTurno(turno: ITurno) {
     turno.estado = EstadosTurno.CANCELADO_MEDICO;
@@ -88,7 +112,19 @@ export class ListadoTurnosComponent implements OnInit {
     });
   }
 
-  changeStateShift(action:string,shift:ITurno){
+  canCancel(state: number): boolean {
+    switch (state) {
+      case EstadosTurno.PENDIENTE:
+        return true;
+        break;
+
+      default:
+        return false;
+        break;
+    }
+  }
+
+  changeStateShift(action: string, shift: ITurno, typeUser: string) {
     switch (action) {
       case 'ACEPTAR':
         shift.estado = EstadosTurno.ACEPTADO;
@@ -96,47 +132,57 @@ export class ListadoTurnosComponent implements OnInit {
           this.confirmo_turno.emit(shift);
         });
         break;
-        case 'CANCELAR':
-          shift.estado = EstadosTurno.CANCELADO_MEDICO;
-          this.turnoSvc.modificarTurno(shift, shift.id).then(() => {
-            this.getTurnos();
-          });
-          break;
-      default:
+      case 'CANCELAR':
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.panelClass = 'custom-modalbox';
+        dialogConfig.data = {
+          shift,
+          typeUser,
+        };
+
+        const dialogRef = this.dialog.open(CancelModalComponent, dialogConfig);
+        dialogRef.afterClosed().subscribe((result) => {
+          console.log(`Dialog result: ${result}`);
+          this.getTurnos();
+        });
         break;
     }
   }
 
-
-  agregarEncuesta(turno: ITurno) {
-
-  }
+  agregarEncuesta(turno: ITurno) {}
   agregarResena(turno: ITurno) {
     console.log(turno);
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.panelClass='custom-modalbox';
+    dialogConfig.panelClass = 'custom-modalbox';
     const dialogRef = this.dialog.open(ReseniaModalComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }
-  
-  getFilterSpecialties(filter:any[]){
-    let onlyName = filter.map(t=>t.name);
-    let newList = this.mostrar_turnos.filter(t => onlyName.includes(t.especialidad.name));
+
+  getFilterSpecialties(filter: any[]) {
+    let onlyName = filter.map((t) => t.name);
+    let newList = this.mostrar_turnos.filter((t) =>
+      onlyName.includes(t.especialidad.name)
+    );
     this.dataSource.data = newList;
   }
 
-  getFilterDoctors(filter:any[]){
-    let doctorIds = filter.map(doctor=> doctor.id)
-    let newList = this.mostrar_turnos.filter(t => doctorIds.includes(t.medico.id));
+  getFilterDoctors(filter: any[]) {
+    let doctorIds = filter.map((doctor) => doctor.id);
+    let newList = this.mostrar_turnos.filter((t) =>
+      doctorIds.includes(t.medico.id)
+    );
     this.dataSource.data = newList;
   }
 
-  getFilterPatients(filter:any[]){
-    let patientIds = filter.map(patient=> patient.id)
-    let newList = this.mostrar_turnos.filter(t => patientIds.includes(t.paciente.id));
+  getFilterPatients(filter: any[]) {
+    let patientIds = filter.map((patient) => patient.id);
+    let newList = this.mostrar_turnos.filter((t) =>
+      patientIds.includes(t.paciente.id)
+    );
     this.dataSource.data = newList;
   }
-
 }

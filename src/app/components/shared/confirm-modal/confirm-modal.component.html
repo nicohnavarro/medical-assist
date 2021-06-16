@@ -1,33 +1,46 @@
 <div app-theme class="myModal">
   <div class="" *ngIf="cargando">
-    <h2 mat-dialog-title>Agregando turno ...</h2>
+    <h2 mat-dialog-title>{{ "addingShift" | translate }}</h2>
     <mat-spinner></mat-spinner>
   </div>
 
   <div class="modal" *ngIf="!cargando && !turno_cargado">
     <h2 mat-dialog-title>
-      Detalles del turno para {{ turno.especialidad.name }}
+      {{ "details" | translate }} {{ turno.especialidad.name }}
     </h2>
     <mat-dialog-content>
-      <span><b>Medico:</b> {{ turno.medico.name }}</span><br>
-      <span><b>Paciente:</b> {{ turno.paciente.name }}</span><br>
-      <span><b>Fecha:</b> {{ turno.fecha }} {{ turno.hora }}</span>
+      <span
+        ><b>{{ "doctor" | translate }}:</b> {{ turno.medico.name }}</span
+      ><br />
+      <span
+        ><b>{{ "patient" | translate }}:</b> {{ turno.paciente.name }}</span
+      ><br />
+      <span
+        ><b>{{ "date" | translate }}:</b> {{ turno.fecha }}
+        {{ turno.hora }}</span
+      >
     </mat-dialog-content>
     <mat-dialog-actions>
       <button mat-raised-button color="primary" (click)="confirmarTurno()">
-        Confirmar Turno
+        {{ "confirmShift" | translate }}
       </button>
-      <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+      <button mat-raised-button mat-dialog-close color="warn">
+        {{ "cancel" | translate }}
+      </button>
     </mat-dialog-actions>
   </div>
 
   <div class="" *ngIf="!cargando && turno_cargado">
-    <h2 mat-dialog-title>Muchas gracias {{ turno.paciente.name }}</h2>
+    <h2 mat-dialog-title>
+      {{ "thankyou" | translate }}{{ turno.paciente.name }}
+    </h2>
     <mat-dialog-content>
-      <span>No te olvides de cargar una reseña mas adelante!</span>
+      <span>{{ "reminderShift" | translate }}</span>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button mat-raised-button color="warn" mat-dialog-close>Cerrar</button>
+      <button mat-raised-button color="warn" mat-dialog-close>
+        {{ "close" | translate }}
+      </button>
     </mat-dialog-actions>
   </div>
 </div>

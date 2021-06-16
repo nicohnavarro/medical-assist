@@ -16,6 +16,7 @@ public user;
   async login(email:string, password:string){
     try{
       const result = await this.afAuth.signInWithEmailAndPassword(email,password);
+      this.user =result.user;
       return result.user;
     }
     catch(err){
