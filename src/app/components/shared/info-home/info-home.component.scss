@@ -8,6 +8,10 @@
   padding:25px 30px;
 }
 
+h1{
+  display: none;
+}
+
 .neumoDiv {
   margin: 5px;
   display: flex;
@@ -19,4 +23,14 @@
   color: var(--on-background);
   box-shadow: var(--border-shadow);
   font-family: "Gothic A1", sans-serif;
+}
+
+
+
+@media only screen and (max-width: 700px) {
+  h1{
+    display: inline-block;
+    font-weight: 800;
+
+  }
 }

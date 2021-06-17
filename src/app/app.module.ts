@@ -57,6 +57,8 @@ import { HistorialFormComponent } from './components/shared/historial-form/histo
 import { StarRatingComponent } from './components/shared/star-rating/star-rating.component';
 import { RateModalComponent } from './components/shared/rate-modal/rate-modal.component';
 import { SurveyModalComponent } from './components/shared/survey-modal/survey-modal.component';
+import { MedicalScheduleComponent } from './components/shared/medical-schedule/medical-schedule.component';
+import { HourTakenDirective } from './directives/hour-taken.directive';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -102,7 +104,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     HistorialFormComponent,
     StarRatingComponent,
     RateModalComponent,
-    SurveyModalComponent
+    SurveyModalComponent,
+    MedicalScheduleComponent,
+    HourTakenDirective
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,9 @@
+<div class="week">
+  <div class="day">
+  </div>
+</div>
+<div class="schedule">
+  <div class="time" *ngFor="let time of scheduleExample" (click)="selectTime(time)" [ngClass]="time.active ? 'active' : ''">
+    <span>{{time.hour}}</span>
+  </div>
+</div>

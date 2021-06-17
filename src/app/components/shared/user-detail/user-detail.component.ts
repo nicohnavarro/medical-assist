@@ -22,5 +22,6 @@ export class UserDetailComponent implements OnInit {
     this.especialidades = [];
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

@@ -1,36 +1,58 @@
 .mat-form-field + .mat-form-field {
-    margin-left: 8px;
-  }
-  mat-expansion-panel{
-      margin-top: 1rem;
-  }
+  margin-left: 8px;
+}
+mat-expansion-panel {
+  margin-top: 1rem;
+}
 mat-panel-description {
-    span{
-        color: blueviolet;
-    }
+  span {
+    color: rgb(40, 178, 247);
+  }
 }
 
-.images{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    img{
-        width: 130px;
-        height: 110px;
-        border-radius: 14px;
-        margin: 10px 20px;
-    }
+.images {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  img {
+    width: 130px;
+    height: 110px;
+    border-radius: 14px;
+    margin: 10px 20px;
+  }
 }
 
 .profesional {
-    span{
-        font-weight: 700;
-        margin-bottom: 25px;
-    }
+  span {
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
 }
 
-.especialidades{
-    p{
-        margin-left: 5px;
-    }
+.especialidades {
+  p {
+    margin-left: 5px;
+  }
+}
+
+mat-expansion-panel {
+  margin-left: 2rem;
+  width: 80%;
+  margin-bottom: 1rem;
+  border-radius: 20px;
+  background: var(--background) !important;
+  color: var(--on-background) !important;
+  box-shadow: var(--border-shadow) !important;
+}
+
+mat-expansion-panel-header {
+  mat-panel-title {
+    font-weight: bold;
+  }
+  border-radius: 20px;
+}
+
+mat-accordion {
+  border-radius: 20px;
+  margin-top: 1rem;
 }

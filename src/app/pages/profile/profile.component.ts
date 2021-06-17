@@ -1,3 +1,5 @@
+import { AuthService } from './../../services/auth.service';
+import { IUser } from './../../models/user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -9,9 +11,9 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProfileComponent implements OnInit {
   loggeado: boolean = false;
-  uid: string;
-  constructor(private userSvc: UserService, private router: Router) {
-
+  user: IUser;
+  constructor(private userSvc: UserService, private authSvc: AuthService, private router: Router) {
+    this.user = this.authSvc.user;
   }
 
   ngOnInit(): void {

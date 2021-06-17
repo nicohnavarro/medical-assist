@@ -9,7 +9,9 @@
   </div>
   <div class="spaced"></div>
   <div *ngIf="user" class="userInfo">
-    <img *ngIf="user != null" [src]="user.first_image" alt="" />
+    <div class="imageContent" *ngIf="user != null">
+      <img [src]="user.first_image" alt="" />
+    </div>
     <p>{{ user.mail}}</p>
   </div>
   <button mat-button *ngIf="!user" (click)="login()">

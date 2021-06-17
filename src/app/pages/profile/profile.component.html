@@ -1,12 +1,20 @@
-<div class="sacar_turnos" *ngIf="loggeado">
-    
-</div>
-
-<div *ngIf="!loggeado">
-    <div class="aviso">
-        <mat-card>
-            Ingresa para poder editar tu perfil!
-            <button mat-raised-button color="primary"  (click)="irIngreso()">Ingresar</button>
-        </mat-card>
+<div class="row">
+    <div class="column-datos">
+        <app-user-detail
+        [nombre]="user.name"
+        [apellido]="user.surname"
+        [domicilio]="user.address"
+        [edad]="user.age"
+        [correo]="user.mail"
+        [imagen_uno]="user.first_image"
+        [imagen_dos]="user.second_image"
+        [tipo]="user.type"
+        [obraSocial]="user?.obraSocial"
+        [doc]="user.doc"
+        [especialidades]="user?.especializaciones"
+      >
+      </app-user-detail>
     </div>
-</div>
+    <div class="column-feature">
+      <app-medical-schedule></app-medical-schedule>
+  </div>
