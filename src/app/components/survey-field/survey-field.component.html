@@ -1,0 +1,16 @@
+<div class="slider">
+  <div class="container">
+    <label>{{ title }}</label>
+    <label><b> <span *ngIf="value>8">😎</span><span *ngIf="value<3">😠</span>{{value}}</b></label>
+  </div>
+  <mat-slider
+      class="example-margin"
+      [max]="max"
+      [min]="min"
+      [step]="step"
+      [thumbLabel]="thumbLabel"
+      [(ngModel)]="value"
+      (change)=getValue(value);
+      aria-labelledby="example-name-label">
+  </mat-slider>
+</div>

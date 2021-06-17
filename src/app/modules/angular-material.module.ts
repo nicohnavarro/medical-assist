@@ -24,7 +24,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [],
@@ -53,7 +53,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatBadgeModule,
     MatStepperModule,
     MatSidenavModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSliderModule
   ],
   exports:[
     MatToolbarModule,
@@ -79,7 +80,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatBadgeModule,
     MatStepperModule,
     MatSidenavModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSliderModule
   ]
 })
 export class AngularMaterialModule { }

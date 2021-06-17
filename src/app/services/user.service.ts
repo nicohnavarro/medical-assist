@@ -2,10 +2,6 @@ import { Injectable } from '@angular/core';
 import { IUser } from '../models/user';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { IMedico } from '../models/medico';
-import { IPaciente } from '../models/paciente';
-import { IAdmin } from '../models/admin';
-import { Dias } from '../utils/dias.enum';
 import { map } from 'rxjs/operators';
 
 @Injectable({

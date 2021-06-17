@@ -11,7 +11,7 @@ export interface ITurno {
   fecha: string;
   hora: string;
   resena?: string;
-  encuesta?: string;
+  encuesta?: any[];
   motivoRechazo?: string;
   calificacion?: any;
   estado: EstadosTurno;

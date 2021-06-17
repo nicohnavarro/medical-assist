@@ -1,3 +1,4 @@
+import { SurveyModalComponent } from './../../shared/survey-modal/survey-modal.component';
 import { CancelModalComponent } from './../../shared/cancel-modal/cancel-modal.component';
 import { AuthService } from './../../../services/auth.service';
 import { element } from 'protractor';
@@ -105,28 +106,13 @@ export class ListadoTurnosComponent implements OnInit {
     });
   }
 
-  aceptarTurno(turno: ITurno) {
-    turno.estado = EstadosTurno.ACEPTADO;
-    this.turnoSvc.modificarTurno(turno, turno.id).then(() => {
-      this.confirmo_turno.emit(turno);
-    });
-  }
-  cancelarTurno(turno: ITurno) {
-    turno.estado = EstadosTurno.CANCELADO_MEDICO;
-    this.turnoSvc.modificarTurno(turno, turno.id).then(() => {
-      this.getTurnos();
-    });
-  }
-
   canCancel(state: number): boolean {
     switch (state) {
       case EstadosTurno.PENDIENTE:
         return true;
-        break;
 
       default:
         return false;
-        break;
     }
   }
 
@@ -167,7 +153,20 @@ export class ListadoTurnosComponent implements OnInit {
     }
   }
 
-  addSurvey(turno: ITurno) {}
+  addSurvey(shift: ITurno) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.panelClass = 'custom-modalbox';
+    dialogConfig.maxWidth = '60vw';
+    dialogConfig.data = {
+      shift,
+    };
+    const dialogRef = this.dialog.open(SurveyModalComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   addRate(shift: ITurno) {
     const dialogConfig = new MatDialogConfig();

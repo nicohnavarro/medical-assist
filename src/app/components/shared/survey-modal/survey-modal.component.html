@@ -1,1 +1,23 @@
-<p>survey-modal works!</p>
+<div app-theme class="myModal">
+  <h2 mat-dialog-title>
+    {{ "surveyMsg" | translate }}
+  </h2>
+  <mat-dialog-content>
+    <app-survey-field [title]='field1' (sendValue)="getValue1($event)"></app-survey-field>
+    <app-survey-field [title]='field2' (sendValue)="getValue2($event)"></app-survey-field>
+    <app-survey-field [title]='field3' (sendValue)="getValue3($event)"></app-survey-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="!btnEnable"
+      (click)="addSurvey()"
+    >
+      {{ "add" | translate }} {{ "survey" | translate }}
+    </button>
+    <button mat-raised-button mat-dialog-close color="warn">
+      {{ "close" | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>

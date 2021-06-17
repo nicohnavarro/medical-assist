@@ -8,7 +8,6 @@ import { ErrorComponent } from './pages/error/error.component';
 import { MainComponent } from './pages/main/main.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EncuestaComponent } from './components/encuesta/encuesta.component';
 import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
 import { SacarTurnoComponent } from './pages/sacar-turno/sacar-turno.component';
 
@@ -21,7 +20,7 @@ const routes: Routes = [
     {path: 'lists', component:ListadosComponent},
     {path: 'addShift', component:SacarTurnoComponent},
     {path: 'shiftsList', component:MisTurnosComponent},
-    {path: 'surveys', component:EncuestaComponent, canActivate:[UserGuard]},
+    // {path: 'surveys', component:EncuestaComponent, canActivate:[UserGuard]},
   ]},
   { path: 'login', component: LoginComponent, data: {animation: 'login'} },
   { path: 'register', component: RegisterComponent, data: {animation: 'register'} },

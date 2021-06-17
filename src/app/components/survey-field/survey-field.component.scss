@@ -1,0 +1,16 @@
+.mat-slider-horizontal {
+  width: 200px;
+}
+.slider{
+  border-radius: 14px;
+  background: var(--background);
+  color: var(--on-background);
+  box-shadow: var(--border-shadow);
+  padding: .2rem;
+}
+.container{
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem .5rem;
+  max-width: 284px;
+}

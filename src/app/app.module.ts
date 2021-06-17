@@ -34,7 +34,7 @@ import { DetalleProfesionalComponent } from './components/profesionales/detalle-
 import { DetallePacienteComponent } from './components/pacientes/detalle-paciente/detalle-paciente.component';
 import { ListadosComponent } from './pages/listados/listados.component';
 import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
-import { EncuestaComponent } from './components/encuesta/encuesta.component';
+import { SurveyFieldComponent } from './components/survey-field/survey-field.component';
 import { ListadoTurnosComponent } from './components/turnos/listado-turnos/listado-turnos.component';
 import { SacarTurnoComponent } from './pages/sacar-turno/sacar-turno.component';
 import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
@@ -84,7 +84,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DetallePacienteComponent,
     ListadosComponent,
     SidebarComponent,
-    EncuestaComponent,
+    SurveyFieldComponent,
     ListadoTurnosComponent,
     SacarTurnoComponent,
     EnumToArrayPipe,
