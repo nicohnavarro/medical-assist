@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="ranking">
+    <span *ngFor="let start of typeStar; index as i">
+      <mat-icon (click)="setScore(i)">{{ start }}</mat-icon>
+    </span>
+  </div>
+</div>
+

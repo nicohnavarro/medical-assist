@@ -93,6 +93,12 @@
   "reviewMsg":"Agregue una resena al turno",
   "required":"Requerido",
   "shift":"Turno",
-  "historyAdded":"Historia Clinica Agregada"
+  "historyAdded":"Historia Clinica Agregada",
+  "rate":"Calificar",
+  "comment":"Comentario",
+  "ratingComment":"Calificar Turno",
+  "ratingMsg":"Califica tu Turno",
+  "addRating":"Agregar Calificacion",
+  "add":"Agregar"
 }
 

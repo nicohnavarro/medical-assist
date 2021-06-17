@@ -93,6 +93,12 @@
   "reviewMsg":"Add review to patient",
   "required":"Required",
   "shift":"Shift",
-  "historyAdded":"Medical History Added"
+  "historyAdded":"Medical History Added",
+  "rate":"Rate",
+  "comment":"Comment",
+  "ratingComment":"Rating Shift",
+  "ratingMsg":"Rate your Shift",
+  "addRating":"Add Rating",
+  "add":"Add"
 }
 

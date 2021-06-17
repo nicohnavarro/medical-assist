@@ -110,11 +110,11 @@
     <th mat-header-cell *matHeaderCellDef>{{ "survey" | translate }}</th>
     <td mat-cell *matCellDef="let element">
       <mat-icon
-        *ngIf="element.encuesta && element.estado == 5"
+        *ngIf="element.estado == 5 && !element.encuesta"
         aria-hidden="false"
         aria-label="Example home icon"
-        (click)="agregarEncuesta(element)"
-        >grade</mat-icon
+        (click)="addSurvey(element)"
+        >assignment_late</mat-icon
       >
     </td>
   </ng-container>
@@ -127,6 +127,18 @@
         aria-label="Example home icon"
         (click)="seeReview(element)"
         >assignment</mat-icon
+      >
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="calificar"  *ngIf="typeUser === 'Paciente'">
+    <th mat-header-cell *matHeaderCellDef>{{ "rate" | translate }}</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon
+        *ngIf="element.estado == 5 && !element.calificacion"
+        aria-hidden="false"
+        aria-label="Example home icon"
+        (click)="addRate(element)"
+        >grade</mat-icon
       >
     </td>
   </ng-container>

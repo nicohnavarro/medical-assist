@@ -1,0 +1,12 @@
+.ranking {
+  display: flex;
+  flex-direction: row;
+  mat-icon {
+    color: orange;
+    font-size:40px;
+    margin-left:10px;
+  }
+  mat-icon:hover{
+    cursor:pointer;
+  }
+}

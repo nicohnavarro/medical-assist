@@ -56,6 +56,9 @@ import { CustomFilterComponent } from './components/shared/custom-filter/custom-
 import { CancelModalComponent } from './components/shared/cancel-modal/cancel-modal.component';
 import { ReviewModalComponent } from './components/shared/review-modal/review-modal.component';
 import { HistorialFormComponent } from './components/shared/historial-form/historial-form.component';
+import { StarRatingComponent } from './components/shared/star-rating/star-rating.component';
+import { RateModalComponent } from './components/shared/rate-modal/rate-modal.component';
+import { SurveyModalComponent } from './components/shared/survey-modal/survey-modal.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -101,7 +104,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomFilterComponent,
     CancelModalComponent,
     ReviewModalComponent,
-    HistorialFormComponent
+    HistorialFormComponent,
+    StarRatingComponent,
+    RateModalComponent,
+    SurveyModalComponent
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,7 @@ export interface ITurno {
   resena?: string;
   encuesta?: string;
   motivoRechazo?: string;
+  calificacion?: any;
   estado: EstadosTurno;
   especialidad: MedicalSpecialty;
 }
-

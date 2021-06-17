@@ -17,6 +17,7 @@ import { ITurno } from 'src/app/models/turno';
 import { TurnoService } from 'src/app/services/turno.service';
 import { UserService } from 'src/app/services/user.service';
 import { EstadosTurno } from 'src/app/utils/estados-turno.enum';
+import { RateModalComponent } from '../../shared/rate-modal/rate-modal.component';
 import { ReseniaModalComponent } from '../../shared/resenia-modal/resenia-modal.component';
 import { ReviewModalComponent } from '../../shared/review-modal/review-modal.component';
 import { Notyf } from 'notyf';
@@ -62,9 +63,10 @@ export class ListadoTurnosComponent implements OnInit {
     this.typeUser = authSvc.user.type;
     if (this.typeUser === 'Paciente') {
       let removeId = this.displayedColumns.indexOf('atender');
-      let finishId = this.displayedColumns.indexOf('finalizar');
       this.displayedColumns.splice(removeId, 1);
+      let finishId = this.displayedColumns.indexOf('finalizar');
       this.displayedColumns.splice(finishId, 1);
+      this.displayedColumns.push('calificar');
     }
     specialtiesSvc.getSpecialties().subscribe((data) => {
       this.Specialties = data.map((item) => {
@@ -165,7 +167,23 @@ export class ListadoTurnosComponent implements OnInit {
     }
   }
 
-  agregarEncuesta(turno: ITurno) {}
+  addSurvey(turno: ITurno) {}
+
+  addRate(shift: ITurno) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.panelClass = 'custom-modalbox';
+    dialogConfig.maxWidth = '60vw';
+    dialogConfig.data = {
+      shift,
+    };
+    const dialogRef = this.dialog.open(RateModalComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
   seeReview(shift: ITurno) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

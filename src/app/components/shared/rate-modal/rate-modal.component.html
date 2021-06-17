@@ -1,0 +1,29 @@
+<div app-theme class="myModal">
+  <h2 mat-dialog-title>
+    {{ "ratingMsg" | translate }} 🌟👨‍⚕️
+  </h2>
+  <mat-dialog-content>
+    <app-star-rating (rateChanged)="getRate($event)"></app-star-rating>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "ratingComment" | translate }}:</mat-label>
+      <textarea
+        matInput
+        (ngModelChange)="validComment($event)"
+        [ngModel]="comment"
+      ></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="!btnEnable"
+      (click)="addRating()"
+    >
+      {{ "add" | translate }} {{ "comment" | translate }}
+    </button>
+    <button mat-raised-button mat-dialog-close color="warn">
+      {{ "close" | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>
