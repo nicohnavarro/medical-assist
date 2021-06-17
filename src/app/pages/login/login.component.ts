@@ -1,3 +1,4 @@
+import { LogsService } from './../../services/logs.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   cargando = false;
 
-  constructor(private authSvc: AuthService, private userSvc: UserService, private router: Router, private _snackBar: MatSnackBar) { }
+  constructor(private authSvc: AuthService,private logSvc:LogsService, private userSvc: UserService, private router: Router, private _snackBar: MatSnackBar) { }
   selected
   ngOnInit(): void {
   }
@@ -61,7 +62,10 @@ export class LoginComponent implements OnInit {
       }
       else{
         localStorage.setItem("uid",user.uid);
-        this.router.navigate(["main"]);
+        let log = { userId: user.uid, date: new Date()}
+        this.logSvc.add(log).then(()=>{
+          this.router.navigate(["main"]);
+        })
       }
     }
     catch (err) {

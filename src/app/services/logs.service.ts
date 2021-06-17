@@ -15,8 +15,8 @@ export class LogsService {
     return this.db.collection<any>('logs').valueChanges({ idField: 'id' });
   }
 
-  add(log: Logs, id: string) {
-    return this.db.collection('logs').doc(id).set(log);
+  add(log: Logs) {
+    return this.db.collection('logs').add(log);
   }
 
   getById(id: string): Observable<Logs> {
@@ -35,5 +35,5 @@ export class LogsService {
 interface Logs {
   id?:string,
   date: Date,
-  user:IUser
+  userId:string
 }

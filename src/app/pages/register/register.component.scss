@@ -64,6 +64,11 @@
   }
 }
 
+mat-toolbar{
+  background: var(--background)!important;
+  color: var(--on-background)!important;
+}
+
 ::ng-deep .mat-select-value{    
   color: var(--on-background); }
 

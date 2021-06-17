@@ -1,3 +1,4 @@
+import { SharedModule } from './modules/shared.module';
 import { darkTheme } from './theme/dark-theme';
 import { lightTheme } from './theme/light-theme';
 import { ThemeModule } from './theme/theme.module';
@@ -15,11 +16,9 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { environment } from 'src/environments/environment';
 import { AngularMaterialModule } from './modules/angular-material.module';
 import { ToastrModule } from 'ngx-toastr';
-import { LanguageSelectorComponent } from './components/shared/language-selector/language-selector.component';
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { MainComponent } from './pages/main/main.component';
 import { ErrorComponent } from './pages/error/error.component';
-import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { UploadImageComponent } from './components/shared/upload-image/upload-image.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
@@ -45,11 +44,10 @@ import { AltaEspecialidadComponent } from './components/especialidades/alta-espe
 import { ComboDiaComponent } from './components/turnos/combo-dia/combo-dia.component';
 import { ComboHoraComponent } from './components/turnos/combo-hora/combo-hora.component';
 import { ConfirmModalComponent } from './components/shared/confirm-modal/confirm-modal.component';
-import { PerfilComponent } from './pages/perfil/perfil.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
 import { ReseniaModalComponent } from './components/shared/resenia-modal/resenia-modal.component';
 import { RecaptchaModule } from 'ng-recaptcha';
-import { ThemeToogleComponent } from './components/shared/theme-toogle/theme-toogle.component';
 import { InfoHomeComponent } from './components/shared/info-home/info-home.component';
 import { ComboListComponent } from './components/shared/combo-list/combo-list.component';
 import { CustomFilterComponent } from './components/shared/custom-filter/custom-filter.component';
@@ -67,11 +65,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    LanguageSelectorComponent,
     NavbarComponent,
     MainComponent,
     ErrorComponent,
-    LoginComponent,
     RegisterComponent,
     UploadImageComponent,
     FooterComponent,
@@ -95,10 +91,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ComboDiaComponent,
     ComboHoraComponent,
     ConfirmModalComponent,
-    PerfilComponent,
+    ProfileComponent,
     MisTurnosComponent,
     ReseniaModalComponent,
-    ThemeToogleComponent,
     InfoHomeComponent,
     ComboListComponent,
     CustomFilterComponent,
@@ -116,6 +111,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     ThemeModule.forRoot({
       themes: [lightTheme, darkTheme],
       active: 'light'
@@ -141,6 +137,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularMaterialModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

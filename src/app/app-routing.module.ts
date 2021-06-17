@@ -1,6 +1,6 @@
 import { UserGuard } from './guards/user.guard';
 import { InfoHomeComponent } from './components/shared/info-home/info-home.component';
-import { PerfilComponent } from './pages/perfil/perfil.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { ListadosComponent } from './pages/listados/listados.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -16,13 +16,13 @@ const routes: Routes = [
   { path: 'main', component: MainComponent, data: {animation: 'home'},children:[
     {path: '',component:InfoHomeComponent},
     {path: 'home',component:InfoHomeComponent},
-    {path: 'profile',component:PerfilComponent,data: {animation: 'home'}},
+    {path: 'profile',component:ProfileComponent,data: {animation: 'home'}},
     {path: 'lists', component:ListadosComponent},
     {path: 'addShift', component:SacarTurnoComponent},
     {path: 'shiftsList', component:MisTurnosComponent},
     // {path: 'surveys', component:EncuestaComponent, canActivate:[UserGuard]},
   ]},
-  { path: 'login', component: LoginComponent, data: {animation: 'login'} },
+  { path: 'login',  loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule), data: {animation: 'login'} },
   { path: 'register', component: RegisterComponent, data: {animation: 'register'} },
   { path: '**', component: ErrorComponent, data: {animation: 'home'} }
   
