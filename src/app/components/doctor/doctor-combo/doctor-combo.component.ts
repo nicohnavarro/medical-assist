@@ -3,11 +3,11 @@ import { IMedico } from 'src/app/models/medico';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-combo-profesional',
-  templateUrl: './combo-profesional.component.html',
-  styleUrls: ['./combo-profesional.component.scss']
+  selector: 'app-doctor-combo',
+  templateUrl: './doctor-combo.component.html',
+  styleUrls: ['./doctor-combo.component.scss']
 })
-export class ComboProfesionalComponent implements OnInit {
+export class DoctorComboComponent implements OnInit {
 
   @Input() eligio_especialidad:boolean; 
   @Input() medicos:IMedico[];

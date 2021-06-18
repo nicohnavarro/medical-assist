@@ -1,18 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { Inject} from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {PageEvent} from '@angular/material/paginator';
+import {MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { IMedico } from 'src/app/models/medico';
+import { IPaciente } from 'src/app/models/paciente';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-listado-profesionales',
-  templateUrl: './listado-profesionales.component.html',
-  styleUrls: ['./listado-profesionales.component.scss']
+  selector: 'app-patient-list',
+  templateUrl: './patient-list.component.html',
+  styleUrls: ['./patient-list.component.scss']
 })
-export class ListadoProfesionalesComponent implements OnInit {
+export class PatientListComponent implements OnInit {
 
-  medicos:Array<IMedico>=[];
+  pacientes:Array<IPaciente>=[];
   cargando:boolean=true;
   displayedColumns: string[] = [
     'nombre',
@@ -24,22 +26,22 @@ export class ListadoProfesionalesComponent implements OnInit {
     'borrar'
   ];
 
-  dataSource = new MatTableDataSource<IMedico>(this.medicos);
+  dataSource = new MatTableDataSource<IPaciente>(this.pacientes);
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   
   constructor(private userSvc:UserService,public dialog: MatDialog) { 
-    this.medicos=new Array<IMedico>();
+    this.pacientes=new Array<IPaciente>();
   }
   
   ngOnInit(): void {
-    this.getMedicos();
+    this.getPacientes();
     this.dataSource.paginator = this.paginator;
   }
 
-  getMedicos(){
-    this.userSvc.getByType('Medico').subscribe(data => {
-      this.medicos = data as IMedico[];
-      this.dataSource.data = this.medicos;
+  getPacientes(){
+    this.userSvc.getByType('Paciente').subscribe(data => {
+      this.pacientes = data as IPaciente[];
+      this.dataSource.data = this.pacientes;
       setTimeout(() => {
         
         this.cargando=false;
@@ -51,11 +53,11 @@ export class ListadoProfesionalesComponent implements OnInit {
     const dialogRef = this.dialog.open(component, options);
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getMedicos();
+      this.getPacientes();
     });
   }
 
-  editarMedico(medico){
+  editarPaciente(paciente){
     // this.openDialog(AlumnoDetalleComponent,{
     //   width: '60%',
     //   height: 'auto',
@@ -63,7 +65,7 @@ export class ListadoProfesionalesComponent implements OnInit {
     //   data: {pacienteDetalle:paciente}});
   }
 
-  eliminarMedico(medico){
+  eliminarPaciente(paciente){
     // this.openDialog(AlumnoBorradoComponent,{
     //   width: '25%',
     //   data: {paciente:paciente}});
