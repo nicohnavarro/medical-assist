@@ -5,8 +5,7 @@
       {{ "shiftsToday" | translate }}
     </ng-template>
     <app-shifts-list
-      [mostrar_turnos]="turnos_hoy"
-      (confirmo_turno)="actualizar_turnos($event)"
+      [showShifts]="todayShifts"
     ></app-shifts-list>
   </mat-tab>
   <mat-tab>
@@ -15,8 +14,7 @@
       {{ "shiftsNext" | translate }}
     </ng-template>
     <app-shifts-list
-      [mostrar_turnos]="turnos_proximos"
-      (confirmo_turno)="actualizar_turnos($event)"
+      [showShifts]="nextShifts"
     ></app-shifts-list>
   </mat-tab>
   <mat-tab>
@@ -25,9 +23,8 @@
       {{ "shiftsPrevious" | translate }}
     </ng-template>
     <app-shifts-list
-      [mostrar_turnos]="turnos_pasados"
-      [turno_pasado]="pasados"
-      (confirmo_turno)="actualizar_turnos($event)"
+      [showShifts]="previousShifts"
+      [pastShifts]="arePrevious"
     ></app-shifts-list>
   </mat-tab>
 </mat-tab-group>

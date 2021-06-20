@@ -1,22 +1,22 @@
 <mat-accordion>
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
-      <mat-panel-title> Datos Personales </mat-panel-title>
+      <mat-panel-title> {{'personalInfo' | translate}} </mat-panel-title>
       <mat-panel-description> </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>Nombre: {{ nombre }}</p>
-    <p>Apellido: {{ apellido }}</p>
-    <p>Domicilio: {{ domicilio }}</p>
-    <p>Edad: {{ edad }}</p>
+    <p>{{'name' | translate}}: {{ nombre }}</p>
+    <p>{{'surname' | translate}}: {{ apellido }}</p>
+    <p>{{'address' | translate}}: {{ domicilio }}</p>
+    <p>{{'age' | translate}}: {{ edad }}</p>
   </mat-expansion-panel>
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
-      <mat-panel-title> Datos de Cuenta </mat-panel-title>
+      <mat-panel-title>{{'accountInfo' | translate}}</mat-panel-title>
       <mat-panel-description> </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>Correo: {{ correo }}</p>
-    <p>Clave: ********</p>
-    <p>DNI: {{ doc }}</p>
+    <p>{{'email' | translate}}: {{ correo }}</p>
+    <p>{{'password' | translate}}: ********</p>
+    <p>{{'document' | translate}}: {{ doc }}</p>
     <div class="images">
       <img [src]="imagen_uno" alt="" />
       <img [src]="imagen_dos" alt="" />
@@ -24,12 +24,12 @@
   </mat-expansion-panel>
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
-      <mat-panel-title> Tipo Usuario </mat-panel-title>
+      <mat-panel-title>{{'typeOfUser' | translate}}</mat-panel-title>
       <mat-panel-description> </mat-panel-description>
     </mat-expansion-panel-header>
     <p>{{ tipo }}</p>
     <div class="profesional" *ngIf="tipo === 'Medico'">
-      <span>Especialidades</span>
+      <span>{{'specialties' | translate}}</span>
       <div *ngFor="let categoria of especialidades" class="especialidades">
         <p>-{{ categoria }}</p>
       </div>

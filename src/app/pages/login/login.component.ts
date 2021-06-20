@@ -4,7 +4,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  tipoUsuarioFormCtrl = new FormControl('Elegi tipo de usuario');
+  typeOfUserFormCtrl = new FormControl('');
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -23,27 +22,48 @@ export class LoginComponent implements OnInit {
     Validators.required,
     Validators.minLength(6),
   ]);
-
-  hide = true;
-  cargando = false;
-
-  constructor(private authSvc: AuthService,private logSvc:LogsService, private userSvc: UserService, private router: Router, private _snackBar: MatSnackBar) { }
+  errorAccountMsg:string;
+  errorMsg:string;
+  errorAction:string;
+  hide:boolean = true;
+  loading:boolean = false;
   selected
+
+  constructor(
+    private authSvc: AuthService,
+    private logSvc:LogsService,
+    private router: Router,
+    private _snackBar: MatSnackBar
+    ) { 
+
+    this.errorAccountMsg = localStorage.getItem('lang') == 'en' ?
+    "There is an error with your credentials 🛂":
+    "Hay un error con tus credenciales 🛂";
+
+    this.errorAction = localStorage.getItem('lang') == 'en' ?
+    "Go to Register ⬅️":
+    "Registrarse ⬅️";
+
+    this.errorMsg = localStorage.getItem('lang') == 'en' ?
+    "There's been a problem ❌":
+    "Ocurrio un problema ❌";
+    }
+    
   ngOnInit(): void {
   }
 
-  onOptionsSelected(value) {
-    switch (this.tipoUsuarioFormCtrl.value) {
+  onOptionsSelected() {
+    switch (this.typeOfUserFormCtrl.value) {
       case 'admin':
         this.emailFormControl.setValue('admin@admin.com');
         this.passwordFormControl.setValue('123123');
         break;
-      case 'paciente':
-        this.emailFormControl.setValue('paciente@paciente.com');
+      case 'patient':
+        this.emailFormControl.setValue('patient@test.com');
         this.passwordFormControl.setValue('123123');
         break;
-      case 'medico':
-        this.emailFormControl.setValue('medico@medico.com');
+      case 'doctor':
+        this.emailFormControl.setValue('doctor@test.com');
         this.passwordFormControl.setValue('123123');
         break;
 
@@ -55,10 +75,10 @@ export class LoginComponent implements OnInit {
 
   async logIn() {
     try {
-      this.activarSpinner();
+      this.turnOnSpinner();
       const user = await this.authSvc.login(this.emailFormControl.value, this.passwordFormControl.value);
       if (!user) {
-        this.openSnackBar('No ingresaste una cuenta valida.', 'Registrarse');
+        this.openSnackBar(this.errorAccountMsg, this.errorAction);
       }
       else{
         localStorage.setItem("uid",user.uid);
@@ -69,7 +89,7 @@ export class LoginComponent implements OnInit {
       }
     }
     catch (err) {
-      this.openSnackBar("Tuvimos un problema", 'Error');
+      this.openSnackBar(this.errorMsg, this.errorAction);
     }
 
   }
@@ -79,18 +99,16 @@ export class LoginComponent implements OnInit {
       duration: 3000,
     });
     snackBarRef.afterDismissed().subscribe(() => {
-      //console.log('The snack-bar was dismissed');
     });
 
     snackBarRef.onAction().subscribe(() => {
-      //console.log('The snack-bar action was triggered!');
       this.router.navigate(['/register']);
     });
   }
 
-  activarSpinner() {
-    this.cargando = true;
-    setTimeout(() => this.cargando = false, 3000);
+  turnOnSpinner() {
+    this.loading = true;
+    setTimeout(() => this.loading = false, 3000);
   }
 
 }

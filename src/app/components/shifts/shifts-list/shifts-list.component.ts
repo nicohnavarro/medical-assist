@@ -9,10 +9,8 @@ import { AuthService } from '../../../services/auth.service';
 import { MedicalSpecialtiesService } from '../../../services/medical-specialties.service';
 import {
   Component,
-  EventEmitter,
   Input,
   OnInit,
-  Output,
   ViewChild,
 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -29,28 +27,27 @@ import { Notyf } from 'notyf';
   styleUrls: ['./shifts-list.component.scss'],
 })
 export class ShiftsListComponent implements OnInit {
-  states = ShiftStates;
-  specialties = [];
-  doctors = [];
-  patients = [];
+  States = ShiftStates;
+  Specialties = [];
+  Doctors = [];
+  Patients = [];
   successMsg:string;
   @Input() showShifts: Array<Shift> = [];
   @Input() pastShifts: boolean = false;
-  @Output() shiftConfirmed: EventEmitter<Shift> = new EventEmitter<Shift>();
   loading: boolean = true;
   typeUser: string = '';
   displayedColumns: string[] = [
-    'especialidad',
-    'medico',
-    'paciente',
-    'fecha',
-    'hora',
-    'estado',
-    'atender',
-    'cancelar',
-    'finalizar',
-    'encuesta',
-    'resena',
+    'specialty',
+    'doctor',
+    'patient',
+    'date',
+    'hour',
+    'state',
+    'attend',
+    'cancel',
+    'finish',
+    'survey',
+    'review',
   ];
 
   dialogConfig: MatDialogConfig;
@@ -69,36 +66,36 @@ export class ShiftsListComponent implements OnInit {
     this.setPatientOptions(this.typeUser);
 
     specialtiesSvc.getSpecialties().subscribe((data) => {
-      this.specialties = data.map((item) => {
+      this.Specialties = data.map((item) => {
         return { ...item, completed: true };
       });
     });
 
     userSvc.getByType('Medico').subscribe((data) => {
-      this.doctors = data.map((item) => {
+      this.Doctors = data.map((item) => {
         return { ...item, completed: true };
       });
     });
 
     userSvc.getByType('Paciente').subscribe((data) => {
-      this.patients = data.map((item) => {
+      this.Patients = data.map((item) => {
         return { ...item, completed: true };
       });
     });
 
     this.successMsg = localStorage.getItem('lang') == 'en' ?
-    "Shift accepted ✅":
-    "Turno Aceptado ✅";
+    "Shift accepted":
+    "Turno Aceptado";
 
   }
 
   private setPatientOptions(type: string) {
-    if (type === 'Paciente') {
-      let removeId = this.displayedColumns.indexOf('atender');
+    if (type == 'Paciente') {
+      let removeId = this.displayedColumns.indexOf('attend');
       this.displayedColumns.splice(removeId, 1);
-      let finishId = this.displayedColumns.indexOf('finalizar');
+      let finishId = this.displayedColumns.indexOf('finish');
       this.displayedColumns.splice(finishId, 1);
-      this.displayedColumns.push('calificar');
+      this.displayedColumns.push('qualify');
     }
   }
 
@@ -140,7 +137,6 @@ export class ShiftsListComponent implements OnInit {
       case 'ACEPTAR':
         shift.estado = ShiftStates.ACEPTADO;
         this.shiftSvc.updateShift(shift, shift.id).then(() => {
-          this.shiftConfirmed.emit(shift);
           let notyf = new Notyf();
           notyf.success(this.successMsg);
         });

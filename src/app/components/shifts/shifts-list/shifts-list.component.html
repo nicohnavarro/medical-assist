@@ -21,7 +21,7 @@
 </div>
 
 <mat-spinner
-  *ngIf="cargando"
+  *ngIf="loading"
   [diameter]="150"
   style="margin: 10% auto"
 ></mat-spinner>
@@ -29,50 +29,53 @@
   mat-table
   [dataSource]="dataSource"
   class="mat-elevation-z8"
-  *ngIf="!cargando"
+  *ngIf="!loading"
   class="table-responsive"
 >
-  <!-- Nombre Column -->
-  <ng-container matColumnDef="especialidad">
+  <!-- Specialty Column -->
+  <ng-container matColumnDef="specialty">
     <th mat-header-cell *matHeaderCellDef>{{ "specialties" | translate }}</th>
     <td mat-cell *matCellDef="let element">{{ element.especialidad.name }}</td>
   </ng-container>
 
-  <!-- Apellido Column -->
-  <ng-container matColumnDef="medico">
+  <!-- Doctor Column -->
+  <ng-container matColumnDef="doctor">
     <th mat-header-cell *matHeaderCellDef>{{ "doctor" | translate }}</th>
     <td mat-cell *matCellDef="let element">{{ element.medico.name }}</td>
   </ng-container>
 
-  <!-- Dni Column -->
-  <ng-container matColumnDef="paciente">
+  <!-- Patient Column -->
+  <ng-container matColumnDef="patient">
     <th mat-header-cell *matHeaderCellDef>{{ "patient" | translate }}</th>
     <td mat-cell *matCellDef="let element">{{ element.paciente.name }}</td>
   </ng-container>
 
-  <!-- Correo Column -->
-  <ng-container matColumnDef="fecha">
+  <!-- Date Column -->
+  <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef>{{ "date" | translate }}</th>
     <td mat-cell *matCellDef="let element">{{ element.fecha }}</td>
   </ng-container>
 
-  <!-- Edad Column -->
-  <ng-container matColumnDef="hora">
+  <!-- Hour Column -->
+  <ng-container matColumnDef="hour">
     <th mat-header-cell *matHeaderCellDef>{{ "time" | translate }}</th>
     <td mat-cell *matCellDef="let element">{{ element.hora }}</td>
   </ng-container>
-  <ng-container matColumnDef="estado">
+
+ <!-- State Column -->
+  <ng-container matColumnDef="state">
     <th mat-header-cell *matHeaderCellDef>{{ "state" | translate }}</th>
     <td mat-cell *matCellDef="let element">
-      {{ element.estado | enumAsString: Estados }}
+      {{ element.estado | enumAsString: States }}
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="atender" *ngIf="typeUser === 'Medico'">
+  <!-- Attend Column -->
+  <ng-container matColumnDef="attend" *ngIf="typeUser !== 'Paciente'">
     <th mat-header-cell *matHeaderCellDef>{{ "accept" | translate }}</th>
     <td mat-cell disabled="true" *matCellDef="let element">
       <mat-icon
-        *ngIf="!turno_pasado && element.estado === 0"
+        *ngIf="!pastShifts && element.estado === 0"
         aria-hidden="false"
         aria-label="Example home icon"
         (click)="changeStateShift('ACEPTAR', element)"
@@ -81,23 +84,26 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="cancelar">
+  <!-- Cancel Column -->
+  <ng-container matColumnDef="cancel">
     <th mat-header-cell *matHeaderCellDef>{{ "cancel" | translate }}</th>
     <td mat-cell *matCellDef="let element">
       <mat-icon
-        *ngIf="!turno_pasado && element.estado === 0"
+        *ngIf="!pastShifts && element.estado === 0"
         aria-hidden="false"
         aria-label="Example home icon"
         (click)="changeStateShift('CANCELAR', element, typeUser)"
         >report_problem</mat-icon
       >
     </td>
+
+  <!-- Finish Column -->
   </ng-container>
-  <ng-container matColumnDef="finalizar">
+  <ng-container matColumnDef="finish">
     <th mat-header-cell *matHeaderCellDef>{{ "finish" | translate }}</th>
     <td mat-cell *matCellDef="let element">
       <mat-icon
-        *ngIf="!turno_pasado && element.estado === 1"
+        *ngIf="!pastShifts && element.estado === 1"
         aria-hidden="false"
         aria-label="Example home icon"
         (click)="changeStateShift('FINALIZADO', element, typeUser)"
@@ -106,7 +112,8 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="encuesta">
+  <!-- Survey Column -->
+  <ng-container matColumnDef="survey">
     <th mat-header-cell *matHeaderCellDef>{{ "survey" | translate }}</th>
     <td mat-cell *matCellDef="let element">
       <mat-icon
@@ -118,7 +125,9 @@
       >
     </td>
   </ng-container>
-  <ng-container matColumnDef="resena">
+
+  <!-- Review Column -->
+  <ng-container matColumnDef="review">
     <th mat-header-cell *matHeaderCellDef>{{ "review" | translate }}</th>
     <td mat-cell *matCellDef="let element">
       <mat-icon
@@ -130,7 +139,9 @@
       >
     </td>
   </ng-container>
-  <ng-container matColumnDef="calificar"  *ngIf="typeUser === 'Paciente'">
+
+    <!-- Qualify Column -->
+  <ng-container matColumnDef="qualify"  *ngIf="typeUser === 'Paciente'">
     <th mat-header-cell *matHeaderCellDef>{{ "rate" | translate }}</th>
     <td mat-cell *matCellDef="let element">
       <mat-icon

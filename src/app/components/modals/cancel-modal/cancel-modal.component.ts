@@ -1,3 +1,4 @@
+import { ToastNotyf } from './../../../utils/toastNotyf';
 import { ShiftStates } from 'src/app/utils/shiftStates.enum';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -27,8 +28,8 @@ export class CancelModalComponent implements OnInit {
     this.shiftLoaded = false;
 
     this.successMsg = localStorage.getItem('lang') == 'en' ?
-    "Shift cancelled 🚨":
-    "Turno Cancelado 🚨";
+    "Shift cancelled":
+    "Turno Cancelado";
   }
 
   ngOnInit(): void {}
@@ -43,8 +44,11 @@ export class CancelModalComponent implements OnInit {
     this.shift.motivoRechazo = this.reason;
     this.turnoSvc.updateShift(this.shift, this.shift.id).then(() => {
       this.dialogRef.close();
-      let notyf = new Notyf();
-      notyf.error(this.successMsg);
+      let notyf = ToastNotyf;
+      notyf.open({
+        type: 'warning',
+        message: this.successMsg
+      });
     });
   }
 }

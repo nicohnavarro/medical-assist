@@ -56,8 +56,20 @@ export class RateModalComponent implements OnInit {
         .udpateUser(this.shift.medico, this.shift.medico.id)
         .then(() => {
           this.dialogRef.close();
-          let notyf = new Notyf();
-          notyf.success(this.successMsg);
+          let notyf = new Notyf({
+            types: [
+              {
+                type: 'info',
+                background: 'blue',
+                icon: false
+              }
+            ]
+          });
+          
+          notyf.open({
+            type: 'info',
+            message: this.successMsg
+          });
         });
     });
   }

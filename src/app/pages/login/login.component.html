@@ -18,7 +18,7 @@
           <form class="example-form">
               <mat-form-field>
                   <mat-label>{{'email' | translate}}</mat-label>
-                  <input matInput [formControl]="emailFormControl" placeholder="Ej. admin@gmail.com">
+                  <input matInput [formControl]="emailFormControl" placeholder="admin@test.com">
                   <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                      {{'validateEmail1' | translate}}
                   </mat-error>
@@ -40,23 +40,23 @@
                     {{'validatePassword1' | translate}}
                   </mat-error>
               </mat-form-field>
-              <mat-form-field *ngIf="(!cargando)">
+              <mat-form-field *ngIf="(!loading)">
                   <mat-label>{{ 'guest' | translate}}</mat-label>
-                  <mat-select [(value)]="selected" [formControl]="tipoUsuarioFormCtrl" (selectionChange)="onOptionsSelected(selected)">
+                  <mat-select [(value)]="selected" [formControl]="typeOfUserFormCtrl" (selectionChange)="onOptionsSelected(selected)">
                       <mat-option value="admin">
                           {{ 'admin' | translate}}
                       </mat-option>
-                      <mat-option value="paciente">
+                      <mat-option value="patient">
                           {{ 'patient' | translate}}
                       </mat-option>
-                      <mat-option value="medico">
+                      <mat-option value="doctor">
                           {{ 'doctor' | translate}}
                       </mat-option>
                   </mat-select>
               </mat-form-field>
           </form>
       </div>
-      <div class="btn-ingreso"*ngIf="(cargando)">
+      <div class="btn-ingreso"*ngIf="(loading)">
           <!-- <button class="mediano google" mat-raised-button>
               <img src="../../../assets/icon/gmail.jpg" alt="">
               <span>  Google</span>
@@ -69,11 +69,11 @@
               <span>  Twitter</span></button> -->
 
       </div>
-      <mat-spinner *ngIf="(cargando)"></mat-spinner>
+      <mat-spinner *ngIf="(loading)"></mat-spinner>
       <div class="btn-login" >
-          <button class="grande" *ngIf="(!cargando)" mat-raised-button color="primary" (click)="logIn()">{{'login' | translate}}</button>
-          <!-- <button class="grande" *ngIf="(cargando)" mat-raised-button color="primary">Cargando ...</button> -->
-          <button class="grande" mat-raised-button *ngIf="(!cargando)" color="warn" routerLink="/register">{{'register'| translate}}</button>
+          <button class="grande" *ngIf="(!loading)" mat-raised-button color="primary" (click)="logIn()">{{'login' | translate}}</button>
+          <!-- <button class="grande" *ngIf="(loading)" mat-raised-button color="primary">loading ...</button> -->
+          <button class="grande" mat-raised-button *ngIf="(!loading)" color="warn" routerLink="/register">{{'register'| translate}}</button>
       </div>
   </div>
 </div>

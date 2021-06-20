@@ -24,7 +24,7 @@ export class ConfirmModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  confirmarTurno(){
+  confirmShift(){
     this.loading= true;
     setTimeout(() => {
       this.shiftSvc.addShift(this.shift);

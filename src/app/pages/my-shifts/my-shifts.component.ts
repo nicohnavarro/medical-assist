@@ -9,31 +9,31 @@ import { getDiaFormat } from 'src/app/utils/helpers';
   styleUrls: ['./my-shifts.component.scss']
 })
 export class MyShiftsComponent implements OnInit {
-  turnos_hoy:Shift[];
-  turnos_proximos:Shift[];
-  turnos_pasados:Shift[];
-  pasados:boolean=true;
-  constructor(private turnoSvc:ShiftService) {
-    this.getShiftsHoy();
-    this.getShiftsProximos();
-    this.getShiftsPasados();
+  todayShifts:Shift[];
+  nextShifts:Shift[];
+  previousShifts:Shift[];
+  arePrevious:boolean=true;
+  constructor(private shiftSvc:ShiftService) {
+    this.getTodayShifts();
+    this.getNextShifts();
+    this.getPreviousShifts();
    }
 
   ngOnInit(): void {
   }
 
-  getShiftsHoy(){
-    this.turnoSvc.getShifts().subscribe(data => {
-      this.turnos_hoy = data.filter((turno)=>{
-        if(turno.fecha.split("-")[1] === getDiaFormat(new Date()))
-          return turno;
+  getTodayShifts(){
+    this.shiftSvc.getShifts().subscribe(data => {
+      this.todayShifts = data.filter((shift)=>{
+        if(shift.fecha.split("-")[1] === getDiaFormat(new Date()))
+          return shift;
       });
      })
   }
 
-  getShiftsProximos(){
-    this.turnoSvc.getShifts().subscribe(data => {
-      this.turnos_proximos= data.filter((turno)=>{
+  getNextShifts(){
+    this.shiftSvc.getShifts().subscribe(data => {
+      this.nextShifts= data.filter((turno)=>{
         let fecha =turno.fecha.split("-")[1].split("/")
         let dia = fecha[0];
         let mes = fecha[1];
@@ -46,9 +46,9 @@ export class MyShiftsComponent implements OnInit {
      })
   }
 
-  getShiftsPasados(){
-    this.turnoSvc.getShifts().subscribe(data => {
-      this.turnos_pasados= data.filter((turno)=>{
+  getPreviousShifts(){
+    this.shiftSvc.getShifts().subscribe(data => {
+      this.previousShifts= data.filter((turno)=>{
         let fecha =turno.fecha.split("-")[1].split("/")
         let dia = fecha[0];
         let mes = fecha[1];
@@ -61,8 +61,8 @@ export class MyShiftsComponent implements OnInit {
      })
   }
 
-  actualizar_turnos(turno:Shift){
-    this.getShiftsHoy();
+  udpateShifts(turno:Shift){
+    this.getTodayShifts();
   }
 
 }

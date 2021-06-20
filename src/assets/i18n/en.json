@@ -105,6 +105,7 @@
   "selectedSpecialty":"Specialty selected",
   "selectedDoctor":"Doctor selected",
   "selectedDay":"Day selected",
-  "selectedHour":"Hour selected"
+  "selectedHour":"Hour selected",
+  "surveyMsg":"Please completed this survey 📝"
 }
 

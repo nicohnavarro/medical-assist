@@ -105,6 +105,7 @@
   "selectedSpecialty":"Especialidad seleccionada",
   "selectedDoctor":"Medico seleccionado",
   "selectedDay":"Dia seleccionado",
-  "selectedHour":"Hora seleccionada"
+  "selectedHour":"Hora seleccionada",
+  "surveyMsg":"Por favor completa nuestra encuesta 📝"
 }
 

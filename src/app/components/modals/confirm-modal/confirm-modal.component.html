@@ -1,27 +1,27 @@
 <div app-theme class="myModal">
-  <div class="" *ngIf="cargando">
+  <div class="" *ngIf="loading">
     <h2 mat-dialog-title>{{ "addingShift" | translate }}</h2>
     <mat-spinner></mat-spinner>
   </div>
 
-  <div class="modal" *ngIf="!cargando && !turno_cargado">
+  <div class="modal" *ngIf="!loading && !shiftLoaded">
     <h2 mat-dialog-title>
-      {{ "details" | translate }} {{ turno.especialidad.name }}
+      {{ "details" | translate }} {{ shift.especialidad.name }}
     </h2>
     <mat-dialog-content>
       <span
-        ><b>{{ "doctor" | translate }}:</b> {{ turno.medico.name }}</span
+        ><b>{{ "doctor" | translate }}:</b> {{ shift.medico.name }}</span
       ><br />
       <span
-        ><b>{{ "patient" | translate }}:</b> {{ turno.paciente.name }}</span
+        ><b>{{ "patient" | translate }}:</b> {{ shift.paciente.name }}</span
       ><br />
       <span
-        ><b>{{ "date" | translate }}:</b> {{ turno.fecha }}
-        {{ turno.hora }}</span
+        ><b>{{ "date" | translate }}:</b> {{ shift.fecha }}
+        {{ shift.hora }}</span
       >
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button mat-raised-button color="primary" (click)="confirmarTurno()">
+      <button mat-raised-button color="primary" (click)="confirmShift()">
         {{ "confirmShift" | translate }}
       </button>
       <button mat-raised-button mat-dialog-close color="warn">
@@ -30,9 +30,9 @@
     </mat-dialog-actions>
   </div>
 
-  <div class="" *ngIf="!cargando && turno_cargado">
+  <div class="" *ngIf="!loading && shiftLoaded">
     <h2 mat-dialog-title>
-      {{ "thankyou" | translate }}{{ turno.paciente.name }}
+      {{ "thankyou" | translate }}{{ shift.paciente.name }}
     </h2>
     <mat-dialog-content>
       <span>{{ "reminderShift" | translate }}</span>
