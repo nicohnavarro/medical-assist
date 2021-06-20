@@ -1,10 +1,5 @@
-import { ConfirmModalComponent } from 'src/app/components/modals/confirm-modal/confirm-modal.component';
-import { MyShiftsComponent } from './pages/my-shifts/my-shifts.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { ComboHourComponent } from './components/shifts/combo-hour/combo-hour.component';
-import { ComboDayComponent } from './components/shifts/combo-day/combo-day.component';
 import { AddSpecialtyComponent } from './components/specialties/add-specialty/add-specialty.component';
-import { AddShiftComponent } from './pages/add-shift/add-shift.component';
 import { ListComponent } from './pages/list/list.component';
 import { PatientListComponent } from './components/patient-list/patient-list.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
@@ -37,21 +32,11 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { SpinnerModalComponent } from './components/modals/spinner-modal/spinner-modal.component';
 import { DoctorListComponent } from './components/doctor-list/doctor-list.component';
-import { SurveyFieldComponent } from './components/shared/survey-field/survey-field.component';
-import { ShiftsListComponent } from './components/shifts/shifts-list/shifts-list.component';
 import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
 import { EnumAsStringPipe } from './pipes/enum-as-string.pipe';
 import { SeeReviewModalComponent } from './components/modals/see-review-modal/see-review-modal.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { InfoHomeComponent } from './components/shared/info-home/info-home.component';
-import { ComboListComponent } from './components/shared/combo-list/combo-list.component';
-import { CustomFilterComponent } from './components/shared/custom-filter/custom-filter.component';
-import { CancelModalComponent } from './components/modals/cancel-modal/cancel-modal.component';
-import { SetReviewModalComponent } from './components/modals/set-review-modal/set-review-modal.component';
-import { HistorialFormComponent } from './components/forms/historial-form/historial-form.component';
-import { StarRatingComponent } from './components/functional/star-rating/star-rating.component';
-import { RateModalComponent } from './components/modals/rate-modal/rate-modal.component';
-import { SurveyModalComponent } from './components/modals/survey-modal/survey-modal.component';
 import { MedicalScheduleComponent } from './components/shared/medical-schedule/medical-schedule.component';
 import { HourTakenDirective } from './directives/hour-taken.directive';
 
@@ -74,27 +59,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     PatientListComponent,
     DoctorListComponent,
     ListComponent,
-    SurveyFieldComponent,
-    ShiftsListComponent,
-    AddShiftComponent,
     EnumToArrayPipe,
     EnumAsStringPipe,
     AddSpecialtyComponent,
-    ComboDayComponent,
-    ComboHourComponent,
-    ConfirmModalComponent,
     ProfileComponent,
-    MyShiftsComponent,
     SeeReviewModalComponent,
     InfoHomeComponent,
-    ComboListComponent,
-    CustomFilterComponent,
-    CancelModalComponent,
-    SetReviewModalComponent,
-    HistorialFormComponent,
-    StarRatingComponent,
-    RateModalComponent,
-    SurveyModalComponent,
     MedicalScheduleComponent,
     HourTakenDirective
   ],

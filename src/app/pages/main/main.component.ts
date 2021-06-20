@@ -52,7 +52,7 @@ export class MainComponent implements OnInit {
     let shiftsLists:menuOption = {
       icon:"list_alt",
       title:"shifts",
-      router:"shiftsList"
+      router:"myShifts"
     }
 
     let surveys:menuOption = {

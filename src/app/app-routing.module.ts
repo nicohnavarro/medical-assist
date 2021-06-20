@@ -7,8 +7,6 @@ import { ErrorComponent } from './pages/error/error.component';
 import { MainComponent } from './pages/main/main.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MyShiftsComponent } from './pages/my-shifts/my-shifts.component';
-import { AddShiftComponent } from './pages/add-shift/add-shift.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -18,8 +16,8 @@ const routes: Routes = [
       { path: 'home', component: InfoHomeComponent },
       { path: 'profile', component: ProfileComponent, data: { animation: 'home' } },
       { path: 'lists', component: ListComponent },
-      { path: 'addShift', component: AddShiftComponent },
-      { path: 'shiftsList', component: MyShiftsComponent },
+      { path: 'addShift', loadChildren: () => import('./pages/add-shift/add-shift.module').then(m => m.AddShiftModule), data: { animation: 'login' } },
+      { path: 'myShifts',  loadChildren: () => import('./pages/my-shifts/my-shifts.module').then(m => m.MyShiftsModule), data: { animation: 'login' } },
       // {path: 'surveys', component:EncuestaComponent, canActivate:[UserGuard]},
     ]
   },
