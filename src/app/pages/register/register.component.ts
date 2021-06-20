@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { SpinnerModalComponent } from 'src/app/components/shared/spinner-modal/spinner-modal.component';
+import { SpinnerModalComponent } from 'src/app/components/modals/spinner-modal/spinner-modal.component';
 import { IUser } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { FileService } from 'src/app/services/file.service';

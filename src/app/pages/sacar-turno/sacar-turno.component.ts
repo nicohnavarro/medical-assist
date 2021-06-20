@@ -5,7 +5,7 @@ import { WorkDaysService } from './../../services/work-days.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ConfirmModalComponent } from 'src/app/components/shared/confirm-modal/confirm-modal.component';
+import { ConfirmModalComponent } from 'src/app/components/modals/confirm-modal/confirm-modal.component';
 import { IMedico } from 'src/app/models/medico';
 import { IPaciente } from 'src/app/models/paciente';
 import { AuthService } from 'src/app/services/auth.service';

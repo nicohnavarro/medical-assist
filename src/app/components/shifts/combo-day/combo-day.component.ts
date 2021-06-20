@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {getHorarios, getQuincena} from 'src/app/utils/helpers';
 
 @Component({
-  selector: 'app-combo-dia',
-  templateUrl: './combo-dia.component.html',
-  styleUrls: ['./combo-dia.component.scss']
+  selector: 'app-combo-day',
+  templateUrl: './combo-day.component.html',
+  styleUrls: ['./combo-day.component.scss']
 })
-export class ComboDiaComponent implements OnInit {
+export class ComboDayComponent implements OnInit {
   @Input() eligio_medico: boolean;
   @Input() dias: string[];
   @Input() dia_mostrar: string;

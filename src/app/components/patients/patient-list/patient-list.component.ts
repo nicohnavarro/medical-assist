@@ -1,10 +1,8 @@
+import { IUser } from './../../../models/user';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {PageEvent} from '@angular/material/paginator';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { IPaciente } from 'src/app/models/paciente';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class PatientListComponent implements OnInit {
 
-  pacientes:Array<IPaciente>=[];
+  pacientes:Array<IUser>=[];
   cargando:boolean=true;
   displayedColumns: string[] = [
     'nombre',
@@ -26,11 +24,11 @@ export class PatientListComponent implements OnInit {
     'borrar'
   ];
 
-  dataSource = new MatTableDataSource<IPaciente>(this.pacientes);
+  dataSource = new MatTableDataSource<IUser>(this.pacientes);
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   
   constructor(private userSvc:UserService,public dialog: MatDialog) { 
-    this.pacientes=new Array<IPaciente>();
+    this.pacientes=new Array<IUser>();
   }
   
   ngOnInit(): void {
@@ -40,7 +38,7 @@ export class PatientListComponent implements OnInit {
 
   getPacientes(){
     this.userSvc.getByType('Paciente').subscribe(data => {
-      this.pacientes = data as IPaciente[];
+      this.pacientes = data as IUser[];
       this.dataSource.data = this.pacientes;
       setTimeout(() => {
         

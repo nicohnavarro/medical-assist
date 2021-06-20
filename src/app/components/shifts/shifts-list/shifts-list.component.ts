@@ -1,8 +1,12 @@
-import { SurveyModalComponent } from './../../shared/survey-modal/survey-modal.component';
-import { CancelModalComponent } from './../../shared/cancel-modal/cancel-modal.component';
-import { AuthService } from './../../../services/auth.service';
+import { ReseniaModalComponent } from './../../modals/resenia-modal/resenia-modal.component';
+import { RateModalComponent } from './../../modals/rate-modal/rate-modal.component';
+import { SurveyModalComponent } from './../../modals/survey-modal/survey-modal.component';
+import { ReviewModalComponent } from './../../modals/review-modal/review-modal.component';
+import { CancelModalComponent } from './../../modals/cancel-modal/cancel-modal.component';
+
+import { AuthService } from '../../../services/auth.service';
 import { element } from 'protractor';
-import { MedicalSpecialtiesService } from './../../../services/medical-specialties.service';
+import { MedicalSpecialtiesService } from '../../../services/medical-specialties.service';
 import {
   Component,
   EventEmitter,
@@ -18,9 +22,7 @@ import { ITurno } from 'src/app/models/turno';
 import { TurnoService } from 'src/app/services/turno.service';
 import { UserService } from 'src/app/services/user.service';
 import { EstadosTurno } from 'src/app/utils/estados-turno.enum';
-import { RateModalComponent } from '../../shared/rate-modal/rate-modal.component';
-import { ReseniaModalComponent } from '../../shared/resenia-modal/resenia-modal.component';
-import { ReviewModalComponent } from '../../shared/review-modal/review-modal.component';
+
 import { Notyf } from 'notyf';
 @Component({
   selector: 'app-listado-turnos',
