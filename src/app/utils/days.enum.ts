@@ -1,4 +1,4 @@
-export enum Dias {
+export enum Days {
     DOMINGO,
     LUNES,
     MARTES,

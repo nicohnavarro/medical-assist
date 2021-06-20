@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { IUser } from 'src/app/models/user';
-import { Especialidades } from 'src/app/utils/especialidades.enum';
+import { Specialties } from 'src/app/utils/specialties.enum';
 
 @Component({
   selector: 'app-stepper-form',
@@ -49,7 +49,7 @@ export class StepperFormComponent implements OnInit {
 
   tipoUsuario: string;
   tiposUsuarios: string[] = ['Paciente', 'Medico'];
-  especialidades = Especialidades;
+  especialidades = Specialties;
   hide = true;
   cargando = false;
   usuario: IUser;

@@ -1,4 +1,4 @@
-export enum EstadosTurno {
+export enum ShiftStates {
   PENDIENTE,
   ACEPTADO,
   CANCELADO_MEDICO,

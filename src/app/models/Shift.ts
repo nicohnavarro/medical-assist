@@ -1,9 +1,8 @@
 import { IUser } from './user';
 import { MedicalSpecialty } from './medical_specialty';
-import { Especialidades } from '../utils/especialidades.enum';
-import { EstadosTurno } from '../utils/estados-turno.enum';
+import { ShiftStates } from '../utils/shiftStates.enum';
 
-export interface ITurno {
+export interface Shift {
   id?: string;
   paciente: IUser;
   medico: IUser;
@@ -13,6 +12,6 @@ export interface ITurno {
   encuesta?: any[];
   motivoRechazo?: string;
   calificacion?: any;
-  estado: EstadosTurno;
+  estado: ShiftStates;
   especialidad: MedicalSpecialty;
 }

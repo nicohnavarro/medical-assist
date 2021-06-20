@@ -4,8 +4,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ComboHourComponent } from './components/shifts/combo-hour/combo-hour.component';
 import { ComboDayComponent } from './components/shifts/combo-day/combo-day.component';
 import { AddSpecialtyComponent } from './components/specialties/add-specialty/add-specialty.component';
-import { ComboSpecialtiesComponent } from './components/specialties/combo-specialties/combo-specialties.component';
-import { DoctorComboComponent } from './components/doctor/doctor-combo/doctor-combo.component';
 import { AddShiftComponent } from './pages/add-shift/add-shift.component';
 import { ListComponent } from './pages/list/list.component';
 import { PatientListComponent } from './components/patient-list/patient-list.component';
@@ -38,18 +36,18 @@ import { UserDetailComponent } from './components/shared/user-detail/user-detail
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { SpinnerModalComponent } from './components/modals/spinner-modal/spinner-modal.component';
-import { DoctorListComponent } from './components/doctor/doctor-list/doctor-list.component';
+import { DoctorListComponent } from './components/doctor-list/doctor-list.component';
 import { SurveyFieldComponent } from './components/shared/survey-field/survey-field.component';
 import { ShiftsListComponent } from './components/shifts/shifts-list/shifts-list.component';
 import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
 import { EnumAsStringPipe } from './pipes/enum-as-string.pipe';
-import { ReseniaModalComponent } from './components/modals/resenia-modal/resenia-modal.component';
+import { SeeReviewModalComponent } from './components/modals/see-review-modal/see-review-modal.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { InfoHomeComponent } from './components/shared/info-home/info-home.component';
 import { ComboListComponent } from './components/shared/combo-list/combo-list.component';
 import { CustomFilterComponent } from './components/shared/custom-filter/custom-filter.component';
 import { CancelModalComponent } from './components/modals/cancel-modal/cancel-modal.component';
-import { ReviewModalComponent } from './components/modals/review-modal/review-modal.component';
+import { SetReviewModalComponent } from './components/modals/set-review-modal/set-review-modal.component';
 import { HistorialFormComponent } from './components/forms/historial-form/historial-form.component';
 import { StarRatingComponent } from './components/functional/star-rating/star-rating.component';
 import { RateModalComponent } from './components/modals/rate-modal/rate-modal.component';
@@ -81,20 +79,18 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddShiftComponent,
     EnumToArrayPipe,
     EnumAsStringPipe,
-    DoctorComboComponent,
-    ComboSpecialtiesComponent,
     AddSpecialtyComponent,
     ComboDayComponent,
     ComboHourComponent,
     ConfirmModalComponent,
     ProfileComponent,
     MyShiftsComponent,
-    ReseniaModalComponent,
+    SeeReviewModalComponent,
     InfoHomeComponent,
     ComboListComponent,
     CustomFilterComponent,
     CancelModalComponent,
-    ReviewModalComponent,
+    SetReviewModalComponent,
     HistorialFormComponent,
     StarRatingComponent,
     RateModalComponent,

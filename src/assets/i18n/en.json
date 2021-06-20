@@ -19,7 +19,7 @@
   "guest": "Login as a guest",
   "username": "Username",
   "password": "Password",
-  "logout": "Logout",
+  "logOut": "logOut",
   "error": "Ups!",
   "errorLogin": "You can't login :(, Sorry.",
   "me": "me",

@@ -1,4 +1,4 @@
-export enum Especialidades {
+export enum Specialties {
     CARDIOLOGIA,
     CLINICA,
     TRAUMATOLOGIA,

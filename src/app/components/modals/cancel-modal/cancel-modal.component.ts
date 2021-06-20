@@ -1,8 +1,8 @@
-import { EstadosTurno } from 'src/app/utils/estados-turno.enum';
+import { ShiftStates } from 'src/app/utils/shiftStates.enum';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ITurno } from 'src/app/models/turno';
-import { TurnoService } from 'src/app/services/turno.service';
+import { Shift } from 'src/app/models/Shift';
+import { ShiftService } from 'src/app/services/shift.service';
 import { Notyf } from 'notyf';
 @Component({
   selector: 'app-cancel-modal',
@@ -10,39 +10,41 @@ import { Notyf } from 'notyf';
   styleUrls: ['./cancel-modal.component.scss'],
 })
 export class CancelModalComponent implements OnInit {
-  turno: ITurno;
-  cargando: boolean;
-  turno_cargado: boolean;
-  motivo: string = '';
+  shift: Shift;
+  laoding: boolean;
+  shiftLoaded: boolean;
+  reason: string = '';
   btnEnable: boolean = false;
+  successMsg:string;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { shift; typeUser },
+    @Inject(MAT_DIALOG_DATA) public data: { shift:Shift; typeUser:string },
     public dialogRef: MatDialogRef<CancelModalComponent>,
-    private turnoSvc: TurnoService
+    private turnoSvc: ShiftService
   ) {
-    console.log(data.shift);
-    console.log(data.typeUser);
-    this.turno = data.shift;
-    this.cargando = false;
-    this.turno_cargado = false;
+    this.shift = data.shift;
+    this.laoding = false;
+    this.shiftLoaded = false;
+
+    this.successMsg = localStorage.getItem('lang') == 'en' ?
+    "Shift cancelled 🚨":
+    "Turno Cancelado 🚨";
   }
 
   ngOnInit(): void {}
 
-  validMotivo(event) {
-    this.motivo = event;
+  validReason(event) {
+    this.reason = event;
     event.length > 6 ? (this.btnEnable = true) : (this.btnEnable = false);
   }
 
   cancelShift() {
-    console.log(this.turno);
-    this.turno.estado = EstadosTurno.CANCELADO_MEDICO;
-    this.turno.motivoRechazo = this.motivo;
-    this.turnoSvc.modificarTurno(this.turno, this.turno.id).then(() => {
+    this.shift.estado = ShiftStates.CANCELADO_MEDICO;
+    this.shift.motivoRechazo = this.reason;
+    this.turnoSvc.updateShift(this.shift, this.shift.id).then(() => {
       this.dialogRef.close();
       let notyf = new Notyf();
-      notyf.error('El turno ha sido cancelado.');
+      notyf.error(this.successMsg);
     });
   }
 }

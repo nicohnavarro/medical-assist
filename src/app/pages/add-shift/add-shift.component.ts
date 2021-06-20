@@ -1,6 +1,6 @@
 import { IUser } from 'src/app/models/user';
-import { ITurno } from '../../models/turno';
-import { TurnoService } from '../../services/turno.service';
+import { Shift } from '../../models/Shift';
+import { ShiftService } from '../../services/shift.service';
 import { MedicalSpecialtiesService } from '../../services/medical-specialties.service';
 import { WorkDaysService } from '../../services/work-days.service';
 import { Component, OnInit } from '@angular/core';
@@ -40,7 +40,7 @@ export class AddShiftComponent implements OnInit {
 
   constructor(
     private userSvc: UserService, 
-    private shiftSvc: TurnoService, 
+    private shiftSvc: ShiftService, 
     private specialtiesSvc: MedicalSpecialtiesService,
     public dialog: MatDialog,
     private router: Router, 
@@ -128,7 +128,7 @@ export class AddShiftComponent implements OnInit {
     let day = selectedDay.split('-')[0];
     let shiftsTaken = [];
     let schedule: string[] = this.doctorInfo.filter(info => info.day === day).map(info => info.schedule)[0];
-    this.shiftSvc.getTurnos().subscribe((data) => {
+    this.shiftSvc.getShifts().subscribe((data) => {
       shiftsTaken = data.filter(shift => shift.fecha === selectedDay && shift.estado <= 1).map(item => item.hora)
       shiftsTaken.length > 0 ?
         this.hourFilterList = schedule.filter(hour => !shiftsTaken.includes(hour))
@@ -150,7 +150,7 @@ export class AddShiftComponent implements OnInit {
   }
 
   async openDialog() {
-    let shiftCreated: ITurno = {
+    let shiftCreated: Shift = {
       especialidad: this.shiftSpecialty,
       medico: this.shiftDoctor,
       fecha: this.shiftDay,

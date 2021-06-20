@@ -2,7 +2,7 @@ import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { ITurno } from '../models/turno';
+import { Shift } from '../models/turno';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +17,11 @@ export class WorkDaysService {
         return this.db.collection('usuarios').doc(uid).collection('work_days').valueChanges({idField: 'docId'});
   }
 
-  add(turno: ITurno): void {
-    this.db.collection<ITurno>('turnos').add(turno);
+  add(turno: Shift): void {
+    this.db.collection<Shift>('turnos').add(turno);
   }
 
-  update(turno:ITurno,id:string): Promise<void>{
-    return this.db.collection<ITurno>('turnos').doc(id).set(turno);
+  update(turno:Shift,id:string): Promise<void>{
+    return this.db.collection<Shift>('turnos').doc(id).set(turno);
   }
 }

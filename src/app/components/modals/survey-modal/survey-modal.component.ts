@@ -1,9 +1,8 @@
-import { EstadosTurno } from 'src/app/utils/estados-turno.enum';
+import { ShiftStates } from './../../../utils/shiftStates.enum';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ITurno } from 'src/app/models/turno';
-import { TurnoService } from 'src/app/services/turno.service';
-import { UserService } from 'src/app/services/user.service';
+import { Shift } from 'src/app/models/Shift';
+import { ShiftService } from 'src/app/services/shift.service';
 import { Notyf } from 'notyf';
 @Component({
   selector: 'app-survey-modal',
@@ -11,9 +10,9 @@ import { Notyf } from 'notyf';
   styleUrls: ['./survey-modal.component.scss']
 })
 export class SurveyModalComponent implements OnInit {
-  turno: ITurno;
-  cargando: boolean;
-  turno_cargado: boolean;
+  shift: Shift;
+  loading: boolean;
+  shiftLoaded: boolean;
   btnEnable: boolean = false;
   field1:string;
   field2:string;
@@ -21,17 +20,21 @@ export class SurveyModalComponent implements OnInit {
   value1:number;
   value2:number;
   value3:number;
+  successMsg:string;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { shift },
     public dialogRef: MatDialogRef<SurveyModalComponent>,
-    private turnoSvc: TurnoService
+    private shiftSvc: ShiftService
   ) {
-    this.turno = data.shift;
-    this.cargando = false;
-    this.turno_cargado = false;
+    this.shift = data.shift;
+    this.loading = false;
+    this.shiftLoaded = false;
     this.field1 = 'servicio';
     this.field2 = 'diagnostico';
     this.field3 = 'atencion';
+    this.successMsg = localStorage.getItem('lang') == 'en' ?
+    "Survey completed ✔️":
+    "Encuenta completada ✔️";
   }
 
   ngOnInit(): void { }
@@ -56,16 +59,16 @@ export class SurveyModalComponent implements OnInit {
   }
 
   addSurvey() {
-    let encuesta = [{
+    let survey = [{
       'servicio': this.value1,
       'diagnostico': this.value2,
       'atencion':this.value3
     }]
-    this.turno.encuesta = encuesta;
-    this.turnoSvc.modificarTurno(this.turno, this.turno.id).then(() => {
+    this.shift.encuesta = survey;
+    this.shiftSvc.updateShift(this.shift, this.shift.id).then(() => {
       this.dialogRef.close();
       let notyf = new Notyf();
-      notyf.success('Encuenta Completada.');
+      notyf.success(this.successMsg);
     });
   }
 

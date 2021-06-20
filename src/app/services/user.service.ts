@@ -8,14 +8,19 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore) { }
 
-  getAll(): Observable<any[]> {
-    return this.db.collection<any>('usuarios').valueChanges({ idField: 'id' });
-  }
-
-  add(user: IUser, id: string) {
+  
+  addUser(user: IUser, id: string) {
     return this.db.collection('usuarios').doc(id).set(user);
+  }
+  
+  udpateUser(user: IUser, id: string): Promise<void> {
+    return this.db.collection<IUser>('usuarios').doc(id).set(user);
+  }
+  
+  getAllUsers(): Observable<any[]> {
+    return this.db.collection<any>('usuarios').valueChanges({ idField: 'id' });
   }
 
   getById(id: string): Observable<IUser> {
@@ -28,19 +33,17 @@ export class UserService {
       })
     );
   }
-
-  setUser(id: string) {
-    this.getById(id).subscribe((data) => {
-      return data;
-    });
-  }
-
-  modificarUser(user: IUser, id: string): Promise<void> {
-    return this.db.collection<IUser>('usuarios').doc(id).set(user);
-  }
+  
   getByType(type: string) {
     return this.db
       .collection('usuarios', (ref) => ref.where('type', '==', type))
       .valueChanges({ idField: 'id' });
   }
+
+  getCurrentUser(id: string) {
+    this.getById(id).subscribe((data) => {
+      return data;
+    });
+  }
+
 }

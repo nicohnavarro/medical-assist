@@ -1,6 +1,6 @@
 import { WorkDaysService } from './../../../services/work-days.service';
 import { AuthService } from './../../../services/auth.service';
-import { Dias } from './../../../utils/dias.enum';
+import { Days } from '../../../utils/days.enum';
 import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-medical-schedule',

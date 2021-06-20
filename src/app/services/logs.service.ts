@@ -11,7 +11,7 @@ export class LogsService {
 
   constructor(private db: AngularFirestore) {}
 
-  getAll(): Observable<any[]> {
+  getAllUsers(): Observable<any[]> {
     return this.db.collection<any>('logs').valueChanges({ idField: 'id' });
   }
 

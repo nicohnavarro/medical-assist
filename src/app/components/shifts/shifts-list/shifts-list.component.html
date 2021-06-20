@@ -85,7 +85,7 @@
     <th mat-header-cell *matHeaderCellDef>{{ "cancel" | translate }}</th>
     <td mat-cell *matCellDef="let element">
       <mat-icon
-        *ngIf="!turno_pasado && canCancel(element.estado)"
+        *ngIf="!turno_pasado && element.estado === 0"
         aria-hidden="false"
         aria-label="Example home icon"
         (click)="changeStateShift('CANCELAR', element, typeUser)"

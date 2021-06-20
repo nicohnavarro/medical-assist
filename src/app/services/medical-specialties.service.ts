@@ -18,12 +18,7 @@ export class MedicalSpecialtiesService {
     return usersDocuments.valueChanges({idField: 'id'});
   }
 
-
-  // agregarTurno(turno: ITurno): void {
-  //   this.db.collection<ITurno>('turnos').add(turno);
-  // }
-
-  // modificarTurno(turno:ITurno,id:string): Promise<void>{
-  //   return this.db.collection<ITurno>('turnos').doc(id).set(turno);
-  // }
+  addSpecialty(specialty: string): void {
+    this.db.collection<string>('medical_specialties').add(specialty);
+  }
 }

@@ -34,9 +34,9 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
-  async logout() {
+  async logOut() {
     try {
-      await this.authSvc.logout();
+      await this.authSvc.logOut();
       localStorage.removeItem('uid')
       this.router.navigate(['/login'])
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ITurno } from 'src/app/models/turno';
-import { TurnoService } from 'src/app/services/turno.service';
+import { Shift } from 'src/app/models/Shift';
+import { ShiftService } from 'src/app/services/shift.service';
 import { getDiaFormat } from 'src/app/utils/helpers';
 
 @Component({
@@ -9,21 +9,21 @@ import { getDiaFormat } from 'src/app/utils/helpers';
   styleUrls: ['./my-shifts.component.scss']
 })
 export class MyShiftsComponent implements OnInit {
-  turnos_hoy:ITurno[];
-  turnos_proximos:ITurno[];
-  turnos_pasados:ITurno[];
+  turnos_hoy:Shift[];
+  turnos_proximos:Shift[];
+  turnos_pasados:Shift[];
   pasados:boolean=true;
-  constructor(private turnoSvc:TurnoService) {
-    this.getTurnosHoy();
-    this.getTurnosProximos();
-    this.getTurnosPasados();
+  constructor(private turnoSvc:ShiftService) {
+    this.getShiftsHoy();
+    this.getShiftsProximos();
+    this.getShiftsPasados();
    }
 
   ngOnInit(): void {
   }
 
-  getTurnosHoy(){
-    this.turnoSvc.getTurnos().subscribe(data => {
+  getShiftsHoy(){
+    this.turnoSvc.getShifts().subscribe(data => {
       this.turnos_hoy = data.filter((turno)=>{
         if(turno.fecha.split("-")[1] === getDiaFormat(new Date()))
           return turno;
@@ -31,8 +31,8 @@ export class MyShiftsComponent implements OnInit {
      })
   }
 
-  getTurnosProximos(){
-    this.turnoSvc.getTurnos().subscribe(data => {
+  getShiftsProximos(){
+    this.turnoSvc.getShifts().subscribe(data => {
       this.turnos_proximos= data.filter((turno)=>{
         let fecha =turno.fecha.split("-")[1].split("/")
         let dia = fecha[0];
@@ -46,8 +46,8 @@ export class MyShiftsComponent implements OnInit {
      })
   }
 
-  getTurnosPasados(){
-    this.turnoSvc.getTurnos().subscribe(data => {
+  getShiftsPasados(){
+    this.turnoSvc.getShifts().subscribe(data => {
       this.turnos_pasados= data.filter((turno)=>{
         let fecha =turno.fecha.split("-")[1].split("/")
         let dia = fecha[0];
@@ -61,8 +61,8 @@ export class MyShiftsComponent implements OnInit {
      })
   }
 
-  actualizar_turnos(turno:ITurno){
-    this.getTurnosHoy();
+  actualizar_turnos(turno:Shift){
+    this.getShiftsHoy();
   }
 
 }

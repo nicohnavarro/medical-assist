@@ -1,11 +1,11 @@
-import { ReseniaModalComponent } from './../../modals/resenia-modal/resenia-modal.component';
+import { ShiftStates } from './../../../utils/shiftStates.enum';
+import { SeeReviewModalComponent } from '../../modals/see-review-modal/see-review-modal.component';
 import { RateModalComponent } from './../../modals/rate-modal/rate-modal.component';
 import { SurveyModalComponent } from './../../modals/survey-modal/survey-modal.component';
-import { ReviewModalComponent } from './../../modals/review-modal/review-modal.component';
+import { SetReviewModalComponent } from '../../modals/set-review-modal/set-review-modal.component';
 import { CancelModalComponent } from './../../modals/cancel-modal/cancel-modal.component';
 
 import { AuthService } from '../../../services/auth.service';
-import { element } from 'protractor';
 import { MedicalSpecialtiesService } from '../../../services/medical-specialties.service';
 import {
   Component,
@@ -18,10 +18,9 @@ import {
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ITurno } from 'src/app/models/turno';
-import { TurnoService } from 'src/app/services/turno.service';
+import { Shift } from 'src/app/models/Shift';
+import { ShiftService } from 'src/app/services/shift.service';
 import { UserService } from 'src/app/services/user.service';
-import { EstadosTurno } from 'src/app/utils/estados-turno.enum';
 
 import { Notyf } from 'notyf';
 @Component({
@@ -30,14 +29,15 @@ import { Notyf } from 'notyf';
   styleUrls: ['./shifts-list.component.scss'],
 })
 export class ShiftsListComponent implements OnInit {
-  Estados = EstadosTurno;
-  Specialties = [];
-  Doctors = [];
-  Patients = [];
-  @Input() mostrar_turnos: Array<ITurno> = [];
-  @Input() turno_pasado: boolean = false;
-  @Output() confirmo_turno: EventEmitter<ITurno> = new EventEmitter<ITurno>();
-  cargando: boolean = true;
+  states = ShiftStates;
+  specialties = [];
+  doctors = [];
+  patients = [];
+  successMsg:string;
+  @Input() showShifts: Array<Shift> = [];
+  @Input() pastShifts: boolean = false;
+  @Output() shiftConfirmed: EventEmitter<Shift> = new EventEmitter<Shift>();
+  loading: boolean = true;
   typeUser: string = '';
   displayedColumns: string[] = [
     'especialidad',
@@ -53,156 +53,143 @@ export class ShiftsListComponent implements OnInit {
     'resena',
   ];
 
-  dataSource = new MatTableDataSource<ITurno>(this.mostrar_turnos);
+  dialogConfig: MatDialogConfig;
+  dataSource = new MatTableDataSource<Shift>(this.showShifts);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
     private userSvc: UserService,
-    private turnoSvc: TurnoService,
+    private shiftSvc: ShiftService,
     public dialog: MatDialog,
     private specialtiesSvc: MedicalSpecialtiesService,
     private authSvc: AuthService
   ) {
+
     this.typeUser = authSvc.user.type;
-    if (this.typeUser === 'Paciente') {
+    this.setPatientOptions(this.typeUser);
+
+    specialtiesSvc.getSpecialties().subscribe((data) => {
+      this.specialties = data.map((item) => {
+        return { ...item, completed: true };
+      });
+    });
+
+    userSvc.getByType('Medico').subscribe((data) => {
+      this.doctors = data.map((item) => {
+        return { ...item, completed: true };
+      });
+    });
+
+    userSvc.getByType('Paciente').subscribe((data) => {
+      this.patients = data.map((item) => {
+        return { ...item, completed: true };
+      });
+    });
+
+    this.successMsg = localStorage.getItem('lang') == 'en' ?
+    "Shift accepted ✅":
+    "Turno Aceptado ✅";
+
+  }
+
+  private setPatientOptions(type: string) {
+    if (type === 'Paciente') {
       let removeId = this.displayedColumns.indexOf('atender');
       this.displayedColumns.splice(removeId, 1);
       let finishId = this.displayedColumns.indexOf('finalizar');
       this.displayedColumns.splice(finishId, 1);
       this.displayedColumns.push('calificar');
     }
-    specialtiesSvc.getSpecialties().subscribe((data) => {
-      this.Specialties = data.map((item) => {
-        return { ...item, completed: true };
-      });
-    });
-    userSvc.getByType('Medico').subscribe((data) => {
-      this.Doctors = data.map((item) => {
-        return { ...item, completed: true };
-      });
-    });
-    userSvc.getByType('Paciente').subscribe((data) => {
-      this.Patients = data.map((item) => {
-        return { ...item, completed: true };
-      });
-    });
   }
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.cargando = false;
-      this.dataSource.data = this.mostrar_turnos;
+      this.loading = false;
+      this.dataSource.data = this.showShifts;
       this.dataSource.paginator = this.paginator;
-    }, 5000);
+    }, 4000);
+    this.setDialogConfig();
   }
 
-  getTurnos() {
-    this.dataSource.data = this.mostrar_turnos;
+  private setDialogConfig() {
+    this.dialogConfig = new MatDialogConfig();
+    this.dialogConfig.disableClose = true;
+    this.dialogConfig.autoFocus = true;
+    this.dialogConfig.panelClass = 'custom-modalbox';
+    this.dialogConfig.maxWidth = '60vw';
+  }
+
+  getShifts() {
+    this.dataSource.data = this.showShifts;
   }
 
   openDialog(component, options?): void {
     const dialogRef = this.dialog.open(component, options);
-
     dialogRef.afterClosed().subscribe((result) => {
-      this.getTurnos();
+      this.getShifts();
     });
   }
 
-  canCancel(state: number): boolean {
-    switch (state) {
-      case EstadosTurno.PENDIENTE:
-        return true;
-
-      default:
-        return false;
-    }
-  }
-
-  changeStateShift(action: string, shift: ITurno, typeUser: string) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.panelClass = 'custom-modalbox';
-    dialogConfig.maxWidth = '60vw';
-    dialogConfig.data = {
+  changeStateShift(action: string, shift: Shift, typeUser: string) {
+    this.dialogConfig.data = {
       shift,
       typeUser,
     };
 
     switch (action) {
       case 'ACEPTAR':
-        shift.estado = EstadosTurno.ACEPTADO;
-        this.turnoSvc.modificarTurno(shift, shift.id).then(() => {
-          this.confirmo_turno.emit(shift);
+        shift.estado = ShiftStates.ACEPTADO;
+        this.shiftSvc.updateShift(shift, shift.id).then(() => {
+          this.shiftConfirmed.emit(shift);
           let notyf = new Notyf();
-          notyf.success('El turno ha sido Aceptado.');
+          notyf.success(this.successMsg);
         });
         break;
       case 'CANCELAR':
-        let dialogRef = this.dialog.open(CancelModalComponent, dialogConfig);
+        let dialogRef = this.dialog.open(CancelModalComponent, this.dialogConfig);
         dialogRef.afterClosed().subscribe((result) => {
-          console.log(`Dialog result: ${result}`);
-          this.getTurnos();
+          this.getShifts();
         });
         break;
       case 'FINALIZADO':
-        let reviewModal = this.dialog.open(ReviewModalComponent, dialogConfig);
+        let reviewModal = this.dialog.open(SetReviewModalComponent, this.dialogConfig);
         reviewModal.afterClosed().subscribe((result) => {
-          console.log(`Dialog result: ${result}`);
-          this.getTurnos();
+          this.getShifts();
         });
         break;
     }
   }
 
-  addSurvey(shift: ITurno) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.panelClass = 'custom-modalbox';
-    dialogConfig.maxWidth = '60vw';
-    dialogConfig.data = {
+  addSurvey(shift: Shift) {
+    this.dialogConfig.data = {
       shift,
     };
-    const dialogRef = this.dialog.open(SurveyModalComponent, dialogConfig);
+    const dialogRef = this.dialog.open(SurveyModalComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 
-  addRate(shift: ITurno) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.panelClass = 'custom-modalbox';
-    dialogConfig.maxWidth = '60vw';
-    dialogConfig.data = {
+  addRate(shift: Shift) {
+    this.dialogConfig.data = {
       shift,
     };
-    const dialogRef = this.dialog.open(RateModalComponent, dialogConfig);
+    const dialogRef = this.dialog.open(RateModalComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 
-  seeReview(shift: ITurno) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.panelClass = 'custom-modalbox';
-    dialogConfig.maxWidth = '30vw';
-    dialogConfig.data = {
+  seeReview(shift: Shift) {
+    this.dialogConfig.data = {
       shift,
     };
-    const dialogRef = this.dialog.open(ReseniaModalComponent, dialogConfig);
+    const dialogRef = this.dialog.open(SeeReviewModalComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 
   getFilterSpecialties(filter: any[]) {
     let onlyName = filter.map((t) => t.name);
-    let newList = this.mostrar_turnos.filter((t) =>
+    let newList = this.showShifts.filter((t) =>
       onlyName.includes(t.especialidad.name)
     );
     this.dataSource.data = newList;
@@ -210,7 +197,7 @@ export class ShiftsListComponent implements OnInit {
 
   getFilterDoctors(filter: any[]) {
     let doctorIds = filter.map((doctor) => doctor.id);
-    let newList = this.mostrar_turnos.filter((t) =>
+    let newList = this.showShifts.filter((t) =>
       doctorIds.includes(t.medico.id)
     );
     this.dataSource.data = newList;
@@ -218,7 +205,7 @@ export class ShiftsListComponent implements OnInit {
 
   getFilterPatients(filter: any[]) {
     let patientIds = filter.map((patient) => patient.id);
-    let newList = this.mostrar_turnos.filter((t) =>
+    let newList = this.showShifts.filter((t) =>
       patientIds.includes(t.paciente.id)
     );
     this.dataSource.data = newList;

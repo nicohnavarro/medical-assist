@@ -1,4 +1,3 @@
-import { UserGuard } from './guards/user.guard';
 import { InfoHomeComponent } from './components/shared/info-home/info-home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ListComponent } from './pages/list/list.component';

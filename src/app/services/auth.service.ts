@@ -1,7 +1,6 @@
-import { LogsService } from './logs.service';
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth'
-import { first } from 'rxjs/operators'
+import { AngularFireAuth } from '@angular/fire/auth';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,18 +23,18 @@ export class AuthService {
 
   async register(email: string, password: string) {
     const result = await this.afAuth.createUserWithEmailAndPassword(email, password).catch(err => { throw err });
-    this.enviarMailRegistro();
+    this.sendResgistrationMail();
     this.user = result.user;
     return result;
   }
 
-  async logout() {
+  async logOut() {
     try {
       await this.afAuth.signOut();
       this.user = null;
     }
     catch (err) {
-      console.log(err);
+      throw err;
     }
   }
 
@@ -43,7 +42,7 @@ export class AuthService {
     return this.afAuth.authState.pipe(first()).toPromise();
   }
 
-  public enviarMailRegistro() {
+  public sendResgistrationMail() {
     this.afAuth.currentUser.then(resp => {
       resp.sendEmailVerification({
         handleCodeInApp: true,

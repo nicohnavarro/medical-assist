@@ -1,4 +1,4 @@
-import { Dias } from './dias.enum';
+import { Days } from './days.enum';
 
 
 export function getHorarios() {
@@ -20,7 +20,7 @@ export function getQuincena(){
         addDay.setDate(addDay.getDate() + i);
         if(addDay.getDay()=== 0){continue}
         let addDayFormat = getDiaFormat(addDay);
-        quincena.push(Dias[addDay.getDay()]+"-" + addDayFormat);
+        quincena.push(Days[addDay.getDay()]+"-" + addDayFormat);
     }
     return quincena;
 }
@@ -31,8 +31,8 @@ export function getDateWork(work_days:string[]){
     let quincena:string[] = [];
     for(let i=1 ; i<=15 ; i++){
         date.setDate(today.getDate() + i);
-        if(work_days.includes(Dias[date.getDay()])){
-            quincena.push(Dias[date.getDay()] + '-' + getDiaFormat(date));
+        if(work_days.includes(Days[date.getDay()])){
+            quincena.push(Days[date.getDay()] + '-' + getDiaFormat(date));
         }
     }
     return quincena;
