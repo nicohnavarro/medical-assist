@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {getHorarios, getQuincena} from 'src/app/utils/helpers';
 
 @Component({
   selector: 'app-combo-day',
@@ -7,12 +6,10 @@ import {getHorarios, getQuincena} from 'src/app/utils/helpers';
   styleUrls: ['./combo-day.component.scss']
 })
 export class ComboDayComponent implements OnInit {
-  @Input() eligio_medico: boolean;
-  @Input() dias: string[];
-  @Input() dia_mostrar: string;
-  @Output() seleccionaDia: EventEmitter<string> = new EventEmitter<string>();
-
-
+  @Input() choseDoctor: boolean;
+  @Input() workDays: string[];
+  @Input() showDay: string;
+  @Output() selectedDay: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
    }
@@ -20,7 +17,7 @@ export class ComboDayComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onOptionsSelected(dia: string) {
-    this.seleccionaDia.emit(dia);
+  onOptionsSelected(day: string) {
+    this.selectedDay.emit(day);
   }
 }

@@ -1,4 +1,3 @@
-import { UserService } from './../../../services/user.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-combo-list',
@@ -12,9 +11,8 @@ export class ComboListComponent implements OnInit {
   @Input() myList:any[];
   @Output() selectedItem:EventEmitter<string> = new EventEmitter<string>();
   @Input() elementToShow:any;
-  sorry:string= 'Disculpas no pudimos encontrar tu seleccion'
 
-  constructor(private userSvc:UserService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

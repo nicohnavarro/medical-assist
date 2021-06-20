@@ -6,16 +6,17 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./combo-hour.component.scss']
 })
 export class ComboHourComponent implements OnInit {
-  @Input() eligio_dia: boolean;
-  @Input() horarios: string[];
-  @Input() horario_mostrar: string;
-  @Output() seleccionaHora: EventEmitter<string> = new EventEmitter<string>();
+  @Input() choseDay: boolean;
+  @Input() hours: string[];
+  @Input() showHour: string;
+  @Output() selectedHour: EventEmitter<string> = new EventEmitter<string>();
+  
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onOptionsSelectedHour(horario:string){
-    this.seleccionaHora.emit(horario);
+  onOptionsSelectedHour(hour:string){
+    this.selectedHour.emit(hour);
   }
 }

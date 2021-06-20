@@ -99,6 +99,12 @@
   "ratingComment":"Calificar Turno",
   "ratingMsg":"Califica tu Turno",
   "addRating":"Agregar Calificacion",
-  "add":"Agregar"
+  "add":"Agregar",
+  "sorrySearch":"Perdon, no encontramos resultados para tu busqueda 😞",
+  "goLogin":"Ingresa para pedir un turno 👨‍⚕️",
+  "selectedSpecialty":"Especialidad seleccionada",
+  "selectedDoctor":"Medico seleccionado",
+  "selectedDay":"Dia seleccionado",
+  "selectedHour":"Hora seleccionada"
 }
 

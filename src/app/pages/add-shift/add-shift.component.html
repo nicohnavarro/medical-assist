@@ -1,47 +1,47 @@
-<div class="sacar_turnos" *ngIf="loggeado">
+<div class="sacar_turnos" *ngIf="isLogged">
     <div class="especialidad">
         <app-combo-list
         lastSelection="true"
-          fieldName="Especialidad seleccionada:"
-          [elementToShow]="turno_especialidad"
-          [myList]="lista_especialidad"
-          (selectedItem)="mandamosEspecialidad($event)"
+          fieldName="{{'selectedSpecialty' | translate}}:"
+          [elementToShow]="shiftSpecialty"
+          [myList]="specialtiesList"
+          (selectedItem)="sendSpecialty($event)"
         ></app-combo-list>
       </div>
 
   <div class="medico">
     <app-combo-list
-      [lastSelection]="tiene_especialidad"
-      fieldName="Medico seleccionado:"
-      [elementToShow]="turno_medico"
-      [myList]="lista_filtrada_medicos"
-      (selectedItem)="mandamosMedico($event)"
+      [lastSelection]="haveSpecialty"
+      fieldName="{{'selectedDoctor' | translate}}:"
+      [elementToShow]="shiftDoctor"
+      [myList]="doctorFilterList"
+      (selectedItem)="sendDoctor($event)"
     ></app-combo-list>
   </div>
   <div class="medico">
     <app-combo-day
-      [eligio_medico]="tiene_medico"
-      [dias]="lista_filtrada_dias"
-      [dia_mostrar]="turno_dia"
-      (seleccionaDia)="mandamosDia($event)"
+      [choseDoctor]="haveDoctor"
+      [workDays]="dayFilterList"
+      [showDay]="shiftDay"
+      (selectedDay)="sendDay($event)"
     ></app-combo-day>
   </div>
   <div class="medico">
     <app-combo-hour
-      [eligio_dia]="tiene_dia"
-      (seleccionaHora)="mandamosHora($event)"
-      [horarios]="lista_filtrada_horarios"
-      [horario_mostrar]="turno_hora"
+      [choseDay]="haveDay"
+      (selectedHour)="sendHour($event)"
+      [hours]="hourFilterList"
+      [showHour]="shiftHour"
     ></app-combo-hour>
   </div>
 </div>
 
-<div *ngIf="!loggeado">
+<div *ngIf="!isLogged">
   <div class="aviso">
     <mat-card>
-      Ingresa para poder pedir un turno!
-      <button mat-raised-button color="primary" (click)="irIngreso()">
-        Ingresar
+      {{'goLogin' | translate}}
+      <button mat-raised-button color="primary" (click)="goLogin()">
+        {{'login' | translate}}
       </button>
     </mat-card>
   </div>

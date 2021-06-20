@@ -99,6 +99,12 @@
   "ratingComment":"Rating Shift",
   "ratingMsg":"Rate your Shift",
   "addRating":"Add Rating",
-  "add":"Add"
+  "add":"Add",
+  "sorrySearch":"Sorry we couldn't find what you are looking for",
+  "goLogin":"Login to add a shift",
+  "selectedSpecialty":"Specialty selected",
+  "selectedDoctor":"Doctor selected",
+  "selectedDay":"Day selected",
+  "selectedHour":"Hour selected"
 }
 

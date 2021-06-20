@@ -7,12 +7,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmModalComponent } from 'src/app/components/modals/confirm-modal/confirm-modal.component';
-import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-import { Dias } from 'src/app/utils/dias.enum';
-import { Especialidades } from 'src/app/utils/especialidades.enum';
-import { EstadosTurno } from 'src/app/utils/estados-turno.enum';
-import { getDateWork, getHorarios, getQuincena } from 'src/app/utils/helpers';
+import { getDateWork} from 'src/app/utils/helpers';
 import { MedicalSpecialty } from 'src/app/models/medical_specialty';
 
 @Component({
@@ -22,131 +18,144 @@ import { MedicalSpecialty } from 'src/app/models/medical_specialty';
 })
 export class AddShiftComponent implements OnInit {
 
-  turno_especialidad: MedicalSpecialty;
-  turno_medico: IUser;
-  turno_dia: string;
-  turno_hora: string;
-  lista_medicos: IUser[];
-  lista_especialidad: any[];
-  lista_filtrada_medicos: IUser[];
-  lista_filtrada_dias: string[];
-  lista_filtrada_horarios: string[];
-  tiene_especialidad: boolean = false;
-  tiene_medico: boolean = false;
-  tiene_dia: boolean = false;
-  turno_paciente: IUser;
-  loggeado: boolean = false;
+  shiftSpecialty: MedicalSpecialty;
+  shiftPatient: IUser;
+  shiftDoctor: IUser;
+  shiftDay: string;
+  shiftHour: string;
+  
+  doctorList: IUser[];
   doctorInfo: any[];
+  specialtiesList: any[];
 
-  constructor(private userSvc: UserService, private shiftSvc: TurnoService, private specialtiesSvc: MedicalSpecialtiesService, public dialog: MatDialog, private authSvc: AuthService, private router: Router, private workDaysSvc: WorkDaysService) {
+  doctorFilterList: IUser[];
+  dayFilterList: string[];
+  hourFilterList: string[];
+  
+  isLogged: boolean = false;
+  haveSpecialty: boolean = false;
+  haveDoctor: boolean = false;
+  haveDay: boolean = false;
+  
 
-
+  constructor(
+    private userSvc: UserService, 
+    private shiftSvc: TurnoService, 
+    private specialtiesSvc: MedicalSpecialtiesService,
+    public dialog: MatDialog,
+    private router: Router, 
+    private workDaysSvc: WorkDaysService
+    ){
     if (localStorage.getItem('uid')) {
-      this.loggeado = true;
-      this.lista_medicos = [];
-      this.lista_filtrada_medicos = [];
-      this.lista_filtrada_dias = [];
-      this.lista_filtrada_horarios = [];
-      this.userSvc.getByType('Medico').subscribe(data => {
-        this.lista_medicos = data as IUser[];
-      });
-      this.userSvc.getById(localStorage.getItem('uid')).subscribe(paciente => {
-        this.turno_paciente = paciente as IUser;
-      })
-      this.specialtiesSvc.getSpecialties().subscribe(data => {
-        this.lista_especialidad = data;
-      })
+      this.isLogged = true;
+      this.initialState();
     }
   }
 
   ngOnInit(): void {
   }
 
-  mandamosEspecialidad(id: string) {
+  private initialState(){
+    this.doctorList = [];
+
+    this.doctorFilterList = [];
+    this.dayFilterList = [];
+    this.hourFilterList = [];
+
+    this.userSvc.getByType('Medico').subscribe(data => {
+      this.doctorList = data as IUser[];
+    });
+
+    this.userSvc.getById(localStorage.getItem('uid')).subscribe(paciente => {
+      this.shiftPatient = paciente as IUser;
+    });
+
+    this.specialtiesSvc.getSpecialties().subscribe(data => {
+      this.specialtiesList = data;
+    });
+  }
+
+  sendSpecialty(id: string) {
     this.cleanFilter();
     this.specialtiesSvc.getSpecialtyById(id).subscribe(data => {
-      this.turno_especialidad = data as MedicalSpecialty;
-      this.filtrarMedicosByEspecialidad(data.name);
-      this.tiene_especialidad = true;
-
-    })
-  }
-
-  mandamosMedico(id: string) {
-    this.userSvc.getById(id).subscribe(medico => {
-      this.turno_dia = null;
-      this.turno_hora = null;
-      this.turno_medico = medico as IUser;
-      this.filtrarDiasByMedico(medico as IUser);
-      this.tiene_medico = true;
-    })
-  }
-
-  mandamosDia(dia: string) {
-    this.turno_dia = dia;
-    this.tiene_dia = true;
-    this.filtrarHoraByDia(dia);
-
-  }
-
-  mandamosHora(hora: string) {
-    this.turno_hora = hora;
-    this.openDialog();
-    console.log(hora);
-  }
-
-  filtrarMedicosByEspecialidad(especialidad) {
-    let filtrada = this.lista_medicos.filter(medico => {
-      if (medico.especializaciones.includes(especialidad.toString()))
-        return medico;
+      this.shiftSpecialty = data as MedicalSpecialty;
+      this.filterDoctorBySpecialty(data.name);
+      this.haveSpecialty = true;
     });
-    this.lista_filtrada_medicos = filtrada;
   }
 
-  filtrarDiasByMedico(medico: IUser) {
-    this.workDaysSvc.getWorkDays(medico.id).subscribe(data => {
+  sendDoctor(id: string) {
+    this.userSvc.getById(id).subscribe(doctor => {
+      this.shiftDay = null;
+      this.shiftHour = null;
+      this.shiftDoctor = doctor as IUser;
+      this.filterDaysByDoctor(doctor as IUser);
+      this.haveDoctor = true;
+    })
+  }
+
+  sendDay(day: string) {
+    this.shiftDay = day;
+    this.haveDay = true;
+    this.filterHourByDay(day);
+
+  }
+
+  sendHour(hour: string) {
+    this.shiftHour = hour;
+    this.openDialog();
+  }
+
+  filterDoctorBySpecialty(specialty) {
+    let doctors = this.doctorList.filter(doctor => {
+      if (doctor.especializaciones.includes(specialty.toString()))
+        return doctor;
+    });
+    this.doctorFilterList = doctors;
+  }
+
+  filterDaysByDoctor(doctor: IUser) {
+    this.workDaysSvc.getWorkDays(doctor.id).subscribe(data => {
       this.doctorInfo = data;
       let work_days = data.map(doctor => {
         return doctor.day;
       });
-      this.lista_filtrada_dias = getDateWork(work_days);
+      this.dayFilterList = getDateWork(work_days);
     });
   }
 
-  filtrarHoraByDia(selectedDay: string) {
+  filterHourByDay(selectedDay: string) {
     let day = selectedDay.split('-')[0];
     let shiftsTaken = [];
     let schedule: string[] = this.doctorInfo.filter(info => info.day === day).map(info => info.schedule)[0];
     this.shiftSvc.getTurnos().subscribe((data) => {
       shiftsTaken = data.filter(shift => shift.fecha === selectedDay && shift.estado <= 1).map(item => item.hora)
-      if (shiftsTaken.length > 0) {
-        this.lista_filtrada_horarios = schedule.filter(hour => !shiftsTaken.includes(hour));
-      }
-      else {
-        this.lista_filtrada_horarios = schedule
-      }
+      shiftsTaken.length > 0 ?
+        this.hourFilterList = schedule.filter(hour => !shiftsTaken.includes(hour))
+        :
+        this.hourFilterList = schedule
     });
   }
 
-  cleanFilter() {
-    this.tiene_especialidad = false;
-    this.lista_filtrada_medicos = [];
-    this.turno_medico = null;
-    this.tiene_medico = false;
-    this.lista_filtrada_dias = [];
-    this.lista_filtrada_horarios = [];
-    this.tiene_dia = false;
-    this.turno_dia = null;
-    this.turno_hora = null;
+  private cleanFilter() {
+    this.haveSpecialty = false;
+    this.doctorFilterList = [];
+    this.shiftDoctor = null;
+    this.haveDoctor = false;
+    this.dayFilterList = [];
+    this.hourFilterList = [];
+    this.haveDay = false;
+    this.shiftDay = null;
+    this.shiftHour = null;
   }
 
   async openDialog() {
-    let turno: ITurno = {
-      especialidad: this.turno_especialidad,
-      medico: this.turno_medico,
-      fecha: this.turno_dia,
-      hora: this.turno_hora,
-      paciente: this.turno_paciente,
+    let shiftCreated: ITurno = {
+      especialidad: this.shiftSpecialty,
+      medico: this.shiftDoctor,
+      fecha: this.shiftDay,
+      hora: this.shiftHour,
+      paciente: this.shiftPatient,
       estado: 0,
     };
 
@@ -157,16 +166,15 @@ export class AddShiftComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.panelClass = 'custom-modalbox';
     dialogConfig.data = {
-      turno
+      shiftCreated
     };
 
     const dialogRef = this.dialog.open(ConfirmModalComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 
-  irIngreso() {
+  goLogin() {
     this.router.navigate(['login']);
   }
 
