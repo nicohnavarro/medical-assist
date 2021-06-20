@@ -42,7 +42,7 @@ export class ReviewModalComponent implements OnInit {
     console.log(this.turno);
     this.turno.estado = EstadosTurno.FINALIZADO;
     this.turno.resena = this.motivo;
-    this.turno.paciente.historial = this.medicalHistory;
+    this.turno.paciente.record = this.medicalHistory;
     this.turnoSvc.modificarTurno(this.turno, this.turno.id).then(() => {
       this.userSvc
         .modificarUser(this.turno.paciente, this.turno.paciente.id)

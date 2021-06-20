@@ -19,20 +19,20 @@
     ></app-combo-list>
   </div>
   <div class="medico">
-    <app-combo-dia
+    <app-combo-day
       [eligio_medico]="tiene_medico"
       [dias]="lista_filtrada_dias"
       [dia_mostrar]="turno_dia"
       (seleccionaDia)="mandamosDia($event)"
-    ></app-combo-dia>
+    ></app-combo-day>
   </div>
   <div class="medico">
-    <app-combo-hora
+    <app-combo-hour
       [eligio_dia]="tiene_dia"
       (seleccionaHora)="mandamosHora($event)"
       [horarios]="lista_filtrada_horarios"
       [horario_mostrar]="turno_hora"
-    ></app-combo-hora>
+    ></app-combo-hour>
   </div>
 </div>
 

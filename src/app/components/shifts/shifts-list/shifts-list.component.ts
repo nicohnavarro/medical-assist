@@ -25,11 +25,11 @@ import { EstadosTurno } from 'src/app/utils/estados-turno.enum';
 
 import { Notyf } from 'notyf';
 @Component({
-  selector: 'app-listado-turnos',
-  templateUrl: './listado-turnos.component.html',
-  styleUrls: ['./listado-turnos.component.scss'],
+  selector: 'app-shifts-list',
+  templateUrl: './shifts-list.component.html',
+  styleUrls: ['./shifts-list.component.scss'],
 })
-export class ListadoTurnosComponent implements OnInit {
+export class ShiftsListComponent implements OnInit {
   Estados = EstadosTurno;
   Specialties = [];
   Doctors = [];

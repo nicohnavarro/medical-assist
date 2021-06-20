@@ -1,13 +1,12 @@
-import { ITurno } from './../../models/turno';
-import { TurnoService } from './../../services/turno.service';
-import { MedicalSpecialtiesService } from './../../services/medical-specialties.service';
-import { WorkDaysService } from './../../services/work-days.service';
+import { IUser } from 'src/app/models/user';
+import { ITurno } from '../../models/turno';
+import { TurnoService } from '../../services/turno.service';
+import { MedicalSpecialtiesService } from '../../services/medical-specialties.service';
+import { WorkDaysService } from '../../services/work-days.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmModalComponent } from 'src/app/components/modals/confirm-modal/confirm-modal.component';
-import { IMedico } from 'src/app/models/medico';
-import { IPaciente } from 'src/app/models/paciente';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Dias } from 'src/app/utils/dias.enum';
@@ -17,25 +16,25 @@ import { getDateWork, getHorarios, getQuincena } from 'src/app/utils/helpers';
 import { MedicalSpecialty } from 'src/app/models/medical_specialty';
 
 @Component({
-  selector: 'app-sacar-turno',
-  templateUrl: './sacar-turno.component.html',
-  styleUrls: ['./sacar-turno.component.scss']
+  selector: 'app-add-shift',
+  templateUrl: './add-shift.component.html',
+  styleUrls: ['./add-shift.component.scss']
 })
-export class SacarTurnoComponent implements OnInit {
+export class AddShiftComponent implements OnInit {
 
   turno_especialidad: MedicalSpecialty;
-  turno_medico: IMedico;
+  turno_medico: IUser;
   turno_dia: string;
   turno_hora: string;
-  lista_medicos: IMedico[];
+  lista_medicos: IUser[];
   lista_especialidad: any[];
-  lista_filtrada_medicos: IMedico[];
+  lista_filtrada_medicos: IUser[];
   lista_filtrada_dias: string[];
   lista_filtrada_horarios: string[];
   tiene_especialidad: boolean = false;
   tiene_medico: boolean = false;
   tiene_dia: boolean = false;
-  turno_paciente: IPaciente;
+  turno_paciente: IUser;
   loggeado: boolean = false;
   doctorInfo: any[];
 
@@ -49,10 +48,10 @@ export class SacarTurnoComponent implements OnInit {
       this.lista_filtrada_dias = [];
       this.lista_filtrada_horarios = [];
       this.userSvc.getByType('Medico').subscribe(data => {
-        this.lista_medicos = data as IMedico[];
+        this.lista_medicos = data as IUser[];
       });
       this.userSvc.getById(localStorage.getItem('uid')).subscribe(paciente => {
-        this.turno_paciente = paciente as IPaciente;
+        this.turno_paciente = paciente as IUser;
       })
       this.specialtiesSvc.getSpecialties().subscribe(data => {
         this.lista_especialidad = data;
@@ -77,8 +76,8 @@ export class SacarTurnoComponent implements OnInit {
     this.userSvc.getById(id).subscribe(medico => {
       this.turno_dia = null;
       this.turno_hora = null;
-      this.turno_medico = medico as IMedico;
-      this.filtrarDiasByMedico(medico as IMedico);
+      this.turno_medico = medico as IUser;
+      this.filtrarDiasByMedico(medico as IUser);
       this.tiene_medico = true;
     })
   }
@@ -104,7 +103,7 @@ export class SacarTurnoComponent implements OnInit {
     this.lista_filtrada_medicos = filtrada;
   }
 
-  filtrarDiasByMedico(medico: IMedico) {
+  filtrarDiasByMedico(medico: IUser) {
     this.workDaysSvc.getWorkDays(medico.id).subscribe(data => {
       this.doctorInfo = data;
       let work_days = data.map(doctor => {

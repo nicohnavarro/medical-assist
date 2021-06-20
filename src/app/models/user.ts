@@ -12,6 +12,9 @@ export interface IUser {
   especializaciones?: string[];
   doc: string;
   obraSocial?: string;
+  record?:any;
+  qualification?:any;
+
 }
 
 export interface UserNav {

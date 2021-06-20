@@ -4,11 +4,11 @@ import { TurnoService } from 'src/app/services/turno.service';
 import { getDiaFormat } from 'src/app/utils/helpers';
 
 @Component({
-  selector: 'app-mis-turnos',
-  templateUrl: './mis-turnos.component.html',
-  styleUrls: ['./mis-turnos.component.scss']
+  selector: 'app-my-shifts',
+  templateUrl: './my-shifts.component.html',
+  styleUrls: ['./my-shifts.component.scss']
 })
-export class MisTurnosComponent implements OnInit {
+export class MyShiftsComponent implements OnInit {
   turnos_hoy:ITurno[];
   turnos_proximos:ITurno[];
   turnos_pasados:ITurno[];

@@ -43,10 +43,10 @@ export class RateModalComponent implements OnInit {
   addRating() {
     let calification = { score: this.rate, comment: this.comment };
     this.turno.calificacion = calification;
-    if(!this.turno.medico.calificaciones){
-      this.turno.medico.calificaciones=[];
+    if(!this.turno.medico.qualification){
+      this.turno.medico.qualification=[];
     }
-    this.turno.medico.calificaciones.push(calification);
+    this.turno.medico.qualification.push(calification);
     this.turnoSvc.modificarTurno(this.turno, this.turno.id).then(() => {
       this.userSvc
         .modificarUser(this.turno.medico, this.turno.medico.id)

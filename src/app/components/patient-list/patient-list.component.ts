@@ -1,4 +1,4 @@
-import { IUser } from './../../../models/user';
+import { IUser } from './../../models/user';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';

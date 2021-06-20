@@ -1,3 +1,15 @@
+import { ConfirmModalComponent } from 'src/app/components/modals/confirm-modal/confirm-modal.component';
+import { MyShiftsComponent } from './pages/my-shifts/my-shifts.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ComboHourComponent } from './components/shifts/combo-hour/combo-hour.component';
+import { ComboDayComponent } from './components/shifts/combo-day/combo-day.component';
+import { AddSpecialtyComponent } from './components/specialties/add-specialty/add-specialty.component';
+import { ComboSpecialtiesComponent } from './components/specialties/combo-specialties/combo-specialties.component';
+import { DoctorComboComponent } from './components/doctor/doctor-combo/doctor-combo.component';
+import { AddShiftComponent } from './pages/add-shift/add-shift.component';
+import { ListComponent } from './pages/list/list.component';
+import { PatientListComponent } from './components/patient-list/patient-list.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
 import { SharedModule } from './modules/shared.module';
 import { darkTheme } from './theme/dark-theme';
 import { lightTheme } from './theme/light-theme';
@@ -21,31 +33,16 @@ import { MainComponent } from './pages/main/main.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { UploadImageComponent } from './components/functional/upload-image/upload-image.component';
-import { FooterComponent } from './components/shared/footer/footer.component';
 import { StepperFormComponent } from './components/forms/stepper-form/stepper-form.component';
 import { UserDetailComponent } from './components/shared/user-detail/user-detail.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { SpinnerModalComponent } from './components/modals/spinner-modal/spinner-modal.component';
-import { ListadoPacientesComponent } from './components/pacientes/listado-pacientes/listado-pacientes.component';
-import { ListadoProfesionalesComponent } from './components/doctor/doctor-list/doctor-list.component';
-import { DetalleProfesionalComponent } from './components/doctor/detalle-profesional/detalle-profesional.component';
-import { DetallePacienteComponent } from './components/pacientes/detalle-paciente/detalle-paciente.component';
-import { ListadosComponent } from './pages/listados/listados.component';
-import { SidebarComponent } from './components/layout/sidebar/sidebar.component';
-import { SurveyFieldComponent } from './components/survey-field/survey-field.component';
-import { ListadoTurnosComponent } from './components/turnos/listado-turnos/listado-turnos.component';
-import { SacarTurnoComponent } from './pages/sacar-turno/sacar-turno.component';
+import { DoctorListComponent } from './components/doctor/doctor-list/doctor-list.component';
+import { SurveyFieldComponent } from './components/shared/survey-field/survey-field.component';
+import { ShiftsListComponent } from './components/shifts/shifts-list/shifts-list.component';
 import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
 import { EnumAsStringPipe } from './pipes/enum-as-string.pipe';
-import { ComboProfesionalComponent } from './components/doctor/doctor-combo/doctor-combo.component';
-import { ComboEspecialidadComponent } from './components/especialidades/combo-especialidad/combo-especialidad.component';
-import { AltaEspecialidadComponent } from './components/especialidades/alta-especialidad/alta-especialidad.component';
-import { ComboDiaComponent } from './components/turnos/combo-dia/combo-dia.component';
-import { ComboHoraComponent } from './components/turnos/combo-hora/combo-hora.component';
-import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
 import { ReseniaModalComponent } from './components/modals/resenia-modal/resenia-modal.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { InfoHomeComponent } from './components/shared/info-home/info-home.component';
@@ -76,25 +73,22 @@ export function HttpLoaderFactory(http: HttpClient) {
     StepperFormComponent,
     UserDetailComponent,
     SpinnerModalComponent,
-    ListadoPacientesComponent,
-    ListadoProfesionalesComponent,
-    DetalleProfesionalComponent,
-    DetallePacienteComponent,
-    ListadosComponent,
-    SidebarComponent,
+    PatientListComponent,
+    DoctorListComponent,
+    ListComponent,
     SurveyFieldComponent,
-    ListadoTurnosComponent,
-    SacarTurnoComponent,
+    ShiftsListComponent,
+    AddShiftComponent,
     EnumToArrayPipe,
     EnumAsStringPipe,
-    ComboProfesionalComponent,
-    ComboEspecialidadComponent,
-    AltaEspecialidadComponent,
-    ComboDiaComponent,
-    ComboHoraComponent,
+    DoctorComboComponent,
+    ComboSpecialtiesComponent,
+    AddSpecialtyComponent,
+    ComboDayComponent,
+    ComboHourComponent,
     ConfirmModalComponent,
     ProfileComponent,
-    MisTurnosComponent,
+    MyShiftsComponent,
     ReseniaModalComponent,
     InfoHomeComponent,
     ComboListComponent,
