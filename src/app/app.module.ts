@@ -1,6 +1,3 @@
-import { StepperFormComponent } from './components/forms/stepper-form/stepper-form.component';
-import { UploadImageComponent } from './components/functional/upload-image/upload-image.component';
-import { UserDetailComponent } from './components/shared/user-detail/user-detail.component';
 import { CancelModalComponent } from './components/modals/cancel-modal/cancel-modal.component';
 import { StarRatingComponent } from './components/functional/star-rating/star-rating.component';
 import { RateModalComponent } from './components/modals/rate-modal/rate-modal.component';
@@ -33,7 +30,6 @@ import { ErrorComponent } from './pages/error/error.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { DoctorListComponent } from './components/doctor-list/doctor-list.component';
-import { RecaptchaModule } from 'ng-recaptcha';
 import { HourTakenDirective } from './directives/hour-taken.directive';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -55,10 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HistorialFormComponent,
     ListComponent,
     SetReviewModalComponent,
-    HourTakenDirective,
-    UserDetailComponent,
-    UploadImageComponent,
-    StepperFormComponent
+    HourTakenDirective
   ],
   imports: [
     BrowserModule,
@@ -85,8 +78,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    AngularFireStorageModule,
-    RecaptchaModule
+    AngularFireStorageModule
   ],
   exports: [
     TranslateModule,

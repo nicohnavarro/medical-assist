@@ -1,3 +1,4 @@
+import { UserModule } from './../../modules/user.module';
 import { SpinnerModalComponent } from 'src/app/components/modals/spinner-modal/spinner-modal.component';
 import { RegisterRoutingModule } from './register.routing.module';
 import { RegisterComponent } from './register.component';
@@ -18,7 +19,8 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     RegisterRoutingModule,
     SharedModule,
-    AngularMaterialModule                                               
+    AngularMaterialModule,
+    UserModule                                          
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

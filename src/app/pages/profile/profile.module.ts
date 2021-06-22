@@ -1,3 +1,4 @@
+import { UserModule } from './../../modules/user.module';
 import { AddSpecialtyComponent } from './../../components/specialties/add-specialty/add-specialty.component';
 import { MedicalScheduleComponent } from './../../components/shared/medical-schedule/medical-schedule.component';
 import { ProfileRoutingModule } from './profile.routing.module';
@@ -19,7 +20,8 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     ProfileRoutingModule,
     SharedModule,
-    AngularMaterialModule,                                           
+    AngularMaterialModule,
+    UserModule                                           
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
