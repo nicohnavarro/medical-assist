@@ -1,19 +1,24 @@
-import { SurveyFieldComponent } from './../../components/shared/survey-field/survey-field.component';
-import { SurveyModalComponent } from './../../components/modals/survey-modal/survey-modal.component';
-import { HistorialFormComponent } from './../../components/forms/historial-form/historial-form.component';
+import { EnumToArrayPipe } from './../../pipes/enum-to-array.pipe';
+import { EnumAsStringPipe } from './../../pipes/enum-as-string.pipe';
 import { CustomFilterComponent } from './../../components/shared/custom-filter/custom-filter.component';
 import { ShiftsListComponent } from './../../components/shifts/shifts-list/shifts-list.component';
 import { MyShiftsComponent } from './my-shifts.component';
 import { MyShiftsRoutingModule } from './my-shifts.routing.module';
 import { AngularMaterialModule } from '../../modules/angular-material.module';
 import { SharedModule } from '../../modules/shared.module';
-import { TranslateModule} from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [MyShiftsComponent,ShiftsListComponent,CustomFilterComponent,HistorialFormComponent,SurveyFieldComponent,SurveyModalComponent],
+  declarations: [
+    MyShiftsComponent,
+    ShiftsListComponent,
+    CustomFilterComponent,
+    EnumToArrayPipe,
+    EnumAsStringPipe,
+  ],
   imports: [
     TranslateModule,
     FormsModule,
@@ -22,7 +27,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     MyShiftsRoutingModule,
     SharedModule,
-    AngularMaterialModule                                               
-  ]
+    AngularMaterialModule,
+  ],
 })
-export class MyShiftsModule { }
+export class MyShiftsModule {}
