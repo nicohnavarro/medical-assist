@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { IUser } from '../models/user';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

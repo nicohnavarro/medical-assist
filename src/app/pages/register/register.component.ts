@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SpinnerModalComponent } from 'src/app/components/modals/spinner-modal/spinner-modal.component';
-import { IUser } from 'src/app/models/user';
+import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { FileService } from 'src/app/services/file.service';
 import { UserService } from 'src/app/services/user.service';
@@ -22,7 +21,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() { }
 
-  async ObtenerUsuario(user: IUser) {
+  async ObtenerUsuario(user: User) {
     this.openDialog();
     try{
       let cred = await this.Registrar(user).catch(err =>{throw err});
@@ -43,7 +42,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  async Registrar(user: IUser) {
+  async Registrar(user: User) {
     return await this.authSvc.register(user.mail, user.password).catch(err => { throw err });
   }
 

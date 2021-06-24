@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { IUser } from 'src/app/models/user';
+import { User } from 'src/app/models/User';
 import { Specialties } from 'src/app/utils/specialties.enum';
 
 @Component({
@@ -14,7 +14,7 @@ import { Specialties } from 'src/app/utils/specialties.enum';
   styleUrls: ['./stepper-form.component.scss'],
 })
 export class StepperFormComponent implements OnInit {
-  @Output() usuario_registrado: EventEmitter<IUser> = new EventEmitter<IUser>();
+  @Output() usuario_registrado: EventEmitter<User> = new EventEmitter<User>();
   @Output() user_img_1: EventEmitter<File> = new EventEmitter<File>();
   @Output() user_img_2: EventEmitter<File> = new EventEmitter<File>();
   imagen_uno: string = '../../../assets/images/user.png';
@@ -52,7 +52,7 @@ export class StepperFormComponent implements OnInit {
   especialidades = Specialties;
   hide = true;
   cargando = false;
-  usuario: IUser;
+  usuario: User;
 
   datosPersonalesFormGroup: FormGroup;
   datosCuentaFormGroup: FormGroup;

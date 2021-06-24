@@ -1,4 +1,4 @@
-import { IUser } from 'src/app/models/user';
+import { User } from 'src/app/models/User';
 import { Shift } from '../../models/Shift';
 import { ShiftService } from '../../services/shift.service';
 import { MedicalSpecialtiesService } from '../../services/medical-specialties.service';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { ConfirmModalComponent } from 'src/app/components/modals/confirm-modal/confirm-modal.component';
 import { UserService } from 'src/app/services/user.service';
 import { getDateWork} from 'src/app/utils/helpers';
-import { MedicalSpecialty } from 'src/app/models/medical_specialty';
+import { MedicalSpecialty } from 'src/app/models/MedicalSpecialty';
 
 @Component({
   selector: 'app-add-shift',
@@ -19,16 +19,16 @@ import { MedicalSpecialty } from 'src/app/models/medical_specialty';
 export class AddShiftComponent implements OnInit {
 
   shiftSpecialty: MedicalSpecialty;
-  shiftPatient: IUser;
-  shiftDoctor: IUser;
+  shiftPatient: User;
+  shiftDoctor: User;
   shiftDay: string;
   shiftHour: string;
   
-  doctorList: IUser[];
+  doctorList: User[];
   doctorInfo: any[];
   specialtiesList: any[];
 
-  doctorFilterList: IUser[];
+  doctorFilterList: User[];
   dayFilterList: string[];
   hourFilterList: string[];
   
@@ -63,11 +63,11 @@ export class AddShiftComponent implements OnInit {
     this.hourFilterList = [];
 
     this.userSvc.getByType('Medico').subscribe(data => {
-      this.doctorList = data as IUser[];
+      this.doctorList = data as User[];
     });
 
     this.userSvc.getById(localStorage.getItem('uid')).subscribe(paciente => {
-      this.shiftPatient = paciente as IUser;
+      this.shiftPatient = paciente as User;
     });
 
     this.specialtiesSvc.getSpecialties().subscribe(data => {
@@ -88,8 +88,8 @@ export class AddShiftComponent implements OnInit {
     this.userSvc.getById(id).subscribe(doctor => {
       this.shiftDay = null;
       this.shiftHour = null;
-      this.shiftDoctor = doctor as IUser;
-      this.filterDaysByDoctor(doctor as IUser);
+      this.shiftDoctor = doctor as User;
+      this.filterDaysByDoctor(doctor as User);
       this.haveDoctor = true;
     })
   }
@@ -114,7 +114,7 @@ export class AddShiftComponent implements OnInit {
     this.doctorFilterList = doctors;
   }
 
-  filterDaysByDoctor(doctor: IUser) {
+  filterDaysByDoctor(doctor: User) {
     this.workDaysSvc.getWorkDays(doctor.id).subscribe(data => {
       this.doctorInfo = data;
       let work_days = data.map(doctor => {

@@ -1,5 +1,5 @@
 import { AuthService } from './../../services/auth.service';
-import { IUser } from './../../models/user';
+import { User } from '../../models/User';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProfileComponent implements OnInit {
   loggeado: boolean = false;
-  user: IUser;
+  user: User;
   constructor(private userSvc: UserService, private authSvc: AuthService, private router: Router) {
     this.user = this.authSvc.user;
   }

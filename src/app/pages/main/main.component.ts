@@ -1,4 +1,4 @@
-import { IUser } from 'src/app/models/user';
+import { User } from 'src/app/models/User';
 import { Component, OnInit } from '@angular/core';
 
 @Component({  
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  user:IUser; 
+  user:User; 
   menuOptions:menuOption[];
   constructor() {
     this.menuOptions = [];

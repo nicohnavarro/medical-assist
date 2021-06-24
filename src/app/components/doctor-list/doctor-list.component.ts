@@ -1,4 +1,4 @@
-import { IUser } from 'src/app/models/user';
+import { User } from 'src/app/models/User';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class DoctorListComponent implements OnInit {
 
-  medicos:Array<IUser>=[];
+  medicos:Array<User>=[];
   cargando:boolean=true;
   displayedColumns: string[] = [
     'nombre',
@@ -24,11 +24,11 @@ export class DoctorListComponent implements OnInit {
     'borrar'
   ];
 
-  dataSource = new MatTableDataSource<IUser>(this.medicos);
+  dataSource = new MatTableDataSource<User>(this.medicos);
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   
   constructor(private userSvc:UserService,public dialog: MatDialog) { 
-    this.medicos=new Array<IUser>();
+    this.medicos=new Array<User>();
   }
   
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class DoctorListComponent implements OnInit {
 
   getMedicos(){
     this.userSvc.getByType('Medico').subscribe(data => {
-      this.medicos = data as IUser[];
+      this.medicos = data as User[];
       this.dataSource.data = this.medicos;
       setTimeout(() => {
         

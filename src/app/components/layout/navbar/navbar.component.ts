@@ -3,7 +3,6 @@ import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Notyf } from 'notyf';
-import { UserNav } from './../../../models/user';
 
 @Component({
   selector: 'app-navbar',
