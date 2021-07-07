@@ -1,5 +1,8 @@
 <div class="week">
-  <div class="day">
+  <div class="schedule">
+    <div class="time" *ngFor="let day of daysEnables" (click)="selectDay(day)" [ngClass]="day.active ? 'active' : ''">
+      <span>{{day.name}}</span>
+    </div>
   </div>
 </div>
 <div class="schedule">
