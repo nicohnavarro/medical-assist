@@ -7,10 +7,10 @@
     <app-survey-field [title]='field2' (sendValue)="getValue2($event)"></app-survey-field>
     <app-survey-field [title]='field3' (sendValue)="getValue3($event)"></app-survey-field>
   </mat-dialog-content>
-  <mat-dialog-actions>
+  <mat-dialog-actions align="end"> 
     <button
       mat-raised-button
-      color="accent"
+      color="primary"
       [disabled]="!btnEnable"
       (click)="addSurvey()"
     >

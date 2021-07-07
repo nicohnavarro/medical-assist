@@ -132,6 +132,7 @@ export class ShiftsListComponent implements OnInit {
       shift,
       typeUser,
     };
+    console.log(shift);
 
     switch (action) {
       case 'ACEPTAR':

@@ -10,7 +10,9 @@ mat-list {
   color: var(--on-background)!important;
   mat-list-item:hover {
     cursor: pointer;
-    background-color: #4583c7;
+    background-color: #471be3;
+    color:white;
+    border-radius: 14px;
   }
   mat-list-item {
     transition: background-color 0.1s linear 0.1s;

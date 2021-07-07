@@ -21,12 +21,12 @@ export class SetReviewModalComponent implements OnInit {
   successMsg:string;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { shiftCreated },
+    @Inject(MAT_DIALOG_DATA) public data: { shift:Shift },
     public dialogRef: MatDialogRef<SetReviewModalComponent>,
     private shiftSvc: ShiftService,
     private userSvc: UserService
   ) {
-    this.shift = data.shiftCreated;
+    this.shift = data.shift;
     this.loading = false;
     this.shiftLoaded = false;
     this.successMsg = localStorage.getItem('lang') == 'en' ?
@@ -44,6 +44,7 @@ export class SetReviewModalComponent implements OnInit {
   }
 
   finishShift() {
+    console.log(this.shift)
     this.shift.estado = ShiftStates.FINALIZADO;
     this.shift.resena = this.reason;
     this.shift.paciente.record = this.medicalHistory;
