@@ -21,7 +21,6 @@ export class NavbarComponent implements OnInit {
       this.userSvc.getById(localStorage.getItem('uid')).subscribe((data) => {
         this.authSvc.user = data;
         this.user = data;
-        console.log(data);
       })
     }
   }
@@ -40,7 +39,7 @@ export class NavbarComponent implements OnInit {
       this.router.navigate(['/login'])
     }
     catch (err) {
-      console.log(err);
+      this.showNotif('red',err.message);
     }
   }
 
@@ -49,12 +48,12 @@ export class NavbarComponent implements OnInit {
     this.openSidebar.emit("Open-sideBar");
   }
 
-  showNotif() {
+  showNotif(color:string,message:string) {
     const notyf = new Notyf({
       types: [
         {
           type: 'info',
-          background: 'blue',
+          background: color,
           icon: false
         }
       ]
@@ -62,7 +61,7 @@ export class NavbarComponent implements OnInit {
 
     notyf.open({
       type: 'info',
-      message: 'Send us <b>an email</b> to get support'
+      message: message
     });
   }
 }

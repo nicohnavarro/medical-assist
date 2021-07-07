@@ -120,7 +120,6 @@ export class StepperFormComponent implements OnInit {
   }
 
   resolved(captchaResponse: string) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
 
   CrearUsuario() {

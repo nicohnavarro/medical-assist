@@ -31,7 +31,6 @@ export class ThemeToogleComponent implements OnInit {
     const theme = checked ? 'dark' : 'light';
     this.renderer.setAttribute(this.document.body, 'class', hostClass);
     const classes = this.overlayContainer.getContainerElement().classList;
-    console.log(this.overlayContainer.getContainerElement().children);
     if(checked){
       classes.remove('lightMode');
       classes.add('darkMode');

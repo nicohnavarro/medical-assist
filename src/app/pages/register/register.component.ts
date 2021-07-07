@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
   async openDialog() {
     const dialogRef = this.dialog.open(SpinnerModalComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      // console.log(`Dialog result: ${result}`);
     });
   }
 
