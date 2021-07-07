@@ -1,3 +1,4 @@
+import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
 import { CancelModalComponent } from './components/modals/cancel-modal/cancel-modal.component';
 import { StarRatingComponent } from './components/functional/star-rating/star-rating.component';
 import { RateModalComponent } from './components/modals/rate-modal/rate-modal.component';
@@ -47,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RateModalComponent,
     StarRatingComponent,
     CancelModalComponent,
+    ConfirmModalComponent,
     PatientListComponent,
     DoctorListComponent,
     HistorialFormComponent,

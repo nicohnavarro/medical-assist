@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("uid",user.uid);
         let log = { userId: user.uid, date: new Date()}
         this.logSvc.add(log).then(()=>{
-          this.router.navigate(["main"]);
+          this.router.navigate(["main/home"]);
         })
       }
     }

@@ -13,18 +13,18 @@ $custom-typography: mat-typography-config(
 
 // GAMA COLORES
 $my-primary-color: (
-  200 : #abcbe9,
-  300 : #89b6e0,
-  400 : #6fa6d9,
-  500 : #5696d2,
-  600 : #4f8ecd,
-  700 : #4583c7,
+  200 : #a78ff3,
+  300 : #8362ee,
+  400 : #6941ea,
+  500 : #4e1fe6,
+  600 : #471be3,
+  700 : #3d17df,
   contrast: (
     200 : #000000,
-    300 : #000000,
-    400 : #000000,
-    500 : #000000,
-    600 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
     700 : #ffffff,
   ),
 );
@@ -45,6 +45,7 @@ $my-accent-color: (
     700 : #ffffff,
   ),
 );
+
 
 $my-warn-color: (
   200: #e68080,

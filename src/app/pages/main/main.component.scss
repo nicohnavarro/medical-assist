@@ -17,6 +17,7 @@ mat-list {
   }
   .active {
     box-shadow: var(--inset-shadow)!important;
+    border-radius: 15px;
   }
 }
 .example-container {

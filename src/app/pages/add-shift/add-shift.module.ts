@@ -1,7 +1,6 @@
 import { ComboListComponent } from './../../components/shared/combo-list/combo-list.component';
 import { ComboHourComponent } from './../../components/shifts/combo-hour/combo-hour.component';
 import { ComboDayComponent } from './../../components/shifts/combo-day/combo-day.component';
-import { ConfirmModalComponent } from 'src/app/components/modals/confirm-modal/confirm-modal.component';
 import { AddShiftComponent } from './add-shift.component';
 import { AngularMaterialModule } from './../../modules/angular-material.module';
 import { SharedModule } from './../../modules/shared.module';
@@ -12,7 +11,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [AddShiftComponent,ConfirmModalComponent,ComboDayComponent,ComboHourComponent,ComboListComponent],
+  declarations: [AddShiftComponent,ComboDayComponent,ComboHourComponent,ComboListComponent],
   imports: [
     TranslateModule,
     FormsModule,
