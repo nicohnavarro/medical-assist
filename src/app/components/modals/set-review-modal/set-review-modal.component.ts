@@ -44,7 +44,6 @@ export class SetReviewModalComponent implements OnInit {
   }
 
   finishShift() {
-    console.log(this.shift)
     this.shift.estado = ShiftStates.FINALIZADO;
     this.shift.resena = this.reason;
     this.shift.paciente.record = this.medicalHistory;
