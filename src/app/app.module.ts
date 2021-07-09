@@ -1,3 +1,4 @@
+import { UserModule } from './modules/user.module';
 import { ConfirmModalComponent } from './components/modals/confirm-modal/confirm-modal.component';
 import { CancelModalComponent } from './components/modals/cancel-modal/cancel-modal.component';
 import { StarRatingComponent } from './components/functional/star-rating/star-rating.component';
@@ -53,7 +54,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HistorialFormComponent,
     ListComponent,
     SetReviewModalComponent,
-    HourTakenDirective,
+    HourTakenDirective
   ],
   imports: [
     BrowserModule,
@@ -63,6 +64,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    UserModule,
     ThemeModule.forRoot({
       themes: [lightTheme, darkTheme],
       active: 'light'
@@ -90,7 +92,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularMaterialModule,
     SharedModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

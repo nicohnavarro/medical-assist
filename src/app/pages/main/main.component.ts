@@ -25,7 +25,6 @@ export class MainComponent implements OnInit {
   }
 
   buildMenu(role: string) {
-    console.log('acaa', role);
     let home: menuOption = {
       icon: "home",
       title: "home",
@@ -87,15 +86,15 @@ export class MainComponent implements OnInit {
       router: "charts"
     }
       switch (role) {
-        case 'Admin':
+        case 'admin':
           this.menuOptions = [];
           this.menuOptions.push(home, profile, lists, addUser, shiftsLists, surveys, schedules, reviews, charts, addShift);
           break;
-        case 'Patient':
+        case 'patient':
           this.menuOptions = [];
           this.menuOptions.push(home, profile, shiftsLists, reviews, addShift);
           break;
-        case 'Doctor':
+        case 'doctor':
           this.menuOptions = [];
           this.menuOptions.push(home, profile, shiftsLists, surveys, schedules, reviews);
           break;

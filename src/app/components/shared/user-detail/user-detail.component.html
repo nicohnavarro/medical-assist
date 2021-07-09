@@ -27,14 +27,14 @@
       <mat-panel-title>{{'typeOfUser' | translate}}</mat-panel-title>
       <mat-panel-description> </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>{{ tipo }}</p>
-    <div class="profesional" *ngIf="tipo === 'Medico'">
+    <p>{{ tipo | translate}}</p>
+    <div class="profesional" *ngIf="tipo === 'doctor'">
       <span>{{'specialties' | translate}}</span>
       <div *ngFor="let categoria of especialidades" class="especialidades">
         <p>-{{ categoria }}</p>
       </div>
     </div>
-    <div class="profesional" *ngIf="tipo === 'Paciente'">
+    <div class="profesional" *ngIf="tipo === 'patient'">
       <span>{{ "insurance" | translate }}</span>
       <div class="especialidades">
         <p>-{{ obraSocial }}</p>

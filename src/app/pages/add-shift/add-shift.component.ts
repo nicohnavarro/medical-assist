@@ -63,7 +63,7 @@ export class AddShiftComponent implements OnInit {
     this.dayFilterList = [];
     this.hourFilterList = [];
 
-    this.userSvc.getByType('Doctor').subscribe(data => {
+    this.userSvc.getByType('doctor').subscribe(data => {
       this.doctorList = data as User[];
     });
 
@@ -118,10 +118,10 @@ export class AddShiftComponent implements OnInit {
   filterDaysByDoctor(doctor: User) {
     this.workDaysSvc.getWorkDays(doctor.id).subscribe(data => {
       this.doctorInfo = data;
-      let work_days = data.map(doctor => {
+      let workDays = data.filter((workday)=> workday.active).map(doctor => {
         return doctor.name;
       });
-      this.dayFilterList = getDateWork(work_days);
+      this.dayFilterList = getDateWork(workDays);
     });
   }
 

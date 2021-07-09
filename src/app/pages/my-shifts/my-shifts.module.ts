@@ -16,7 +16,6 @@ import { CommonModule } from '@angular/common';
     MyShiftsComponent,
     ShiftsListComponent,
     CustomFilterComponent,
-    EnumToArrayPipe,
     EnumAsStringPipe,
   ],
   imports: [

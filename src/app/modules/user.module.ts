@@ -1,3 +1,4 @@
+import { EnumToArrayPipe } from './../pipes/enum-to-array.pipe';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,6 +14,7 @@ import { NgModule } from '@angular/core';
     UploadImageComponent,
     UserDetailComponent,
     StepperFormComponent,
+    EnumToArrayPipe
   ],
   imports: [
     SharedModule,
@@ -24,5 +26,6 @@ import { NgModule } from '@angular/core';
     FormsModule,
   ],
   exports: [UploadImageComponent, UserDetailComponent, StepperFormComponent],
+  providers: [EnumToArrayPipe],
 })
 export class UserModule {}

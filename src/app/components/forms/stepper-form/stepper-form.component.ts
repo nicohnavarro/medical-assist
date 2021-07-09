@@ -48,7 +48,7 @@ export class StepperFormComponent implements OnInit {
   //#endregion
 
   tipoUsuario: string;
-  tiposUsuarios: string[] = ['Paciente', 'Medico'];
+  tiposUsuarios: string[] = ['patient', 'doctor'];
   especialidades = Specialties;
   hide = true;
   cargando = false;
@@ -135,9 +135,9 @@ export class StepperFormComponent implements OnInit {
       first_image: this.imagen_uno,
       second_image: this.imagen_dos,
     };
-    if (this.tipoUsuario === 'Medico')
+    if (this.tipoUsuario === 'doctor')
       this.usuario.especializaciones = this.especialidadFormCtrl.value;
-    if (this.tipoUsuario === 'Paciente')
+    if (this.tipoUsuario === 'patient')
       this.usuario.obraSocial = this.obraSocial.value;
   }
 }

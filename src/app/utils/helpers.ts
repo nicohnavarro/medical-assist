@@ -25,13 +25,13 @@ export function getQuincena(){
     return quincena;
 }
 
-export function getDateWork(work_days:string[]){
+export function getDateWork(workDays:string[]){
     let date = new Date();
     let today = new Date();
     let quincena:string[] = [];
     for(let i=1 ; i<=15 ; i++){
         date.setDate(today.getDate() + i);
-        if(work_days.includes(Days[date.getDay()])){
+        if(workDays.includes(Days[date.getDay()])){
             quincena.push(Days[date.getDay()] + '-' + getDiaFormat(date));
         }
     }

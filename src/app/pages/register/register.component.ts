@@ -1,3 +1,4 @@
+import { EnumToArrayPipe } from './../../pipes/enum-to-array.pipe';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,7 +17,7 @@ import { UserService } from 'src/app/services/user.service';
 export class RegisterComponent implements OnInit {
   file_uno: File;
   file_dos: File;
-  constructor(private authSvc: AuthService, private fileSvc: FileService, private userSvc: UserService, private _snackBar: MatSnackBar, private router: Router, public dialog: MatDialog) {
+  constructor(private authSvc: AuthService, private fileSvc: FileService, private userSvc: UserService, private _snackBar: MatSnackBar, private router: Router, public dialog: MatDialog,private enumToArray: EnumToArrayPipe) {
    }
 
   ngOnInit() { }
@@ -33,7 +34,7 @@ export class RegisterComponent implements OnInit {
         this.userSvc.addUser(user,cred.user.uid).then((algo)=>{
           localStorage.setItem('uid',cred.user.uid);
           this.dialog.closeAll();
-          this.router.navigate(['main']);
+          this.router.navigate(['main/home']);
         }).catch(err => {console.log(err)});
       }
     }catch(err){

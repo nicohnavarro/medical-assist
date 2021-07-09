@@ -16,7 +16,7 @@
       </app-user-detail>
     </div>
     <div class="column-feature">
-      <app-medical-schedule *ngIf="user && user.type === 'Doctor'" [user]=user></app-medical-schedule>
-      <app-user-card *ngIf="user && user.type !== 'Doctor'" [user]=user></app-user-card>
+      <app-medical-schedule *ngIf="user && user.type === 'doctor'" [user]=user></app-medical-schedule>
+      <app-user-card *ngIf="user && user.type !== 'doctor'" [user]=user></app-user-card>
     </div> 
   </div>

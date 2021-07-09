@@ -160,7 +160,7 @@
               *ngFor="let tipo of tiposUsuarios"
               [value]="tipo"
             >
-              {{ tipo }}
+              {{ tipo | translate }}
             </mat-radio-button>
           </mat-radio-group>
 
@@ -181,7 +181,7 @@
           </mat-form-field>
         </div>
         <mat-form-field
-          *ngIf="tipoUsuario == 'Medico'"
+          *ngIf="tipoUsuario == 'doctor'"
           appearance="fill"
           color="primary"
         >
@@ -203,7 +203,7 @@
         </mat-form-field>
 
         <mat-form-field
-          *ngIf="tipoUsuario == 'Paciente'"
+          *ngIf="tipoUsuario == 'patient'"
           appearance="fill"
           color="primary"
         >

@@ -12,19 +12,19 @@ export class UserService {
 
   
   addUser(user: User, id: string) {
-    return this.db.collection('usuarios').doc(id).set(user);
+    return this.db.collection('users').doc(id).set(user);
   }
   
   udpateUser(user: User, id: string): Promise<void> {
-    return this.db.collection<User>('usuarios').doc(id).set(user);
+    return this.db.collection<User>('users').doc(id).set(user);
   }
   
   getAllUsers(): Observable<any[]> {
-    return this.db.collection<any>('usuarios').valueChanges({ idField: 'id' });
+    return this.db.collection<any>('users').valueChanges({ idField: 'id' });
   }
 
   getById(id: string): Observable<User> {
-    const usersDocuments = this.db.doc<User>('usuarios/' + id);
+    const usersDocuments = this.db.doc<User>('users/' + id);
     return usersDocuments.snapshotChanges().pipe(
       map((changes) => {
         const data = changes.payload.data();
@@ -36,7 +36,7 @@ export class UserService {
   
   getByType(type: string) {
     return this.db
-      .collection('usuarios', (ref) => ref.where('type', '==', type))
+      .collection('users', (ref) => ref.where('type', '==', type))
       .valueChanges({ idField: 'id' });
   }
 

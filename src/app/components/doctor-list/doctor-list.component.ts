@@ -37,7 +37,7 @@ export class DoctorListComponent implements OnInit {
   }
 
   getMedicos(){
-    this.userSvc.getByType('Medico').subscribe(data => {
+    this.userSvc.getByType('doctor').subscribe(data => {
       this.medicos = data as User[];
       this.dataSource.data = this.medicos;
       setTimeout(() => {

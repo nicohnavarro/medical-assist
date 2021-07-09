@@ -1,3 +1,5 @@
+import { StepperFormComponent } from './../../components/forms/stepper-form/stepper-form.component';
+import { EnumToArrayPipe } from './../../pipes/enum-to-array.pipe';
 import { UserModule } from './../../modules/user.module';
 import { SpinnerModalComponent } from 'src/app/components/modals/spinner-modal/spinner-modal.component';
 import { RegisterRoutingModule } from './register.routing.module';
