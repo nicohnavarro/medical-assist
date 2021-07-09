@@ -1,3 +1,4 @@
+import { UserCardComponent } from './../../components/shared/user-card/user-card.component';
 import { UserModule } from './../../modules/user.module';
 import { AddSpecialtyComponent } from './../../components/specialties/add-specialty/add-specialty.component';
 import { MedicalScheduleComponent } from './../../components/shared/medical-schedule/medical-schedule.component';
@@ -11,7 +12,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [ProfileComponent,MedicalScheduleComponent,AddSpecialtyComponent],
+  declarations: [ProfileComponent,MedicalScheduleComponent,AddSpecialtyComponent,UserCardComponent],
   imports: [
     TranslateModule,
     FormsModule,

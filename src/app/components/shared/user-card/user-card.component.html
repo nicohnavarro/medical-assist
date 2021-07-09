@@ -1,19 +1,19 @@
 <section>
-  <div class="card">
+  <div class="card" *ngIf="user">
       <div class="face front">
-          <h3 class="debit">Credit Card</h3>
-          <h3 class="bank">Bank Name</h3>
-          <img src="chip.PNG" alt="" class="chip">
-          <h3 class="number">0123 4567 8901 2345</h3>
+          <h3 class="debit">{{ 'title' | translate }}</h3>
+          <h3 class="bank">{{user?.obraSocial}}</h3>
+          <img src="../../../../assets/images/chip.png" alt="" class="chip">
+          <h3 class="number">{{ user.doc }}</h3>
           <h5 class="valid"><span>Valid<br>thru</span><span>11/24</span></h5>
-          <h5 class="cardHolder">Nicolas Navarro</h5>
+          <h5 class="cardHolder">{{user.surname}}, {{user.name}}</h5>
       </div>
       <div class="face back">
           <div class="blackbar"></div>
           <div class="cvvtext">
               <h5>Autorized Signature-not valid unless signed</h5>
               <div class="whitebar"></div>
-              <div class="cvv">123</div>
+              <div class="cvv">{{user.type}}</div>
           </div>
           <p class="text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste maxime, voluptate
               similique dignissimos dolor magnam harum, autem fugit praesentium culpa eius corrupti ab!
@@ -22,4 +22,13 @@
               ratione vel amet! Ullam obcaecati tempora error aliquid quos eum adipisci.</p>
       </div>
   </div>
+  <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" id="blobSvg">
+    <defs>
+      <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color: rgb(167, 143, 243);"></stop>
+        <stop offset="100%" style="stop-color: rgb(71, 27, 227);"></stop>
+      </linearGradient>
+    </defs>
+    <path id="blob" d="M432.5,302Q374,354,333,421.5Q292,489,221,456.5Q150,424,111,369.5Q72,315,106.5,262.5Q141,210,163.5,175Q186,140,233.5,105.5Q281,71,341.5,97Q402,123,446.5,186.5Q491,250,432.5,302Z" fill="url(#gradient)"></path>
+  </svg>
 </section>
