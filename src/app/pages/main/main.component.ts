@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
   user: User;
   menuOptions: menuOption[];
-  loading:boolean=false;
+  loading: boolean = false;
   constructor(private userSvc: UserService) {
     this.menuOptions = [];
     if (localStorage.getItem('uid')) {
@@ -25,6 +25,7 @@ export class MainComponent implements OnInit {
   }
 
   buildMenu(role: string) {
+    console.log('acaa', role);
     let home: menuOption = {
       icon: "home",
       title: "home",
@@ -85,20 +86,23 @@ export class MainComponent implements OnInit {
       title: "charts",
       router: "charts"
     }
-
-    switch (role) {
-      case 'Admin':
-        this.menuOptions.push(home, profile, lists, addUser, shiftsLists, surveys, schedules, reviews, charts, addShift);
-        break;
-      case 'Patient':
-        this.menuOptions.push(home, profile, shiftsLists, reviews, addShift);
-        break;
-      case 'Doctor':
-        this.menuOptions.push(home, profile, shiftsLists, surveys, schedules, reviews, addShift);
-        break;
-      default:
-        break;
-    }
+      switch (role) {
+        case 'Admin':
+          this.menuOptions = [];
+          this.menuOptions.push(home, profile, lists, addUser, shiftsLists, surveys, schedules, reviews, charts, addShift);
+          break;
+        case 'Patient':
+          this.menuOptions = [];
+          this.menuOptions.push(home, profile, shiftsLists, reviews, addShift);
+          break;
+        case 'Doctor':
+          this.menuOptions = [];
+          this.menuOptions.push(home, profile, shiftsLists, surveys, schedules, reviews);
+          break;
+        default:
+          this.menuOptions = [];
+          break;
+      }
   }
 }
 

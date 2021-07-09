@@ -20,7 +20,7 @@ export class WorkDaysService {
     this.db.collection('usuarios').doc(uid).collection('work_days').add(workDays);
   }
 
-  updateWorkDays(workDays: any, id: string): Promise<void> {
-    return this.db.collection<any>('workDays').doc(id).set(workDays);
+  updateWorkDays(workDays: any,idUser:string ,uid: string): Promise<void> {
+    return this.db.collection('usuarios').doc(idUser).collection<WorkDay>('work_days').doc(uid).set(workDays);
   }
 }

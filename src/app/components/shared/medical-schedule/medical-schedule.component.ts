@@ -67,11 +67,13 @@ export class MedicalScheduleComponent implements OnInit {
   }
 
   saveWorkDays(){
-    console.log(this.daysEnables);
     this.daysEnables.forEach(element => {
-      element.docId ? this.workDaysSvc.updateWorkDays(element,element.docId).then((data)=>{
+      console.log(element);
+      const {docId,...data} = element;
+      element.docId ? this.workDaysSvc.updateWorkDays(data,this.user.id,docId).then((data)=>{
         console.log(data);
-      }):this.workDaysSvc.addWorkDays(element,this.user.id);
+      }).catch((err)=>{ console.log(err)})
+      :this.workDaysSvc.addWorkDays(element,this.user.id);
     });
   }
 }

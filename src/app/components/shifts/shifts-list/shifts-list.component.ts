@@ -62,7 +62,7 @@ export class ShiftsListComponent implements OnInit {
     private authSvc: AuthService
   ) {
 
-    this.typeUser = authSvc.user.type;
+    this.typeUser = authSvc.user?.type;
     this.setPatientOptions(this.typeUser);
 
     specialtiesSvc.getSpecialties().subscribe((data) => {
