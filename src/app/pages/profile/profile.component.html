@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="column-datos">
+    <div class="column-datos" *ngIf="user">
         <app-user-detail
         [nombre]="user.name"
         [apellido]="user.surname"

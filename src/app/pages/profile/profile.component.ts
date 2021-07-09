@@ -12,15 +12,20 @@ import { UserService } from 'src/app/services/user.service';
 export class ProfileComponent implements OnInit {
   loggeado: boolean = false;
   user: User;
-  constructor(private userSvc: UserService, private authSvc: AuthService, private router: Router) {
-    this.user = this.authSvc.user;
+  constructor(private userSvc: UserService, private router: Router) {
+    // this.user = this.authSvc.user;
+    if (localStorage.getItem('uid')) {
+      this.userSvc.getById(localStorage.getItem('uid')).subscribe((data) => {
+        this.user = data;
+      })
+    }
   }
 
   ngOnInit(): void {
   }
 
 
-  irIngreso() {
+  goLogin() {
     this.router.navigate(['login']);
   }
 }

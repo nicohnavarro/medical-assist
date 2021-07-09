@@ -15,7 +15,7 @@ mat-list {
     border-radius: 14px;
   }
   mat-list-item {
-    transition: background-color 0.1s linear 0.1s;
+    transition: background-color color border-radius 0.1s linear 0.1s;
   }
   .active {
     box-shadow: var(--inset-shadow)!important;

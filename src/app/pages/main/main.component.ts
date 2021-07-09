@@ -1,5 +1,4 @@
 import { UserService } from './../../services/user.service';
-import { AuthService } from './../../services/auth.service';
 import { User } from 'src/app/models/User';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
   user: User;
   menuOptions: menuOption[];
+  loading:boolean=false;
   constructor(private userSvc: UserService) {
     this.menuOptions = [];
     if (localStorage.getItem('uid')) {
@@ -99,8 +99,6 @@ export class MainComponent implements OnInit {
       default:
         break;
     }
-
-
   }
 }
 

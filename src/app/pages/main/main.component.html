@@ -1,5 +1,5 @@
 <div class="example-container">
-  <app-navbar [user]="user" (openSidebar)="snav.toggle()"></app-navbar>
+  <app-navbar *ngIf="user" [user]="user" (openSidebar)="snav.toggle()"></app-navbar>
   <mat-sidenav-container class="example-sidenav-container" hasBackdrop="false">
     <mat-sidenav #snav fixedTopGap="56" mode='side'>
       <mat-list>
@@ -16,8 +16,15 @@
       </mat-list>
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <mat-sidenav-content *ngIf="!loading">
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
+<!-- 
+  <mat-spinner
+  *ngIf="loading"
+  [diameter]="150"
+  style="margin: 10% auto"
+></mat-spinner> -->
+
 </div>

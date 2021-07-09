@@ -32,7 +32,7 @@
   "validateEmail1": "Email is invalid",
   "validateEmail2": "Email is required",
   "validatePassword1": "Password must have 6 characters",
-  "validatePasswrod2": "Password is required",
+  "validatePassword2": "Password is required",
   "register": "Register",
   "loginmessage1": "Login with email and password",
   "loginmessage2": "to book an appointment with your favorite doctor",

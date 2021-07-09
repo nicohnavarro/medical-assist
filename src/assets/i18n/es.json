@@ -32,7 +32,7 @@
   "validateEmail1": "Por favor ingrese un correo valido.",
   "validateEmail2": " El correo es obligatorio",
   "validatePassword1": "La clave tiene que tener al menos 6 caracteres.",
-  "validatePasswrod2": "La clave es obligatorio",
+  "validatePassword2": "La clave es obligatorio",
   "register": "Registrate",
   "loginmessage1": "Ingresa con tu usuario y contraseña",
   "loginmessage2": "para acceder a la mejor atencion personalizada",

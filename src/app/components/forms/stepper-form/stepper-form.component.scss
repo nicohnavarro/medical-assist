@@ -132,11 +132,22 @@ mat-step {
   }
   .form_datos {
     display: flex;
+    width: 100%;
     flex-direction: column;
-    justify-content: start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    .datos-prin{
+      mat-form-field {
+        width: 80%;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem 1rem;
+      }
+    }
     mat-form-field {
       width: 80%;
+      justify-content: center;
+      align-items: center;
       margin: 1rem 1rem;
     }
   }
