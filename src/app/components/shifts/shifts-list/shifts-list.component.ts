@@ -71,13 +71,13 @@ export class ShiftsListComponent implements OnInit {
       });
     });
 
-    userSvc.getByType('Medico').subscribe((data) => {
+    userSvc.getByType('doctor').subscribe((data) => {
       this.Doctors = data.map((item) => {
         return { ...item, completed: true };
       });
     });
 
-    userSvc.getByType('Paciente').subscribe((data) => {
+    userSvc.getByType('patient').subscribe((data) => {
       this.Patients = data.map((item) => {
         return { ...item, completed: true };
       });
@@ -90,7 +90,7 @@ export class ShiftsListComponent implements OnInit {
   }
 
   private setPatientOptions(type: string) {
-    if (type == 'Paciente') {
+    if (type == 'patient') {
       let removeId = this.displayedColumns.indexOf('attend');
       this.displayedColumns.splice(removeId, 1);
       let finishId = this.displayedColumns.indexOf('finish');

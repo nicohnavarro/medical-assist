@@ -12,11 +12,12 @@ import { Notyf } from 'notyf';
 })
 export class CancelModalComponent implements OnInit {
   shift: Shift;
-  laoding: boolean;
+  loading: boolean;
   shiftLoaded: boolean;
   reason: string = '';
   btnEnable: boolean = false;
   successMsg:string;
+  typeUser:string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { shift:Shift; typeUser:string },
@@ -24,8 +25,9 @@ export class CancelModalComponent implements OnInit {
     private turnoSvc: ShiftService
   ) {
     this.shift = data.shift;
-    this.laoding = false;
+    this.loading = false;
     this.shiftLoaded = false;
+    this.typeUser = data.typeUser;
 
     this.successMsg = localStorage.getItem('lang') == 'en' ?
     "Shift cancelled":
@@ -40,7 +42,7 @@ export class CancelModalComponent implements OnInit {
   }
 
   cancelShift() {
-    this.shift.estado = ShiftStates.CANCELADO_MEDICO;
+    this.typeUser === 'patient'? this.shift.estado = ShiftStates.CANCELADO_PACIENTE : this.shift.estado = ShiftStates.CANCELADO_MEDICO;
     this.shift.motivoRechazo = this.reason;
     this.turnoSvc.updateShift(this.shift, this.shift.id).then(() => {
       this.dialogRef.close();

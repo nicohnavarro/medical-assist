@@ -1,4 +1,3 @@
-import { EnumToArrayPipe } from './../../pipes/enum-to-array.pipe';
 import { EnumAsStringPipe } from './../../pipes/enum-as-string.pipe';
 import { CustomFilterComponent } from './../../components/shared/custom-filter/custom-filter.component';
 import { ShiftsListComponent } from './../../components/shifts/shifts-list/shifts-list.component';

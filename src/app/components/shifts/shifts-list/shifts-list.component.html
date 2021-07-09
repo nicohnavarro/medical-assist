@@ -71,7 +71,7 @@
   </ng-container>
 
   <!-- Attend Column -->
-  <ng-container matColumnDef="attend" *ngIf="typeUser !== 'Paciente'">
+  <ng-container matColumnDef="attend" *ngIf="typeUser !== 'patient'">
     <th mat-header-cell *matHeaderCellDef>{{ "accept" | translate }}</th>
     <td mat-cell disabled="true" *matCellDef="let element">
       <mat-icon
@@ -141,7 +141,7 @@
   </ng-container>
 
     <!-- Qualify Column -->
-  <ng-container matColumnDef="qualify"  *ngIf="typeUser === 'Paciente'">
+  <ng-container matColumnDef="qualify"  *ngIf="typeUser === 'patient'">
     <th mat-header-cell *matHeaderCellDef>{{ "rate" | translate }}</th>
     <td mat-cell *matCellDef="let element">
       <mat-icon

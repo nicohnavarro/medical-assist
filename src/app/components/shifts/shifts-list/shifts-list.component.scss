@@ -13,12 +13,16 @@ table {
   border-radius: 15px;
 }
 
-tbody tr:hover{
+tbody td:hover{
   background-color: #471be3;
+  color:white!important;
 }
 
 .mat-row:hover{
   background-color: #471be3;
+  .mat-cell{
+    color:white!important;
+  }
 }
 
 .mat-icon:hover{
