@@ -106,6 +106,7 @@
   "selectedDoctor":"Medico seleccionado",
   "selectedDay":"Dia seleccionado",
   "selectedHour":"Hora seleccionada",
-  "surveyMsg":"Por favor completa nuestra encuesta 📝"
+  "surveyMsg":"Por favor completa nuestra encuesta 📝",
+  "save":"Guardar 💾"
 }
 

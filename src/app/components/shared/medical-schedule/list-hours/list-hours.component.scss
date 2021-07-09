@@ -1,0 +1,31 @@
+label{
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.schedule{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 2rem;
+  .time{
+    border-radius: 20px;
+    background: var(--background) !important;
+    color: var(--on-background) !important;
+    box-shadow: var(--border-shadow) !important;
+    padding: 1rem;
+    width: 10%;
+    margin: .5rem;
+  }
+  .time:hover{
+    box-shadow: var(--inset-shadow)!important;
+    cursor:pointer;
+  }
+
+  .active{
+    box-shadow: var(--inset-shadow)!important;
+  }
+}

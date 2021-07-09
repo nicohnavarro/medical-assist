@@ -1,0 +1,10 @@
+<div class="schedule">
+  <div
+    class="time"
+    *ngFor="let day of days"
+    (click)="selectDay(day)"
+    [ngClass]="day.active ? 'active' : ''"
+  >
+    <span>{{ day.name }}</span>
+  </div>
+</div>

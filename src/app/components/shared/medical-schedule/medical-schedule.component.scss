@@ -1,26 +1,6 @@
-.schedule{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 2rem;
-  .time{
-    border-radius: 20px;
-    background: var(--background) !important;
-    color: var(--on-background) !important;
-    box-shadow: var(--border-shadow) !important;
-    padding: 1rem;
-    width: 15%;
-    margin: .5rem;
-  }
-  .time:hover{
-    box-shadow: var(--inset-shadow)!important;
-    cursor:pointer;
-  }
-
-  .active{
-    box-shadow: var(--inset-shadow)!important;
-  }
+.grande{
+  width: 30%;
+  height: 10%;
+  margin-top: 1rem;
+  font-size: 17px;
 }

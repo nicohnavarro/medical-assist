@@ -7,8 +7,8 @@
 
       <mat-selection-list #hour [multiple]="false"
         (selectionChange)="onOptionsSelectedHour(hour.selectedOptions.selected[0]?.value)">
-        <mat-list-option *ngFor="let hour of hours" value="{{hour}}">
-          {{hour}}
+        <mat-list-option *ngFor="let hour of hours" value="{{hour.hour}}">
+          {{hour.hour}}
         </mat-list-option>
 
       </mat-selection-list>

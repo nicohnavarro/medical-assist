@@ -1,3 +1,4 @@
+import { WorkSchedule } from './../../../models/WorkDay';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ComboHourComponent implements OnInit {
   @Input() choseDay: boolean;
-  @Input() hours: string[];
+  @Input() hours: WorkSchedule[];
   @Input() showHour: string;
   @Output() selectedHour: EventEmitter<string> = new EventEmitter<string>();
   

@@ -1,0 +1,10 @@
+<label>{{day}}</label>
+<div class="schedule">
+  <div
+    class="time"
+    *ngFor="let time of schedule"
+    (click)="selectTime(time)"
+    [ngClass]="time.active ? 'active' : ''"
+  >
+    <span>{{ time.hour }}</span>
+  </div>

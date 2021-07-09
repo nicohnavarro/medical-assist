@@ -1,3 +1,5 @@
+import { ListHoursComponent } from '../../components/shared/medical-schedule/list-hours/list-hours.component';
+import { ListDaysComponent } from '../../components/shared/medical-schedule/list-days/list-days.component';
 import { UserCardComponent } from './../../components/shared/user-card/user-card.component';
 import { UserModule } from './../../modules/user.module';
 import { AddSpecialtyComponent } from './../../components/specialties/add-specialty/add-specialty.component';
@@ -12,7 +14,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [ProfileComponent,MedicalScheduleComponent,AddSpecialtyComponent,UserCardComponent],
+  declarations: [ProfileComponent,MedicalScheduleComponent,AddSpecialtyComponent,UserCardComponent,ListDaysComponent,ListHoursComponent],
   imports: [
     TranslateModule,
     FormsModule,

@@ -1,3 +1,4 @@
+import { WorkSchedule } from './../../models/WorkDay';
 import { User } from 'src/app/models/User';
 import { Shift } from '../../models/Shift';
 import { ShiftService } from '../../services/shift.service';
@@ -8,7 +9,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ConfirmModalComponent } from 'src/app/components/modals/confirm-modal/confirm-modal.component';
 import { UserService } from 'src/app/services/user.service';
-import { getDateWork} from 'src/app/utils/helpers';
+import { getDateWork } from 'src/app/utils/helpers';
 import { MedicalSpecialty } from 'src/app/models/MedicalSpecialty';
 
 @Component({
@@ -23,29 +24,29 @@ export class AddShiftComponent implements OnInit {
   shiftDoctor: User;
   shiftDay: string;
   shiftHour: string;
-  
+
   doctorList: User[];
   doctorInfo: any[];
   specialtiesList: any[];
 
   doctorFilterList: User[];
   dayFilterList: string[];
-  hourFilterList: string[];
-  
+  hourFilterList: WorkSchedule[];
+
   isLogged: boolean = false;
   haveSpecialty: boolean = false;
   haveDoctor: boolean = false;
   haveDay: boolean = false;
-  
+
 
   constructor(
-    private userSvc: UserService, 
-    private shiftSvc: ShiftService, 
+    private userSvc: UserService,
+    private shiftSvc: ShiftService,
     private specialtiesSvc: MedicalSpecialtiesService,
     public dialog: MatDialog,
-    private router: Router, 
+    private router: Router,
     private workDaysSvc: WorkDaysService
-    ){
+  ) {
     if (localStorage.getItem('uid')) {
       this.isLogged = true;
       this.initialState();
@@ -55,14 +56,14 @@ export class AddShiftComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  private initialState(){
+  private initialState() {
     this.doctorList = [];
 
     this.doctorFilterList = [];
     this.dayFilterList = [];
     this.hourFilterList = [];
 
-    this.userSvc.getByType('Medico').subscribe(data => {
+    this.userSvc.getByType('Doctor').subscribe(data => {
       this.doctorList = data as User[];
     });
 
@@ -118,7 +119,7 @@ export class AddShiftComponent implements OnInit {
     this.workDaysSvc.getWorkDays(doctor.id).subscribe(data => {
       this.doctorInfo = data;
       let work_days = data.map(doctor => {
-        return doctor.day;
+        return doctor.name;
       });
       this.dayFilterList = getDateWork(work_days);
     });
@@ -127,11 +128,12 @@ export class AddShiftComponent implements OnInit {
   filterHourByDay(selectedDay: string) {
     let day = selectedDay.split('-')[0];
     let shiftsTaken = [];
-    let schedule: string[] = this.doctorInfo.filter(info => info.day === day).map(info => info.schedule)[0];
+    let schedule: WorkSchedule[] = this.doctorInfo.filter(info => info.name === day).map(info => info.schedule)[0].filter(hour=> hour.active);
+    console.log(schedule);
     this.shiftSvc.getShifts().subscribe((data) => {
       shiftsTaken = data.filter(shift => shift.fecha === selectedDay && shift.estado <= 1).map(item => item.hora)
       shiftsTaken.length > 0 ?
-        this.hourFilterList = schedule.filter(hour => !shiftsTaken.includes(hour))
+        this.hourFilterList = schedule.filter(shift => !shiftsTaken.includes(shift.hour))
         :
         this.hourFilterList = schedule
     });
@@ -171,6 +173,7 @@ export class AddShiftComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmModalComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
+      this.shiftHour = '';
     });
   }
 

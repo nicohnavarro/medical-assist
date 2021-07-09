@@ -1,5 +1,7 @@
+import { User } from './../../../models/User';
 import { WorkDaysService } from './../../../services/work-days.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { WorkDay, WorkSchedule } from 'src/app/models/WorkDay';
 @Component({
   selector: 'app-medical-schedule',
   templateUrl: './medical-schedule.component.html',
@@ -7,37 +9,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedicalScheduleComponent implements OnInit {
 
+  @Input() user:User | undefined;
   scheduleExample:WorkSchedule[];
   active:boolean = false;
+  daySchedule:string='';
   doctorInfo;
   daysWork;
+  loading:boolean=false;
   daysEnables: WorkDay[]=[];
 
   constructor(private workDaysSvc:WorkDaysService) {
     let idDoc = localStorage.getItem('uid');
     this.workDaysSvc.getWorkDays(idDoc).subscribe(data => {
-      this.doctorInfo = data;
-      let work_days = data.map(doctor => {
-        return doctor.day;
-      });
-      this.daysWork = work_days;
+      console.log(data);
+      data.length > 0 ? this.daysEnables = data.sort((a,b)=> a.index - b.index) : this.getDays()
+;      if(data.length > 0){
+        this.daysEnables = data;
+      }
     });
     this.scheduleExample = [];
   }
 
   ngOnInit(): void {
-    this.getDays();
-    this.getSchedule();
   }
 
   getDays(){
     this.daysEnables = [
-      {name:'LUNES',active:false,schedule:this.getSchedule()},
-      {name:'MARTES',active:false,schedule:this.getSchedule()},
-      {name:'MIERCOLES',active:false,schedule:this.getSchedule()},
-      {name:'JUEVES',active:false,schedule:this.getSchedule()},
-      {name:'VIERNES',active:false,schedule:this.getSchedule()},
-      {name:'SABADO',active:false,schedule:this.getSchedule()},
+      {index:1,name:'LUNES',active:false,schedule:this.getSchedule(),doctorId:this.user.id},
+      {index:2,name:'MARTES',active:false,schedule:this.getSchedule(),doctorId:this.user.id},
+      {index:3,name:'MIERCOLES',active:false,schedule:this.getSchedule(),doctorId:this.user.id},
+      {index:4,name:'JUEVES',active:false,schedule:this.getSchedule(),doctorId:this.user.id},
+      {index:5,name:'VIERNES',active:false,schedule:this.getSchedule(),doctorId:this.user.id},
+      {index:6,name:'SABADO',active:false,schedule:this.getSchedule(),doctorId:this.user.id},
     ]
   }
 
@@ -45,38 +48,30 @@ export class MedicalScheduleComponent implements OnInit {
     const schedule = [];
     let exampleDate = new Date('11/11/2020 8:00:00');
     let first = exampleDate.getHours()+':00';
-    this.scheduleExample.push({'hour':first,'active':true});
-    schedule.push({'hour':first,'active':true});
+    schedule.push({'hour':first,'active':false});
     while(exampleDate.getHours()<19){
       exampleDate.setMinutes( exampleDate.getMinutes() + 30 );
       let minutes = exampleDate.getMinutes() === 0 ? '00':'30'
       let hour = exampleDate.getHours()+':'+minutes;
-      this.scheduleExample.push({hour,'active':false});
       schedule.push({hour,'active':false});
     }
     return schedule;
   }
 
+  selectDay(day:WorkDay){
+    this.scheduleExample = day.schedule;
+    this.daySchedule = day.name;
+  }
 
   selectTime(hour){
-    hour.active ? hour.active= false: hour.active = true;
-    console.log(this.doctorInfo);
-    console.log(this.daysWork);
   }
-  selectDay(hour){
-    hour.active ? hour.active= false: hour.active = true;
-    console.log(this.doctorInfo);
-    console.log(this.daysWork);
+
+  saveWorkDays(){
+    console.log(this.daysEnables);
+    this.daysEnables.forEach(element => {
+      element.docId ? this.workDaysSvc.updateWorkDays(element,element.docId).then((data)=>{
+        console.log(data);
+      }):this.workDaysSvc.addWorkDays(element,this.user.id);
+    });
   }
-}
-
-export interface WorkDay{
-  name:string,
-  active:boolean,
-  schedule?:any[]
-}
-
-export interface WorkSchedule{
-  hour:string,
-  active:boolean,
 }

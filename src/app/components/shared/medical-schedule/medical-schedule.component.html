@@ -1,12 +1,5 @@
 <div class="week">
-  <div class="schedule">
-    <div class="time" *ngFor="let day of daysEnables" (click)="selectDay(day)" [ngClass]="day.active ? 'active' : ''">
-      <span>{{day.name}}</span>
-    </div>
-  </div>
-</div>
-<div class="schedule">
-  <div class="time" *ngFor="let time of scheduleExample" (click)="selectTime(time)" [ngClass]="time.active ? 'active' : ''">
-    <span>{{time.hour}}</span>
-  </div>
+  <app-list-days [days]="daysEnables" (selectedDay)="selectDay($event)"></app-list-days>
+  <app-list-hours [day]="daySchedule" [schedule]="scheduleExample" (selectedHour)="selectTime($event)"></app-list-hours>
+  <button class="grande" *ngIf="!loading" mat-raised-button color="primary" (click)="saveWorkDays()">{{'save' | translate}}</button>
 </div>
