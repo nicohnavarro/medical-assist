@@ -27,7 +27,7 @@ export class AddShiftComponent implements OnInit {
 
   doctorList: User[];
   doctorInfo: any[];
-  specialtiesList: any[];
+  specialtiesList: MedicalSpecialty[];
 
   doctorFilterList: User[];
   dayFilterList: string[];

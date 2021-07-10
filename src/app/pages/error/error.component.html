@@ -1,1 +1,7 @@
-<p>error works!</p>
+<div class="container">
+  <h1>Error page ❌</h1>
+  <div class="btn-login" >
+    <button class="grande" mat-raised-button *ngIf="(islogged)" color="primary" routerLink="/main/home">🏘️</button>
+    <button class="grande" mat-raised-button *ngIf="(!islogged)" color="primary" routerLink="/login">🔙</button>
+</div>
+</div>

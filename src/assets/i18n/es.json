@@ -13,7 +13,7 @@
   "addUser": "Agregar usuario",
   "addShift": "Sacar turno",
   "lists": "Listados",
-  "charts": "Estadísticas",
+  "statistics": "Estadísticas",
   "settings": "Configuracion",
   "login": "Ingresar",
   "guest": "Ingresa como invitado",
@@ -107,6 +107,7 @@
   "selectedDay":"Dia seleccionado",
   "selectedHour":"Hora seleccionada",
   "surveyMsg":"Por favor completa nuestra encuesta 📝",
-  "save":"Guardar 💾"
+  "save":"Guardar 💾",
+  "barchart":"Cantidad de turnos por especialidad"
 }
 

@@ -82,8 +82,8 @@ export class MainComponent implements OnInit {
 
     let charts: menuOption = {
       icon: "insert_chart",
-      title: "charts",
-      router: "charts"
+      title: "statistics",
+      router: "statistics"
     }
       switch (role) {
         case 'admin':

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Shift } from 'src/app/models/Shift';
 import { ShiftService } from 'src/app/services/shift.service';
+import { MedicalSpecialtiesService } from 'src/app/services/medical-specialties.service';
 
 @Component({
   selector: 'app-confirm-modal',
@@ -14,7 +15,8 @@ export class ConfirmModalComponent implements OnInit {
   shiftLoaded:boolean;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {shiftCreated :Shift},
-    private shiftSvc:ShiftService
+    private shiftSvc:ShiftService,
+    private medicalSpecialtySvc:MedicalSpecialtiesService
     ){
     this.shift=data.shiftCreated;
     this.loading=false;
@@ -26,8 +28,10 @@ export class ConfirmModalComponent implements OnInit {
 
   confirmShift(){
     this.loading= true;
+    this.shift.especialidad.shifts ? this.shift.especialidad.shifts = this.shift.especialidad.shifts+1: this.shift.especialidad.shifts=1
     setTimeout(() => {
       this.shiftSvc.addShift(this.shift);
+      this.medicalSpecialtySvc.updateSpecialty(this.shift.especialidad,this.shift.especialidad.id);
       this.loading=false;
       this.shiftLoaded = true;
     }, 2000);

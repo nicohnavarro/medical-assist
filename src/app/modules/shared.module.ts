@@ -3,14 +3,16 @@ import { AngularMaterialModule } from './angular-material.module';
 import { ThemeToogleComponent } from '../components/functional/theme-toogle/theme-toogle.component';
 import { LanguageSelectorComponent } from '../components/functional/language-selector/language-selector.component';
 import { NgModule } from '@angular/core';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 @NgModule({
   declarations: [LanguageSelectorComponent, ThemeToogleComponent,ColorStateDirective],
-  imports: [AngularMaterialModule],
+  imports: [AngularMaterialModule,NgxChartsModule],
   exports: [
     LanguageSelectorComponent,
     ThemeToogleComponent,
     AngularMaterialModule,
-    ColorStateDirective
+    NgxChartsModule,
+    ColorStateDirective,
   ]
 })
 export class SharedModule { }

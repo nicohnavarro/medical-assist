@@ -1,4 +1,6 @@
 export interface MedicalSpecialty {
   name:string;
-  id:string;
+  id?:string;
+  shifts?:number;
+  doctors?:number;
 }
