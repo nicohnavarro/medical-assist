@@ -33,6 +33,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { DoctorListComponent } from './components/doctor-list/doctor-list.component';
 import { HourTakenDirective } from './directives/hour-taken.directive';
+import { ColorStateDirective } from './directives/color-state.directive';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);

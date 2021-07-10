@@ -46,39 +46,69 @@ export class MyShiftsComponent implements OnInit {
 
   getNextShifts(){
     this.shiftSvc.getShifts().subscribe(data => {
-      this.nextShifts= data
-      .filter((shift)=>{
-        return (shift.paciente.id == this.user.id) || (shift.medico.id == this.user.id)
-      })
-      .filter((turno)=>{
-        let fecha =turno.fecha.split("-")[1].split("/")
-        let dia = fecha[0];
-        let mes = fecha[1];
-        let anio = fecha[2];
-        let fechaCompara = new Date(`${mes}/${dia}/${anio}`);
-
-        if(fechaCompara.getTime() > new Date().getTime())
-          return turno;
-      });
+      if(this.user.type === 'admin'){
+        this.nextShifts= data
+        .filter((turno)=>{
+          let fecha =turno.fecha.split("-")[1].split("/")
+          let dia = fecha[0];
+          let mes = fecha[1];
+          let anio = fecha[2];
+          let fechaCompara = new Date(`${mes}/${dia}/${anio}`);
+  
+          if(fechaCompara.getTime() > new Date().getTime())
+            return turno;
+        });
+      }
+      else{
+        this.nextShifts= data
+        .filter((shift)=>{
+          return (shift.paciente.id == this.user.id) || (shift.medico.id == this.user.id)
+        })
+        .filter((turno)=>{
+          let fecha =turno.fecha.split("-")[1].split("/")
+          let dia = fecha[0];
+          let mes = fecha[1];
+          let anio = fecha[2];
+          let fechaCompara = new Date(`${mes}/${dia}/${anio}`);
+  
+          if(fechaCompara.getTime() > new Date().getTime())
+            return turno;
+        });
+      }
      })
   }
 
   getPreviousShifts(){
     this.shiftSvc.getShifts().subscribe(data => {
-      this.previousShifts= data
-      .filter((shift)=>{
-        return (shift.paciente.id == this.user.id) || (shift.medico.id == this.user.id)
-      })
-      .filter((turno)=>{
-        let fecha =turno.fecha.split("-")[1].split("/")
-        let dia = fecha[0];
-        let mes = fecha[1];
-        let anio = fecha[2];
-        let fechaCompara = new Date(`${mes}/${dia}/${anio}`);
-
-        if(fechaCompara.getDay() != new Date().getDay() && fechaCompara.getTime() < new Date().getTime())
-          return turno;
-      });
+      if(this.user.type === 'admin'){
+        this.previousShifts= data
+        .filter((turno)=>{
+          let fecha =turno.fecha.split("-")[1].split("/")
+          let dia = fecha[0];
+          let mes = fecha[1];
+          let anio = fecha[2];
+          let fechaCompara = new Date(`${mes}/${dia}/${anio}`);
+  
+          if(fechaCompara.getDay() != new Date().getDay() && fechaCompara.getTime() < new Date().getTime())
+            return turno;
+        });
+      }
+      else{
+        this.previousShifts= data
+        .filter((shift)=>{
+          return (shift.paciente.id == this.user.id) || (shift.medico.id == this.user.id)
+        })
+        .filter((turno)=>{
+          let fecha =turno.fecha.split("-")[1].split("/")
+          let dia = fecha[0];
+          let mes = fecha[1];
+          let anio = fecha[2];
+          let fechaCompara = new Date(`${mes}/${dia}/${anio}`);
+  
+          if(fechaCompara.getDay() != new Date().getDay() && fechaCompara.getTime() < new Date().getTime())
+            return turno;
+        });
+      }
      })
   }
 

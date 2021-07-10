@@ -11,6 +11,17 @@ table {
   color: var(--on-background)!important;
   box-shadow: var(--border-shadow)!important;
   border-radius: 15px;
+  .states{
+    width: fit-content;
+    border-radius: 20px;
+    padding: .3rem .5rem;
+    font-weight: bold;
+    font-size: 14px;
+  }
+}
+
+.mat-column-state{
+  width: 200px;
 }
 
 tbody td:hover{
