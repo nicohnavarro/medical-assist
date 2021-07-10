@@ -12,7 +12,7 @@ export class ColorStateDirective {
       el.nativeElement.style.backgroundColor = styles.background;
       el.nativeElement.style.color = styles.color;
       el.nativeElement.innerText = styles.text;
-    }, 500);
+    }, 1000);
   }
 
   setColor(state: string): styleState {
@@ -27,7 +27,7 @@ export class ColorStateDirective {
         return { background: 'orange', color: 'black', text: '❌ Cancelado por Doctor' }
         break;
       case ShiftStates[3]:
-        return { background: 'orange', color: 'black', text: '❎ Cancelado por ti' }
+        return { background: 'orange', color: 'black', text: '❎ Cancelado por Paciente' }
         break;
       case ShiftStates[4]:
         return { background: 'orange', color: 'black', text: '👨‍⚕️ Rechazado' }

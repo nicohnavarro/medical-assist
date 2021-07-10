@@ -97,6 +97,10 @@ export class ShiftsListComponent implements OnInit {
       this.displayedColumns.splice(finishId, 1);
       this.displayedColumns.push('qualify');
     }
+    else if (type == 'doctor') {
+      let removeId = this.displayedColumns.indexOf('survey');
+      this.displayedColumns.splice(removeId, 1);
+    }
   }
 
   ngOnInit(): void {
@@ -139,6 +143,7 @@ export class ShiftsListComponent implements OnInit {
         this.shiftSvc.updateShift(shift, shift.id).then(() => {
           let notyf = new Notyf();
           notyf.success(this.successMsg);
+          this.getShifts();
         });
         break;
       case 'CANCELAR':
