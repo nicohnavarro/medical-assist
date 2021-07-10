@@ -11,7 +11,7 @@ export class VerticalBarComponent implements OnInit {
   single: any[];
   multi: any[];
   @Input() data: any[];
-  view: any[] = [700, 400];
+  view: any[] = [900, 400];
 
   // options
   showXAxis = true;

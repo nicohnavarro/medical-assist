@@ -1,0 +1,29 @@
+<h4>{{ "heatMap" | translate }} 🗓️</h4>
+<div class="neumoDiv" app-theme>
+  <ngx-charts-heat-map
+    class="chart-container"
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="calendarData"
+    [animations]="animations"
+    [legend]="showLegend"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [showXAxisLabel]="false"
+    [showYAxisLabel]="false"
+    [xAxisTickFormatting]="calendarAxisTickFormatting"
+    [tooltipText]="calendarTooltipText"
+    [innerPadding]="innerPadding"
+    [tooltipDisabled]="tooltipDisabled"
+    [trimXAxisTicks]="trimXAxisTicks"
+    [trimYAxisTicks]="trimYAxisTicks"
+    [rotateXAxisTicks]="rotateXAxisTicks"
+    [maxXAxisTickLength]="maxXAxisTickLength"
+    [maxYAxisTickLength]="maxYAxisTickLength"
+    (select)="select($event)"
+    (activate)="activate($event)"
+    (deactivate)="deactivate($event)"
+  >
+  </ngx-charts-heat-map>
+</div>

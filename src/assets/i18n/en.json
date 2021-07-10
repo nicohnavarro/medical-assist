@@ -108,6 +108,7 @@
   "selectedHour":"Hour selected",
   "surveyMsg":"Please completed this survey 📝",
   "save":"Save 💾",
-  "barchart":"Shifts by Specialties"
+  "barchart":"Shifts by Specialties",
+  "heatMap":"Shifts by Year"
 }
 

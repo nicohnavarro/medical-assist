@@ -1,3 +1,4 @@
+import { HeatMapCalendarComponent } from './../../components/charts/heat-map-calendar/heat-map-calendar.component';
 import { VerticalBarComponent } from './../../components/charts/vertical-bar/vertical-bar.component';
 import { StatisticsRoutingModule } from './statistics.routing.module';
 import { AngularMaterialModule } from '../../modules/angular-material.module';
@@ -9,7 +10,7 @@ import { StatisticsComponent } from "./statistics.component";
 import { NgModule } from '@angular/core';
 
 @NgModule({
-  declarations: [StatisticsComponent,VerticalBarComponent],
+  declarations: [StatisticsComponent,VerticalBarComponent,HeatMapCalendarComponent],
   imports: [
     TranslateModule,
     FormsModule,
