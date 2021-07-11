@@ -1,0 +1,25 @@
+<h4>{{ "pieChart" | translate }} 👩‍⚕️👨‍⚕️</h4>
+<div class="neumoDiv" app-theme>
+  <ngx-charts-pie-chart
+    class="chart-container"
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="data"
+    [animations]="animations"
+    [legend]="showLegend"
+    [legendTitle]="legendTitle"
+    [legendPosition]="legendPosition"
+    [explodeSlices]="explodeSlices"
+    [labels]="showLabels"
+    [doughnut]="doughnut"
+    [arcWidth]="arcWidth"
+    [gradient]="gradient"
+    [tooltipDisabled]="tooltipDisabled"
+    [tooltipText]="pieTooltipText"
+    (dblclick)="dblclick($event)"
+    (select)="select($event)"
+    (activate)="activate($event)"
+    (deactivate)="deactivate($event)"
+  >
+  </ngx-charts-pie-chart>
+</div>

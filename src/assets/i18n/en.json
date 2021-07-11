@@ -109,6 +109,7 @@
   "surveyMsg":"Please completed this survey 📝",
   "save":"Save 💾",
   "barchart":"Shifts by Specialties",
-  "heatMap":"Shifts by Year"
+  "heatMap":"Shifts by Year",
+  "pieChart":"Doctors by Specialties"
 }
 

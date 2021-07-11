@@ -109,6 +109,7 @@
   "surveyMsg":"Por favor completa nuestra encuesta 📝",
   "save":"Guardar 💾",
   "barchart":"Cantidad de turnos por especialidad",
-  "heatMap":"Cantidad de turnos anual"
+  "heatMap":"Cantidad de turnos anual",
+  "pieChart":"Medicos por Especialidad"
 }
 

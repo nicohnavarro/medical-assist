@@ -1,3 +1,6 @@
+import { Specialties } from './../../utils/specialties.enum';
+import { MedicalSpecialty } from './../../models/MedicalSpecialty';
+import { MedicalSpecialtiesService } from './../../services/medical-specialties.service';
 import { EnumToArrayPipe } from './../../pipes/enum-to-array.pipe';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,8 +20,12 @@ import { UserService } from 'src/app/services/user.service';
 export class RegisterComponent implements OnInit {
   file_uno: File;
   file_dos: File;
-  constructor(private authSvc: AuthService, private fileSvc: FileService, private userSvc: UserService, private _snackBar: MatSnackBar, private router: Router, public dialog: MatDialog,private enumToArray: EnumToArrayPipe) {
-   }
+  specialties:MedicalSpecialty[];
+  constructor(private authSvc: AuthService, private fileSvc: FileService, private userSvc: UserService,private medicalSpecialtiesSvc:MedicalSpecialtiesService, private _snackBar: MatSnackBar, private router: Router, public dialog: MatDialog,private enumToArray: EnumToArrayPipe) {
+    this.medicalSpecialtiesSvc.getSpecialties().subscribe((specialties)=> {
+      this.specialties = specialties;
+    })
+  }
 
   ngOnInit() { }
 
@@ -31,6 +38,9 @@ export class RegisterComponent implements OnInit {
         let task_2 = await this.fileSvc.UploadFile(this.file_dos, user.mail);
         user.first_image = await task_1.ref.getDownloadURL();
         user.second_image = await task_2.ref.getDownloadURL();
+        if(user.type === 'doctor'){
+          await this.addDoctorToSpecialty(user.especializaciones);
+        }
         this.userSvc.addUser(user,cred.user.uid).then((algo)=>{
           localStorage.setItem('uid',cred.user.uid);
           this.dialog.closeAll();
@@ -64,6 +74,19 @@ export class RegisterComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // console.log(`Dialog result: ${result}`);
     });
+  }
+
+  async addDoctorToSpecialty(specialties:string[]){
+    for(let i= 0; i< specialties.length; i++){
+      let specialtyToUpdate = this.specialties.filter((specialty)=> specialty.name === specialties[i])[0];
+      if(specialtyToUpdate.doctors){
+        specialtyToUpdate.doctors = specialtyToUpdate.doctors+1
+      }
+      else{
+        specialtyToUpdate.doctors = 1
+      }
+      await this.medicalSpecialtiesSvc.updateSpecialty(specialtyToUpdate,specialtyToUpdate.id);
+    }
   }
 
 

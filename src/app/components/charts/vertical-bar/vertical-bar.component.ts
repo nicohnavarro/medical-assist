@@ -1,5 +1,3 @@
-import { MedicalSpecialtiesService } from './../../../services/medical-specialties.service';
-import { ShiftService } from './../../../services/shift.service';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -11,7 +9,8 @@ export class VerticalBarComponent implements OnInit {
   single: any[];
   multi: any[];
   @Input() data: any[];
-  view: any[] = [900, 400];
+  // view: any[] = [700, 400];
+  view: any[] = undefined;
 
   // options
   showXAxis = true;

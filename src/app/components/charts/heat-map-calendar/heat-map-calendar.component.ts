@@ -11,7 +11,8 @@ const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
 })
 export class HeatMapCalendarComponent implements OnInit {
 
-  view: any[] = [1000, 200];
+  // view: any[] = [1000, 200];
+  view=undefined
   colorScheme = {
     domain:
       ['#c9bcfb',

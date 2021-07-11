@@ -1,4 +1,9 @@
 <div class="container">
-  <app-vertical-bar [data]="barData"></app-vertical-bar>
-  <app-heat-map-calendar></app-heat-map-calendar>
+  <div class="row">
+    <app-vertical-bar [data]="barData"></app-vertical-bar>
+    <app-pie-chart [data]="pieData"></app-pie-chart>
+  </div>
+  <div class="row2">
+    <app-heat-map-calendar></app-heat-map-calendar>
+  </div>
 </div>
