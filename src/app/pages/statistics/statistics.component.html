@@ -3,7 +3,8 @@
     <app-vertical-bar [data]="barData"></app-vertical-bar>
     <app-pie-chart [data]="pieData"></app-pie-chart>
   </div>
-  <div class="row2">
+  <div class="row2" id="pdfTable" #pdfTable>
+    <span (click)="downloadAsPDF()">🚨</span>
     <app-heat-map-calendar></app-heat-map-calendar>
   </div>
 </div>
