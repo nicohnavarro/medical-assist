@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container" id="pdfTable" #pdfTable>
   <div class="row">
     <app-vertical-bar [data]="barData"></app-vertical-bar>
     <app-pie-chart [data]="pieData"></app-pie-chart>
   </div>
-  <div class="row2" id="pdfTable" #pdfTable>
+  <div class="row2" x>
     <span (click)="downloadAsPDF()">🚨</span>
     <app-heat-map-calendar></app-heat-map-calendar>
   </div>

@@ -88,7 +88,6 @@ export class HeatMapCalendarComponent implements OnInit {
         // const value = dayOfWeek < 6 ? date.getMonth() + 1 : 0;
         const valueFilter = data.filter((value) => value.date.valueOf() === date.valueOf())[0];
         const value = valueFilter ? valueFilter.value : 0;
-        console.log(value);
 
         series.push({
           date,
@@ -148,7 +147,6 @@ export class HeatMapCalendarComponent implements OnInit {
       var myCount = 0;
       // loop over every element in the copy and see if it's the same
       for (var w = 0; w < copy.length; w++) {
-        console.log(copy[w]);
         if (original[i].valueOf() === copy[w]?.valueOf()) {
           // increase amount of times duplicate is found
           myCount++;

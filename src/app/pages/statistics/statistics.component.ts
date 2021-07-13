@@ -6,6 +6,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import htmlToPdfmake from 'html-to-pdfmake';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-statistics',
@@ -28,14 +29,48 @@ export class StatisticsComponent implements OnInit {
   }
 
   public downloadAsPDF() {
-    const doc = new jsPDF();
+    const DATA:any = document.getElementById('pdfTable');
+    const doc = new jsPDF('p','pt','a4');
+    const options = {
+      background:'white',
+      scale:3,
+    }
+    html2canvas(DATA,options)
+      .then((canvas)=>{
+        const img = canvas.toDataURL('image/PNG');
+
+        const bufferX = 15;
+        const bufferY = 15;
+        const imgProps = (doc as any).getImageProperties(img);
+        const pdfWidth = doc.internal.pageSize.getWidth() -2 * bufferX;
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        doc.addImage(
+          img,
+          'PNG',
+          bufferX,
+          bufferY,
+          pdfWidth,
+          pdfHeight,
+          undefined,
+          'FAST'
+        );
+        return doc;
+      })
+      .then((docResult)=>{
+        docResult.save('pruebanico.pdf');
+      });
+
+  //   const pdfTable = this.pdfTable.nativeElement;
    
-    const pdfTable = this.pdfTable.nativeElement;
-   
-    var html = htmlToPdfmake(pdfTable.innerHTML);
-    console.log(html[1].stack[1]);
-    const documentDefinition = { content: html[1],width: 1000,height:100};
-    pdfMake.createPdf(documentDefinition).open(); 
+  //   var html = htmlToPdfmake(pdfTable.innerHTML);
+  //   console.log(html[1].stack[1]);
+  //   const documentDefinition = {
+  //     pageSize: {
+  //     width: 1000,
+  //     height: 200
+  // },
+  // content: html[1],width: 1000,height:100};
+  //   pdfMake.createPdf(documentDefinition).open(); 
      
   }
 
