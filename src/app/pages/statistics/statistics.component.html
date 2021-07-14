@@ -1,10 +1,10 @@
-<div class="container" id="pdfTable" #pdfTable>
+<div class="container">
   <div class="row">
-    <app-vertical-bar [data]="barData"></app-vertical-bar>
-    <app-pie-chart [data]="pieData"></app-pie-chart>
+    <app-vertical-bar [data]="barData"  id="verticalBar" #verticalBar></app-vertical-bar>
+    <app-pie-chart [data]="pieData" id="pieChart" #pieChart></app-pie-chart>
   </div>
   <div class="row2" x>
     <span (click)="downloadAsPDF()">🚨</span>
-    <app-heat-map-calendar></app-heat-map-calendar>
+    <app-heat-map-calendar id="heatMap" #heatMap></app-heat-map-calendar>
   </div>
 </div>
