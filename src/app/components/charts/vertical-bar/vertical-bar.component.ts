@@ -43,11 +43,11 @@ export class VerticalBarComponent implements OnInit {
     if (window.innerWidth < 600) {
       this.view = [500, 600];
     }
-    else if (window.innerWidth > 600) {
+    if (window.innerWidth > 600) {
       this.view = [600, 400];
       this.showLegend =false;
     }
-    else if (window.innerWidth > 1200) {
+    if (window.innerWidth > 1200) {
       this.view = [900, 400];
       this.showLegend =true;
     }

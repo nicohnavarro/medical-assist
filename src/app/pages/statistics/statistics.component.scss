@@ -23,7 +23,7 @@
     font-style: var(--on-background);
     box-shadow: var(--border-shadow);
     font-family: "Gothic A1", sans-serif;
-    width: 45%;
+    width: 48%;
     height: 100%;
   }
 }
@@ -36,7 +36,7 @@
     margin: 5px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding: 10px;
     border-radius: 20px;
     background: var(--background);
@@ -44,7 +44,7 @@
     font-style: var(--on-background);
     box-shadow: var(--border-shadow);
     font-family: "Gothic A1", sans-serif;
-    width: 100%;
+    width: auto;
     height: 100%;
   }
 }
