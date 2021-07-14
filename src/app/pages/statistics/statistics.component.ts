@@ -66,11 +66,12 @@ export class StatisticsComponent implements OnInit {
     const imgProps = (doc as any).getImageProperties(this.barChart);
     const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    doc.text("Admin Report with charts", 40, 30);
     doc.addImage(
       this.barChart,
       'PNG',
       bufferX,
-      bufferY,
+      bufferY*3,
       pdfWidth,
       pdfHeight,
       undefined,
@@ -79,7 +80,7 @@ export class StatisticsComponent implements OnInit {
 
     doc.autoTable({
       headStyles: { fillColor: [71, 27, 227] },
-      margin: { top: 500 },
+      margin: { top: 350 },
       bodyStyles: {
         cellPadding: { top: 10, right: 20, bottom: 10, left: 10 },
         font: 'helvetica',
@@ -91,11 +92,13 @@ export class StatisticsComponent implements OnInit {
       ],
     });
 
+    doc.addPage('a4','p');
+
     doc.addImage(
       this.pieChart,
       'PNG',
       bufferX,
-      40,
+      bufferY,
       pdfWidth,
       pdfHeight,
       undefined,

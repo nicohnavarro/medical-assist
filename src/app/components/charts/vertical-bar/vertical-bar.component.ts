@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-vertical-bar',
@@ -9,9 +9,11 @@ export class VerticalBarComponent implements OnInit {
   single: any[];
   multi: any[];
   @Input() data: any[];
-  view: any[] = [900, 400];
+  view: any[] = [650, 400];
   // view: any[] = undefined;
-
+  // view: any[] = [500, 600];
+  screenWidth;
+  screenHeight;
   // options
   showXAxis = true;
   showYAxis = true;
@@ -37,12 +39,27 @@ export class VerticalBarComponent implements OnInit {
     ],
   };
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onSelect(event) {
     console.log(event);
+  }
+
+  @HostListener('window:resize', ['$event'])
+
+  onResize(event) {
+    if (window.innerWidth < 600) {
+      this.view = [500, 600];
+    }
+    if (window.innerWidth > 600) {
+      this.view = [900, 400];
+    }
+    this.screenWidth = window.innerWidth;
+
+    this.screenHeight = window.innerHeight;
+
   }
 }
 
