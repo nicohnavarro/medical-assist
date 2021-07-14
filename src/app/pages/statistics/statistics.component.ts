@@ -119,7 +119,7 @@ export class StatisticsComponent implements OnInit {
       ],
     });
 
-    doc.save('pruebanico.pdf');
+    doc.save('AdminReport.pdf');
     // });
   }
 
@@ -127,50 +127,5 @@ export class StatisticsComponent implements OnInit {
     this.barChart = await this.generateCanvasChart('verticalBar');
     this.pieChart = await this.generateCanvasChart('pieChart');
     this.heatMapChart = await this.generateCanvasChart('heatMap');
-  }
-
-  async generateBarChartImg(doc: jsPDFWithPlugin) {
-    const DATA: any = document.getElementById('verticalBar');
-    const options = {
-      background: 'white',
-      scale: 3,
-    };
-
-    const canvas = await html2canvas(DATA, options);
-    const img = canvas.toDataURL('image/PNG');
-
-    const bufferX = 15;
-    const bufferY = 15;
-    const imgProps = (doc as any).getImageProperties(img);
-    const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-    doc.addImage(
-      img,
-      'PNG',
-      bufferX,
-      bufferY,
-      pdfWidth,
-      pdfHeight,
-      undefined,
-      'FAST'
-    );
-  }
-
-  async generatePieChartImg(doc: jsPDFWithPlugin) {
-    const DATA: any = document.getElementById('pieChart');
-    const options = {
-      background: 'white',
-      scale: 3,
-    };
-
-    const canvas = await html2canvas(DATA, options);
-    const img = canvas.toDataURL('image/PNG');
-
-    const bufferX = 15;
-    const bufferY = 15;
-    const imgProps = (doc as any).getImageProperties(img);
-    const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-    doc.addImage(img, 'PNG', bufferX, bufferY, 400, 400, undefined, 'FAST');
   }
 }
