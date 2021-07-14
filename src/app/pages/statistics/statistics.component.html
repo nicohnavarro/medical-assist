@@ -1,14 +1,23 @@
 <div class="container">
+  <div class="button">
+    <button class="big" mat-raised-button color="primary" (click)="downloadAsPDF()"><span *ngIf="downloading">⬇️</span>{{'downloadPdf' | translate}}</button>
+  </div>
   <div class="row">
     <!-- <h4>{{ "barchart" | translate }} 📊</h4> -->
     <div class="neumoDiv" app-theme>
-      <app-vertical-bar [data]="barData" id="verticalBar" #verticalBar></app-vertical-bar>
+      <app-vertical-bar
+        [data]="barData"
+        id="verticalBar"
+        #verticalBar
+      ></app-vertical-bar>
     </div>
-
-    <app-pie-chart [data]="pieData" id="pieChart" #pieChart></app-pie-chart>
+    <div class="neumoDiv" app-theme>
+      <app-pie-chart [data]="pieData" id="pieChart" #pieChart></app-pie-chart>
+    </div>
   </div>
   <div class="row2">
-    <span (click)="downloadAsPDF()">🚨</span>
-    <app-heat-map-calendar id="heatMap" #heatMap></app-heat-map-calendar>
+    <div class="neumoDiv" app-theme>
+      <app-heat-map-calendar id="heatMap" #heatMap></app-heat-map-calendar>
+    </div>
   </div>
 </div>

@@ -2,23 +2,6 @@ text{
   color: var(--on-background)!important;
 }
 
-.neumoDiv {
-  margin: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 10px;
-  border-radius: 20px;
-  background: var(--background);
-  color: var(--on-background);
-  font-style: var(--on-background);
-  box-shadow: var(--border-shadow);
-  font-family: "Gothic A1", sans-serif;
-  width: 90%;
-  height: 100%;
-}
-
-
 
 @media only screen and (max-width: 700px) {
   h1{

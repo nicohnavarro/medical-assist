@@ -110,6 +110,7 @@
   "save":"Save 💾",
   "barchart":"Shifts by Specialties",
   "heatMap":"Shifts by Year",
-  "pieChart":"Doctors by Specialties"
+  "pieChart":"Doctors by Specialties",
+  "downloadPdf":"Download Pdf"
 }
 

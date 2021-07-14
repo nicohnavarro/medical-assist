@@ -39,7 +39,19 @@ export class VerticalBarComponent implements OnInit {
     ],
   };
 
-  constructor() { }
+  constructor() {
+    if (window.innerWidth < 600) {
+      this.view = [500, 600];
+    }
+    else if (window.innerWidth > 600) {
+      this.view = [600, 400];
+      this.showLegend =false;
+    }
+    else if (window.innerWidth > 1200) {
+      this.view = [900, 400];
+      this.showLegend =true;
+    }
+  }
 
   ngOnInit(): void { }
 
@@ -53,13 +65,17 @@ export class VerticalBarComponent implements OnInit {
     if (window.innerWidth < 600) {
       this.view = [500, 600];
     }
-    if (window.innerWidth > 600) {
+     if (window.innerWidth > 600) {
+      this.view = [600, 400];
+      this.showLegend =false;
+    }
+     if (window.innerWidth > 1500) {
       this.view = [900, 400];
+      this.showLegend =true;
     }
     this.screenWidth = window.innerWidth;
 
     this.screenHeight = window.innerHeight;
-
   }
 }
 

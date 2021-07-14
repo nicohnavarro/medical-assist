@@ -18,6 +18,7 @@ interface jsPDFWithPlugin extends jsPDF.jsPDF {
 })
 export class StatisticsComponent implements OnInit {
   @ViewChild('pdfTable') pdfTable: ElementRef;
+  downloading:boolean = false;
   loadingBarChart: boolean = true;
   loadingPieChart: boolean = true;
   loadingHeatMap: boolean = true;
@@ -59,6 +60,7 @@ export class StatisticsComponent implements OnInit {
   }
 
   async downloadAsPDF() {
+    this.downloading = true;
     await this.getImages();
     const doc = new jsPDF.jsPDF('p', 'pt', 'a4') as jsPDFWithPlugin;
     const bufferX = 15;
@@ -93,21 +95,23 @@ export class StatisticsComponent implements OnInit {
     });
 
     doc.addPage('a4','p');
-
+    const imgPropsPie = (doc as any).getImageProperties(this.pieChart);
+    const pdfHeightPie = (imgPropsPie.height * pdfWidth) / imgPropsPie.width;
+    doc.text("Pie Chart Doctors by Specialties", 40, 30);
     doc.addImage(
       this.pieChart,
       'PNG',
       bufferX,
-      bufferY,
+      bufferY*3,
       pdfWidth,
-      pdfHeight,
+      pdfHeightPie,
       undefined,
       'FAST'
     );
 
     doc.autoTable({
       headStyles: { fillColor: [71, 27, 227] },
-      margin: { top: 150 },
+      margin: { top: 400 },
       bodyStyles: {
         cellPadding: { top: 10, right: 20, bottom: 10, left: 10 },
         font: 'helvetica',
@@ -120,6 +124,7 @@ export class StatisticsComponent implements OnInit {
     });
 
     doc.save('AdminReport.pdf');
+    this.downloading = false;
     // });
   }
 

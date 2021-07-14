@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-pie-chart',
@@ -25,15 +25,27 @@ export class PieChartComponent implements OnInit {
   animations: boolean = true;
   showLegend = false;
   legendTitle = 'Legend';
-  legendPosition = 'right';
-  explodeSlices = false;
+  legendPosition = 'left';
+  explodeSlices = true;
   showLabels = true;
   doughnut = false;
   arcWidth = 0.25;
   gradient = false;
   tooltipDisabled = false;
+  screenWidth;
+  screenHeight;
 
-  constructor() {}
+  constructor() {
+    if (window.innerWidth < 600) {
+      this.view = [400, 400];
+    }
+    if (window.innerWidth > 600) {
+      this.view = [400, 400];
+    }
+     if (window.innerWidth > 1500) {
+      this.view = [900, 400];
+    }
+  }
 
   ngOnInit(): void {
   }
@@ -62,6 +74,24 @@ export class PieChartComponent implements OnInit {
 
   deactivate(data) {
     // console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
+
+  @HostListener('window:resize', ['$event'])
+
+  onResize(event) {
+    if (window.innerWidth < 600) {
+      this.view = [400, 400];
+    }
+    if (window.innerWidth > 600) {
+      this.view = [400, 400];
+    }
+     if (window.innerWidth > 1500) {
+      this.view = [900, 400];
+    }
+    this.screenWidth = window.innerWidth;
+
+    this.screenHeight = window.innerHeight;
+
   }
 }
 

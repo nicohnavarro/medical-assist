@@ -1,5 +1,5 @@
 import { ShiftService } from './../../../services/shift.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 const monthName = new Intl.DateTimeFormat('en-us', { month: 'short' });
 const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
@@ -12,7 +12,7 @@ const weekdayName = new Intl.DateTimeFormat('en-us', { weekday: 'short' });
 export class HeatMapCalendarComponent implements OnInit {
 
   // view: any[] = [1000, 200];
-  view=undefined
+  view = undefined
   colorScheme = {
     domain:
       ['#c9bcfb',
@@ -39,6 +39,9 @@ export class HeatMapCalendarComponent implements OnInit {
   rotateXAxisTicks = true;
   maxXAxisTickLength = 16;
   maxYAxisTickLength = 16;
+  screenWidth;
+  screenHeight;
+
 
   constructor(private shiftSvc: ShiftService) {
     this.shiftSvc.getShifts().subscribe((data) => {
@@ -50,6 +53,15 @@ export class HeatMapCalendarComponent implements OnInit {
       const newFiltered = this.compressArray(dateValid);
       this.calendarData = this.getCalendarData(newFiltered);
     })
+    if (window.innerWidth < 600) {
+      this.view = [500, 100];
+    }
+    if (window.innerWidth > 600) {
+      this.view = [900, 150]
+    }
+    if (window.innerWidth > 800) {
+      this.view = [1300, 150]
+    }
   }
 
   ngOnInit(): void {
@@ -163,6 +175,23 @@ export class HeatMapCalendarComponent implements OnInit {
 
     return compressed;
   };
+
+  @HostListener('window:resize', ['$event'])
+
+  onResize(event) {
+    if (window.innerWidth < 600) {
+      this.view = [500, 100];
+    }
+    if (window.innerWidth > 600) {
+      this.view = [900, 150]
+    }
+    if (window.innerWidth > 1300) {
+      this.view = [1300, 150]
+    }
+    this.screenWidth = window.innerWidth;
+
+    this.screenHeight = window.innerHeight;
+  }
 
 }
 
