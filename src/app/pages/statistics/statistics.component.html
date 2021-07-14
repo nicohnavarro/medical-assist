@@ -1,9 +1,13 @@
 <div class="container">
   <div class="row">
-    <app-vertical-bar [data]="barData"  id="verticalBar" #verticalBar></app-vertical-bar>
+    <h4>{{ "barchart" | translate }} 📊</h4>
+    <div class="neumoDiv" app-theme>
+      <app-vertical-bar [data]="barData" id="verticalBar" #verticalBar></app-vertical-bar>
+    </div>
+
     <app-pie-chart [data]="pieData" id="pieChart" #pieChart></app-pie-chart>
   </div>
-  <div class="row2" x>
+  <div class="row2">
     <span (click)="downloadAsPDF()">🚨</span>
     <app-heat-map-calendar id="heatMap" #heatMap></app-heat-map-calendar>
   </div>
