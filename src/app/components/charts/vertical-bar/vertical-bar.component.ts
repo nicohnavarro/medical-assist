@@ -9,9 +9,7 @@ export class VerticalBarComponent implements OnInit {
   single: any[];
   multi: any[];
   @Input() data: any[];
-  view: any[] = [650, 400];
-  // view: any[] = undefined;
-  // view: any[] = [500, 600];
+  view: any[] =[];
   screenWidth;
   screenHeight;
   // options
@@ -41,13 +39,14 @@ export class VerticalBarComponent implements OnInit {
 
   constructor() {
     if (window.innerWidth < 600) {
-      this.view = [500, 600];
+      this.view = [300, 400];
+      this.showLegend =false;
     }
     if (window.innerWidth > 600) {
       this.view = [600, 400];
       this.showLegend =false;
     }
-    if (window.innerWidth > 1200) {
+    if (window.innerWidth > 1500) {
       this.view = [900, 400];
       this.showLegend =true;
     }
@@ -63,7 +62,8 @@ export class VerticalBarComponent implements OnInit {
 
   onResize(event) {
     if (window.innerWidth < 600) {
-      this.view = [500, 600];
+      this.view = [300, 400];
+      this.showLegend =false;
     }
      if (window.innerWidth > 600) {
       this.view = [600, 400];

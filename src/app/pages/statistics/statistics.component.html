@@ -1,6 +1,6 @@
 <div class="container">
   <div class="button">
-    <button class="big" mat-raised-button color="primary" (click)="downloadAsPDF()"><span *ngIf="downloading">⬇️</span>{{'downloadPdf' | translate}}</button>
+    <button class="big" mat-raised-button color="primary" (click)="downloadAsPDF()"><span *ngIf="downloading">⬇️ {{'downloading' | translate}}</span><span *ngIf="!downloading">{{'downloadPdf' | translate}}</span></button>
   </div>
   <div class="row">
     <!-- <h4>{{ "barchart" | translate }} 📊</h4> -->

@@ -123,6 +123,21 @@ export class StatisticsComponent implements OnInit {
       ],
     });
 
+    doc.addPage('a4','p');
+    const imgPropsHeat = (doc as any).getImageProperties(this.heatMapChart);
+    const pdfHeightHeat = (imgPropsHeat.height * pdfWidth) / imgPropsHeat.width;
+    doc.text("Heat Map Chart Shifts by Year", 40, 30);
+    doc.addImage(
+      this.heatMapChart,
+      'PNG',
+      bufferX,
+      bufferY*3,
+      pdfWidth,
+      pdfHeightHeat,
+      undefined,
+      'FAST'
+    );
+
     doc.save('AdminReport.pdf');
     this.downloading = false;
     // });

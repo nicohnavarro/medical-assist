@@ -37,7 +37,7 @@ export class PieChartComponent implements OnInit {
 
   constructor() {
     if (window.innerWidth < 600) {
-      this.view = [400, 400];
+      this.view = [300, 300];
     }
     if (window.innerWidth > 600) {
       this.view = [400, 400];

@@ -111,6 +111,7 @@
   "barchart":"Cantidad de turnos por especialidad",
   "heatMap":"Cantidad de turnos anual",
   "pieChart":"Medicos por Especialidad",
-  "downloadPdf":"Descargar Pdf"
+  "downloadPdf":"Descargar Pdf",
+  "downloading":"Descargando ..."
 }
 

@@ -111,6 +111,7 @@
   "barchart":"Shifts by Specialties",
   "heatMap":"Shifts by Year",
   "pieChart":"Doctors by Specialties",
-  "downloadPdf":"Download Pdf"
+  "downloadPdf":"Download Pdf",
+  "downloading":"Downloading ..."
 }
 
