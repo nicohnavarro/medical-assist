@@ -31,7 +31,7 @@ export class ShiftsListComponent implements OnInit {
   Specialties = [];
   Doctors = [];
   Patients = [];
-  successMsg:string;
+  successMsg: string;
   @Input() showShifts: Array<Shift> = [];
   @Input() pastShifts: boolean = false;
   loading: boolean = true;
@@ -54,6 +54,13 @@ export class ShiftsListComponent implements OnInit {
   dataSource = new MatTableDataSource<Shift>(this.showShifts);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
+  ngOnChanges(model: any) {
+    if (this.showShifts?.length) {
+      this.dataSource.data = this.showShifts;
+      this.dataSource.paginator = this.paginator;
+    }
+  }
+
   constructor(
     private userSvc: UserService,
     private shiftSvc: ShiftService,
@@ -67,7 +74,7 @@ export class ShiftsListComponent implements OnInit {
 
     specialtiesSvc.getSpecialties().subscribe((data) => {
       this.Specialties = data.map((item) => {
-        return { ...item, completed: true };
+        return { ...item, completed: true };;
       });
     });
 
@@ -81,12 +88,14 @@ export class ShiftsListComponent implements OnInit {
       this.Patients = data.map((item) => {
         return { ...item, completed: true };
       });
+      this.loading = false;
     });
 
     this.successMsg = localStorage.getItem('lang') == 'en' ?
-    "Shift accepted":
-    "Turno Aceptado";
+      "Shift accepted" :
+      "Turno Aceptado";
 
+    this.setDialogConfig();
   }
 
   private setPatientOptions(type: string) {
@@ -104,12 +113,6 @@ export class ShiftsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.loading = false;
-      this.dataSource.data = this.showShifts;
-      this.dataSource.paginator = this.paginator;
-    }, 4000);
-    this.setDialogConfig();
   }
 
   private setDialogConfig() {
