@@ -80,10 +80,10 @@ export class MedicalScheduleComponent implements OnInit {
           this.msg = localStorage.getItem('lang') == 'en' ?
             "Schedule Created" :
             "Calendario Creado";
-          notyf.open({
-            type: 'info',
-            message: this.msg
-          });
+          // notyf.open({
+          //   type: 'info',
+          //   message: this.msg
+          // });
         });
     });
     this.msg = localStorage.getItem('lang') == 'en' ?

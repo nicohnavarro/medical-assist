@@ -54,7 +54,7 @@ export class HeatMapCalendarComponent implements OnInit {
       this.calendarData = this.getCalendarData(newFiltered);
     })
     if (window.innerWidth < 600) {
-      this.view = [470, 140];
+      this.view = [430, 140];
     }
     if (window.innerWidth > 600) {
       this.view = [900, 150]
