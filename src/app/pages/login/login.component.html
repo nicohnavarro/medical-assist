@@ -1,63 +1,86 @@
 <div class="row">
   <div class="column-imagen">
-      <img src="../../../assets/images/loginimage.svg" alt="">
-      <span>{{'loginmessage1' | translate}}</span>
-      <span>{{'loginmessage2' | translate}}</span>
-<div class="features">
-    <app-language-selector></app-language-selector>
-    <app-theme-toogle></app-theme-toogle>
-</div>
+    <img src="../../../assets/images/loginimage.svg" alt="" />
+    <span>{{ "loginmessage1" | translate }}</span>
+    <span>{{ "loginmessage2" | translate }}</span>
+    <div class="features">
+      <app-language-selector></app-language-selector>
+      <app-theme-toogle></app-theme-toogle>
+    </div>
   </div>
   <div class="column-login">
+    <mat-toolbar>
+      <span>{{ "title" | translate }}</span>
+    </mat-toolbar>
 
-      <mat-toolbar>
-          <span>{{'title' | translate}}</span>
-      </mat-toolbar>
+    <div class="campos">
+      <form class="example-form">
+        <mat-form-field>
+          <mat-label>{{ "email" | translate }}</mat-label>
+          <input
+            matInput
+            [formControl]="emailFormControl"
+            placeholder="admin@test.com"
+          />
+          <mat-error
+            *ngIf="
+              emailFormControl.hasError('email') &&
+              !emailFormControl.hasError('required')
+            "
+          >
+            {{ "validateEmail1" | translate }}
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            {{ "validateEmail2" | translate }}
+          </mat-error>
+        </mat-form-field>
 
-      <div class="campos">
-          <form class="example-form">
-              <mat-form-field>
-                  <mat-label>{{'email' | translate}}</mat-label>
-                  <input matInput [formControl]="emailFormControl" placeholder="admin@test.com">
-                  <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                     {{'validateEmail1' | translate}}
-                  </mat-error>
-                  <mat-error *ngIf="emailFormControl.hasError('required')">
-                      {{'validateEmail2' | translate}}
-                  </mat-error>
-              </mat-form-field>
-
-              <mat-form-field>
-                  <mat-label>{{ 'password' | translate}}</mat-label>
-                  <input matInput [formControl]="passwordFormControl" minlength="6" [type]="hide ? 'password' : 'text'">
-                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  </button>
-                  <mat-error *ngIf="passwordFormControl.hasError('required')">
-                    {{'validatePassword2' | translate}}
-                  </mat-error>
-                  <mat-error *ngIf="passwordFormControl.value.length < 6">
-                    {{'validatePassword1' | translate}}
-                  </mat-error>
-              </mat-form-field>
-              <mat-form-field *ngIf="(!loading)">
-                  <mat-label>{{ 'guest' | translate}}</mat-label>
-                  <mat-select [(value)]="selected" [formControl]="typeOfUserFormCtrl" (selectionChange)="onOptionsSelected(selected)">
-                      <mat-option value="admin">
-                          {{ 'admin' | translate}}
-                      </mat-option>
-                      <mat-option value="patient">
-                          {{ 'patient' | translate}}
-                      </mat-option>
-                      <mat-option value="doctor">
-                          {{ 'doctor' | translate}}
-                      </mat-option>
-                  </mat-select>
-              </mat-form-field>
-          </form>
-      </div>
-      <div class="btn-ingreso"*ngIf="(loading)">
-          <!-- <button class="mediano google" mat-raised-button>
+        <mat-form-field>
+          <mat-label>{{ "password" | translate }}</mat-label>
+          <input
+            matInput
+            [formControl]="passwordFormControl"
+            minlength="6"
+            [type]="hide ? 'password' : 'text'"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          <mat-error *ngIf="passwordFormControl.hasError('required')">
+            {{ "validatePassword2" | translate }}
+          </mat-error>
+          <mat-error *ngIf="passwordFormControl.value.length < 6">
+            {{ "validatePassword1" | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field *ngIf="!loading">
+          <mat-label>{{ "guest" | translate }}</mat-label>
+          <mat-select
+            [(value)]="selected"
+            [formControl]="typeOfUserFormCtrl"
+            (selectionChange)="onOptionsSelected(selected)"
+          >
+            <mat-option value="admin">
+              {{ "admin" | translate }}
+            </mat-option>
+            <mat-option value="patient">
+              {{ "patient" | translate }}
+            </mat-option>
+            <mat-option value="doctor">
+              {{ "doctor" | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="btn-ingreso" *ngIf="loading">
+      <!-- <button class="mediano google" mat-raised-button>
               <img src="../../../assets/icon/gmail.jpg" alt="">
               <span>  Google</span>
               </button>
@@ -67,13 +90,29 @@
           <button class="mediano twitter" mat-raised-button disabled>
               <img src="../../../assets/icon/twitter.png" alt="">
               <span>  Twitter</span></button> -->
-
-      </div>
-      <mat-spinner *ngIf="(loading)"></mat-spinner>
-      <div class="btn-login" >
-          <button class="grande" *ngIf="(!loading)" mat-raised-button color="primary" (click)="logIn()">{{'login' | translate}}</button>
-          <!-- <button class="grande" *ngIf="(loading)" mat-raised-button color="primary">loading ...</button> -->
-          <button class="grande" mat-raised-button *ngIf="(!loading)" color="accent" routerLink="/register">{{'register'| translate}}</button>
-      </div>
+      <mat-spinner *ngIf="loading"></mat-spinner>
+    </div>
+    <div class="btn-login">
+      <button
+        class="grande"
+        *ngIf="!loading"
+        mat-raised-button
+        color="primary"
+        (click)="logIn()"
+      >
+        {{ "login" | translate }}
+      </button>
+      <!-- <button class="grande" *ngIf="(loading)" mat-raised-button color="primary">loading ...</button> -->
+      <button
+        class="grande"
+        mat-raised-button
+        *ngIf="!loading"
+        color="accent"
+        routerLink="/register"
+      >
+        {{ "register" | translate }}
+      </button>
+    </div>
   </div>
 </div>
+

@@ -3,30 +3,31 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
-  styleUrls: ['./pie-chart.component.scss']
+  styleUrls: ['./pie-chart.component.scss'],
 })
 export class PieChartComponent implements OnInit {
   // view: any[] = [600, 400];
-  view=undefined;
+  view = undefined;
   colorScheme = {
-    domain:
-      ['#c9bcfb',
-        '#afa2de',
-        '#937be9',
-        '#7e5feb',
-        '#633de7',
-        '#471be3',
-        '#4018e0',
-        '#3714dc',
-        '#2f10d8',
-        '#19079c']
+    domain: [
+      '#c9bcfb',
+      '#afa2de',
+      '#937be9',
+      '#7e5feb',
+      '#633de7',
+      '#471be3',
+      '#4018e0',
+      '#3714dc',
+      '#2f10d8',
+      '#19079c',
+    ],
   };
   @Input() data: any[];
   animations: boolean = true;
   showLegend = false;
   legendTitle = 'Legend';
   legendPosition = 'left';
-  explodeSlices = true;
+  explodeSlices = false;
   showLabels = true;
   doughnut = false;
   arcWidth = 0.25;
@@ -42,13 +43,12 @@ export class PieChartComponent implements OnInit {
     if (window.innerWidth > 600) {
       this.view = [400, 400];
     }
-     if (window.innerWidth > 1500) {
+    if (window.innerWidth > 1500) {
       this.view = [900, 400];
     }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   pieTooltipText({ data }) {
     const label = formatLabel(data.name);
@@ -77,7 +77,6 @@ export class PieChartComponent implements OnInit {
   }
 
   @HostListener('window:resize', ['$event'])
-
   onResize(event) {
     if (window.innerWidth < 600) {
       this.view = [400, 400];
@@ -85,21 +84,19 @@ export class PieChartComponent implements OnInit {
     if (window.innerWidth > 600) {
       this.view = [400, 400];
     }
-     if (window.innerWidth > 1500) {
+    if (window.innerWidth > 1500) {
       this.view = [900, 400];
     }
     this.screenWidth = window.innerWidth;
 
     this.screenHeight = window.innerHeight;
-
   }
 }
 
 export type dataPie = {
-  name: string,
-  value: number
-}
-
+  name: string;
+  value: number;
+};
 
 export function formatLabel(label: any): string {
   if (label instanceof Date) {
@@ -117,7 +114,7 @@ export function formatLabel(label: any): string {
  * @export
  */
 export function escapeLabel(label: any): string {
-  return label.toLocaleString().replace(/[&'`"<>]/g, match => {
+  return label.toLocaleString().replace(/[&'`"<>]/g, (match) => {
     return {
       '&': '&amp;',
       // tslint:disable-next-line: quotemark
@@ -125,7 +122,7 @@ export function escapeLabel(label: any): string {
       '`': '&#x60;',
       '"': '&quot;',
       '<': '&lt;',
-      '>': '&gt;'
+      '>': '&gt;',
     }[match];
   });
 }

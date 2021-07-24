@@ -7,12 +7,7 @@ import { CancelModalComponent } from './../../modals/cancel-modal/cancel-modal.c
 
 import { AuthService } from '../../../services/auth.service';
 import { MedicalSpecialtiesService } from '../../../services/medical-specialties.service';
-import {
-  Component,
-  Input,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -68,13 +63,12 @@ export class ShiftsListComponent implements OnInit {
     private specialtiesSvc: MedicalSpecialtiesService,
     private authSvc: AuthService
   ) {
-
     this.typeUser = authSvc.user?.type;
     this.setPatientOptions(this.typeUser);
 
     specialtiesSvc.getSpecialties().subscribe((data) => {
       this.Specialties = data.map((item) => {
-        return { ...item, completed: true };;
+        return { ...item, completed: true };
       });
     });
 
@@ -91,9 +85,10 @@ export class ShiftsListComponent implements OnInit {
       this.loading = false;
     });
 
-    this.successMsg = localStorage.getItem('lang') == 'en' ?
-      "Shift accepted" :
-      "Turno Aceptado";
+    this.successMsg =
+      localStorage.getItem('lang') == 'en'
+        ? 'Shift accepted'
+        : 'Turno Aceptado';
 
     this.setDialogConfig();
   }
@@ -105,22 +100,25 @@ export class ShiftsListComponent implements OnInit {
       let finishId = this.displayedColumns.indexOf('finish');
       this.displayedColumns.splice(finishId, 1);
       this.displayedColumns.push('qualify');
-    }
-    else if (type == 'doctor') {
+    } else if (type == 'doctor') {
       let removeId = this.displayedColumns.indexOf('survey');
       this.displayedColumns.splice(removeId, 1);
     }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   private setDialogConfig() {
     this.dialogConfig = new MatDialogConfig();
     this.dialogConfig.disableClose = true;
     this.dialogConfig.autoFocus = true;
     this.dialogConfig.panelClass = 'custom-modalbox';
-    this.dialogConfig.maxWidth = '60vw';
+    if (window.innerWidth < 600) {
+      this.dialogConfig.maxWidth = '90vw';
+      this.dialogConfig.maxHeight = '100vh';
+    } else {
+      this.dialogConfig.maxWidth = '60vw';
+    }
   }
 
   getShifts() {
@@ -150,13 +148,19 @@ export class ShiftsListComponent implements OnInit {
         });
         break;
       case 'CANCELAR':
-        let dialogRef = this.dialog.open(CancelModalComponent, this.dialogConfig);
+        let dialogRef = this.dialog.open(
+          CancelModalComponent,
+          this.dialogConfig
+        );
         dialogRef.afterClosed().subscribe((result) => {
           this.getShifts();
         });
         break;
       case 'FINALIZADO':
-        let reviewModal = this.dialog.open(SetReviewModalComponent, this.dialogConfig);
+        let reviewModal = this.dialog.open(
+          SetReviewModalComponent,
+          this.dialogConfig
+        );
         reviewModal.afterClosed().subscribe((result) => {
           this.getShifts();
         });
@@ -169,8 +173,7 @@ export class ShiftsListComponent implements OnInit {
       shift,
     };
     const dialogRef = this.dialog.open(SurveyModalComponent, this.dialogConfig);
-    dialogRef.afterClosed().subscribe((result) => {
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   addRate(shift: Shift) {
@@ -178,17 +181,18 @@ export class ShiftsListComponent implements OnInit {
       shift,
     };
     const dialogRef = this.dialog.open(RateModalComponent, this.dialogConfig);
-    dialogRef.afterClosed().subscribe((result) => {
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   seeReview(shift: Shift) {
     this.dialogConfig.data = {
       shift,
     };
-    const dialogRef = this.dialog.open(SeeReviewModalComponent, this.dialogConfig);
-    dialogRef.afterClosed().subscribe((result) => {
-    });
+    const dialogRef = this.dialog.open(
+      SeeReviewModalComponent,
+      this.dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   getFilterSpecialties(filter: any[]) {

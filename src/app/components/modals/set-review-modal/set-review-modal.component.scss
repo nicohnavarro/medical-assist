@@ -26,3 +26,10 @@ mat-dialog-actions{
   justify-content: end;
 }
 
+@media only screen and (max-width: 700px) {
+  .mat-dialog-content {
+    flex-direction:column;
+  justify-content: center;
+  padding: 1rem .2rem;
+  }
+}

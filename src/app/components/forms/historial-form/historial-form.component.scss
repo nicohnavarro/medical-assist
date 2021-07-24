@@ -129,3 +129,59 @@ h4{
 }
 
 
+@media only screen and (max-width: 700px) {
+.form_datos {
+  width: 90%;
+  display:flex;
+  padding-top:500px;
+  .datos-prin{
+    display: flex;
+    flex-direction:column;
+    margin:auto;
+    width: 95vw;
+    mat-form-field {
+      background: var(--background);
+      color: var(--on-background);
+      box-shadow: var(--border-shadow);
+      padding: 0.5rem 1rem;
+      border-radius:15px;
+      width: 100%;
+      mat-label {
+        color: var(--on-background);
+      }
+      input {
+        color: var(--on-background);
+      }
+    }
+  }
+}
+.datos-secon{
+  flex-direction:column;
+  .optionals{
+    flex-direction:column;
+    justify-content: space-between;
+    margin-bottom:1rem;
+    margin-right: 1rem;
+    width: 90%;
+    background: var(--background);
+    color: var(--on-background);
+    box-shadow: var(--border-shadow);
+    border-radius:15px;
+    mat-form-field {
+      padding: 0.5rem 1rem;
+      width: 90%;
+      margin-right:4%;
+      mat-label {
+        color: var(--on-background);
+      }
+      input {
+        color: var(--on-background);
+      }
+    }
+  }
+}
+
+}
+
+
+
