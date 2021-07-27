@@ -15,10 +15,9 @@ import { MedicalSpecialty } from 'src/app/models/MedicalSpecialty';
 @Component({
   selector: 'app-add-shift',
   templateUrl: './add-shift.component.html',
-  styleUrls: ['./add-shift.component.scss']
+  styleUrls: ['./add-shift.component.scss'],
 })
 export class AddShiftComponent implements OnInit {
-
   shiftSpecialty: MedicalSpecialty;
   shiftPatient: User;
   shiftDoctor: User;
@@ -38,7 +37,6 @@ export class AddShiftComponent implements OnInit {
   haveDoctor: boolean = false;
   haveDay: boolean = false;
 
-
   constructor(
     private userSvc: UserService,
     private shiftSvc: ShiftService,
@@ -53,8 +51,7 @@ export class AddShiftComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   private initialState() {
     this.doctorList = [];
@@ -63,22 +60,22 @@ export class AddShiftComponent implements OnInit {
     this.dayFilterList = [];
     this.hourFilterList = [];
 
-    this.userSvc.getByType('doctor').subscribe(data => {
+    this.userSvc.getByType('doctor').subscribe((data) => {
       this.doctorList = data as User[];
     });
 
-    this.userSvc.getById(localStorage.getItem('uid')).subscribe(paciente => {
+    this.userSvc.getById(localStorage.getItem('uid')).subscribe((paciente) => {
       this.shiftPatient = paciente as User;
     });
 
-    this.specialtiesSvc.getSpecialties().subscribe(data => {
+    this.specialtiesSvc.getSpecialties().subscribe((data) => {
       this.specialtiesList = data;
     });
   }
 
   sendSpecialty(id: string) {
     this.cleanFilter();
-    this.specialtiesSvc.getSpecialtyById(id).subscribe(data => {
+    this.specialtiesSvc.getSpecialtyById(id).subscribe((data) => {
       this.shiftSpecialty = data as MedicalSpecialty;
       this.filterDoctorBySpecialty(data.name);
       this.haveSpecialty = true;
@@ -86,20 +83,19 @@ export class AddShiftComponent implements OnInit {
   }
 
   sendDoctor(id: string) {
-    this.userSvc.getById(id).subscribe(doctor => {
+    this.userSvc.getById(id).subscribe((doctor) => {
       this.shiftDay = null;
       this.shiftHour = null;
       this.shiftDoctor = doctor as User;
       this.filterDaysByDoctor(doctor as User);
       this.haveDoctor = true;
-    })
+    });
   }
 
   sendDay(day: string) {
     this.shiftDay = day;
     this.haveDay = true;
     this.filterHourByDay(day);
-
   }
 
   sendHour(hour: string) {
@@ -107,8 +103,8 @@ export class AddShiftComponent implements OnInit {
     this.openDialog();
   }
 
-  filterDoctorBySpecialty(specialty) {
-    let doctors = this.doctorList.filter(doctor => {
+  filterDoctorBySpecialty(specialty: string) {
+    let doctors = this.doctorList.filter((doctor) => {
       if (doctor.especializaciones.includes(specialty.toString()))
         return doctor;
     });
@@ -116,11 +112,13 @@ export class AddShiftComponent implements OnInit {
   }
 
   filterDaysByDoctor(doctor: User) {
-    this.workDaysSvc.getWorkDays(doctor.id).subscribe(data => {
+    this.workDaysSvc.getWorkDays(doctor.id).subscribe((data) => {
       this.doctorInfo = data;
-      let workDays = data.filter((workday)=> workday.active).map(doctor => {
-        return doctor.name;
-      });
+      let workDays = data
+        .filter((workday) => workday.active)
+        .map((doctor) => {
+          return doctor.name;
+        });
       this.dayFilterList = getDateWork(workDays);
     });
   }
@@ -128,14 +126,19 @@ export class AddShiftComponent implements OnInit {
   filterHourByDay(selectedDay: string) {
     let day = selectedDay.split('-')[0];
     let shiftsTaken = [];
-    let schedule: WorkSchedule[] = this.doctorInfo.filter(info => info.name === day).map(info => info.schedule)[0].filter(hour=> hour.active);
-    console.log(schedule);
+    let schedule: WorkSchedule[] = this.doctorInfo
+      .filter((info) => info.name === day)
+      .map((info) => info.schedule)[0]
+      .filter((hour) => hour.active);
     this.shiftSvc.getShifts().subscribe((data) => {
-      shiftsTaken = data.filter(shift => shift.fecha === selectedDay && shift.estado <= 1).map(item => item.hora)
-      shiftsTaken.length > 0 ?
-        this.hourFilterList = schedule.filter(shift => !shiftsTaken.includes(shift.hour))
-        :
-        this.hourFilterList = schedule
+      shiftsTaken = data
+        .filter((shift) => shift.fecha === selectedDay && shift.estado <= 1)
+        .map((item) => item.hora);
+      shiftsTaken.length > 0
+        ? (this.hourFilterList = schedule.filter(
+            (shift) => !shiftsTaken.includes(shift.hour)
+          ))
+        : (this.hourFilterList = schedule);
     });
   }
 
@@ -161,18 +164,17 @@ export class AddShiftComponent implements OnInit {
       estado: 0,
     };
 
-
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.panelClass = 'custom-modalbox';
     dialogConfig.data = {
-      shiftCreated
+      shiftCreated,
     };
 
     const dialogRef = this.dialog.open(ConfirmModalComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.shiftHour = '';
     });
   }
@@ -180,5 +182,4 @@ export class AddShiftComponent implements OnInit {
   goLogin() {
     this.router.navigate(['login']);
   }
-
 }
