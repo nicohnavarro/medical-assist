@@ -33,6 +33,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { DoctorListComponent } from './components/doctor-list/doctor-list.component';
 import { HourTakenDirective } from './directives/hour-taken.directive';
+import { PatientHistoryComponent } from './pages/patient-history/patient-history.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -54,7 +55,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HistorialFormComponent,
     ListComponent,
     SetReviewModalComponent,
-    HourTakenDirective
+    HourTakenDirective,
+    PatientHistoryComponent
   ],
   imports: [
     BrowserModule,

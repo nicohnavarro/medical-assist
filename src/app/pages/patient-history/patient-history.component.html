@@ -1,0 +1,22 @@
+<div class="example-action-buttons">
+  <button mat-button (click)="accordion.openAll()">Expand All</button>
+  <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+</div>
+<mat-accordion class="example-headers-align" multi *ngIf="user?.history">
+
+  <mat-expansion-panel *ngFor="let history of user.history">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{history.specialty}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{history.date}}
+        <mat-icon>date_range</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+      <p>{{ 'height' | translate}}: <span>{{history.altura}}</span></p>
+      <p>{{ 'weight' | translate}}: <span>{{history.peso}}</span></p>
+      <p>{{ 'temperature' | translate}}: <span>{{history.temperature}}</span></p>
+      <p>{{ 'pressure' | translate}}: <span>{{history.pressure}}</span></p>
+    </mat-expansion-panel>
+</mat-accordion>

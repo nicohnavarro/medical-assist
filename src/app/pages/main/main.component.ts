@@ -74,6 +74,12 @@ export class MainComponent implements OnInit {
       router: "schedules"
     }
 
+    let history: menuOption = {
+      icon: "access_time",
+      title: "History",
+      router: "history"
+    }
+
     let reviews: menuOption = {
       icon: "assignment",
       title: "reviews",
@@ -92,7 +98,7 @@ export class MainComponent implements OnInit {
           break;
         case 'patient':
           this.menuOptions = [];
-          this.menuOptions.push(home, profile, shiftsLists, reviews, addShift);
+          this.menuOptions.push(home, profile, shiftsLists,history, reviews, addShift);
           break;
         case 'doctor':
           this.menuOptions = [];

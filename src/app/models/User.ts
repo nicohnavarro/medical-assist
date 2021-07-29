@@ -1,3 +1,4 @@
+import { PatientHistory } from './PatientHistory';
 export interface User {
   id?: string;
   mail: string;
@@ -12,8 +13,8 @@ export interface User {
   especializaciones?: string[];
   doc: string;
   obraSocial?: string;
-  record?:any;
   qualification?:any;
+  history?:PatientHistory[];
 
 }
 

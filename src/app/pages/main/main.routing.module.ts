@@ -1,3 +1,4 @@
+import { PatientHistoryComponent } from './../patient-history/patient-history.component';
 import { ListComponent } from './../list/list.component';
 import { InfoHomeComponent } from './../../components/shared/info-home/info-home.component';
 import { MainComponent } from './main.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
       { path: 'lists', component: ListComponent },
       { path: 'addShift', loadChildren: () => import('../add-shift/add-shift.module').then(m => m.AddShiftModule) },
       { path: 'myShifts',  loadChildren: () => import('../my-shifts/my-shifts.module').then(m => m.MyShiftsModule) },
+      { path: 'history',  component:PatientHistoryComponent},
       { path: 'statistics',  loadChildren: () => import('../statistics/statistics.module').then(m => m.StatisticsModule) },
     ]
   },
