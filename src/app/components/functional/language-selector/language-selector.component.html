@@ -1,3 +1,21 @@
-<span>🇦🇷  </span>
+<!-- <span>🇦🇷  </span>
 <mat-slide-toggle (change)="onEnglishSwitched($event)" [checked]="checked" color="primary"></mat-slide-toggle>
-<span>  🇺🇸</span>
+<span>  🇺🇸</span> -->
+
+<mat-form-field appearance="outline">
+  <mat-label></mat-label>
+  <mat-select
+    [(value)]="selected"
+    (selectionChange)="onEnglishSwitched(selected)"
+  >
+    <mat-option value="es">
+      🇦🇷 Castellano
+    </mat-option>
+    <mat-option value="en">
+      🇺🇸 English
+    </mat-option>
+    <mat-option value="br">
+      🇧🇷 Português
+    </mat-option>
+  </mat-select>
+</mat-form-field>

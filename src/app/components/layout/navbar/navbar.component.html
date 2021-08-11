@@ -5,7 +5,9 @@
   <span>{{ "title" | translate }}</span>
   <div class="controls">
     <app-theme-toogle></app-theme-toogle>
-    <app-language-selector></app-language-selector>
+    <div class="language">
+      <app-language-selector></app-language-selector>
+    </div>
   </div>
   <div class="spaced"></div>
   <div *ngIf="user" class="userInfo">

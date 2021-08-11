@@ -5,6 +5,12 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  .language{
+    width: 24px;
+    height: 50%;
+    font-size: small;
+    margin-top: 1rem;
+  }
 }
 .spaced{
   width:50%;

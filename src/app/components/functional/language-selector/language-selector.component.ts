@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
@@ -8,20 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./language-selector.component.scss']
 })
 export class LanguageSelectorComponent implements OnInit {
-  checked: boolean;
   lang: string;
-  options: any;
+  selected: string;
+  languageFormCtrl = new FormControl('');
 
   constructor(private translateService: TranslateService) {
     if (localStorage.getItem("lang") === 'en') {
       this.translateService.use('en');
       document.documentElement.lang = 'en'
-      this.checked = true;
+      this.selected = 'en';
     }
     else if (localStorage.getItem("lang") === 'es') {
       this.translateService.use('es');
       document.documentElement.lang = 'es'
-      this.checked = false;
+      this.selected = 'es';
+    }
+    else if (localStorage.getItem("lang") === 'br') {
+      this.translateService.use('br');
+      document.documentElement.lang = 'br'
+      this.selected = 'br';
     }
     else {
       localStorage.setItem("lang", "es")
@@ -31,17 +37,31 @@ export class LanguageSelectorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.options = [
-      { Value: 'es', Text: '🇦🇷 Español', },
-      { Value: 'en', Text: '🇬🇧 English', },
-    ];
   }
 
-  onEnglishSwitched({ checked }: MatSlideToggleChange) {
-    this.lang = checked ? 'en' : 'es';
-    localStorage.setItem("lang", this.lang);
-    this.translateService.use(this.lang);
-    document.documentElement.lang = this.lang;
+  onEnglishSwitched(selected: string) {
+    console.log(selected);
+    console.log(this.selected)
+    switch (selected) {
+      case 'es':
+        localStorage.setItem("lang",'es');
+        this.translateService.use('es');
+        document.documentElement.lang = 'es';
+        break;
+      case 'en':
+        localStorage.setItem("lang",'en');
+        this.translateService.use('en');
+        document.documentElement.lang = 'en';
+        break;
+      case 'br':
+        localStorage.setItem("lang",'br');
+        this.translateService.use('br');
+        document.documentElement.lang = 'br';
+        break;
+
+      default:
+        break;
+    }
   }
 
 }
