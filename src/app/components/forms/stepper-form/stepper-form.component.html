@@ -1,4 +1,99 @@
 <mat-horizontal-stepper linear="false" #stepper>
+  <mat-step>
+    <div class="form_datos">
+      <ng-template matStepLabel>{{ "typeOfUser" | translate }}</ng-template>
+      <div class="datos_tipo">
+        <div class="tipo">
+          <label id="example-radio-group-label">{{
+            "chooseOption" | translate
+          }}</label
+          ><br />
+          <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            [(ngModel)]="tipoUsuario"
+            name="tipoUsuario"
+          >
+            <mat-radio-button
+              class="example-radio-button"
+              value="patient"
+            >
+            <img src="../../../../assets/images/person.png" alt="">
+              {{ "patient" | translate }}
+            </mat-radio-button>
+            <mat-radio-button
+            class="example-radio-button"
+            value="doctor"
+          >
+          <img src="../../../../assets/images/doctor.png" alt="">
+            {{ "doctor" | translate }}
+          </mat-radio-button>
+          </mat-radio-group>
+
+          <mat-form-field appearance="standard">
+            <mat-label>{{ "document" | translate }}</mat-label>
+            <input
+              matInput
+              [formControl]="documentFormCtrl"
+              placeholder="DNI"
+            />
+            <mat-error *ngIf="documentFormCtrl.hasError('required')">
+              {{ "fieldRequired" | translate }}
+            </mat-error>
+
+            <mat-error *ngIf="documentFormCtrl.value.length < 8">
+              {{ "validateDocument" | translate }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <mat-form-field
+          *ngIf="tipoUsuario == 'doctor'"
+          appearance="fill"
+          color="primary"
+        >
+          <mat-label>{{ "specialties" | translate }}</mat-label>
+          <mat-select
+            class="select_color"
+            [formControl]="especialidadFormCtrl"
+            multiple
+            required
+          >
+            <mat-option
+              class="select_color"
+              *ngFor="let especialidad of especialidades | enumToArray"
+              [value]="especialidad.name"
+            >
+              {{ especialidad.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field
+          *ngIf="tipoUsuario == 'patient'"
+          appearance="fill"
+          color="primary"
+        >
+          <mat-label>{{ "insurance" | translate }}</mat-label>
+          <input
+            matInput
+            [formControl]="obraSocial"
+            placeholder="Obra Social"
+          />
+          <mat-error *ngIf="obraSocial.hasError('required')">
+            {{ "fieldRequired" | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="btn-form">
+      <button mat-raised-button color="accent" matStepperPrevious>
+        {{ "back" | translate }}
+      </button>
+      <button matStepperNext mat-raised-button color="primary">
+        {{ "next" | translate }}
+      </button>
+    </div>
+  </mat-step>
   <mat-step [stepControl]="datosPersonalesFormGroup">
     <form [formGroup]="datosPersonalesFormGroup">
       <div class="form_datos">
@@ -136,94 +231,6 @@
         {{ "back" | translate }}
       </button>
       <button mat-raised-button color="primary" matStepperNext>
-        {{ "next" | translate }}
-      </button>
-    </div>
-  </mat-step>
-  <mat-step>
-    <div class="form_datos">
-      <ng-template matStepLabel>{{ "typeOfUser" | translate }}</ng-template>
-      <div class="datos_tipo">
-        <div class="tipo">
-          <label id="example-radio-group-label">{{
-            "chooseOption" | translate
-          }}</label
-          ><br />
-          <mat-radio-group
-            aria-labelledby="example-radio-group-label"
-            class="example-radio-group"
-            [(ngModel)]="tipoUsuario"
-            name="tipoUsuario"
-          >
-            <mat-radio-button
-              class="example-radio-button"
-              *ngFor="let tipo of tiposUsuarios"
-              [value]="tipo"
-            >
-              {{ tipo | translate }}
-            </mat-radio-button>
-          </mat-radio-group>
-
-          <mat-form-field appearance="standard">
-            <mat-label>{{ "document" | translate }}</mat-label>
-            <input
-              matInput
-              [formControl]="documentFormCtrl"
-              placeholder="DNI"
-            />
-            <mat-error *ngIf="documentFormCtrl.hasError('required')">
-              {{ "fieldRequired" | translate }}
-            </mat-error>
-
-            <mat-error *ngIf="documentFormCtrl.value.length < 8">
-              {{ "validateDocument" | translate }}
-            </mat-error>
-          </mat-form-field>
-        </div>
-        <mat-form-field
-          *ngIf="tipoUsuario == 'doctor'"
-          appearance="fill"
-          color="primary"
-        >
-          <mat-label>{{ "specialties" | translate }}</mat-label>
-          <mat-select
-            class="select_color"
-            [formControl]="especialidadFormCtrl"
-            multiple
-            required
-          >
-            <mat-option
-              class="select_color"
-              *ngFor="let especialidad of especialidades | enumToArray"
-              [value]="especialidad.name"
-            >
-              {{ especialidad.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field
-          *ngIf="tipoUsuario == 'patient'"
-          appearance="fill"
-          color="primary"
-        >
-          <mat-label>{{ "insurance" | translate }}</mat-label>
-          <input
-            matInput
-            [formControl]="obraSocial"
-            placeholder="Obra Social"
-          />
-          <mat-error *ngIf="obraSocial.hasError('required')">
-            {{ "fieldRequired" | translate }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="btn-form">
-      <button mat-raised-button color="accent" matStepperPrevious>
-        {{ "back" | translate }}
-      </button>
-      <button matStepperNext mat-raised-button color="primary">
         {{ "next" | translate }}
       </button>
     </div>

@@ -6,6 +6,12 @@ mat-horizontal-stepper {
   overflow-x: hidden;
 }
 
+mat-radio-button{
+  img{
+    height: 100px;
+    width: 50px;
+  }
+}
 
 mat-step {
   background: var(--background);
