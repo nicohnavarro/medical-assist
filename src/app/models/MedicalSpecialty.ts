@@ -3,4 +3,5 @@ export interface MedicalSpecialty {
   id?:string;
   shifts?:number;
   doctors?:number;
+  image?:string;
 }
