@@ -1,15 +1,21 @@
 <div class="sacar_turnos" *ngIf="isLogged">
-    <div class="especialidad">
-        <app-combo-list
+    <div class="especialidad" *ngIf="!haveSpecialty">
+        <!-- <app-combo-list
         lastSelection="true"
           fieldName="{{'selectedSpecialty' | translate}}:"
           [elementToShow]="shiftSpecialty"
           [myList]="specialtiesList"
           (selectedItem)="sendSpecialty($event)"
-        ></app-combo-list>
+        ></app-combo-list> -->
+        <app-combo-specialties
+        [specialties]="specialtiesList"
+        (selectedItem)="sendSpecialty($event)"
+        >
+        </app-combo-specialties>
       </div>
 
-  <div class="medico">
+  <div class="medico" *ngIf="haveSpecialty">
+    <span  *ngIf="haveSpecialty" (click)="haveSpecialty = false; haveDoctor = false; shiftDoctor = null;shiftSpecialty=null">🔙 {{'specialties' | translate}}</span> 
     <app-combo-list
       [lastSelection]="haveSpecialty"
       fieldName="{{'selectedDoctor' | translate}}:"
@@ -18,7 +24,8 @@
       (selectedItem)="sendDoctor($event)"
     ></app-combo-list>
   </div>
-  <div class="medico">
+  <div class="medico" *ngIf="haveDoctor">
+    <span  *ngIf="haveDoctor" (click)="haveDoctor = false">🔙{{'doctor' | translate}}</span> 
     <app-combo-day
       [choseDoctor]="haveDoctor"
       [workDays]="dayFilterList"
@@ -26,7 +33,7 @@
       (selectedDay)="sendDay($event)"
     ></app-combo-day>
   </div>
-  <div class="medico">
+  <div  *ngIf="!haveDay">
     <app-combo-hour
       [choseDay]="haveDay"
       (selectedHour)="sendHour($event)"
@@ -34,7 +41,16 @@
       [showHour]="shiftHour"
     ></app-combo-hour>
   </div>
+
+  <div class="info_turno" *ngIf="isLogged && shiftSpecialty">
+  <h3>{{'shift' | translate}} Info 📂</h3>
+  <h4>{{'selectedDoctor' | translate}}: </h4><span>{{shiftDoctor?.name}}</span>
+  <h4>{{'selectedSpecialty' | translate}}: </h4><span>{{shiftSpecialty?.name}}</span>
+  <h4>{{'selectedDay' | translate}}: </h4><span>{{shiftDay}} {{shiftHour}}</span>
+    
 </div>
+</div>
+
 
 <div *ngIf="!isLogged">
   <div class="aviso">

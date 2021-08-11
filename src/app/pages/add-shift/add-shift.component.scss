@@ -1,10 +1,20 @@
 .sacar_turnos {
   display: flex;
   flex-direction: row;
-  div {
-    width: 25%;
-    margin: 1rem 1rem;
+  justify-content: flex-start;
+  width: 100%;
+  .especialidad{
+    width: 70%;
   }
+  .medico{
+    width: 30%;
+    margin-right: 2rem;
+    margin-left: 1rem;
+  }
+}
+
+.info_turno{
+  margin-left: 2rem;
 }
 
 .aviso {

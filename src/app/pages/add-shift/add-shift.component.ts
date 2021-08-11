@@ -29,13 +29,15 @@ export class AddShiftComponent implements OnInit {
   specialtiesList: MedicalSpecialty[];
 
   doctorFilterList: User[];
-  dayFilterList: string[];
+  dayFilterList: string[] = [];
   hourFilterList: WorkSchedule[];
 
   isLogged: boolean = false;
   haveSpecialty: boolean = false;
   haveDoctor: boolean = false;
   haveDay: boolean = false;
+
+  shiftsTaken: Shift[];
 
   constructor(
     private userSvc: UserService,
@@ -49,9 +51,12 @@ export class AddShiftComponent implements OnInit {
       this.isLogged = true;
       this.initialState();
     }
+    this.shiftSvc.getShifts().subscribe((data) => {
+      this.shiftsTaken = data
+    });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   private initialState() {
     this.doctorList = [];
@@ -73,13 +78,11 @@ export class AddShiftComponent implements OnInit {
     });
   }
 
-  sendSpecialty(id: string) {
+  sendSpecialty(specialty: MedicalSpecialty) {
     this.cleanFilter();
-    this.specialtiesSvc.getSpecialtyById(id).subscribe((data) => {
-      this.shiftSpecialty = data as MedicalSpecialty;
-      this.filterDoctorBySpecialty(data.name);
-      this.haveSpecialty = true;
-    });
+    this.shiftSpecialty = specialty;
+    this.filterDoctorBySpecialty(specialty.name);
+    this.haveSpecialty = true;
   }
 
   sendDoctor(id: string) {
@@ -93,9 +96,13 @@ export class AddShiftComponent implements OnInit {
   }
 
   sendDay(day: string) {
-    this.shiftDay = day;
+    console.log(day);
+    let divisor = day.split('-');
+    this.shiftDay = divisor[0]+'-'+divisor[1];
+    this.shiftHour = divisor[2];
     this.haveDay = true;
-    this.filterHourByDay(day);
+    this.openDialog();
+    // this.filterHourByDay(day);
   }
 
   sendHour(hour: string) {
@@ -107,7 +114,12 @@ export class AddShiftComponent implements OnInit {
     let doctors = this.doctorList.filter((doctor) => {
       if (doctor.especializaciones.includes(specialty.toString()))
         return doctor;
-    });
+    }).map((aux) => {
+      let score = aux.qualification ?
+        aux.qualification.reduce((accu, current) => (accu.score + current.score)) / aux.qualification.length
+        : 0;
+      return { ...aux, 'score': score }
+    }).sort((a, b) => (a.score < b.score) ? 1 : -1);
     this.doctorFilterList = doctors;
   }
 
@@ -119,27 +131,46 @@ export class AddShiftComponent implements OnInit {
         .map((doctor) => {
           return doctor.name;
         });
-      this.dayFilterList = getDateWork(workDays);
+      const days = getDateWork(workDays);
+      let daysAndHours = [];
+      days.forEach((valor, indice, array) => {
+        let dayHours=this.filterHourByDay(valor).map((aux) => {
+          return `${valor}-${aux.hour}`
+        });
+        if(daysAndHours.length === 0){
+          daysAndHours = dayHours;
+        }
+        else{
+          daysAndHours = daysAndHours.concat(dayHours);
+        }
+      })
+      this.dayFilterList = daysAndHours;
     });
   }
 
   filterHourByDay(selectedDay: string) {
+    let scheduleActive = [];
     let day = selectedDay.split('-')[0];
-    let shiftsTaken = [];
+    let shiftsActive = [];
     let schedule: WorkSchedule[] = this.doctorInfo
       .filter((info) => info.name === day)
       .map((info) => info.schedule)[0]
       .filter((hour) => hour.active);
-    this.shiftSvc.getShifts().subscribe((data) => {
-      shiftsTaken = data
-        .filter((shift) => shift.fecha === selectedDay && shift.estado <= 1)
-        .map((item) => item.hora);
-      shiftsTaken.length > 0
-        ? (this.hourFilterList = schedule.filter(
-            (shift) => !shiftsTaken.includes(shift.hour)
-          ))
-        : (this.hourFilterList = schedule);
-    });
+
+    console.log(selectedDay);
+    console.log(this.shiftsTaken);
+    shiftsActive = this.shiftsTaken
+      .filter((shift) => shift.fecha === selectedDay && shift.estado <= 1)
+      .map((item) => item.hora);
+
+    shiftsActive.length > 0
+      ? (scheduleActive = schedule.filter(
+        (shift) => !shiftsActive.includes(shift.hour)
+      ))
+      : (scheduleActive = schedule);
+
+    return scheduleActive;
+
   }
 
   private cleanFilter() {
@@ -175,7 +206,11 @@ export class AddShiftComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmModalComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((result) => {
-      this.shiftHour = '';
+      this.cleanFilter();
+      this.shiftSpecialty = null;
+    });
+    this.shiftSvc.getShifts().subscribe((data) => {
+      this.shiftsTaken = data
     });
   }
 

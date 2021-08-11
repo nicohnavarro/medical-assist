@@ -1,0 +1,29 @@
+.container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  .box{
+    margin: 1rem;
+    padding: 1rem;
+    width: auto;
+    height: 100px;
+    border-radius: 14px;
+    background: var(--background);
+    color: var(--on-background);
+    box-shadow: var(--border-shadow);
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    img{
+      width: 50%;
+      height: 50%;
+    }
+    span{
+      flex-wrap: wrap;
+    }
+  }
+  .box:hover{
+    cursor: pointer;
+  }
+}
