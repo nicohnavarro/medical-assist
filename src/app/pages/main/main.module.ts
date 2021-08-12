@@ -1,3 +1,4 @@
+import { ExcelService } from './../../services/excel.service';
 import { FooterComponent } from './../../components/layout/footer/footer.component';
 import { NavbarComponent } from './../../components/layout/navbar/navbar.component';
 import { InfoHomeComponent } from './../../components/shared/info-home/info-home.component';
@@ -21,6 +22,9 @@ import { CommonModule } from '@angular/common';
     MainRoutingModule,
     SharedModule,
     AngularMaterialModule                             
+  ],
+  providers:[
+    ExcelService
   ]
 })
 export class MainModule { }

@@ -1,4 +1,4 @@
-import { User } from './User';
+
 export interface PatientHistory {
   id?:string;
   height:number;
@@ -7,4 +7,5 @@ export interface PatientHistory {
   temperature:string;
   date: Date;
   specialty: string;
+  historyAdditional?:any[];
 }

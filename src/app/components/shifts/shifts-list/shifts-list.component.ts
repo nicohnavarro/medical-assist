@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { ShiftStates } from './../../../utils/shiftStates.enum';
 import { SeeReviewModalComponent } from '../../modals/see-review-modal/see-review-modal.component';
 import { RateModalComponent } from './../../modals/rate-modal/rate-modal.component';
@@ -22,6 +23,7 @@ import { Notyf } from 'notyf';
   styleUrls: ['./shifts-list.component.scss'],
 })
 export class ShiftsListComponent implements OnInit {
+  search: FormControl;
   States = ShiftStates;
   Specialties = [];
   Doctors = [];
@@ -63,6 +65,7 @@ export class ShiftsListComponent implements OnInit {
     private specialtiesSvc: MedicalSpecialtiesService,
     private authSvc: AuthService
   ) {
+    this.search = new FormControl('');
     this.typeUser = authSvc.user?.type;
     this.setPatientOptions(this.typeUser);
 
@@ -91,6 +94,13 @@ export class ShiftsListComponent implements OnInit {
         : 'Turno Aceptado';
 
     this.setDialogConfig();
+  }
+
+  findResults(words:string){
+    if(words==='')
+      this.dataSource.data = this.showShifts;
+    let lowerCase = words.toLowerCase()
+    this.dataSource.data = this.showShifts.filter((shift)=> JSON.stringify(shift).toLowerCase().includes(lowerCase))
   }
 
   private setPatientOptions(type: string) {

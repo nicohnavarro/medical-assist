@@ -20,6 +20,20 @@
   </mat-accordion>
 </div>
 
+<div class="filter">
+  <mat-form-field appearance="outline" color="primary">
+    <!-- <mat-label>{{ "search" | translate }}</mat-label> -->
+    <input
+      matInput
+      [formControl]="search"
+      placeholder="Search 🔍"
+      type="text"
+      class="form-control"
+      (input)="findResults($event.target.value)"
+    />
+  </mat-form-field>
+</div>
+
 <mat-spinner
   *ngIf="loading"
   [diameter]="150"
@@ -62,8 +76,8 @@
     <td mat-cell *matCellDef="let element">{{ element.hora }}</td>
   </ng-container>
 
- <!-- State Column -->
-  <ng-container matColumnDef="state" >
+  <!-- State Column -->
+  <ng-container matColumnDef="state">
     <th mat-header-cell *matHeaderCellDef>{{ "state" | translate }}</th>
     <td mat-cell *matCellDef="let element">
       <div class="states" [appColorState]="element.estado">
@@ -99,7 +113,7 @@
       >
     </td>
 
-  <!-- Finish Column -->
+    <!-- Finish Column -->
   </ng-container>
   <ng-container matColumnDef="finish">
     <th mat-header-cell *matHeaderCellDef>{{ "finish" | translate }}</th>
@@ -142,8 +156,8 @@
     </td>
   </ng-container>
 
-    <!-- Qualify Column -->
-  <ng-container matColumnDef="qualify"  *ngIf="typeUser === 'patient'">
+  <!-- Qualify Column -->
+  <ng-container matColumnDef="qualify" *ngIf="typeUser === 'patient'">
     <th mat-header-cell *matHeaderCellDef>{{ "rate" | translate }}</th>
     <td mat-cell *matCellDef="let element">
       <mat-icon

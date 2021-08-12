@@ -81,6 +81,7 @@
   "document": "Document",
   "validateDocument": "Invalid Field",
   "historyData":"Medical Record",
+  "historyAdditional":"Additional Info",
   "height":"Height",
   "weight":"Weight",
   "temperature":"Temp",

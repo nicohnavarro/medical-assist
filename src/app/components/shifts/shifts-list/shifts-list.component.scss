@@ -2,6 +2,12 @@ mat-accordion{
   padding: 1rem;
 }
 
+.filter{
+  mat-form-field{
+    margin: 2rem 1rem 0 2rem;
+    width: 70%;
+  }
+}
 
 table {
   width: 90%;

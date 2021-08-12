@@ -1,52 +1,55 @@
-.controls{
+.controls {
   width: 30%;
   padding: 0;
   margin: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  .language{
+  .language {
     width: 24px;
     height: 50%;
     font-size: small;
     margin-top: 1rem;
   }
 }
-.spaced{
-  width:50%;
+.spaced {
+  width: 50%;
 }
 
-.userInfo{
+.userInfo {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding-left: 1rem;
-  .imageContent{
-    width:2.5rem;
+  .imageContent {
+    width: 2.5rem;
     margin: 15px 10px;
-    img{
+    img {
       border-radius: 10px;
       width: 100%;
     }
   }
-  p{
+  p {
     font-size: medium;
   }
 }
-mat-toolbar{
-  background: var(--background)!important;
-  color: var(--on-background)!important;
+mat-toolbar {
+  background: var(--background) !important;
+  color: var(--on-background) !important;
 }
 
-
+button{
+  z-index: 9999;
+}
 
 @media only screen and (max-width: 700px) {
-  .controls{
+  .controls {
     margin-left: 30px;
   }
-  span,.userInfo{
+  span,
+  .userInfo {
     display: none;
   }
 }

@@ -1,3 +1,4 @@
+import { ExcelService } from './../../services/excel.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from './../../models/User';
@@ -12,16 +13,24 @@ import {MatAccordion} from '@angular/material/expansion';
 export class PatientHistoryComponent implements OnInit {
 
   user:User;
+  historyAdditional:any[];
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  constructor(private userSvc: UserService, private router: Router) {
+  constructor(private userSvc: UserService, private router: Router,private excelSvc:ExcelService) {
     if (localStorage.getItem('uid')) {
       this.userSvc.getById(localStorage.getItem('uid')).subscribe((data) => {
         this.user = data;
+        this.historyAdditional = data.history.map((history)=> history.historyAdditional)
+        let jsonHistory = this.user.history.map((history)=> JSON.stringify(history));
       })
     }
   }
 
   ngOnInit(): void {
+  }
+
+  exportExcel(){
+    let jsonHistory = this.user.history.map((history)=> JSON.parse(JSON.stringify(history,history.historyAdditional)));
+    this.excelSvc.exportAsExcelFile(jsonHistory,Object.entries(this.user),this.user.name);
   }
 
 }

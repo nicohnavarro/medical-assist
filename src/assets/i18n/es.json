@@ -81,6 +81,7 @@
   "document": "Documento",
   "validateDocument": "Documento Invalido",
   "historyData":"Historial Medico",
+  "historyAdditional":"Informacion Adicional",
   "height":"Altura",
   "weight":"Peso",
   "temperature":"Temp",

@@ -96,7 +96,6 @@ export class AddShiftComponent implements OnInit {
   }
 
   sendDay(day: string) {
-    console.log(day);
     let divisor = day.split('-');
     this.shiftDay = divisor[0]+'-'+divisor[1];
     this.shiftHour = divisor[2];
@@ -157,8 +156,6 @@ export class AddShiftComponent implements OnInit {
       .map((info) => info.schedule)[0]
       .filter((hour) => hour.active);
 
-    console.log(selectedDay);
-    console.log(this.shiftsTaken);
     shiftsActive = this.shiftsTaken
       .filter((shift) => shift.fecha === selectedDay && shift.estado <= 1)
       .map((item) => item.hora);

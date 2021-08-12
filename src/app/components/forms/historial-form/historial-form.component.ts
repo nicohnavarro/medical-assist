@@ -63,12 +63,25 @@ export class HistorialFormComponent implements OnInit {
   }
 
   private buildHistory() {
+    let historyAdditional = [];
+    if(this.option1FormCtrl.value){
+      historyAdditional.push({'option':this.option1FormCtrl.value,'value':this.value1FormCtrl.value})
+    }
+    if(this.option2FormCtrl.value){
+      historyAdditional.push({'option':this.option2FormCtrl.value,'value':this.value2FormCtrl.value})
+    }
+    if(this.option3FormCtrl.value){
+      historyAdditional.push({'option':this.option3FormCtrl.value,'value':this.value3FormCtrl.value})
+    }
+
     let history = {
       altura: this.heightFormCtrl.value,
       peso: this.weightFormCtrl.value,
       temperature: this.temperatureFormCtrl.value,
       pressure: this.pressureFormCtrl.value,
+      historyAdditional
     };
-    this.medicalHistory.emit(history);
+
+    this.medicalHistory.emit({history,historyAdditional});
   }
 }

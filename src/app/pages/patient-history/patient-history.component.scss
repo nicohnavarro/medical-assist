@@ -6,6 +6,10 @@
 mat-expansion-panel{
   padding: .2rem;
   margin: .4rem 1rem;
+  border-radius: 20px;
+  background: var(--background) !important;
+  color: var(--on-background) !important;
+  box-shadow: var(--border-shadow) !important;
 }
 
 .example-headers-align .mat-expansion-panel-header-title,
@@ -20,4 +24,10 @@ mat-expansion-panel{
 
 .example-headers-align .mat-form-field + .mat-form-field {
   margin-left: 8px;
+}
+
+button{
+    img{
+      width: 25px;
+    }
 }
