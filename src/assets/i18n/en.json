@@ -110,10 +110,14 @@
   "surveyMsg":"Please completed this survey 📝",
   "save":"Save 💾",
   "barChart":"Shifts by Specialties",
-  "heatMap":"Shifts by Year",
+  "heatMap":"Logs by Year",
   "pieChart":"Doctors by Specialties",
   "downloadPdf":"Download Pdf",
   "downloading":"Downloading ...",
-  "image":"Image"
+  "image":"Image",
+  "barChart2":"Shift by day 📅",
+  "barChart3":"Patients by Specialties",
+  "pieChart2":"Shifts Finished ☑️",
+  "pieChart3":"Shifts Requested 😷"
 }
 

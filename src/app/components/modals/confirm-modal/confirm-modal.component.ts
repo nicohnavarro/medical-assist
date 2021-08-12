@@ -29,6 +29,14 @@ export class ConfirmModalComponent implements OnInit {
   confirmShift(){
     this.loading= true;
     this.shift.especialidad.shifts ? this.shift.especialidad.shifts = this.shift.especialidad.shifts+1: this.shift.especialidad.shifts=1
+    if(this.shift.especialidad.patients){
+      if(!this.shift.especialidad.patients.includes(this.shift.paciente.id)){
+        this.shift.especialidad.patients.push(this.shift.paciente.id);
+      }
+    }
+    else{
+      this.shift.especialidad.patients = [this.shift.paciente.id];
+    }
     setTimeout(() => {
       this.shiftSvc.addShift(this.shift);
       this.medicalSpecialtySvc.updateSpecialty(this.shift.especialidad,this.shift.especialidad.id);

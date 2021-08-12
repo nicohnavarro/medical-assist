@@ -25,6 +25,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "@swimlane/ngx-charts": "^18.0.1",
+    "angular-highcharts": "^12.0.0",
     "firebase": "^7.0 || ^8.0",
     "highcharts": "^9.1.2",
     "html2canvas": "^1.1.1",

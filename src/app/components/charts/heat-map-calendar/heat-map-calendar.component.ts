@@ -1,3 +1,4 @@
+import { LogsService } from './../../../services/logs.service';
 import { ShiftService } from './../../../services/shift.service';
 import { Component, HostListener, OnInit } from '@angular/core';
 
@@ -43,16 +44,25 @@ export class HeatMapCalendarComponent implements OnInit {
   screenHeight;
 
 
-  constructor(private shiftSvc: ShiftService) {
-    this.shiftSvc.getShifts().subscribe((data) => {
-      const shifts = data.map(shift => shift.fecha.split('-')[1]);
-      const dateValid = shifts.map((date) => {
-        const numdate = date.split('/')
-        return new Date(`${numdate[1]}/${numdate[0]}/${numdate[2]}`);
-      });
-      const newFiltered = this.compressArray(dateValid);
+  constructor(private shiftSvc: ShiftService,private logSvc:LogsService) {
+    // this.shiftSvc.getShifts().subscribe((data) => {
+    //   const shifts = data.map(shift => shift.fecha.split('-')[1]);
+    //   const dateValid = shifts.map((date) => {
+    //     const numdate = date.split('/')
+    //     return new Date(`${numdate[1]}/${numdate[0]}/${numdate[2]}`);
+    //   });
+    //   const newFiltered = this.compressArray(dateValid);
+    //   this.calendarData = this.getCalendarData(newFiltered);
+    // })
+
+    this.logSvc.getAllLog().subscribe((data)=>{
+      const logDates = data.map((aux)=> new Date(aux.date.toDate().toDateString()));
+      const newFiltered = this.compressArray(logDates);
       this.calendarData = this.getCalendarData(newFiltered);
     })
+
+
+
     if (window.innerWidth < 600) {
       this.view = [430, 140];
     }

@@ -1,33 +1,105 @@
-<div class="container">
-  <div class="button">
-    <button
-      class="big"
-      mat-raised-button
-      color="primary"
-      (click)="downloadAsPDF()"
-    >
-      <span *ngIf="downloading">⬇️ {{ "downloading" | translate }}</span
-      ><span *ngIf="!downloading">{{ "downloadPdf" | translate }}</span>
-    </button>
-  </div>
-  <div class="row">
-    <div class="neumoDiv" app-theme>
-      <h4>{{ "barChart" | translate }} 📊</h4>
-      <app-vertical-bar
-        [data]="barData"
-        id="verticalBar"
-        #verticalBar
-      ></app-vertical-bar>
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">insert_chart</mat-icon>
+      NgxCharts
+    </ng-template>
+    <div class="container">
+      <div class="button">
+        <button
+          class="big"
+          mat-raised-button
+          color="primary"
+          (click)="downloadAsPDF()"
+        >
+          <span *ngIf="downloading">⬇️ {{ "downloading" | translate }}</span
+          ><span *ngIf="!downloading">{{ "downloadPdf" | translate }}</span>
+        </button>
+      </div>
+      <div class="row">
+        <div class="neumoDiv" app-theme>
+          <h4>{{ "barChart" | translate }} 📊</h4>
+          <app-vertical-bar
+            [data]="barData"
+            id="verticalBar"
+            #verticalBar
+          ></app-vertical-bar>
+        </div>
+        <div class="neumoDiv" app-theme>
+          <h4>{{ "pieChart" | translate }} 👩‍⚕️👨‍⚕️</h4>
+          <app-pie-chart [data]="pieData" id="pieChart" #pieChart></app-pie-chart>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="neumoDiv" app-theme>
+          <h4>{{ "heatMap" | translate }} 🗓️</h4>
+          <app-heat-map-calendar id="heatMap" #heatMap></app-heat-map-calendar>
+        </div>
+      </div>
     </div>
-    <div class="neumoDiv" app-theme>
-      <h4>{{ "pieChart" | translate }} 👩‍⚕️👨‍⚕️</h4>
-      <app-pie-chart [data]="pieData" id="pieChart" #pieChart></app-pie-chart>
+    
+</mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">insert_chart_outlined</mat-icon>
+      HighCharts
+    </ng-template>
+    <div class="container">
+      <!-- <div class="button">
+        <button
+          class="big"
+          mat-raised-button
+          color="primary"
+          (click)="downloadAsPDF()"
+        >
+          <span *ngIf="downloading">⬇️ {{ "downloading" | translate }}</span
+          ><span *ngIf="!downloading">{{ "downloadPdf" | translate }}</span>
+        </button>
+      </div> -->
+      <div class="row">
+        <div class="neumoDiv" app-theme>
+          <h4>{{ "barChart2" | translate }} 📊</h4>          
+          <app-column [data]="columnData"
+          [name]="'Cantidad de turnos por dia'"></app-column>
+        </div>
+        <div class="neumoDiv" app-theme>
+          <h4>{{ "barChart" | translate }} 📊</h4>          
+          <app-column [data]="columnData2"
+          [name]="'Cantidad de turnos por especialidad'"></app-column>
+        </div>
+      </div>
+      <div class="row">
+        <div class="neumoDiv" app-theme>
+          <h4>{{ "pieChart2" | translate }} 👩‍⚕️👨‍⚕️</h4>
+          <app-bar [data]="barHighChartData2"
+          [name]="'Turnos Finalizados'"></app-bar>
+        </div>
+        <div class="neumoDiv" app-theme>
+          <h4>{{ "pieChart3" | translate }} 👩‍⚕️👨‍⚕️</h4>
+          <app-bar [data]="barHighChartData"
+          [name]="'Turnos Solicitados'"></app-bar>
+        </div>
+      </div>
+      <div class="row">
+        <div class="neumoDiv" app-theme>
+          <h4>{{ "pieChart" | translate }} 👨‍⚕️</h4>
+          <app-pie [data]="pieData2"
+          [name]="'Medicos por Especialidad'"></app-pie>
+        </div>
+        <div class="neumoDiv" app-theme>
+          <h4>{{ "barChart3" | translate }} 😷</h4>
+          <app-pie [data]="pieData3"
+          [name]="'Pacientes por Especialidad'"></app-pie>
+        </div>
+        <!-- <div class="neumoDiv" app-theme>
+          <h4>{{ "pieChart3" | translate }} 👩‍⚕️👨‍⚕️</h4>
+          <app-bar [data]="barHighChartData"
+          [name]="'Turnos Solicitados'"></app-bar>
+        </div> -->
+      </div>
     </div>
-  </div>
-  <div class="row2">
-    <div class="neumoDiv" app-theme>
-      <h4>{{ "heatMap" | translate }} 🗓️</h4>
-      <app-heat-map-calendar id="heatMap" #heatMap></app-heat-map-calendar>
-    </div>
-  </div>
-</div>
+    
+    </mat-tab>
+</mat-tab-group>
+
+

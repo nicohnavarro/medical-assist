@@ -110,10 +110,14 @@
   "surveyMsg":"Por favor completa nuestra encuesta 📝",
   "save":"Guardar 💾",
   "barChart":"Cantidad de turnos por especialidad",
-  "heatMap":"Cantidad de turnos anual",
+  "heatMap":"Ingresos anuales",
   "pieChart":"Medicos por Especialidad",
   "downloadPdf":"Descargar Pdf",
   "downloading":"Descargando ...",
-  "image":"Imagen"
+  "image":"Imagen",
+  "barChart2":"Turnos por dia 📅",
+  "barChart3":"Cantidad de pacientes por especialidad",
+  "pieChart2":"Turnos Finalizados ☑️",
+  "pieChart3":"Turnos Solicitados 😷"
 }
 

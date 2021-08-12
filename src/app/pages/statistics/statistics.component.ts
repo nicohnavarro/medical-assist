@@ -1,3 +1,5 @@
+import { Specialties } from './../../utils/specialties.enum';
+import { ShiftService } from './../../services/shift.service';
 import { UserService } from './../../services/user.service';
 import { MedicalSpecialtiesService } from './../../services/medical-specialties.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -6,6 +8,7 @@ import html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { UserOptions } from 'jspdf-autotable';
+import { Shift } from 'src/app/models/Shift';
 
 interface jsPDFWithPlugin extends jsPDF.jsPDF {
   autoTable: (options: UserOptions) => jsPDF.jsPDF;
@@ -18,34 +21,129 @@ interface jsPDFWithPlugin extends jsPDF.jsPDF {
 })
 export class StatisticsComponent implements OnInit {
   @ViewChild('pdfTable') pdfTable: ElementRef;
-  downloading:boolean = false;
+  downloading: boolean = false;
+  specialties: string[];
   loadingBarChart: boolean = true;
   loadingPieChart: boolean = true;
   loadingHeatMap: boolean = true;
   barData: any[];
+  columnData: any[];
+  columnData2: any[];
+  barHighChartData: any[];
+  barHighChartData2: any[];
   pieData: any[];
+  pieData2: any[];
+  pieData3: any[];
   barChart: string;
   pieChart: string;
   heatMapChart: string;
 
   constructor(
     private medicalSpecialtySvc: MedicalSpecialtiesService,
-    private userSvc: UserService
+    private userSvc: UserService,
+    private shiftSvc: ShiftService
   ) {
     this.medicalSpecialtySvc.getSpecialties().subscribe((specialties) => {
+      this.specialties = specialties.map((aux) => aux.name)
       this.barData = specialties.map((specialty) => {
         return { name: specialty.name, value: specialty?.shifts };
       });
       this.pieData = specialties.map((specialty) => {
         return { name: specialty.name, value: specialty?.doctors || 0 };
       });
+      this.pieData2 = specialties.map((specialty) => {
+        return { name: specialty.name, y: specialty?.doctors || 0 };
+      });
+      this.pieData3 = specialties.map((specialty) => {
+        return { name: specialty.name, y: specialty?.patients?.length || 0 };
+      });
     });
+    this.shiftSvc.getShifts().subscribe((shifts) => {
+      this.userSvc.getByType('doctor').subscribe((doctors) => {
+        this.barHighChartData = this.getShiftsEnds(doctors, shifts);
+        this.barHighChartData2 = this.getShiftsActive(doctors, shifts);
+        this.columnData = this.getShiftByDay(shifts);
+        this.columnData2 = this.getShiftsBySpecialty(shifts,this.specialties);
+      })
+    })
+
     this.loadingBarChart = false;
     this.loadingPieChart = false;
     this.loadingHeatMap = false;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  private getShiftsEnds(doctors: any[], shifts: any[]): any[] {
+    let cant: Array<any> = [];
+    const date: Date = new Date();
+    date.setDate(-7);
+    doctors.forEach((d, index) => {
+      cant.push({
+        type: undefined,
+        data: [0],
+        name: `${d.name} ${d.surname}`
+      });
+      shifts.forEach(t => {
+        if (t.medico.id === d.id && t.estado === 0 && new Date(t.fecha.split('-')[1]) >= date) cant[index].data[0]++;
+      });
+    });
+
+    return cant;
+  }
+
+  private getShiftsBySpecialty(shifts: Array<Shift>, specialties: Array<string>) {
+    let cant: Array<any> = []
+    specialties.forEach((a, index) => {
+      cant.push({
+        type: undefined,
+        data: [0],
+        name: specialties[index]
+      })
+      shifts.forEach((t: any) => {
+        if (t.especialidad.name === a) cant[index].data[0]++;
+      });
+    });
+
+    return cant;
+  }
+
+  private getShiftByDay(shifts: Array<Shift>) {
+    let cant: Array<any> = []
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    days.forEach((c, index) => {
+      cant.push({
+        type: undefined,
+        data: [0],
+        name: days[index]
+      })
+      shifts.forEach(t => {
+
+        if (new Date(t.fecha.split('-')[1]).getDay() === index) cant[index].data[0]++;
+      });
+    });
+
+    return cant;
+  }
+
+  private getShiftsActive(doctors: any[], shifts: any[]): any[] {
+    let cant: Array<any> = [];
+    const date: Date = new Date();
+    date.setDate(-7);
+    doctors.forEach((d, index) => {
+      cant.push({
+        type: undefined,
+        data: [0],
+        name: `${d.name} ${d.surname}`
+      });
+      shifts.forEach(t => {
+        if (t.medico.id === d.id && t.estado > 1 && new Date(t.fecha.split('-')[1]) >= date) cant[index].data[0]++;
+      });
+    });
+
+    return cant;
+  }
+
 
   async generateCanvasChart(chart: string): Promise<string> {
     const DATA: any = document.getElementById(chart);
@@ -73,7 +171,7 @@ export class StatisticsComponent implements OnInit {
       this.barChart,
       'PNG',
       bufferX,
-      bufferY*3,
+      bufferY * 3,
       pdfWidth,
       pdfHeight,
       undefined,
@@ -94,7 +192,7 @@ export class StatisticsComponent implements OnInit {
       ],
     });
 
-    doc.addPage('a4','p');
+    doc.addPage('a4', 'p');
     const imgPropsPie = (doc as any).getImageProperties(this.pieChart);
     const pdfHeightPie = (imgPropsPie.height * pdfWidth) / imgPropsPie.width;
     doc.text("Pie Chart Doctors by Specialties", 40, 30);
@@ -102,7 +200,7 @@ export class StatisticsComponent implements OnInit {
       this.pieChart,
       'PNG',
       bufferX,
-      bufferY*3,
+      bufferY * 3,
       pdfWidth,
       pdfHeightPie,
       undefined,
@@ -123,7 +221,7 @@ export class StatisticsComponent implements OnInit {
       ],
     });
 
-    doc.addPage('a4','p');
+    doc.addPage('a4', 'p');
     const imgPropsHeat = (doc as any).getImageProperties(this.heatMapChart);
     const pdfHeightHeat = (imgPropsHeat.height * pdfWidth) / imgPropsHeat.width;
     doc.text("Heat Map Chart Shifts by Year", 40, 30);
@@ -131,7 +229,7 @@ export class StatisticsComponent implements OnInit {
       this.heatMapChart,
       'PNG',
       bufferX,
-      bufferY*3,
+      bufferY * 3,
       pdfWidth,
       pdfHeightHeat,
       undefined,
