@@ -87,11 +87,12 @@ export class PatientsComponent implements OnInit {
     });
 
     paciente.history.forEach((valor, indice, array) => {
-      const{historyAdditional,...data} = valor;
+      const{historyAdditional,...data} = valor.history;
       let historyData = Object.entries(data);
+      historyData.concat(Object.entries(historyAdditional))
       console.log(historyData);
       doc.addPage('a4','p');
-      doc.text("History Report: "+ data.date, 40, 30);
+      doc.text("History Report: "+ valor.date + valor.especialidad, 40, 30);
           doc.autoTable({
       headStyles: { fillColor: [71, 27, 227] },
       bodyStyles: {

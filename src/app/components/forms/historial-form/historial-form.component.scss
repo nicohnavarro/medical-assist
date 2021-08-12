@@ -1,61 +1,101 @@
-.form_datos {
-  width: 90%;
-  display:flex;
-  flex-direction:row;
-  .datos-prin{
-    display: flex;
-    justify-items: center;
-    justify-content: space-between;
-    align-items: center;
-    padding:1rem;
-    margin-bottom:1rem;
-    width: 100%;
-    mat-form-field {
+.container{
+  height: 100%;
+  width: 70%;
+  padding-top: 400px;
+  .form_datos{
+        mat-form-field {
       background: var(--background);
       color: var(--on-background);
-      box-shadow: var(--border-shadow);
-      padding: 0.5rem 1rem;
       border-radius:15px;
-      width: 16%;
+      width: 25%;
+      margin: 1rem;
       mat-label {
         color: var(--on-background);
       }
       input {
         color: var(--on-background);
+      }
+    }
+    .datos-prin{
+      display: flex;    
+      .row{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
       }
     }
   }
 }
 
-h4{
-  margin-left: .5rem;
-}
+// .form_datos {
+//   width: 90%;
+//   display:flex;
+//   flex-direction:row;
+//   .datos-prin{
+//     display: flex;
+//     justify-items: center;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding:1rem;
+//     margin-bottom:1rem;
+//     width: 100%;
+//     mat-form-field {
+//       background: var(--background);
+//       color: var(--on-background);
+//       box-shadow: var(--border-shadow);
+//       padding: 0.5rem 1rem;
+//       border-radius:15px;
+//       width: 16%;
+//       mat-label {
+//         color: var(--on-background);
+//       }
+//       input {
+//         color: var(--on-background);
+//       }
+//     }
+//   }
+// }
+// .example-section {
+//   margin: 12px 0;
+// }
+// h4{
+//   margin-left: .5rem;
+// }
 
 
-.datos-secon{
-  display:flex;
-  justify-content: space-between;
-  .optionals{
-    flex-direction:column;
-    justify-content: space-between;
-    margin-bottom:1rem;
-    margin-right: 1rem;
-    width: 90%;
-    background: var(--background);
-    color: var(--on-background);
-    box-shadow: var(--border-shadow);
-    border-radius:15px;
-    mat-form-field {
-      padding: 0.5rem 1rem;
-      width: 30%;
-      margin-right:4%;
-      mat-label {
-        color: var(--on-background);
-      }
-      input {
-        color: var(--on-background);
-      }
-    }
+// .datos-secon{
+//   display:flex;
+//   justify-content: space-between;
+//   .optionals{
+//     flex-direction:column;
+//     justify-content: space-between;
+//     margin-bottom:1rem;
+//     margin-right: 1rem;
+//     width: 90%;
+//     background: var(--background);
+//     color: var(--on-background);
+//     box-shadow: var(--border-shadow);
+//     border-radius:15px;
+//     mat-form-field {
+//       padding: 0.5rem 1rem;
+//       width: 30%;
+//       margin-right:4%;
+//       mat-label {
+//         color: var(--on-background);
+//       }
+//       input {
+//         color: var(--on-background);
+//       }
+//     }
+//   }
+// }
+
+.row2{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  section{
+    flex-direction: column;
   }
 }
 
@@ -99,89 +139,89 @@ h4{
   }
 }
 
-::ng-deep .mat-select-value{    
-  color: var(--on-background)!important;  }
+// ::ng-deep .mat-select-value{    
+//   color: var(--on-background)!important;  }
 
 
-@media only screen and (max-width: 950px) {
-  .form_datos {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: flex-start;
-    mat-form-field {
-      width: 80%;
-      margin: 1rem 1rem;
-    }
-  }
+// @media only screen and (max-width: 950px) {
+//   .form_datos {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: start;
+//     align-items: flex-start;
+//     mat-form-field {
+//       width: 80%;
+//       margin: 1rem 1rem;
+//     }
+//   }
 
-  .btn-form {
-    text-align: center;
-    margin: auto;
-    margin-top: 3rem;
-    button {
-      margin-left: 1rem;
-    }
+//   .btn-form {
+//     text-align: center;
+//     margin: auto;
+//     margin-top: 3rem;
+//     button {
+//       margin-left: 1rem;
+//     }
   
-  }
+//   }
 
  
-}
+// }
 
 
-@media only screen and (max-width: 700px) {
-.form_datos {
-  width: 90%;
-  display:flex;
-  padding-top:500px;
-  .datos-prin{
-    display: flex;
-    flex-direction:column;
-    margin:auto;
-    width: 95vw;
-    mat-form-field {
-      background: var(--background);
-      color: var(--on-background);
-      box-shadow: var(--border-shadow);
-      padding: 0.5rem 1rem;
-      border-radius:15px;
-      width: 100%;
-      mat-label {
-        color: var(--on-background);
-      }
-      input {
-        color: var(--on-background);
-      }
-    }
-  }
-}
-.datos-secon{
-  flex-direction:column;
-  .optionals{
-    flex-direction:column;
-    justify-content: space-between;
-    margin-bottom:1rem;
-    margin-right: 1rem;
-    width: 90%;
-    background: var(--background);
-    color: var(--on-background);
-    box-shadow: var(--border-shadow);
-    border-radius:15px;
-    mat-form-field {
-      padding: 0.5rem 1rem;
-      width: 90%;
-      margin-right:4%;
-      mat-label {
-        color: var(--on-background);
-      }
-      input {
-        color: var(--on-background);
-      }
-    }
-  }
-}
+// @media only screen and (max-width: 700px) {
+// .form_datos {
+//   width: 90%;
+//   display:flex;
+//   padding-top:500px;
+//   .datos-prin{
+//     display: flex;
+//     flex-direction:column;
+//     margin:auto;
+//     width: 95vw;
+//     mat-form-field {
+//       background: var(--background);
+//       color: var(--on-background);
+//       box-shadow: var(--border-shadow);
+//       padding: 0.5rem 1rem;
+//       border-radius:15px;
+//       width: 100%;
+//       mat-label {
+//         color: var(--on-background);
+//       }
+//       input {
+//         color: var(--on-background);
+//       }
+//     }
+//   }
+// }
+// .datos-secon{
+//   flex-direction:column;
+//   .optionals{
+//     flex-direction:column;
+//     justify-content: space-between;
+//     margin-bottom:1rem;
+//     margin-right: 1rem;
+//     width: 90%;
+//     background: var(--background);
+//     color: var(--on-background);
+//     box-shadow: var(--border-shadow);
+//     border-radius:15px;
+//     mat-form-field {
+//       padding: 0.5rem 1rem;
+//       width: 90%;
+//       margin-right:4%;
+//       mat-label {
+//         color: var(--on-background);
+//       }
+//       input {
+//         color: var(--on-background);
+//       }
+//     }
+//   }
+// }
 
-}
+// }
 
 
 

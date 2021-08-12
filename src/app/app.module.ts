@@ -35,6 +35,7 @@ import { DoctorListComponent } from './components/doctor-list/doctor-list.compon
 import { HourTakenDirective } from './directives/hour-taken.directive';
 import { PatientHistoryComponent } from './pages/patient-history/patient-history.component';
 import { PatientsComponent } from './pages/patients/patients.component';
+import { CaptchaComponent } from './components/modals/captcha/captcha.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -58,7 +59,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SetReviewModalComponent,
     HourTakenDirective,
     PatientHistoryComponent,
-    PatientsComponent
+    PatientsComponent,
+    CaptchaComponent
   ],
   imports: [
     BrowserModule,

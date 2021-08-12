@@ -27,8 +27,35 @@ export class HistorialFormComponent implements OnInit {
   value3FormCtrl: FormControl;
   //#endregion
   datosHistorialFormGroup: FormGroup;
+  moreOptions: FormGroup;
+  autoTicks = false;
+  disabled = false;
+  invert = false;
+  max = 100;
+  min = 0;
+  showTicks = false;
+  step = 1;
+  thumbLabel = false;
+  value = 0;
+  value2 = 0;
+  vertical = false;
+  tickInterval = 1;
 
-  constructor() {
+  getSliderTickInterval(): number | 'auto' {
+    if (this.showTicks) {
+      return this.autoTicks ? 'auto' : this.tickInterval;
+    }
+
+    return 0;
+  }
+
+
+  constructor(fb: FormBuilder) {
+    this.moreOptions = fb.group({
+      diabetes: false,
+      colesterol: false,
+      alergia: false
+    });
     this.datosHistorialFormGroup = new FormGroup({});
     this.heightFormCtrl = new FormControl('', [Validators.required]);
     this.weightFormCtrl = new FormControl('', [Validators.required]);
@@ -64,6 +91,12 @@ export class HistorialFormComponent implements OnInit {
 
   private buildHistory() {
     let historyAdditional = [];
+    console.log(this.moreOptions.value.diabetes);
+    historyAdditional.push({'option':'diabetes','value':this.moreOptions.value.diabetes});
+    historyAdditional.push({'option':'colesterol','value':this.moreOptions.value.colesterol});
+    historyAdditional.push({'option': 'alergia','value':this.moreOptions.value.alergia});
+    historyAdditional.push({'option':'dolorDeCabeza','value':this.value});
+    historyAdditional.push({'option':'mareos','value':this.value2});
     if(this.option1FormCtrl.value){
       historyAdditional.push({'option':this.option1FormCtrl.value,'value':this.value1FormCtrl.value})
     }
@@ -79,6 +112,9 @@ export class HistorialFormComponent implements OnInit {
       peso: this.weightFormCtrl.value,
       temperature: this.temperatureFormCtrl.value,
       pressure: this.pressureFormCtrl.value,
+      diabetes: this.moreOptions.value.diabetes ? 'SI' : 'NO',
+      colesterol: this.moreOptions.value.colesterol ? 'SI' : 'NO',
+      alergia: this.moreOptions.value.alergia ? 'SI' : 'NO',
       historyAdditional
     };
 

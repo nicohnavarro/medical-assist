@@ -52,8 +52,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onOptionsSelected() {
-    switch (this.typeOfUserFormCtrl.value) {
+  onOptionsSelected(user:string) {
+    switch (user) {
       case 'admin':
         this.emailFormControl.setValue('admin@admin.com');
         this.passwordFormControl.setValue('123123');

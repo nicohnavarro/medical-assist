@@ -1,0 +1,39 @@
+<div app-theme class="myModal">
+  <h2 mat-dialog-title>
+    {{ "details" | translate }}: {{ shift.especialidad.name }}
+  </h2>
+  <mat-dialog-content>
+    <span
+      ><b>{{ "doctor" | translate }}:</b> {{ shift.medico.name }}</span
+    ><br />
+    <span
+      ><b>{{ "patient" | translate }}:</b> {{ shift.paciente.name }}</span
+    ><br />
+    <span
+      ><b>{{ "date" | translate }}:</b> {{ shift.fecha }} {{ shift.hora }}</span
+    >
+
+    <h3>{{value1}} + {{value2}} = ??</h3>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "captcha" | translate }}:</mat-label>
+      <textarea
+        matInput
+        (ngModelChange)="validResponse($event)"
+        [ngModel]="response"
+      ></textarea>
+    </mat-form-field>
+    <h4 *ngIf="error">Error ❌</h4>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="cancelShift()"
+    >
+      {{ "cancel" | translate }} {{ "shift" | translate }}
+    </button>
+    <button mat-raised-button mat-dialog-close color="warn">
+      {{ "close" | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>

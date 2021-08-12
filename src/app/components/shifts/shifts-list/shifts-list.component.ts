@@ -17,6 +17,7 @@ import { ShiftService } from 'src/app/services/shift.service';
 import { UserService } from 'src/app/services/user.service';
 
 import { Notyf } from 'notyf';
+import { CaptchaComponent } from '../../modals/captcha/captcha.component';
 @Component({
   selector: 'app-shifts-list',
   templateUrl: './shifts-list.component.html',
@@ -150,10 +151,17 @@ export class ShiftsListComponent implements OnInit {
 
     switch (action) {
       case 'ACEPTAR':
-        shift.estado = ShiftStates.ACEPTADO;
-        this.shiftSvc.updateShift(shift, shift.id).then(() => {
-          let notyf = new Notyf();
-          notyf.success(this.successMsg);
+        // shift.estado = ShiftStates.ACEPTADO;
+        // this.shiftSvc.updateShift(shift, shift.id).then(() => {
+        //   let notyf = new Notyf();
+        //   notyf.success(this.successMsg);
+        //   this.getShifts();
+        // });
+        let dialogCaptcha = this.dialog.open(
+          CaptchaComponent,
+          this.dialogConfig
+        );
+        dialogCaptcha.afterClosed().subscribe((result) => {
           this.getShifts();
         });
         break;

@@ -100,15 +100,15 @@ export class MainComponent implements OnInit {
       switch (role) {
         case 'admin':
           this.menuOptions = [];
-          this.menuOptions.push(home, profile, lists, addUser, shiftsLists, surveys, schedules, reviews, charts, addShift);
+          this.menuOptions.push(home, profile, lists, addUser, shiftsLists, surveys, charts, addShift);
           break;
         case 'patient':
           this.menuOptions = [];
-          this.menuOptions.push(home, profile, shiftsLists,history, reviews, addShift);
+          this.menuOptions.push(home, profile, shiftsLists,history, addShift);
           break;
         case 'doctor':
           this.menuOptions = [];
-          this.menuOptions.push(home, profile, patients,shiftsLists, surveys, schedules, reviews);
+          this.menuOptions.push(home, profile, patients,shiftsLists, surveys, schedules);
           break;
         default:
           this.menuOptions = [];

@@ -5,23 +5,23 @@
 </div>
 <mat-accordion class="example-headers-align" multi *ngIf="user?.history">
 
-  <mat-expansion-panel app-theme *ngFor="let history of user.history">
+  <mat-expansion-panel app-theme *ngFor="let record of user.history">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{history.specialty}}
+        {{record.specialty}}
       </mat-panel-title>
       <mat-panel-description>
-        {{history.date}}
+        {{record.date}}
         <mat-icon>date_range</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
       <h3>{{'historyData' | translate}}</h3>
-      <p>{{ 'height' | translate}}: <span>{{history.altura}}</span></p>
-      <p>{{ 'weight' | translate}}: <span>{{history.peso}}</span></p>
-      <p>{{ 'temperature' | translate}}: <span>{{history.temperature}}</span></p>
-      <p>{{ 'pressure' | translate}}: <span>{{history.pressure}}</span></p>
+      <p>{{ 'height' | translate}}: <span>{{record.history.altura}}</span></p>
+      <p>{{ 'weight' | translate}}: <span>{{record.history.peso}}</span></p>
+      <p>{{ 'temperature' | translate}}: <span>{{record.history.temperature}}</span></p>
+      <p>{{ 'pressure' | translate}}: <span>{{record.history.pressure}}</span></p>
       <br>
-      <h4 *ngIf="history.historyAdditional">{{'historyAdditional' | translate}} ➕</h4>
-      <p *ngFor="let addition of history.historyAdditional"> {{addition.option}} : {{addition.value}}</p>
+      <h4 *ngIf="record.historyAdditional">{{'historyAdditional' | translate}} ➕</h4>
+      <p *ngFor="let addition of record.historyAdditional"> {{addition.option}} : {{addition.value}}</p>
     </mat-expansion-panel>
 </mat-accordion>

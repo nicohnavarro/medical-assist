@@ -59,8 +59,8 @@
             {{ "validatePassword1" | translate }}
           </mat-error>
         </mat-form-field>
-        <mat-form-field *ngIf="!loading">
-          <mat-label>{{ "guest" | translate }}</mat-label>
+        <div *ngIf="!loading">
+          <!-- <mat-label>{{ "guest" | translate }}</mat-label>
           <mat-select
             [(value)]="selected"
             [formControl]="typeOfUserFormCtrl"
@@ -75,8 +75,22 @@
             <mat-option value="doctor">
               {{ "doctor" | translate }}
             </mat-option>
-          </mat-select>
-        </mat-form-field>
+          </mat-select> -->
+          <div class="users">
+            <div class="img-box">
+              <span>{{ "admin" | translate }}</span>
+              <img src="../../../assets/images/admin.png" alt="" (click)="onOptionsSelected('admin')"/>
+            </div>
+            <div class="img-box">
+              <span>{{ "doctor" | translate }}</span>
+              <img src="../../../assets/images/doctor.png" alt="" (click)="onOptionsSelected('doctor')"/>
+            </div>
+            <div class="img-box">
+              <span>{{ "patient" | translate }}</span>
+              <img src="../../../assets/images/person.png" alt="" (click)="onOptionsSelected('patient')"/>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
     <div class="btn-ingreso" *ngIf="loading">
@@ -115,4 +129,3 @@
     </div>
   </div>
 </div>
-

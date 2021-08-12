@@ -4,7 +4,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Shift } from 'src/app/models/Shift';
 import { ShiftService } from 'src/app/services/shift.service';
-import { Notyf } from 'notyf';
+
 @Component({
   selector: 'app-cancel-modal',
   templateUrl: './cancel-modal.component.html',

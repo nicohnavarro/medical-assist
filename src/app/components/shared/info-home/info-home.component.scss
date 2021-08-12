@@ -1,7 +1,7 @@
  
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   justify-content: start;
   background: var(--background);
@@ -23,6 +23,9 @@ h1{
   color: var(--on-background);
   box-shadow: var(--border-shadow);
   font-family: "Gothic A1", sans-serif;
+  img{
+    width:80%
+  }
 }
 
 
