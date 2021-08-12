@@ -68,6 +68,12 @@ export class MainComponent implements OnInit {
       router: "surveys"
     }
 
+    let patients: menuOption = {
+      icon: "supervised_user_circle",
+      title: "patients",
+      router: "patients"
+    }
+
     let schedules: menuOption = {
       icon: "access_time",
       title: "schedules",
@@ -102,7 +108,7 @@ export class MainComponent implements OnInit {
           break;
         case 'doctor':
           this.menuOptions = [];
-          this.menuOptions.push(home, profile, shiftsLists, surveys, schedules, reviews);
+          this.menuOptions.push(home, profile, patients,shiftsLists, surveys, schedules, reviews);
           break;
         default:
           this.menuOptions = [];

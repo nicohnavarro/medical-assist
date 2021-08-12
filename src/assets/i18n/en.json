@@ -113,6 +113,7 @@
   "heatMap":"Shifts by Year",
   "pieChart":"Doctors by Specialties",
   "downloadPdf":"Download Pdf",
-  "downloading":"Downloading ..."
+  "downloading":"Downloading ...",
+  "image":"Image"
 }
 

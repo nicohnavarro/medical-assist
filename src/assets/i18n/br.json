@@ -113,6 +113,7 @@
   "heatMap":"Cantidad de turnos anual",
   "pieChart":"Medicos por Especialidad",
   "downloadPdf":"Descargar Pdf",
-  "downloading":"Descargando ..."
+  "downloading":"Descargando ...",
+  "image":"Imagen"
 }
 

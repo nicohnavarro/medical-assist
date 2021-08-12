@@ -34,6 +34,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { DoctorListComponent } from './components/doctor-list/doctor-list.component';
 import { HourTakenDirective } from './directives/hour-taken.directive';
 import { PatientHistoryComponent } from './pages/patient-history/patient-history.component';
+import { PatientsComponent } from './pages/patients/patients.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -56,7 +57,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ListComponent,
     SetReviewModalComponent,
     HourTakenDirective,
-    PatientHistoryComponent
+    PatientHistoryComponent,
+    PatientsComponent
   ],
   imports: [
     BrowserModule,

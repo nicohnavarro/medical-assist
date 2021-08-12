@@ -1,0 +1,38 @@
+table {
+  width: 90%;
+  padding: 1rem;
+  margin: 2rem auto;
+  background: var(--background)!important;
+  color: var(--on-background)!important;
+  box-shadow: var(--border-shadow)!important;
+  border-radius: 15px;
+}
+
+tbody tr:hover{
+  background-color: #471be3;
+  color:white!important;
+}
+
+.mat-cell{
+  img{
+    width: 30px;
+    border-radius: 50%;
+  }
+}
+
+.mat-row:hover{
+  background-color: #471be3;
+  .mat-cell{
+    color:white!important;
+  }
+}
+
+.mat-icon:hover{
+cursor: pointer;
+}
+
+mat-paginator{
+background: var(--background)!important;
+color: var(--on-background)!important;
+box-shadow: var(--border-shadow)!important;
+}

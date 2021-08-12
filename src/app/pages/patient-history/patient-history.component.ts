@@ -20,7 +20,6 @@ export class PatientHistoryComponent implements OnInit {
       this.userSvc.getById(localStorage.getItem('uid')).subscribe((data) => {
         this.user = data;
         this.historyAdditional = data.history.map((history)=> history.historyAdditional)
-        let jsonHistory = this.user.history.map((history)=> JSON.stringify(history));
       })
     }
   }
