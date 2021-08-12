@@ -66,7 +66,6 @@ export class PatientsComponent implements OnInit {
   }
 
   exportPdf(paciente){
-    console.log(paciente)
     const doc = new jsPDF.jsPDF('p', 'pt', 'a4') as jsPDFWithPlugin;
     const bufferX = 15;
     const bufferY = 15;
@@ -110,7 +109,6 @@ export class PatientsComponent implements OnInit {
   }
 
   exportExcel(paciente){
-    console.log(paciente)
     let jsonHistory = paciente.history.map((history)=> JSON.parse(JSON.stringify(history,history.historyAdditional)));
     this.excelSvc.exportAsExcelFile(jsonHistory,Object.entries(paciente),paciente.name);
   }

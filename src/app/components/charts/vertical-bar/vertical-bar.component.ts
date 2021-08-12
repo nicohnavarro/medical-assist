@@ -55,7 +55,6 @@ export class VerticalBarComponent implements OnInit {
   ngOnInit(): void { }
 
   onSelect(event) {
-    console.log(event);
   }
 
   @HostListener('window:resize', ['$event'])

@@ -19,7 +19,6 @@ export class PatientHistoryComponent implements OnInit {
     if (localStorage.getItem('uid')) {
       this.userSvc.getById(localStorage.getItem('uid')).subscribe((data) => {
         this.user = data;
-        console.log(this.user.history);
         this.historyAdditional = data.history.map((history)=> history.historyAdditional)
       })
     }

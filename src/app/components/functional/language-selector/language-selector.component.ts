@@ -40,8 +40,6 @@ export class LanguageSelectorComponent implements OnInit {
   }
 
   onEnglishSwitched(selected: string) {
-    console.log(selected);
-    console.log(this.selected)
     switch (selected) {
       case 'es':
         localStorage.setItem("lang",'es');

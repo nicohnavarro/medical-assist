@@ -61,7 +61,6 @@ export class PieChartComponent implements OnInit {
   }
 
   dblclick(event) {
-    console.log('Double click', event);
   }
 
   select(data) {

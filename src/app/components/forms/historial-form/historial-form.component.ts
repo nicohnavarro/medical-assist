@@ -91,7 +91,6 @@ export class HistorialFormComponent implements OnInit {
 
   private buildHistory() {
     let historyAdditional = [];
-    console.log(this.moreOptions.value.diabetes);
     historyAdditional.push({'option':'diabetes','value':this.moreOptions.value.diabetes});
     historyAdditional.push({'option':'colesterol','value':this.moreOptions.value.colesterol});
     historyAdditional.push({'option': 'alergia','value':this.moreOptions.value.alergia});

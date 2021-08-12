@@ -47,10 +47,8 @@ export class CaptchaComponent implements OnInit {
     this.response = event;
   }
 
-  cancelShift() {
+  acceptShift() {
     let result = this.value1+this.value2;
-    console.log(result);
-    console.log(this.response);
     if(+this.response === this.value1+this.value2){
       this.error = false;
       this.shift.estado = ShiftStates.ACEPTADO;
