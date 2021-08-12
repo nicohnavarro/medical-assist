@@ -122,8 +122,8 @@ export class AddShiftComponent implements OnInit {
          return {score: accu.score + current.score }})
         : 0;
         console.log(score);
-        let realScore = Math.round(score.score / total);
-      return { ...aux, score:realScore}
+        let realScore = Math.floor(score.score / total);
+      return { ...aux, score:realScore > 0 ? realScore : 0}
     }).sort((a, b) => (a.score < b.score) ? 1 : -1);
     this.doctorFilterList = doctors;
   }
