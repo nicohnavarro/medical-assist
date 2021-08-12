@@ -114,10 +114,16 @@ export class AddShiftComponent implements OnInit {
       if (doctor.especializaciones.includes(specialty.toString()))
         return doctor;
     }).map((aux) => {
+      let total = aux.qualification? aux.qualification.length : 1;
       let score = aux.qualification ?
-        aux.qualification.reduce((accu, current) => (accu.score + current.score)) / aux.qualification.length
+        aux.qualification.reduce((accu, current) => {
+          console.log(accu);
+          console.log(current);
+         return {score: accu.score + current.score }})
         : 0;
-      return { ...aux, 'score': score }
+        console.log(score);
+        let realScore = Math.round(score.score / total);
+      return { ...aux, score:realScore}
     }).sort((a, b) => (a.score < b.score) ? 1 : -1);
     this.doctorFilterList = doctors;
   }
